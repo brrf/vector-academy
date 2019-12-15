@@ -19,6 +19,7 @@
   "homepage": "https://github.com/brrf/vector-training-academy#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "forever": "^1.0.0",
     "helmet": "^3.21.2"
   }
 }
