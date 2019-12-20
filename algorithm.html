@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Algo</title>
+</head>
+<body>
+	<p>Help</p>
+	<script>
+		let companies = {
+			A: [1, 2, 3],
+			B: [1, 2, 3],
+		};
+
+		let applications = {
+			1: ['A', 'B'],
+			2: ['A', 'B'],
+			3: ['A', 'B'],
+		};
+
+		const applicantScores = totalApplicantPoints(companies);
+		let matches = [];
+
+		function totalApplicantPoints (companyRankings) {
+			let applicantScores = {}
+
+			for (let company in companyRankings) {
+				let rankScore = companyRankings[company].length;
+				for (let j = 0; j < companyRankings[company].length; j++) {
+					const applicant = companyRankings[company][j];
+					if (applicant in applicantScores) {
+						applicantScores[applicant] += rankScore
+					} else {
+						applicantScores[applicant] = rankScore;
+					}
+					rankScore--;
+				}
+			}
+			return applicantScores;
+		}
+
+		function findNextMatch(applicantRankPosition, companyRankPosition) {
+			let longestApplicantList = 0;
+			let longestCompanyList = 0;
+
+			for (let applicant in applications) {
+				if(Object.keys(companies).length === 0 || Object.keys(applications).length === 0) return;
+				const ApplicantRankListLength = applications[applicant].length;
+				const CompanyRankListLength = companies[applications[applicant][applicantRankPosition]].length;
+
+				if (ApplicantRankListLength > longestApplicantList) longestApplicantList = ApplicantRankListLength;
+				if (CompanyRankListLength > longestCompanyList) longestCompanyList = CompanyRankListLength;
+
+				if (applicantRankPosition >= ApplicantRankListLength || companyRankPosition >= CompanyRankListLength) continue;
+				if (companies[applications[applicant][applicantRankPosition]][companyRankPosition] === Number(applicant)) {
+					return addAMatch(applicant, applications[applicant][applicantRankPosition]);
+				}
+			};
+			if (applicantRankPosition < longestApplicantList) {
+				applicantRankPosition++;
+				findNextMatch(applicantRankPosition, companyRankPosition);			
+			} else if (companyRankPosition < longestCompanyList) {
+				applicantRankPosition = 0;
+				companyRankPosition++;
+				findNextMatch(applicantRankPosition, companyRankPosition)
+			} else {
+				return;
+			}
+		};
+
+		function addAMatch(matchedApplicant, matchedCompany) {
+			//add matched pair to matches array
+			matches.push({
+				[matchedApplicant]: matchedCompany
+			})
+			//delete the matched company and applicant from their respective objects
+			delete applications[matchedApplicant];
+			for (let applicant in applications) {
+				applications[applicant] = applications[applicant].filter(company => company !== matchedCompany)
+			}
+			delete companies[matchedCompany];
+			for (let company in companies) {
+				companies[company] = companies[company].filter(rankedApplicant => rankedApplicant !== Number(matchedApplicant))
+			}
+			findNextMatch(0, 0)
+		}
+
+
+
+
+		findNextMatch(0, 0);
+		console.log(matches);
+	</script>
+</body>
+</html>
