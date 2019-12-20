@@ -10,12 +10,13 @@
 		let companies = {
 			A: [1, 2, 3],
 			B: [1, 2, 3],
+			C: [1, 2, 3]
 		};
 
 		let applications = {
 			1: ['A', 'B'],
 			2: ['A', 'B'],
-			3: ['A', 'B'],
+			3: ['A', 'B', 'C'],
 		};
 
 		const applicantScores = totalApplicantPoints(companies);
@@ -45,6 +46,7 @@
 
 			for (let applicant in applications) {
 				if(Object.keys(companies).length === 0 || Object.keys(applications).length === 0) return;
+				if(!applications[applicant][applicantRankPosition]) return;
 				const ApplicantRankListLength = applications[applicant].length;
 				const CompanyRankListLength = companies[applications[applicant][applicantRankPosition]].length;
 
