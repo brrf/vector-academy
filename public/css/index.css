@@ -1,4 +1,32 @@
 .page-container {
 	display: grid;
-	grid-template-columns: 20% 13% 17% 16% 34%;
+	grid-template-columns: 10% 23% 17% 16% 4% repeat(3, 10%);
+}
+
+.full-width {
+	grid-column: 1 / 9;
+}
+
+.twenty-percent {
+	grid-column: 1 / 2;
+}
+
+.thirty-percent {
+	grid-column: 2 / 4;
+}
+
+.second-half-width {
+	grid-column: 4 / 9;
+}
+
+.first-third-width {
+	grid-column: 1 / 3;
+}
+
+.second-third-width {
+	grid-column: 3 / 5;
+}
+
+.third-third-width {
+	grid-column: 5 / 9;
 }
