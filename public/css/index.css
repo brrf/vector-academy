@@ -1,10 +1,81 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+	background-color: #f6f7fb;
+	margin: 0;
+}
+
+h1 {
+	cursor: pointer;
+	margin-left: 30px;
+	color: #19225C;
+	font-family: 'Bitter', serif;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:hover {
+	font-weight: bold;
+}
+
+button {
+	cursor: pointer;
+	background-color: #212A65;
+	width: 120px;
+	height: 40px;
+	color: #E4E5F0;
+	border: none;
+	font-size: 15px;
+}
+
+button:hover {
+	opacity: 90%;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+h2 {
+	font-family: 'Bitter', serif;
+	font-weight: bold;
+	font-size: 40px;
+	color: #19225C;
+	margin: 0;
+}
+
+p {
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+	margin: 0;
+}
+
+
 .page-container {
 	display: grid;
-	grid-template-columns: 10% 23% 17% 16% 4% repeat(3, 10%);
+	grid-template-columns: 10% 23% 17% 16% 34%;
+	grid-template-rows: minmax(55px, 8vh) minmax(350px, 83vh);
 }
 
 .full-width {
-	grid-column: 1 / 9;
+	grid-column: 1 / 6;
 }
 
 .twenty-percent {
@@ -16,7 +87,7 @@
 }
 
 .second-half-width {
-	grid-column: 4 / 9;
+	grid-column: 4 / 6;
 }
 
 .first-third-width {
@@ -28,5 +99,93 @@
 }
 
 .third-third-width {
-	grid-column: 5 / 9;
+	grid-column: 5 / 6;
 }
+
+#navbar-container {
+	z-index: 1000;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	position: sticky;
+	top: 0;
+	background-color: white;
+	padding: 10px;
+}
+
+.navbar-links {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+ul li {
+    position: relative;
+}
+
+.navbar-links li {
+	cursor: pointer;
+	margin: 8px 8px 8px 30px;
+	font-family: 'Lato', sans-serif;
+	font-size: 15px;
+	color: #4F588F;
+}
+
+li > .dropdown {
+    min-width: 100%; 
+    background: #f2f2f2;
+    display: none;
+    position: absolute;
+    z-index: 999;
+    left: 0;
+}
+
+li:hover > .dropdown {
+	display: block;
+}
+
+.top-content-section {
+	background-image: url("../assets/AdobeStock_181153776.jpeg");
+	background-size: cover;
+	background-position: 50% 20%;
+	background-color: #9197BE;
+	color: #4f588f;
+}
+
+.top-content-container {
+	background-color: rgba(255,223,186,0.75);
+	color: #19225C;
+	width: 40%;
+	margin: 18vh 10vw;
+	padding: 15px;
+	max-height: 80%;
+}
+
+.top-content-title {
+	margin-top: 8px;
+}
+
+.top-content-container > div {
+	padding: 0 20px;
+}
+
+.top-content-text {	
+	width: 84%;
+	margin: 20px 0 25px 0;
+}
+
+.top-content-button {
+	width: 175px;
+}
+
+.center {
+	text-align: center;
+}
+
+
+
+
+
+
