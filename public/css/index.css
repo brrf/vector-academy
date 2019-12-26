@@ -14,15 +14,34 @@ body {
 }
 
 body {
-	background-color: #f6f7fb;
+	color: #19225C;
+	background-color: #ffffff;
 	margin: 0;
+	font-family: 'Lato', sans-serif;
 }
 
 h1 {
 	cursor: pointer;
 	margin-left: 30px;
-	color: #19225C;
 	font-family: 'Bitter', serif;
+}
+
+h2 {
+	font-family: 'Bitter', serif;
+	font-weight: bold;
+	font-size: 40px;
+	margin: 25px 0 0 0;
+}
+
+h3 {
+	margin: 5px 0;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: 'Bitter', serif;
+}
+
+p {
+	margin: 0;
 }
 
 a {
@@ -39,7 +58,7 @@ button {
 	background-color: #212A65;
 	width: 120px;
 	height: 40px;
-	color: #E4E5F0;
+	color: white;
 	border: none;
 	font-size: 15px;
 }
@@ -52,21 +71,6 @@ ul {
     padding: 0;
     list-style: none;
 }
-
-h2 {
-	font-family: 'Bitter', serif;
-	font-weight: bold;
-	font-size: 40px;
-	color: #19225C;
-	margin: 0;
-}
-
-p {
-	font-family: 'Lato', sans-serif;
-	font-size: 20px;
-	margin: 0;
-}
-
 
 .page-container {
 	display: grid;
@@ -92,6 +96,7 @@ p {
 
 .first-third-width {
 	grid-column: 1 / 3;
+	margin-left: 5vw;
 }
 
 .second-third-width {
@@ -100,6 +105,19 @@ p {
 
 .third-third-width {
 	grid-column: 5 / 6;
+	margin-right: 5vw;
+}
+
+.features-third {
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+	justify-self: center;
+	margin-top: 20px;
+}
+
+.center {
+	text-align: center;
 }
 
 #navbar-container {
@@ -112,6 +130,7 @@ p {
 	top: 0;
 	background-color: white;
 	padding: 10px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .navbar-links {
@@ -174,18 +193,56 @@ li:hover > .dropdown {
 .top-content-text {	
 	width: 84%;
 	margin: 20px 0 25px 0;
+	font-size: 20px;
 }
 
 .top-content-button {
 	width: 175px;
 }
 
-.center {
-	text-align: center;
+.about-content {
+	margin-top: 2vh;
+	background-color: white;
 }
 
+.about-content > h4 {
+	margin: 10px 20vw 25px 20vw;
+	font-weight: normal;
+	font-size: 18px;
+}
 
+.howitworks {
+	margin: 15px 0;
+}
 
+.background-image {
+	width: 375px;
+	height: 250px;
+	background-repeat: round;
+}
 
+.education {
+	background-image: url("../assets/AdobeStock_299919002.jpeg");	
+}
+
+.experience {
+	background-image: url("../assets/AdobeStock_200537096.jpeg");
+}
+
+.salary {
+	background-image: url("../assets/AdobeStock_180706958.jpeg");
+}
+
+.feature-text {
+	padding: 5px;
+}
+
+.features-third > div:last-child {
+	background-color: #FFF8EF;
+	box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.2);
+	text-align: center;
+	width: 375px;
+	height: 85px;
+}
 
 
