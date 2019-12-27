@@ -40,6 +40,10 @@ h3 {
 	font-family: 'Bitter', serif;
 }
 
+h4 {
+	margin: 0;
+}
+
 p {
 	margin: 0;
 }
@@ -84,6 +88,49 @@ ul {
 
 .twenty-percent {
 	grid-column: 1 / 2;
+	background: #E4E5F0;
+    border-radius: 100%;
+    box-shadow: inset 0 0 5px rgba(0,0,0,.15), 0 0 0 #fff;
+	height: 75px;
+	width: 50%;
+	place-self: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: -2;
+}
+
+.twenty-percent::before {
+	background: #ffffff;
+	border-radius: 100%;
+	box-shadow: 0 2px 3px rgba(0,0,0,.15);
+	content: " ";
+	position: absolute;
+	height: 70%;
+	width: 70%;
+	z-index: -1;
+}
+
+.twenty-percent::after{
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0.1em;
+  height: 150%;
+  background: dodgerblue;
+  z-index: -3;
+}
+
+.last::after {
+	display: none;
+}
+
+.twenty-percent > h4 {
+	font-family: 'Bitter', serif;
+	font-weight: bold;
+	font-size: 22px;	
 }
 
 .thirty-percent {
@@ -111,7 +158,6 @@ ul {
 .features-third {
 	display: flex;
 	flex-direction: column;
-	/* align-items: center; */
 	justify-self: center;
 	margin-top: 20px;
 }
@@ -239,7 +285,7 @@ li:hover > .dropdown {
 
 .features-third > div:last-child {
 	background-color: #FFF8EF;
-	box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 11px 2px rgba(0, 0, 0, 0.2);
 	text-align: center;
 	width: 375px;
 	height: 85px;
