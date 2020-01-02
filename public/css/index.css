@@ -52,7 +52,6 @@ h5 {
 	font-size: 20px;
 	margin: 0;
 	z-index: 1;
-
 }
 
 p {
@@ -88,28 +87,11 @@ ul {
     list-style: none;
 }
 
-.page-container {
-	/*display: grid;
-	grid-template-columns: 10% 23% 17% 16% 34%;
-	grid-template-rows: minmax(55px, 8vh) minmax(350px, 83vh);*/
-}
-
-
-
-.second-half-width {
-	
-}
-
 .first-third-width {
 	margin-left: 5vw;
 }
 
-.second-third-width {
-	
-}
-
-.third-third-width {
-	
+.third-third-width {	
 	margin-right: 5vw;
 }
 
@@ -124,11 +106,6 @@ ul {
 .center {
 	text-align: center;
 }
-
-/*.placeholder {
-	border-bottom: 1.5px solid rgba(0, 0, 0, 0.3);
-	height: 25px;
-}*/
 
 #navbar-container {
 	z-index: 1000;
@@ -185,7 +162,6 @@ li:hover > .dropdown {
 	min-height: 350px;
 	height: 83vh;
 	padding: 18vh 11vw;
-
 }
 
 .top-content-container {
@@ -342,3 +318,68 @@ li:hover > .dropdown {
 .howitworks-content > p {
 	margin-left: 90px;
 }
+
+#jumpstart-section {
+	height: 450px;
+	background-image: url("../assets/AdobeStock_183544314.jpeg");
+	background-size: cover;
+	background-position: 50% 55%;
+	position: relative;
+}
+
+#jumpstart-section > div {
+	background-color: rgba(255,223,186,0.8);
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	height: 40%;
+	padding: 18px;
+}
+
+#jumpstart-section h2 {
+	margin-bottom: 5%;
+}
+
+#jumpstart-section button {
+	width: 200px;
+}
+
+footer {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	background-color: #040A2B;
+	color: #f0edee;
+	padding: 25px 40px;
+}
+
+footer div {
+	display: flex;
+	flex-direction: column;
+}
+
+footer div:first-child {
+	flex-basis: 50%;
+	justify-content: space-between;
+}
+
+
+
+footer h1 {
+	margin: 0;
+}
+
+footer p {
+	color: #55575e;
+}
+
+footer li {
+	margin-bottom: 0.5em;
+}
+
+
+
+
