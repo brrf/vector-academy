@@ -10,18 +10,17 @@ app.use(helmet());
 
 
 app.use ((req, res, next) => {
-  res.header ('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.header ('Access-Control-Allow-Origin', 'http://localhost:3001')
   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
   res.header ('Access-Control-Allow-Credentials', true)
   res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
   next()
 });
 
-//Index page (static HTML)
-app.use(express.static(path.join(__dirname, 'app', 'index.html')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'app', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 //404 Not Found Middleware
