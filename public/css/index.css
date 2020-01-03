@@ -157,7 +157,7 @@ ul {
 		justify-content: flex-start;
 		align-items: center;
 		min-height: 70vh;
-		padding-top: 10vh;
+		padding-top: 10vw;
 	}
 
 	.main-inactive a {
@@ -250,7 +250,7 @@ li:hover > .dropdown {
 }
 
 .about-content {
-	padding: 4vh 4vh 0 4vh;
+	padding: 1.5vw 1.5vw 0 1.5vw;
 	background-color: white;
 }
 
@@ -260,7 +260,7 @@ li:hover > .dropdown {
 	justify-content: space-evenly;
 	margin-bottom: 0.6vw;
 	background-color: white;
-	padding-bottom: 10vh;
+	padding-bottom: 4.5vw;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -318,11 +318,11 @@ li:hover > .dropdown {
 }
 
 #howitworks-section {
-	padding: 7vh 4vh 0 4vh;
+	padding: 2.7vw 1.5vw 0 1.5vw;
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-evenly;
-	padding-bottom: 6vh;
+	padding-bottom: 2.25vw;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
