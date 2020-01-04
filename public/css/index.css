@@ -120,66 +120,12 @@ ul {
 	background-color: white;
 	padding: 0.7vw;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-	height: 4vw;
+	height: 4.5vw;
 	min-height: 50px;
 }
 
 .navbar-mobile {
 	display: none;
-}
-
-@media (max-width: 550px) {
-	h1 {
-		font-size: 6vw;
-	}
-
-	h3 {
-		font-size: 3vw;
-	}
-
-	.navbar-mobile {
-		display: block;
-	}
-
-	.navbar-mobile button {
-		width: 16vw;
-	}
-
-	.navbar-large {
-		display: none;
-	}
-
-	.main-inactive {
-		background-color: #4F588F;
-		color: white;
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		align-items: center;
-		min-height: 70vh;
-		padding-top: 10vw;
-	}
-
-	.main-inactive a {
-		margin-top: 2vw;
-		font-size: 10vw;
-	}
-
-	.main-inactive a:hover {
-		color: #9197BE;
-	}
-
-	.main-inactive a > button {
-		width: 40vw;
-		height: 6vw;
-		background-color: #040A2B;
-		font-size: 3vw;
-	}
-
-	hr {
-	  width: 50%;
-	  margin: 50px 0 30px 0;
-	}
 }
 
 .navbar-links {
@@ -214,13 +160,19 @@ li:hover > .dropdown {
 	display: block;
 }
 
-#top-content-section {
+#top-content-section-large {
 	background-image: url("../assets/AdobeStock_181153776.jpeg");
 	background-size: cover;
 	background-position: 50% 20%;
 	background-color: #9197BE;
-	height: 83vh;
+	height: 40vw;
+	max-height: 83vh;
+	min-height: 450px;
 	padding: 10vw 11vw;
+}
+
+#top-content-section-mobile {
+	display: none;
 }
 
 .top-content-container {
@@ -324,6 +276,7 @@ li:hover > .dropdown {
 	justify-content: space-evenly;
 	padding-bottom: 2.25vw;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	background-color: #fbfcfd;
 }
 
 .howitworks-year-container {
@@ -406,25 +359,28 @@ li:hover > .dropdown {
 }
 
 footer {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-around;
 	background-color: #040A2B;
 	color: #f0edee;
 	padding: 1.5vw 2.8vw;
 }
 
-footer div {
+.footer-container {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;	
+}
+
+.footer-container div {
 	display: flex;
 	flex-direction: column;
 }
 
-footer div:first-child {
+.footer-container div:first-child {
 	flex-basis: 50%;
 	justify-content: space-between;
 }
 
-footer h1 {
+.footer-container h1 {
 	margin: 0;
 }
 
@@ -434,6 +390,312 @@ footer p {
 
 footer li {
 	margin-bottom: 0.5em;
+}
+
+/*tablet*/
+@media (max-width: 990px) {
+	h1 {
+		font-size: 3.5vw;
+	}
+
+	h1:hover {
+		opacity: 0.7;
+	}
+
+	h2 {
+		font-size: 3.1vw;
+		margin: 3vw 0;
+	}
+
+	h3 {
+		font-size: 2.3vw;
+	}
+
+	h4 {
+		font-size: 2.5vw;
+		margin-bottom: 3vw;
+	}
+
+	h5 {
+		font-size: 2vw;
+	}
+
+	p {
+		font-size: 1.8vw;
+		line-height: 2.2vw;
+	}
+
+	button {
+		font-size: 1.7vw;
+		width: 14vw;
+		height: 3.5vw;
+	}
+
+	.navbar-links li {
+		font-size: 1.7vw;
+		margin: 0.5vw 0.5vw 0.5vw 2.4vw;
+	}
+
+	#top-content-section-large {
+		padding: 2.5vw 2.5vw;
+		background-position: 60% 20%;
+		display: flex;
+		align-items: center;
+	}
+
+	.top-content-container {		
+		height: 32vw;
+		width: 45vw;
+	}
+
+	.top-content-title {
+		margin: 1vw 0;
+	}
+
+	.top-content-text {	
+		font-size: 2.2vw;
+		margin: 0 0 3vw 0;
+	}
+
+	.top-content-container button {
+		width: 30vw;
+		min-height: 35px;
+	}
+
+	#features-section {
+		flex-flow: column nowrap;
+		align-items: center;
+	}
+	.first-third-width,
+	.third-third-width {
+		margin: 0;
+	}
+	.features-third {
+		margin-bottom: 3vw;
+	}
+	.features-image {
+		width: 60vw;
+		height: 40vw;
+		background-repeat: cover;
+	}
+
+	.features-third > div:last-child {
+		width: 60vw;
+		height: 10vw;
+		background-color: #fff8efb5;
+	}
+	#howitworks-section {
+		flex-direction: column;
+	}
+
+	#jumpstart-section {
+		height: 50vw;
+	}
+
+	#jumpstart-section div {
+		height: 20vw;
+		width: 60vw;
+	}
+
+	#jumpstart-section h2 {
+		margin-bottom: 2vw;
+	}
+
+	#jumpstart-section button {
+		width: 20vw;
+		height: 5.5vw;
+	}
+}
+
+/*mobile*/
+@media (max-width: 550px) {
+	h1 {
+		font-size: 6vw;
+	}
+
+	h1:hover {
+		opacity: 0.7;
+	}
+
+	h2 {
+		font-size: 5.5vw;
+		margin: 3vw 0;
+	}
+
+	h3 {
+		font-size: 4.5vw;
+	}
+
+	h4 {
+		font-size: 3.3vw;
+		margin-bottom: 3vw;
+	}
+
+	h5 {
+		font-size: 3vw;
+	}
+
+	p {
+		font-size: 3vw;
+		line-height: 4vw;
+	}
+
+	button {
+		font-size: 2.4vw;
+	}
+
+	.navbar-mobile {
+		display: block;
+	}
+
+	.navbar-mobile button {
+		width: 16vw;
+	}
+
+	.navbar-large {
+		display: none;
+	}
+
+	.main-inactive {
+		background-color: #4F588F;
+		color: white;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		height: 96vh;
+		padding-top: 10vw;
+	}
+
+	.main-inactive a {
+		margin-top: 2vw;
+		font-size: 10vw;
+	}
+
+	.main-inactive a:hover {
+		color: #9197BE;
+	}
+
+	.main-inactive a > button {
+		width: 40vw;
+		height: 6vw;
+		background-color: #040A2B;
+		font-size: 3vw;
+	}
+
+	#top-content-section-large {
+		display: none;
+	}
+
+	#top-content-section-mobile {
+		display: block;
+	}
+
+	.top-content-image {
+		background-image: url("../assets/AdobeStock_181153776.jpeg");
+		background-size: cover;
+		background-position: 75%;
+		background-color: #9197BE;
+		height: 64vh;
+		min-height: 280px;
+		padding: 0;
+	}
+
+	.top-content-container {
+		background-color: #E4E5F0;
+		height: 32vh; 
+		min-height: 210px;
+		width: 100%;
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		align-items: center;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	}
+
+	.top-content-text {	
+		font-size: 3.3vw;
+		margin: 0 0 3vw 0;
+	}
+
+	.top-content-container button {
+		width: 30vw;
+		min-height: 35px;
+	}
+
+	.features-third {
+		margin-bottom: 5vw;
+	}
+
+	.features-image {
+		width: 75vw;
+		height: 50vw;
+	}
+
+	.features-third > div:last-child {
+		width: 75vw;
+		height: 20vw;
+	}
+
+	.howitworks-content {
+		margin: 2vw 0 3.4vw -5.2vw;
+	}
+
+	.howitworks-year-container {
+		margin-bottom: 4vw;
+	}
+
+	.howitworks-image {
+		width: 30.6vw;
+		height: 30.6vw;
+	}
+
+	.year-label {
+		height: 10.5vw;
+		width: 10.5vw;
+	}
+
+	.howitworks-content > p {
+		margin-left: 10vw;
+	}
+
+	#jumpstart-section {
+		height: 60vw;
+	}
+
+	#jumpstart-section div {
+		height: 30vw;
+		width: 70vw;
+	}
+
+	#jumpstart-section h2 {
+		margin-bottom: 2vw;
+	}
+
+	#jumpstart-section button {
+		width: 30vw;
+		height: 8vw;
+	}
+
+	.footer-container {
+		min-height: 350px;
+		flex-flow: column nowrap;
+		justify-content: space-around;
+		align-items: center;
+	}
+
+	.footer-container h3 {
+		font-size: 4vw;
+	}
+
+	footer p {
+		text-align: center;
+	}
+
+	hr {
+	  width: 50%;
+	  margin: 50px 0 30px 0;
+	}
 }
 
 .hidden {

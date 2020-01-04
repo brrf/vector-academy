@@ -33,13 +33,21 @@
 			</div>	
 		</header>
 		<main class="main-active ">
-			<div class='' id='top-content-section'>
+			<div id='top-content-section-large'>
 				<div class='top-content-container'>
 					<h2 class='top-content-title'>An Engineering Education.<br>Without the Student Debt.</h2>
 					<div>
 						<p class='top-content-text'>At Vector, we work with the most talented high school seniors in the country and place them into America's top engineering companies.</p>
 						<button class='top-content-button'>Start your prereqs</button> 
 					</div>
+				</div>
+			</div>
+			<div id='top-content-section-mobile'>
+				<div class="top-content-image"></div>
+				<div class='top-content-container'>
+					<h2 class='top-content-title'>An Engineering Education.<br>Without the Student Debt.</h2>				
+					<p class='top-content-text center'>At Vector, we work with the most talented high school seniors in the country and place them into America's top engineering companies.</p>
+					<button class='top-content-button'>Start your prereqs</button> 
 				</div>
 			</div>
 			<div class='center about-content'>
@@ -151,25 +159,25 @@
 			<a href="'./apply"><button>Apply</button></a>
 		</main>
 		<footer>
-			<div>
+			<div class='footer-container'>
 				<h1><a href="/">Vector</a></h1>
-				<p></p>	
+				<div>
+					<h3>About</h3>
+					<ul>
+						<li><a href="./privacypolicy">Privacy Policy</a></li>
+						<li><a href="./privacypolicy">Contact</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3>Resources</h3>
+					<ul>
+						<li><a href="./privacypolicy">FAQ</a></li>
+						<li><a href="./privacypolicy">How it works</a></li>
+						<li><a href="./privacypolicy">Application</a></li>
+					</ul>
+				</div>
 			</div>
-			<div>
-				<h3>About</h3>
-				<ul>
-					<li><a href="./privacypolicy">Privacy Policy</a></li>
-					<li><a href="./privacypolicy">Contact</a></li>
-				</ul>
-			</div>
-			<div>
-				<h3>Resources</h3>
-				<ul>
-					<li><a href="./privacypolicy">FAQ</a></li>
-					<li><a href="./privacypolicy">How it works</a></li>
-					<li><a href="./privacypolicy">Application</a></li>
-				</ul>
-			</div>
+			<p></p>
 		</footer>
 	</div>
 </body>
@@ -184,10 +192,12 @@
 	let hamburger = document.querySelector('.hamburger');
 	let mainActive = document.querySelector('.main-active');
 	let mainInactive = document.querySelector('.main-inactive');
+	let footer = document.querySelector('footer');
 	hamburger.addEventListener("click", function() {
 		hamburger.classList.toggle('is-active');
 		mainActive.classList.toggle('hidden');
 		mainInactive.classList.toggle('hidden');
+		footer.classList.toggle('hidden');
 	})
 
 </script>
