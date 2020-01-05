@@ -597,10 +597,10 @@ footer li {
 	}
 
 	.main-inactive a > button {
-		width: 40vw;
-		height: 6vw;
+		width: 50vw;
+		height: 12vw;
 		background-color: #040A2B;
-		font-size: 3vw;
+		font-size: 4.5vw;
 	}
 
 	#top-content-section-large {
