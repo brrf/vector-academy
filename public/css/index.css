@@ -616,6 +616,7 @@ footer li {
 	.top-content-text {	
 		font-size: 3.8vw;
 		margin: 0 0 3vw 0;
+		text-align: center;
 	}
 
 	.top-content-container button {
