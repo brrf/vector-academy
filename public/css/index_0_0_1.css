@@ -496,6 +496,14 @@ footer li {
 		margin-bottom: 1vw;
 	}
 
+	.year-name {
+		margin-top: -1vw;
+	}
+
+	.howitworks-content > p {
+		margin-top: -1vw;
+	}
+
 	#jumpstart-section {
 		height: 50vw;
 	}
