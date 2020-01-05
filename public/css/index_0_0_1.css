@@ -629,8 +629,8 @@ footer li {
 	}
 
 	.top-content-container button {
-		width: 40vw;
-		height: 50px;
+		width: 50vw;
+		height: 12vw;
 	}
 
 	.features-third {
@@ -678,7 +678,7 @@ footer li {
 	}
 
 	#jumpstart-section div {
-		height: 37vw;
+		height: 44vw;
 		width: 70vw;
 	}
 
@@ -687,8 +687,8 @@ footer li {
 	}
 
 	#jumpstart-section button {
-		width: 40vw;
-		height: 8vw;
+		width: 50vw;
+		height: 12vw;
 	}
 
 	.footer-container {
@@ -704,6 +704,7 @@ footer li {
 
 	footer p {
 		text-align: center;
+		font-size: 3vw;
 	}
 
 	hr {
