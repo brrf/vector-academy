@@ -161,7 +161,7 @@ li:hover > .dropdown {
 }
 
 #top-content-section-large {
-	background-image: url("../assets/AdobeStock_181153776.jpeg");
+	background-image: url("../assets/featureimage_web.jpeg");
 	background-size: cover;
 	background-position: 50% 20%;
 	background-color: #9197BE;
@@ -234,38 +234,38 @@ li:hover > .dropdown {
 }
 
 .education {
-	background-image: url("../assets/AdobeStock_299919002.jpeg");	
+	background-image: url("../assets/manlearning_web.jpg");	
 }
 
 .experience {
-	background-image: url("../assets/AdobeStock_200537096.jpeg");
+	background-image: url("../assets/experience_web.jpg");
 }
 
 .salary {
-	background-image: url("../assets/AdobeStock_180706958.jpeg");
+	background-image: url("../assets/salary_web.jpg");
 }
 
 .highschool-junior {
-	background-image: url("../assets/AdobeStock_145143446.jpeg");
+	background-image: url("../assets/pencil_web.jpg");
 }
 
 .highschool-senior {
-	background-image: url("../assets/AdobeStock_217647683.jpeg");
+	background-image: url("../assets/interview_web.jpg");
 	background-position: 100%;
 }
 
 .junior-apprentice-1 {
-	background-image: url("../assets/AdobeStock_265653336.jpeg");
+	background-image: url("../assets/firstday_web.jpg");
 	background-position: 45%;
 }
 
 .junior-apprentice-2 {
-	background-image: url("../assets/AdobeStock_135474635.jpeg");
+	background-image: url("../assets/juniorapprentice_web.jpg");
 	background-position: 30%;
 }
 
 .senior-apprentice {
-	background-image: url("../assets/AdobeStock_208405476.jpeg");
+	background-image: url("../assets/seniorapprentice_web.jpg");
 	background-position: 60%;
 }
 
@@ -332,7 +332,7 @@ li:hover > .dropdown {
 
 #jumpstart-section {
 	height: 30vw;
-	background-image: url("../assets/AdobeStock_183544314.jpeg");
+	background-image: url("../assets/jumpstart_web.jpeg");
 	background-size: cover;
 	background-position: 50% 55%;
 	position: relative;
