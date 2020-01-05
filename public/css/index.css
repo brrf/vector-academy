@@ -548,6 +548,10 @@ footer li {
 		display: block;
 	}
 
+	#navbar-container {
+		margin: 0 3vw 0 0;
+	}
+
 	.navbar-mobile button {
 		width: 16vw;
 	}
