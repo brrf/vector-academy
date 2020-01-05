@@ -518,7 +518,7 @@ footer li {
 	}
 
 	h2 {
-		font-size: 5.5vw;
+		font-size: 7vw;
 		margin: 3vw 0;
 	}
 
@@ -527,7 +527,7 @@ footer li {
 	}
 
 	h4 {
-		font-size: 3.3vw;
+		font-size: 3.6vw;
 		margin-bottom: 3vw;
 	}
 
@@ -536,7 +536,7 @@ footer li {
 	}
 
 	p {
-		font-size: 3vw;
+		font-size: 3.6vw;
 		line-height: 4vw;
 	}
 
@@ -596,15 +596,15 @@ footer li {
 		background-size: cover;
 		background-position: 75%;
 		background-color: #9197BE;
-		height: 64vh;
+		height: 50vh;
 		min-height: 280px;
 		padding: 0;
 	}
 
 	.top-content-container {
 		background-color: #E4E5F0;
-		height: 32vh; 
-		min-height: 210px;
+		height: 35vh; 
+		min-height: 250px;
 		width: 100%;
 		display: flex;
 		flex-flow: column nowrap;
@@ -614,13 +614,13 @@ footer li {
 	}
 
 	.top-content-text {	
-		font-size: 3.3vw;
+		font-size: 3.8vw;
 		margin: 0 0 3vw 0;
 	}
 
 	.top-content-container button {
-		width: 30vw;
-		min-height: 35px;
+		width: 40vw;
+		height: 50px;
 	}
 
 	.features-third {
@@ -664,7 +664,7 @@ footer li {
 	}
 
 	#jumpstart-section div {
-		height: 30vw;
+		height: 37vw;
 		width: 70vw;
 	}
 
