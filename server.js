@@ -18,6 +18,7 @@ app.use ((req, res, next) => {
 });
 
 app.use(express.static('public'));
+app.use(express.static('css'));
 
 // app.get('/', (req, res)=> {
 //   res.sendFile(path.join(__dirname, 'public', 'index.html'));
