@@ -527,21 +527,21 @@ footer li {
 	}
 
 	h4 {
-		font-size: 3.6vw;
+		font-size: 4.2vw;
 		margin-bottom: 3vw;
 	}
 
 	h5 {
-		font-size: 3vw;
+		font-size: 3.9vw;
 	}
 
 	p {
-		font-size: 3.6vw;
+		font-size: 3.9vw;
 		line-height: 4vw;
 	}
 
 	button {
-		font-size: 2.4vw;
+		font-size: 4.5vw;
 	}
 
 	.navbar-mobile {
@@ -608,7 +608,7 @@ footer li {
 	.top-content-container {
 		background-color: #E4E5F0;
 		height: 35vh; 
-		min-height: 250px;
+		min-height: 270px;
 		width: 100%;
 		display: flex;
 		flex-flow: column nowrap;
@@ -622,7 +622,7 @@ footer li {
 	}
 
 	.top-content-text {	
-		font-size: 3.8vw;
+		font-size: 4.5vw;
 		margin: 0 0 4vw 0;
 		text-align: center;
 	}
@@ -682,7 +682,7 @@ footer li {
 	}
 
 	#jumpstart-section button {
-		width: 30vw;
+		width: 40vw;
 		height: 8vw;
 	}
 
