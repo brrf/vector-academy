@@ -16,7 +16,7 @@
 			<div class='navbar-large'>
 				<ul class='navbar-links'>
 					<li>About &#9662
-						<ul class='dropdown'>
+						<ul class='dropdown hidden'>
 							<li><a href="/howitworks">How it works</a></li>
 							<li><a href="/prereqs">Prerequisites</a></li>
 							<li><a href="/faqs">FAQs</a></li>
@@ -195,12 +195,29 @@
 	let mainActive = document.querySelector('.main-active');
 	let mainInactive = document.querySelector('.main-inactive');
 	let footer = document.querySelector('footer');
+	let dropdownParent = document.querySelector('.navbar-links li:first-child');
+	let dropdownList = document.querySelector('.dropdown');
+
 	hamburger.addEventListener("click", function() {
 		hamburger.classList.toggle('is-active');
 		mainActive.classList.toggle('hidden');
 		mainInactive.classList.toggle('hidden');
 		footer.classList.toggle('hidden');
 	})
+
+	//toggle dropdown list (no :hover event on mobile)
+	dropdownParent.addEventListener("click", function () {
+		dropdownList.classList.toggle('hidden');
+	});
+
+	dropdownParent.addEventListener("mouseover", function () {
+		console.log('here')
+		dropdownList.classList.remove('hidden');
+
+	});
+	dropdownParent.addEventListener("mouseout", function () {
+		dropdownList.classList.add('hidden');
+	});
 
 </script>
 </html>
