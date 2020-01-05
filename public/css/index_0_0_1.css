@@ -488,6 +488,14 @@ footer li {
 		flex-direction: column;
 	}
 
+	.howitworks-content {
+		margin-top: 0.6vw;
+	}
+
+	.year-header {
+		margin-bottom: 1vw;
+	}
+
 	#jumpstart-section {
 		height: 50vw;
 	}
@@ -549,7 +557,7 @@ footer li {
 	}
 
 	#navbar-container {
-		margin: 0 3vw 0 0;
+		padding: 0 2.5vw 0 0;
 	}
 
 	.navbar-mobile button {
@@ -648,7 +656,7 @@ footer li {
 	}
 
 	.howitworks-content {
-		margin: 1vw 0 3.4vw -5.2vw;
+		margin: 0.7vw 0 3.4vw -3.3vw;
 	}
 
 	.howitworks-year-container {
@@ -665,8 +673,8 @@ footer li {
 	}
 
 	.year-label {
-		height: 10.5vw;
-		width: 10.5vw;
+		height: 7vw;
+		width: 7vw;
 	}
 
 	.howitworks-content > p {
