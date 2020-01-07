@@ -247,7 +247,7 @@ ul li {
 .features-image {
 	width: 26vw;
 	height: 17.4vw;
-	background-repeat: round;
+	background-size: cover;
 }
 
 .education {

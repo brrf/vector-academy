@@ -195,8 +195,6 @@
 	let mainActive = document.querySelector('.main-active');
 	let mainInactive = document.querySelector('.main-inactive');
 	let footer = document.querySelector('footer');
-	let dropdownParent = document.querySelector('.navbar-links li:first-child');
-	let dropdownList = document.querySelector('.dropdown');
 
 	hamburger.addEventListener("click", function() {
 		hamburger.classList.toggle('is-active');
@@ -206,6 +204,9 @@
 	})
 
 	//toggle dropdown list (no :hover event on mobile)
+	let dropdownParent = document.querySelector('.navbar-links li:first-child');
+	let dropdownList = document.querySelector('.dropdown');
+	
 	dropdownParent.addEventListener("click", function () {
 		dropdownList.classList.toggle('hidden');
 	});
