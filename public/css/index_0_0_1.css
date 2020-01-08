@@ -407,7 +407,7 @@ footer p {
 
 footer li {
 	margin-bottom: 0.5em;
-	font-size: 0.7vw;
+	font-size: 1vw;
 }
 
 /*tablet*/
@@ -538,6 +538,9 @@ footer li {
 	#jumpstart-section button {
 		width: 20vw;
 		height: 5.5vw;
+	}
+	footer li {
+		font-size: 1.6vw;
 	}
 }
 
@@ -729,7 +732,8 @@ footer li {
 		min-height: 350px;
 		flex-flow: column nowrap;
 		justify-content: space-around;
-		align-items: center;
+		align-items: flex-start;
+		margin-left: 40%;
 	}
 
 	.footer-container h3 {
@@ -739,6 +743,10 @@ footer li {
 	footer p {
 		text-align: center;
 		font-size: 3vw;
+	}
+
+	footer li {
+		font-size: 2.8vw;
 	}
 
 	hr {
