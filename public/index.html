@@ -5,7 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link href="https://fonts.googleapis.com/css?family=Bitter&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/body.css">
+	<link rel="stylesheet" type="text/css" href="/css/header.css">
 	<link rel="stylesheet" type="text/css" href="/css/index_0_0_1.css">
+	<link rel="stylesheet" type="text/css" href="/css/footer.css">
 	<link rel="stylesheet" type="text/css" href="/css/hamburger.css">
 	<title>Vector Training Academy</title>
 </head>
@@ -19,7 +22,7 @@
 						<ul class='dropdown hidden'>
 							<li><a href="/howitworks">How it works</a></li>
 							<li><a href="/prereqs">Prerequisites</a></li>
-							<li><a href="/faqs">FAQs</a></li>
+							<li><a href="./faqs.html">FAQs</a></li>
 						</ul>
 					</li>
 					<li><a href="./employerlogin">Employer Login</a></li>
@@ -173,7 +176,7 @@
 				<div>
 					<h3>Resources</h3>
 					<ul>
-						<li><a href="./privacypolicy">FAQ</a></li>
+						<li><a href="./faqs.html">FAQ</a></li>
 						<li><a href="./privacypolicy">How it works</a></li>
 						<li><a href="./privacypolicy">Application</a></li>
 					</ul>
@@ -206,7 +209,7 @@
 	//toggle dropdown list (no :hover event on mobile)
 	let dropdownParent = document.querySelector('.navbar-links li:first-child');
 	let dropdownList = document.querySelector('.dropdown');
-	
+
 	dropdownParent.addEventListener("click", function () {
 		dropdownList.classList.toggle('hidden');
 	});
