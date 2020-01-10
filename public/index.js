@@ -1,3 +1,18 @@
+//template the header, footer and main-inactive sections
+let header = document.createElement('header');
+header.id = 'navbar-container';
+header.innerHTML = `<h1><a href="/">Vector</a></h1><div class='navbar-large'><ul class='navbar-links'><li>About &#9662<ul class='dropdown hidden'><li><a href="/howitworks">How it works</a></li><li><a href="/prereqs">Prerequisites</a></li><li><a href="./faqs.html">FAQs</a></li></ul></li><li><a href="./employerlogin">Employer Login</a></li><li><a href="./employerlogin">Student Login</a></li><li><button>Apply</button></li></ul></div><div class='navbar-mobile'><button class="hamburger hamburger--spin" type="button"><span class="hamburger-inner"></span></button></div>`;	
+document.body.prepend(header);
+
+let footer = document.createElement('footer');
+footer.innerHTML = `<div class='footer-container'><h1><a href="/">Vector</a></h1><div><h3>About</h3><ul><li><a href="./privacypolicy">Privacy Policy</a></li><li><a href="./privacypolicy">Contact</a></li></ul></div><div><h3>Resources</h3><ul><li><a href="./faqs.html">FAQ</a></li><li><a href="./privacypolicy">How it works</a></li><li><a href="./privacypolicy">Application</a></li></ul></div></div><p></p>`;
+document.body.append(footer);
+
+let mainInactive = document.createElement('main');
+mainInactive.className = 'main-inactive hidden';
+mainInactive.innerHTML = `<a href="/howitworks"><h3>How it works</h3></a><a href="prereqs"><h3>Prerequisites</h3></a><a href="./faqs.html"><h3>FAQs</h3></a><hr><a href="./employerlogin"><h3>Employer Login</h3></a><a href="./employerlogin"><h3>Student Login</h3></a><a href="'./apply"><button>Apply</button></a>`;
+footer.before(mainInactive);
+
 //update copyright by year
 let copyright = document.querySelector('footer p');
 const year = new Date().getFullYear();
@@ -6,13 +21,12 @@ copyright.innerHTML = `Copyright &copy; ${year} Vector Training Academy. All Rig
 //toggle active of hamburger
 let hamburger = document.querySelector('.hamburger');
 let mainActive = document.querySelector('.main-active');
-let mainInactive = document.querySelector('.main-inactive');
-let footer = document.querySelector('footer');
 
 hamburger.addEventListener("click", function() {
 	hamburger.classList.toggle('is-active');
 	mainActive.classList.toggle('hidden');
 	mainInactive.classList.toggle('hidden');
+	console.log(mainInactive);
 	footer.classList.toggle('hidden');
 })
 
@@ -25,7 +39,6 @@ dropdownParent.addEventListener("click", function () {
 });
 
 dropdownParent.addEventListener("mouseover", function () {
-	console.log('here')
 	dropdownList.classList.remove('hidden');
 
 });
