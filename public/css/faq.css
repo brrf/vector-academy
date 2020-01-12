@@ -1,5 +1,5 @@
 #faq-section {
-	padding: 5vw 1.5vw 0 1.5vw;
+	padding: 6vw 1.5vw 0 1.5vw;
 }
 
 .faq-category {
@@ -68,6 +68,9 @@
 }
 
 @media (max-width: 990px) {
+	#faq-section {
+		padding-top: 50px;
+	}
 	.accordion-thumb::before {
 		height: 1.0vw;
 		width: 1.0vw;
@@ -86,6 +89,9 @@
 }
 
 @media (max-width: 550px) {
+	#faq-section {
+	padding: 10vw 1.5vw 0 1.5vw;
+	}
 	.accordion-thumb {
 		padding: 1vw 0 2vw 0;
 	}
