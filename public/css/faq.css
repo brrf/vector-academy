@@ -58,7 +58,6 @@
 	font-size: 1.2vw;
 }
 
-
 /* Active */
 .accordion-item.is-active .accordion-thumb::before {
     transform: rotate(45deg);
@@ -110,7 +109,7 @@
 	}
 	.accordion-panel ul li {
 		font-size: 3.9vw;
-		line-height: 4vw;
+		line-height: 4.8vw;
 	}
 }
 
