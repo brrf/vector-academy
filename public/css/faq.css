@@ -89,9 +89,6 @@
 }
 
 @media (max-width: 550px) {
-	#faq-section {
-	padding: 10vw 1.5vw 0 1.5vw;
-	}
 	.accordion-thumb {
 		padding: 1vw 0 2vw 0;
 	}
