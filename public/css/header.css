@@ -4,7 +4,8 @@
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-items: center;
-	position: sticky;
+	position: fixed;
+	width: 100%;
 	top: 0;
 	background-color: white;
 	padding: 0.7vw;
