@@ -37,20 +37,19 @@ h2 {
 
 h3 {
 	margin: 0.3vw 0;
-	font-size: 1.25vw;
+	font-size: 1.5vw;
 	font-weight: bold;
 	font-family: 'Bitter', serif;
 }
 
 h4 {
 	margin: 0;
-	padding: 0.6vw 12vw 1.5vw 12vw;
 	font-weight: normal;
-	font-size: 1.3vw;
+	font-size: 1.4vw;	
 }
 
 h5 {
-	font-size: 1.4vw;
+	font-size: 1.3vw;
 	margin: 0;
 	z-index: 1;
 }
@@ -93,6 +92,10 @@ ul {
 	text-align: center;
 }
 
+.center h4 {
+	padding: 0.6vw 12vw 1.5vw 12vw;
+}
+
 /*tablet*/
 @media (max-width: 990px) {
 	h1 {
@@ -109,12 +112,11 @@ ul {
 	}
 
 	h3 {
-		font-size: 2.3vw;
+		font-size: 2.5vw;
 	}
 
 	h4 {
-		font-size: 2.5vw;
-		/* margin-bottom: 3vw; */
+		font-size: 2.4vw;
 	}
 
 	h5 {
@@ -164,7 +166,7 @@ ul {
 	}
 
 	p {
-		font-size: 4vw;
+		font-size: 3.9vw;
 		line-height: 4vw;
 	}
 

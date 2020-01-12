@@ -51,3 +51,35 @@
 .accordion-panel.display {
 	display: block;
 }
+
+@media (max-width: 990px) {
+	.accordion-thumb::before {
+		height: 1.0vw;
+		width: 1.0vw;
+		margin-right: 2.2vw;
+	}
+
+	.accordion-panel {
+		margin: 0 0 0 4.0vw;
+	}
+}
+
+@media (max-width: 550px) {
+	.accordion-thumb {
+		padding: 1vw 0 2vw 0;
+	}
+
+	.accordion-thumb::before {
+		height: 1.5vw;
+		width: 1.5vw;
+		margin-right: 2.2vw;
+	}
+
+	.accordion-panel {
+		margin: 0 0 0 4.5vw;
+	}
+}
+
+
+
+

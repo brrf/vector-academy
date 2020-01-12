@@ -1,6 +1,6 @@
 //toggle active accordion items
 
-let accordion = document.querySelector('.accordion');
+let accordion = document.querySelector('#faq-section');
 let accordionItems = document.querySelectorAll('.accordion-item');
 
 accordion.addEventListener('click', function(event) {
