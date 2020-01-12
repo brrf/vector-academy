@@ -3,7 +3,7 @@
 }
 
 .faq-category {
-	margin: 3vw 20vw;
+	margin: 3vw 11vw;
 }
 
 .accordion {
@@ -41,7 +41,23 @@
     margin: 0 0 0 2.6vw;
     padding-bottom: .8rem;
     display: none;
+    color: #383651;
 }
+
+.accordion-panel p {
+	margin-bottom: 1vw;
+}
+
+.accordion-panel ul {
+	list-style-type: disc;
+	margin: 0 0 1vw 3vw;
+}
+
+.accordion-panel ul li {
+	line-height: 2vw;
+	font-size: 1.2vw;
+}
+
 
 /* Active */
 .accordion-item.is-active .accordion-thumb::before {
@@ -58,9 +74,15 @@
 		width: 1.0vw;
 		margin-right: 2.2vw;
 	}
-
 	.accordion-panel {
 		margin: 0 0 0 4.0vw;
+	}
+	.accordion-panel ul {
+		margin: 0 0 2vw 4vw;
+	}
+	.accordion-panel ul li {
+		font-size: 1.8vw;
+		line-height: 2.2vw;
 	}
 }
 
@@ -77,6 +99,18 @@
 
 	.accordion-panel {
 		margin: 0 0 0 4.5vw;
+	}
+
+	.accordion-panel p {
+		margin-bottom: 2vw;
+	}
+
+	.accordion-panel ul {
+		margin: 0 0 2vw 6vw;
+	}
+	.accordion-panel ul li {
+		font-size: 3.9vw;
+		line-height: 4vw;
 	}
 }
 
