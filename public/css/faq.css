@@ -107,9 +107,10 @@
 	.accordion-panel ul {
 		margin: 0 0 2vw 6vw;
 	}
+
 	.accordion-panel ul li {
 		font-size: 3.9vw;
-		line-height: 4.8vw;
+		line-height: 4.5vw;
 	}
 }
 
