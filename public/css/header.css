@@ -59,7 +59,7 @@ ul li {
 }
 
 .dropdown li:hover {
-	font-weight: bold;
+	text-shadow: 0 0 0.01px black;
 }
 
 /*tablet*/
