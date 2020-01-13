@@ -28,6 +28,10 @@ app.get('/faqs', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'faqs.html'));
 })
 
+app.get('/privacy', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'privacy.html'));
+})
+
 //404 Not Found Middleware
 app.use(function(req, res, next) {
   res.status(404)

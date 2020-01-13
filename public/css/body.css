@@ -21,6 +21,14 @@ body {
 	background-color: #f4f5f947;
 }
 
+main {
+	margin-top: 4.5vw;
+}
+
+.top-section {
+	padding: 2vw 1.5vw 0 1.5vw;
+}
+
 h1 {
 	cursor: pointer;
 	margin-left: 2vw;
@@ -100,6 +108,9 @@ ul {
 @media (max-width: 990px) {
 	body {
 		-webkit-text-size-adjust: none;
+	}
+	.top-section {
+		padding-top: 35px;
 	}
 	h1 {
 		font-size: 3.5vw;
