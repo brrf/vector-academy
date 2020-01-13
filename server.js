@@ -20,9 +20,13 @@ app.use ((req, res, next) => {
 app.use(express.static('public'));
 app.use(express.static('css'));
 
-// app.get('/', (req, res)=> {
-//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-// });
+app.get('/', (req, res)=> {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/faqs', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'faqs.html'));
+})
 
 //404 Not Found Middleware
 app.use(function(req, res, next) {
