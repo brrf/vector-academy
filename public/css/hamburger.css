@@ -34,7 +34,7 @@
   }
   .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
     width: 40px;
-    height: 3px;
+    height: 2px;
     background-color: #19225C;
     border-radius: 4px;
     position: absolute;
@@ -46,9 +46,9 @@
     content: "";
     display: block; }
   .hamburger-inner::before {
-    top: -10px; }
+    top: -8px; }
   .hamburger-inner::after {
-    bottom: -10px; }
+    bottom: -8px; }
 
     /*
    * Spin
