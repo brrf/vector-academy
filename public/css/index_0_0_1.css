@@ -9,7 +9,6 @@
 .features-third {
 	display: flex;
 	flex-direction: column;
-	justify-self: center;
 	padding-top: 1.4vw;
 	box-shadow: 0 4px 4px -4px #232323;
 }
@@ -22,7 +21,7 @@
 	height: 40vw;
 	max-height: 83vh;
 	min-height: 450px;
-	padding: 10vw 11vw;
+	padding: 7vw 7vw;
 }
 
 #top-content-section-mobile {
@@ -32,7 +31,7 @@
 .top-content-container {
 	background-color: rgba(255,223,186,0.75);
 	color: #19225C;
-	width: 50%;
+	width: 45%;
 	padding: 0.5vw 0.8vw;
 	height: 20vw;
 }
@@ -63,7 +62,7 @@
 #features-section {
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: space-evenly;
+	justify-content: space-around;
 	margin-bottom: 0.6vw;
 	background-color: white;
 	padding-bottom: 4.5vw;
@@ -127,7 +126,7 @@
 	padding: 2.7vw 1.5vw 0 1.5vw;
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: space-evenly;
+	justify-content: space-around;
 	padding-bottom: 2.25vw;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
@@ -215,15 +214,14 @@
 @media (max-width: 990px) {
 
 	#top-content-section-large {
-		padding: 2.5vw 2.5vw;
+		padding: 70px 6vw;
 		background-position: 60% 20%;
 		display: flex;
-		align-items: center;
 	}
 
 	.top-content-container {		
 		height: 32vw;
-		width: 45vw;
+		width: 43vw;
 	}
 
 	.top-content-title {

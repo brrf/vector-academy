@@ -23,6 +23,7 @@ body {
 
 main {
 	margin-top: 4.5vw;
+	display: block;
 }
 
 .top-section {
