@@ -6,7 +6,7 @@
 	margin: 0 13vw;
 }
 
-p, ul {
+.privacy-policy-container p, .privacy-policy-container ul {
 	line-height: 1.9vw;
 }
 
@@ -14,7 +14,7 @@ p, ul {
 	list-style-type: disc;
 }
 
-li {
+.privacy-policy-container li {
 	margin-bottom: 0.7vw;
 }
 

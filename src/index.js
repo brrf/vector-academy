@@ -1,12 +1,14 @@
+let main = document.querySelector('.main-active')
+
 //template the header, footer and main-inactive sections
 let header = document.createElement('header');
 header.id = 'navbar-container';
 header.innerHTML = `<h1><a href="/">Vector</a></h1><div class='navbar-large'><ul class='navbar-links'><li>About &#9662<ul class='dropdown hidden'><li><a href="/howitworks">How it works</a></li><li><a href="/prereqs">Prerequisites</a></li><li><a href="./faqs">FAQs</a></li></ul></li><li><a href="./employerlogin">Employer Login</a></li><li><a href="./employerlogin">Student Login</a></li><li><button>Apply</button></li></ul></div><div class='navbar-mobile'><button class="hamburger hamburger--spin" type="button"><span class="hamburger-inner"></span></button></div>`;	
-document.body.prepend(header);
+document.body.insertBefore(header, main);
 
 let footer = document.createElement('footer');
 footer.innerHTML = `<div class='footer-container'><h1><a href="/">Vector</a></h1><div><h3>About</h3><ul><li><a href="./privacy">Privacy Policy</a></li><li><a href="./privacypolicy">Contact</a></li></ul></div><div><h3>Resources</h3><ul><li><a href="./faqs">FAQ</a></li><li><a href="./privacypolicy">How it works</a></li><li><a href="./privacypolicy">Application</a></li></ul></div></div><p></p>`;
-document.body.append(footer);
+document.body.appendChild(footer);
 
 let mainInactive = document.createElement('main');
 mainInactive.className = 'main-inactive hidden';
