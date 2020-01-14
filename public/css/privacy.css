@@ -34,7 +34,7 @@ strong {
 	margin: 1.5vw 0;
 }
 
-.privacy-policy-container p, .privacy-policy-container li{
+.privacy-policy-container p, .privacy-policy-container li {
 	margin-right: 30vw;
 	font-size: 1.2vw;
 	color: #383651;
@@ -65,6 +65,7 @@ strong {
 	.privacy-policy-container p, .privacy-policy-container li {
 		margin-right: 20vw;
 		font-size: 3vw;
+		line-height: 4.5vw;
 	}
 	li {
 	margin-bottom: 1.4vw;
