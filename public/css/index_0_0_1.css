@@ -214,14 +214,14 @@
 @media (max-width: 990px) {
 
 	#top-content-section-large {
-		padding: 70px 6vw;
+		padding: 70px 4vw;
 		background-position: 60% 20%;
 		display: flex;
 	}
 
 	.top-content-container {		
 		height: 32vw;
-		width: 43vw;
+		width: 45vw;
 	}
 
 	.top-content-title {
