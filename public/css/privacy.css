@@ -8,7 +8,6 @@
 
 p, ul {
 	line-height: 1.9vw;
-	color: #383651;
 }
 
 .privacy-policy-container ul {
@@ -35,9 +34,11 @@ strong {
 	margin: 1.5vw 0;
 }
 
-.privacy-policy-container p, .privacy-policy-container li {
+.privacy-policy-container p, .privacy-policy-container li{
 	margin-right: 30vw;
 	font-size: 1.2vw;
+	color: #383651;
+	line-height: 1.9vw;
 }
 
 .privacy-policy-container div:last-child {
