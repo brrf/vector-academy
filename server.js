@@ -8,6 +8,8 @@ const app = express();
 
 app.use(helmet());
 
+require('dotenv').config();
+
 
 app.use ((req, res, next) => {
   res.header ('Access-Control-Allow-Origin', 'http://localhost:3001')
@@ -22,6 +24,7 @@ app.use(express.static('css'));
 
 app.get('/', (req, res)=> {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+
 });
 
 app.get('/faqs', (req, res) => {
@@ -30,6 +33,16 @@ app.get('/faqs', (req, res) => {
 
 app.get('/privacy', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'privacy.html'));
+})
+
+app.get('/contact', (req, res) => {
+  console.log('here');
+  res.sendFile(path.join(__dirname, 'public', 'contact.html'));
+})
+
+app.post('/contact', (req, res) => {
+  console.log(req.body);
+  res.json({a: 1});
 })
 
 //404 Not Found Middleware
@@ -41,6 +54,6 @@ app.use(function(req, res, next) {
 
 
 //Start server
-app.listen(3001, function () {
-  console.log("Listening on port " + 3001);
+app.listen(process.env.PORT || 3001, function () {
+  console.log("Listening on port " + process.env.PORT);
 });

@@ -1,25 +1,27 @@
+"use strict";
+
 //toggle active accordion items
+const accordion = document.querySelector('#faq-section');
+const accordionItems = document.querySelectorAll('.accordion-item');
+accordion.addEventListener('click', function (event) {
+  
+  function findAccordionItem (event) {
+    let currentTarget = event.target;
+    while (currentTarget.parentNode.tagName != "MAIN") {
+      if (currentTarget.classList.contains('accordion-item')) return currentTarget;
+      currentTarget = currentTarget.parentNode;
+    }
+  }
+  const accordionItem = findAccordionItem(event)
+  if (!accordionItem) return;
+  const accordionPanel = accordionItem.lastElementChild;
+  const isAlreadyAcive = accordionItem.classList.contains('is-active') ? true : false; 
 
-let accordion = document.querySelector('#faq-section');
-let accordionItems = document.querySelectorAll('.accordion-item');
-
-accordion.addEventListener('click', function(event) {
-	const accordionItem = event.target.closest('.accordion-item');
-	const accordionPanel = event.target.closest('.accordion-panel') || event.target.nextElementSibling;
-
-	if (!accordionItem) return;
-	const isAlreadyAcive = accordionItem.classList.contains('is-active') ? true : false
-
-	// for (let item of accordionItems) {
-	// 	item.classList.remove('is-active');
-	// 	item.lastElementChild.classList.remove('display')
-	// }
-	
-	if (isAlreadyAcive) {
-		accordionItem.classList.remove('is-active');
-		accordionPanel.classList.remove('display');
-	} else {
-		accordionItem.classList.add('is-active');		
-		accordionPanel.classList.add('display');
-	}
+  if (isAlreadyAcive) {
+    accordionItem.classList.remove('is-active');
+    accordionPanel.classList.remove('display');
+  } else {
+    accordionItem.classList.add('is-active');
+    accordionPanel.classList.add('display');
+  }
 });

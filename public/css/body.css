@@ -22,7 +22,7 @@ body {
 }
 
 main {
-	margin-top: 4.5vw;
+	margin-top: 65px;
 	display: block;
 }
 
@@ -110,8 +110,8 @@ ul {
 	body {
 		-webkit-text-size-adjust: none;
 	}
-	.top-section {
-		padding-top: 35px;
+	main {
+		margin-top: 50px;
 	}
 	h1 {
 		font-size: 3.5vw;
@@ -153,7 +153,6 @@ ul {
 
 /*mobile*/
 @media (max-width: 550px) {
-
 	h1 {
 		font-size: 6vw;
 	}

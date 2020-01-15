@@ -18,6 +18,11 @@
 	margin-bottom: 0.7vw;
 }
 
+.privacy-policy-container hr {
+	width: 100%;
+	margin: 0;
+}
+
 strong {
 	 font-weight: 900; 
 }

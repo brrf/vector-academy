@@ -65,7 +65,7 @@
 
 @media (max-width: 990px) {
 	#faq-section {
-		padding-top: 35px;
+		padding-top: 10px;
 	}
 	.accordion-thumb::before {
 		height: 1.0vw;

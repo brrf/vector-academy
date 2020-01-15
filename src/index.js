@@ -7,7 +7,7 @@ header.innerHTML = `<h1><a href="/">Vector</a></h1><div class='navbar-large'><ul
 document.body.insertBefore(header, main);
 
 let footer = document.createElement('footer');
-footer.innerHTML = `<div class='footer-container'><h1><a href="/">Vector</a></h1><div><h3>About</h3><ul><li><a href="./privacy">Privacy Policy</a></li><li><a href="./privacypolicy">Contact</a></li></ul></div><div><h3>Resources</h3><ul><li><a href="./faqs">FAQ</a></li><li><a href="./privacypolicy">How it works</a></li><li><a href="./privacypolicy">Application</a></li></ul></div></div><p></p>`;
+footer.innerHTML = `<div class='footer-container'><h1><a href="/">Vector</a></h1><div><h3>About</h3><ul><li><a href="./privacy">Privacy Policy</a></li><li><a href="./contact">Contact</a></li></ul></div><div><h3>Resources</h3><ul><li><a href="./faqs">FAQ</a></li><li><a href="./privacypolicy">How it works</a></li><li><a href="./privacypolicy">Application</a></li></ul></div></div><p></p>`;
 document.body.appendChild(footer);
 
 let mainInactive = document.createElement('main');
