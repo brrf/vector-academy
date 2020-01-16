@@ -60,13 +60,6 @@ textarea {
 	#contact-form-container h2 {
 		margin: 2vw 0;
 	}
-	#contact-form-container button {
-		margin: 2vw 0;
-		height: 7vw;
-		width: 25vw;
-		max-width: 200px;
-		font-size: 2.5vw;
-	}
 }
 
 @media (max-width: 550px) {
@@ -77,10 +70,6 @@ textarea {
 
 	#contact-form-container h2 {
 		margin-bottom: 4vw;
-	}
-	#contact-form-container button {
-		height: 10vw;
-		width: 30vw;
 	}
 }
 
