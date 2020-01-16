@@ -74,7 +74,7 @@ ul li {
 @media (max-width: 550px) {
 	.navbar-mobile {
 		display: block;
-		width: 12vw;
+		width: 15vw;
 	}
 
 	#navbar-container {
