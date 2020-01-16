@@ -1,19 +1,27 @@
 "use strict";
 
 var button = document.querySelector("#contact-form-container button");
-var form = document.querySelector("form");
+var form = document.getElementById("contact-form");
 button.addEventListener("click", submitForm);
 
 function submitForm(e) {
-  console.log('here');
+  const firstName = document.getElementById("contact-form").elements["firstName"].value;
+  const lastName = document.getElementById("contact-form").elements["lastName"].value;
+  const email = document.getElementById("contact-form").elements["email"].value;
+  const message = document.getElementById("contact-form").elements["message"].value;
+  const body = {
+    firstName,
+    lastName,
+    email,
+    message
+  }
   e.preventDefault();
-  console.log(new FormData(form));
   fetch('http://localhost:3002/contact', {
     method: 'POST',
-    body: new FormData(form),
+    body: JSON.stringify(body),
     headers: {
-      "Content-Type": "application/json"
-    }
+        "Content-Type": "application/json",
+      }
   }).then(function (res) {
     return res.json();
   }).then(function (resObject) {

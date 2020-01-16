@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const path = require('path');
 
@@ -9,6 +10,10 @@ const app = express();
 app.use(helmet());
 
 require('dotenv').config();
+
+//Express body parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.use ((req, res, next) => {
@@ -36,7 +41,6 @@ app.get('/privacy', (req, res) => {
 })
 
 app.get('/contact', (req, res) => {
-  console.log('here');
   res.sendFile(path.join(__dirname, 'public', 'contact.html'));
 })
 
