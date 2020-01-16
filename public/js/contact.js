@@ -13,7 +13,19 @@ function repaintDOM() {
   document.querySelector('#contact-form-container').appendChild(text);
 }
 
+function addSpinner() {
+  var spinner = document.createElement('div');
+  spinner.classList.add('spinner-box');
+  spinner.innerHTML = '<div class="circle-border"><div class="circle-core"></div></div>';
+  document.querySelector('#contact-form-container div').appendChild(spinner);
+}
+
+function removeSpinner() {
+  document.querySelector('.spinner-box').remove();
+}
+
 function submitForm(e) {
+  addSpinner();
   var firstName = document.getElementById("contact-form").elements["firstName"].value;
   var lastName = document.getElementById("contact-form").elements["lastName"].value;
   var email = document.getElementById("contact-form").elements["email"].value;
@@ -25,7 +37,7 @@ function submitForm(e) {
     message: message
   };
   e.preventDefault();
-  fetch("http://localhost:3002/contact", {
+  fetch("http://localhost:3003/contact", {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
@@ -35,6 +47,7 @@ function submitForm(e) {
     return res.json();
   }).then(function (resObject) {
     if (!resObject.err) {
+      removeSpinner();
       repaintDOM();
     }
   });

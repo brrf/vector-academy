@@ -18,6 +18,11 @@
 	align-items: center;
 }
 
+#contact-form-container div {
+	display: flex;
+	justify-content: flex-start;
+}
+
 form input {
 	margin-bottom: 20px;
 }
