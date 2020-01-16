@@ -10,7 +10,8 @@
 	background-color: white;
 	padding: 0.7vw;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-	height: 50px;
+	height: 75px;
+	min-height: 3.5vw;
 }
 
 .navbar-mobile {
@@ -32,7 +33,7 @@ ul li {
 	cursor: pointer;
 	margin: 0.3vw 0.3vw 0.3vw 1.8vw;
 	font-family: 'Lato', sans-serif;
-	font-size: 1.2vw;
+	 font-size: 16px; 
 	color: #4F588F;
 }
 
@@ -73,14 +74,12 @@ ul li {
 @media (max-width: 550px) {
 	.navbar-mobile {
 		display: block;
+		width: 12vw;
 	}
 
 	#navbar-container {
 		padding: 0 2.5vw 0 0;
-	}
-
-	.navbar-mobile button {
-		width: 16vw;
+		height: 50px;
 	}
 
 	.navbar-large {
@@ -107,10 +106,10 @@ ul li {
 	}
 
 	.main-inactive a > button {
-		width: 50vw;
-		height: 12vw;
+		/* width: 50vw; */
+		/* height: 12vw; */
 		background-color: #040A2B;
-		font-size: 4.5vw;
+		/* font-size: 4.5vw; */
 	}
 
 }
