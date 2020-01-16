@@ -25,7 +25,7 @@ function submitForm(e) {
     message: message
   };
   e.preventDefault();
-  fetch("http://localhost:3003/contact", {
+  fetch("http://localhost:3002/contact", {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
@@ -36,8 +36,6 @@ function submitForm(e) {
   }).then(function (resObject) {
     if (!resObject.err) {
       repaintDOM();
-    } else {
-      console.log(resObject.err)
     }
   });
 }

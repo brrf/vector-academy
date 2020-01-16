@@ -77,7 +77,6 @@
 }
 
 .features-image {
-	width: 160px;
 	height: 17.4vw;
 	background-size: cover;
 }
@@ -319,7 +318,7 @@
 	.top-content-container {
 		background-color: #E4E5F0;
 		height: 63vw;
-		max-height: 305px;
+		max-height: 315px;
 		padding-top: 3vw;
 		width: 100%;
 		display: flex;
