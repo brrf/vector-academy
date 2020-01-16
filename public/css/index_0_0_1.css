@@ -318,7 +318,8 @@
 
 	.top-content-container {
 		background-color: #E4E5F0;
-		height: 58vw;
+		height: 63vw;
+		max-height: 305px;
 		padding-top: 3vw;
 		width: 100%;
 		display: flex;
