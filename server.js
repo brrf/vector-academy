@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const path = require('path');
+const nodemailer = require('nodemailer');
 
 const app = express();
 
@@ -45,8 +46,28 @@ app.get('/contact', (req, res) => {
 })
 
 app.post('/contact', (req, res) => {
-  console.log(req.body);
-  res.json({a: 1});
+  //send email to vector
+  let transport = nodemailer.createTransport({
+    host: 'smtp.zoho.com',
+    port: 465,
+    auth: {
+       user: process.env.ZOHOUSER,
+       pass: process.env.ZOHOPASS
+    }
+  });
+  const message = {
+    from: req.body.email, // Sender address
+    to: 'moshe@vectortrainingacademy.com',         // List of recipients
+    subject: `Message from: ${req.body.firstName} ${req.body.lastName}`, // Subject line
+    text: req.body.message // Plain text body
+  };
+  transport.sendMail(message, function(err, info) {
+      if (err) {
+        res.json({err})
+      } else {
+        res.json({err: false})
+      }
+  });
 })
 
 //404 Not Found Middleware
