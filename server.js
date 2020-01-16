@@ -56,10 +56,10 @@ app.post('/contact', (req, res) => {
     }
   });
   const message = {
-    from: req.body.email, // Sender address
+    from: 'moshe@vectortrainingacademy.com', // Sender address
     to: 'moshe@vectortrainingacademy.com',         // List of recipients
     subject: `Message from: ${req.body.firstName} ${req.body.lastName}`, // Subject line
-    text: req.body.message // Plain text body
+    text: `Reply to ${req.body.email}. Message: ${req.body.message}` // Plain text body
   };
   transport.sendMail(message, function(err, info) {
       if (err) {

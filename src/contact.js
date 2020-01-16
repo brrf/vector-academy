@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 const button = document.querySelector("#contact-form-container button");
 const form = document.getElementById("contact-form");
 button.addEventListener("click", submitForm);
@@ -25,7 +27,7 @@ function submitForm(e) {
     message
   }
   e.preventDefault();
-  fetch('http://localhost:3002/contact', {
+  fetch(`http://localhost:3002/contact`, {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
