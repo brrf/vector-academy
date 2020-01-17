@@ -78,3 +78,11 @@ textarea {
 	}
 }
 
+.warning {
+	background-color: #de3c31;
+	color: white;
+	width: 70%;
+	margin: 10px auto;
+	padding: 3px;
+}
+
