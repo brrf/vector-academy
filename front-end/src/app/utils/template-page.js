@@ -1,10 +1,12 @@
+import logo from "../../public/assets/Vector-01.png";
+
 "use strict";
 export default function templatePage () {
 	const mainActive = document.querySelector('.main-active');
 
 	const header = document.createElement('header');
 	header.id = 'navbar-container';
-	header.innerHTML = "<h1><a href=\"./index.html\">Vector</a></h1><div class='navbar-large'><ul class='navbar-links'><li>About &#9662<ul class='dropdown hidden'><li><a href=\"./howitworks.html\">How it works</a></li><li><a href=\"./prereqs.html\">Prerequisites</a></li><li><a href=\"./faqs.html\">FAQs</a></li></ul></li><li><a href=\"./employerlogin.html\">Employer Login</a></li><li><a href=\"./employerlogin.html\">Student Login</a></li><li><button>Apply</button></li></ul></div><div class='navbar-mobile'><button class=\"hamburger hamburger--spin\" type=\"button\"><span class=\"hamburger-inner\"></span></button></div>";
+	header.innerHTML = `<a href=\"./index.html\"><img src=${logo} alt=\"logo\"></a><div class='navbar-large'><ul class='navbar-links'><li>About &#9662<ul class='dropdown hidden'><li><a href=\"./howitworks.html\">How it works</a></li><li><a href=\"./prereqs.html\">Prerequisites</a></li><li><a href=\"./faqs.html\">FAQs</a></li></ul></li><li><a href=\"./employerlogin.html\">Employer Login</a></li><li><a href=\"./employerlogin.html\">Student Login</a></li><li><button>Apply</button></li></ul></div><div class='navbar-mobile'><button class=\"hamburger hamburger--spin\" type=\"button\"><span class=\"hamburger-inner\"></span></button></div>`;
 	document.body.insertBefore(header, mainActive);
 	const mainInactive = document.createElement('main');
 	mainInactive.className = 'main-inactive hidden';
