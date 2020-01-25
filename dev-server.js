@@ -20,28 +20,28 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use ((req, res, next) => {
   res.header ('Access-Control-Allow-Origin', '*')
   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
-  res.header ('Access-Control-Allow-Credentials', true)
+  // res.header ('Access-Control-Allow-Credentials', true)
   res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
   next()
 });
 
-app.use(express.static(path.join(__dirname, 'front-end', 'dist')));
+app.use(express.static(path.join(__dirname, 'front-end', 'dev')));
 
 
 app.get('/', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'front-end', 'dev', 'index.html'));
 });
 
 app.get('/faqs', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'faqs.html'));
+  res.sendFile(path.join(__dirname, 'front-end', 'dev', 'faqs.html'));
 });
 
 app.get('/privacy', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'privacy.html'));
+  res.sendFile(path.join(__dirname, 'front-end', 'dev', 'privacy.html'));
 });
 
 app.get('/contact', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'contact.html'));
+  res.sendFile(path.join(__dirname, 'front-end', 'dev', 'contact.html'));
 });
 
 app.post('/contact', (req, res) => {
@@ -82,6 +82,6 @@ app.use(function(req, res, next) {
 
 
 //Start server
-app.listen(process.env.PORT || 3001, function () {
-  console.log("Listening on port " + process.env.PORT);
+app.listen(3001, function () {
+  console.log("Listening on port " + 3001);
 });
