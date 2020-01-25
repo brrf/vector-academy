@@ -81,7 +81,7 @@ a:hover {
 button {
 	 cursor: pointer; 
 	 background-color: #212A65;
-	 max-width: 260px;
+	 max-width: 200px;
 	 width: 10vw;
 	 min-width: 150px;
 	 color: white; 
@@ -97,6 +97,16 @@ button:hover {
 ul {
     padding: 0;
     list-style: none;
+}
+
+img {
+	width: 150px;
+	margin-left: 10px;
+	margin-top: 5px;
+}
+
+textarea {
+	font-family: inherit;
 }
 
 .center {
@@ -175,5 +185,9 @@ ul {
 	p {
 		font-size: 3.9vw;
 		line-height: 4.5vw;
+	}
+	img {
+		width: 120px;
+		margin-left: 10px;
 	}
 }
