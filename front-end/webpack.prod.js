@@ -68,7 +68,7 @@ module.exports = merge(common, {
 			chunks: ['main']
 		}),
 		new DefinePlugin({
-			DOMAIN: JSON.stringify('https://www.vectoracademy.io')
+			DOMAIN: JSON.stringify('https://vectoracademy.io')
 		})
 	],
 	module: {
