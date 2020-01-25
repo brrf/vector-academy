@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-//const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const {DefinePlugin} = require("webpack");
 
 module.exports = merge(common, {
 	mode: "production",
@@ -67,6 +67,9 @@ module.exports = merge(common, {
 			favicon: "./src/public/assets/logo.png",
 			chunks: ['main']
 		}),
+		new DefinePlugin({
+			DOMAIN: JSON.stringify('https://localhost:3001')
+		})
 	],
 	module: {
 		rules: [

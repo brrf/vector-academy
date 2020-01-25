@@ -41,7 +41,7 @@ function submitForm(e) {
     message: message
   };
   e.preventDefault();
-  fetch("http://localhost:3001/contact", {
+  fetch(`${DOMAIN}/contact`, {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
