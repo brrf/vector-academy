@@ -31,7 +31,8 @@ module.exports = merge(common, {
 				collapseWhitespace: true,
 				removeComments: true
 			},
-			favicon: "./src/public/assets/logo.png"
+			favicon: "./src/public/assets/logo.png",
+			chunks: ['main']
 		}),
 		new HtmlWebpackPlugin({
 			filename: "contact.html",
@@ -41,7 +42,8 @@ module.exports = merge(common, {
 				collapseWhitespace: true,
 				removeComments: true
 			},
-			favicon: "./src/public/assets/logo.png"
+			favicon: "./src/public/assets/logo.png",
+			chunks: ['main', 'contact']
 		}),
 		new HtmlWebpackPlugin({
 			filename: "faqs.html",
@@ -51,7 +53,8 @@ module.exports = merge(common, {
 				collapseWhitespace: true,
 				removeComments: true
 			},
-			favicon: "./src/public/assets/logo.png"
+			favicon: "./src/public/assets/logo.png",
+			chunks: ['main', 'faq']
 		}),
 		new HtmlWebpackPlugin({
 			filename: "privacy.html",
@@ -61,7 +64,8 @@ module.exports = merge(common, {
 				collapseWhitespace: true,
 				removeComments: true
 			},
-			favicon: "./src/public/assets/logo.png"
+			favicon: "./src/public/assets/logo.png",
+			chunks: ['main']
 		}),
 	],
 	module: {
@@ -74,5 +78,12 @@ module.exports = merge(common, {
 				]
 			}
 		]
-	}
+	},
+	devServer: {
+	    port: 8080,
+	    open: true,
+	    proxy: {
+	      '/api': 'http://localhost:3001'
+	    }
+  	},
 });
