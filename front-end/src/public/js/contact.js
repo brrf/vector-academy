@@ -1,6 +1,6 @@
 "use strict";
 
-var button = document.querySelector("#contact-form-container button");
+var button = document.querySelector("#form-container button");
 var form = document.getElementById("contact-form");
 button.addEventListener("click", submitForm); // repaint DOM when server responds without error
 

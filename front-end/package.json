@@ -4,7 +4,8 @@
   "description": "",
   "main": "./index.js",
   "scripts": {
-    "dev": "webpack --config webpack.dev.js",
+    "dev": "webpack-dev-server --config webpack.dev.js --open",
+    "test": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
   "author": "Moshe Praver",

@@ -177,6 +177,21 @@
 	margin-left: 6.25vw;
 }
 
+#employer-modal {
+	background-color: rgba(0,0,0,0.6);
+	position: fixed;
+	top: 55px;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 2;
+}
+
+.login-form-container {
+	background-color: #fbfcfd;
+	width: 425px;
+}
+
 #jumpstart-section {
 	height: 30vw;
 	background-image: url("../assets/jumpstart_web.jpeg");
@@ -278,6 +293,10 @@
 		width: 90%;
 		font-size: 2.5vw;
 		line-height: 3vw;
+	}
+
+	.login-form-container {
+		width: 50%;
 	}
 
 	#jumpstart-section {

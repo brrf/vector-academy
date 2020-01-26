@@ -15,7 +15,7 @@ module.exports = merge(common, {
 			filename: "index.html",
 			template: "./src/public/html/template-index.html",
 			favicon: "./src/public/assets/logo.png",
-			chunks: ['main']
+			chunks: ['main', 'modal']
 		}),
 		new HtmlWebpackPlugin({
 			filename: "contact.html",

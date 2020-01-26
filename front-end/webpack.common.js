@@ -5,7 +5,8 @@ module.exports = {
 	entry: {
 		main: "./src/index.js",
 		contact: "./src/public/js/contact.js",
-		faq: "./src/public/js/faq.js"
+		faq: "./src/public/js/faq.js",
+		modal: "./src/public/js/modal.js"
 	},
 	module: {
 		rules: [
