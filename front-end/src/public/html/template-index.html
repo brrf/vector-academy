@@ -126,7 +126,7 @@
 			</div>
 		</div>	
 	</main>
-	<div id="employer-modal">
+	<div class="employer-modal hidden">
 		<div id='form-container' class="login-form-container">
 			<span>&times;</span>
 			<h2>Employer Login</h2>
@@ -137,6 +137,38 @@
 					<button>Login</button>	
 				</div>
 			</form>
+			<p>Don't have an account?   <a href="./contact"><u>Contact us!</u></a></p>
+		</div>
+	</div>
+	<div class="student-login-modal hidden">
+		<div id='form-container' class="login-form-container">
+			<span>&times;</span>
+			<h2>Student Login</h2>
+			<form>
+				<input data-type="text" class="form-full-width" name="username" maxlength="50" placeholder="Username" autofocus required>
+				<input type="text" class="form-full-width" name="password" maxlength="50" placeholder="Password" required> 	
+				<div>
+					<button>Login</button>	
+				</div>
+			</form>
+			<p>Don't have an account?   <u>Sign up here!</u></p>
+		</div>
+	</div>
+	<div class="student-register-modal hidden">
+		<div id='form-container' class="login-form-container">
+			<span>&times;</span>
+			<h2>Register</h2>
+			<div class="warning">Vector enrollment is not open at this time.</div>
+			<form>
+				<input data-type="text" type="e-mail" class="form-full-width" name="email" maxlength="50" placeholder="E-mail" autofocus required disabled>
+				<input data-type="text" type="text" class="form-full-width" name="username" maxlength="50" placeholder="Username" required disabled>
+				<input type="text" class="form-full-width" name="password" maxlength="50" placeholder="Password" required disabled>
+				<input type="text" class="form-full-width" name="password2" maxlength="50" placeholder="Confirm Password" required disabled>	
+				<div>
+					<button disabled >Register</button>	
+				</div>
+			</form>
+			<p>Already have an account?   <u>Sign in here!</u></p>
 		</div>
 	</div>
 </body>

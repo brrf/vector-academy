@@ -99,9 +99,14 @@ ul li {
 		padding-top: 80px;
 	}
 
-	.main-inactive a {
+	.main-inactive a, .main-inactive h3 {
 		margin-top: 2vw;
-		font-size: 10vw;
+		height: 37px;
+	}
+
+	.main-inactive h3:hover {
+		cursor: pointer;
+		color: #9197BE;
 	}
 
 	.main-inactive a:hover {
@@ -109,10 +114,8 @@ ul li {
 	}
 
 	.main-inactive a > button {
-		/* width: 50vw; */
-		/* height: 12vw; */
 		background-color: #040A2B;
-		/* font-size: 4.5vw; */
+		margin-top: 3vw;
 	}
 
 }

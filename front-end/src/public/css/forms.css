@@ -31,13 +31,12 @@
 	align-items: center;
 }
 
-#form-container div {
-	display: flex;
-	justify-content: flex-start;
+form div {
+	flex-basis: 100%;
 }
 
 .form-half-width {
-	width: 49%;
+	flex-basis: 49%;
 }
 
 .form-half-width.first {
@@ -49,7 +48,7 @@
 }
 
 .form-full-width {
-	width: 100%;
+	flex-basis: 100%;
 }
 
 form input {
@@ -91,9 +90,9 @@ textarea {
 }
 
 .warning {
-	background-color: #de3c31;
-	color: white;
-	width: 70%;
-	margin: 10px auto;
-	padding: 3px;
+	color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+	margin: 15px auto;
+	padding: 6px;
 }

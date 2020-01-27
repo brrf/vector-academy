@@ -177,7 +177,7 @@
 	margin-left: 6.25vw;
 }
 
-#employer-modal {
+#login-modal {
 	background-color: rgba(0,0,0,0.6);
 	position: fixed;
 	top: 55px;
@@ -187,9 +187,21 @@
 	z-index: 2;
 }
 
+#login-modal button {
+	margin-bottom: 20px;
+}
+
 .login-form-container {
 	background-color: #fbfcfd;
 	width: 425px;
+}
+
+.student-register-modal button {
+	cursor: not-allowed;
+}
+
+.student-register-modal u:hover, .student-login-modal u:hover {
+	cursor: pointer;
 }
 
 #jumpstart-section {
@@ -296,7 +308,7 @@
 	}
 
 	.login-form-container {
-		width: 50%;
+		width: 55%;
 	}
 
 	#jumpstart-section {
@@ -315,6 +327,15 @@
 
 /*mobile*/
 @media (max-width: 550px) {
+	.login-form-container {
+		width: 65%;
+	}
+	
+	.login-form-container p {
+		margin: 20px 0 10px 0;
+		font-size: 16px;
+
+	}
 
 	#top-content-section-large {
 		display: none;
