@@ -38,7 +38,7 @@ form > div {
 }
 
 .form-half-width {
-	flex-basis: 49%;
+	width: 49%;
 }
 
 .form-half-width.first {

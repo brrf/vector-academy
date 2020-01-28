@@ -44,7 +44,6 @@ function submitForm(e) {
     return res.json();
   }).then(function (resObject) {
     if (!resObject.err) {
-      alert('hello');
       removeSpinner();
       repaintDOM();
     } else {

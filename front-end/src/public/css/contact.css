@@ -8,3 +8,9 @@
 	}
 }
 
+@media (max-width: 550px) {
+	.contact-form-container {
+		width: 85%;
+	}
+}
+

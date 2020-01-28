@@ -201,6 +201,10 @@
 	margin-bottom: 7%;
 }
 
+#jumpstart-section.mobile {
+	display: none;
+}
+
 /*tablet*/
 @media (max-width: 990px) {
 
@@ -422,6 +426,14 @@
 
 	#jumpstart-section h2 {
 		margin: 5vw 0;
+	}
+
+	#jumpstart-section.large {
+		display: none;
+	}
+
+	#jumpstart-section.mobile {
+		display: block;
 	}
 
 	hr {
