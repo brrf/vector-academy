@@ -81,32 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/public/js/contact.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/public/js/home.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/public/js/contact.js":
-/*!**********************************!*\
-  !*** ./src/public/js/contact.js ***!
-  \**********************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./src/public/js/home.js":
+/*!*******************************!*\
+  !*** ./src/public/js/home.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _spinner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./spinner */ \"./src/public/js/spinner.js\");\n\n\n\nvar button = document.querySelector(\"#contact-form button\");\nvar form = document.getElementById(\"contact-form\");\nbutton.addEventListener(\"click\", submitForm); // repaint DOM when server responds without error\n\nfunction repaintDOM() {\n  document.querySelector('h2').innerHTML = 'Message Received!';\n  document.querySelector('form').remove();\n  var text = document.createElement('p');\n  text.innerHTML = 'We appreciate your reaching out. We will be in touch shortly with a reply.';\n  document.querySelector('.contact-form-container').appendChild(text);\n}\n\nfunction submitForm(e) {\n  e.preventDefault();\n  var firstName = document.getElementById(\"contact-form\").elements[\"firstName\"].value;\n  var lastName = document.getElementById(\"contact-form\").elements[\"lastName\"].value;\n  var email = document.getElementById(\"contact-form\").elements[\"email\"].value;\n  var message = document.getElementById(\"contact-form\").elements[\"message\"].value; //form Validation\n\n  if (!firstName || !lastName || !email || !message) {\n    return;\n  }\n\n  var element = document.querySelector('#contact-form div');\n  Object(_spinner__WEBPACK_IMPORTED_MODULE_0__[\"addSpinner\"])(element);\n  var body = {\n    firstName: firstName,\n    lastName: lastName,\n    email: email,\n    message: message\n  };\n  fetch(\"\".concat(\"http://localhost:3001\", \"/contact\"), {\n    method: 'POST',\n    body: JSON.stringify(body),\n    headers: {\n      \"Content-Type\": \"application/json\"\n    }\n  }).then(function (res) {\n    return res.json();\n  }).then(function (resObject) {\n    if (!resObject.err) {\n      alert('hello');\n      Object(_spinner__WEBPACK_IMPORTED_MODULE_0__[\"removeSpinner\"])();\n      repaintDOM();\n    } else {\n      alert('error');\n      Object(_spinner__WEBPACK_IMPORTED_MODULE_0__[\"removeSpinner\"])();\n    }\n  });\n}\n\n//# sourceURL=webpack:///./src/public/js/contact.js?");
-
-/***/ }),
-
-/***/ "./src/public/js/spinner.js":
-/*!**********************************!*\
-  !*** ./src/public/js/spinner.js ***!
-  \**********************************/
-/*! exports provided: addSpinner, removeSpinner */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"addSpinner\", function() { return addSpinner; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"removeSpinner\", function() { return removeSpinner; });\nfunction addSpinner(element) {\n  var spinner = document.createElement('div');\n  spinner.classList.add('spinner-box');\n  spinner.innerHTML = '<div class=\"circle-border\"><div class=\"circle-core\"></div></div>';\n  element.appendChild(spinner);\n}\nfunction removeSpinner() {\n  document.querySelector('.spinner-box').remove();\n}\n\n//# sourceURL=webpack:///./src/public/js/spinner.js?");
+eval("// load Apply modals from buttons\nvar apply1 = document.querySelector('.top-content-button');\nvar apply2 = document.querySelector('#jumpstart-section button');\nvar employerModal = document.querySelector('.employer-modal');\nvar studentLoginModal = document.querySelector('.student-login-modal');\nvar studentRegisterModal = document.querySelector('.student-register-modal');\nemployerModal.addEventListener('click', handleCloseEmployer);\nstudentLoginModal.addEventListener('click', handleCloseStudentLogin);\nstudentRegisterModal.addEventListener('click', handleCloseStudentRegister);\napply1.addEventListener('click', openApplyStudent);\napply2.addEventListener('click', openApplyStudent);\n\nfunction openApplyStudent(e) {\n  if (!studentLoginModal.classList.contains('hidden')) studentLoginModal.classList.add('hidden');\n  if (!employerModal.classList.contains('hidden')) employerModal.classList.add('hidden');\n  studentRegisterModal.classList.remove('hidden');\n}\n\nfunction handleCloseEmployer(e) {\n  if (e.target.nodeName === 'SPAN' || e.target.classList.contains('employer-modal')) {\n    employerModal.classList.add('hidden');\n  }\n}\n\nfunction handleCloseStudentLogin(e) {\n  if (e.target.nodeName === 'SPAN' || e.target.classList.contains('student-login-modal')) {\n    studentLoginModal.classList.add('hidden');\n  }\n}\n\nfunction handleCloseStudentRegister(e) {\n  if (e.target.nodeName === 'SPAN' || e.target.classList.contains('student-register-modal')) {\n    studentRegisterModal.classList.add('hidden');\n  }\n}\n\n//# sourceURL=webpack:///./src/public/js/home.js?");
 
 /***/ })
 

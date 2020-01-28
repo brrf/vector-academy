@@ -1,5 +1,5 @@
 import templatePage from './app/utils/template-page';
-import loadModals from './public/js/modal';
+import loadModals from './public/js/header-modals';
 import "./public/css/hamburger.css";
 import "./public/css/header.css";
 import "./public/css/footer.css";

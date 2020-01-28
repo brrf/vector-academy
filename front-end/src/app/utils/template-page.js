@@ -1,4 +1,5 @@
 import logo from "../../public/assets/Vector-01.png";
+import {addSpinner, removeSpinner} from "../../public/js/spinner";
 
 "use strict";
 export default function templatePage () {
@@ -6,11 +7,11 @@ export default function templatePage () {
 
 	const header = document.createElement('header');
 	header.id = 'navbar-container';
-	header.innerHTML = `<a href=\"./\"><img src=${logo} alt=\"logo\"></a><div class='navbar-large'><ul class='navbar-links'><li>About &#9662<ul class='dropdown hidden'><li><a href=\"./howitworks\">How it works</a></li><li><a href=\"./prereqs\">Prerequisites</a></li><li><a href=\"./faqs\">FAQs</a></li></ul></li><li id=\"employer-login\">Employer Login</li><li id=\"student-login\">Student Login</li><li><button>Apply</button></li></ul></div><div class='navbar-mobile'><button class=\"hamburger hamburger--spin\" type=\"button\"><span class=\"hamburger-inner\"></span></button></div><div class="login-modal employer-modal hidden"><div id='form-container' class="login-form-container"><span>&times;</span><h2>Employer Login</h2><form><input data-type="text" class="form-full-width" name="institutionID" maxlength="50" placeholder="Institution ID" autofocus required><input type="text" class="form-full-width" name="password" maxlength="50" placeholder="Password" required> 	<div><button>Login</button>	</div></form><p>Don't have an account?   <a href="./contact"><u>Contact us!</u></a></p></div></div><div class="login-modal student-login-modal hidden"><div id='form-container' class="login-form-container"><span>&times;</span><h2>Student Login</h2><form><input data-type="text" class="form-full-width" name="username" maxlength="50" placeholder="Username" autofocus required><input type="text" class="form-full-width" name="password" maxlength="50" placeholder="Password" required> 	<div><button>Login</button></div></form><p>Don't have an account?   <u>Sign up here!</u></p></div></div><div class="login-modal student-register-modal hidden"><div id='form-container' class="login-form-container"><span>&times;</span><h2>Register</h2><div class="warning">Vector enrollment is not open at this time.</div><form><input data-type="text" type="e-mail" class="form-full-width" name="email" maxlength="50" placeholder="E-mail" autofocus required disabled><input data-type="text" type="text" class="form-full-width" name="username" maxlength="50" placeholder="Username" required disabled><input type="text" class="form-full-width" name="password" maxlength="50" placeholder="Password" required disabled><input type="text" class="form-full-width" name="password2" maxlength="50" placeholder="Confirm Password" required disabled>	<div><button disabled >Register</button>	</div></form><p>Already have an account?   <u>Sign in here!</u></p></div></div>`;
+	header.innerHTML = `<a href=\"./\"><img src=${logo} alt=\"logo\"></a><div class='navbar-large'><ul class='navbar-links'><li>About &#9662<ul class='dropdown hidden'><li><a href=\"./howitworks\">How it works</a></li><li><a href=\"./prereqs\">Prerequisites</a></li><li><a href=\"./faqs\">FAQs</a></li></ul></li><li id=\"employer-login\">Employer Login</li><li id=\"student-login\">Student Login</li><li><button>Apply</button></li></ul></div><div class='navbar-mobile'><button class=\"hamburger hamburger--spin\" type=\"button\"><span class=\"hamburger-inner\"></span></button></div><div class="login-modal employer-modal hidden"><div id='form-container' class="login-form-container"><span>&times;</span><h2>Employer Login</h2><form><input data-type="text" class="form-full-width" name="institutionID" maxlength="50" placeholder="Institution ID" autofocus required><input type="text" class="form-full-width" name="password" maxlength="50" placeholder="Password" required> 	<div><button>Login</button>	</div></form><p>Don't have an account?   <a href="./contact"><u>Contact us!</u></a></p></div></div><div class="login-modal student-login-modal hidden"><div id='form-container' class="login-form-container"><span>&times;</span><h2>Student Login</h2><form><input data-type="text" class="form-full-width" name="username" maxlength="50" placeholder="Username" autofocus required><input type="text" class="form-full-width" name="password" maxlength="50" placeholder="Password" required> 	<div><button>Login</button></div></form><p>Don't have an account?   <u>Sign up here!</u></p></div></div><div class="login-modal student-register-modal hidden"><div id='form-container' class="login-form-container"><span>&times;</span><h2>Register</h2><div class="warning">Enrollment opens August 1<sup>st</sup>, 2020.</div><form><input data-type="text" type="e-mail" class="form-full-width" name="email" maxlength="50" placeholder="E-mail" autofocus required disabled><input data-type="text" type="text" class="form-full-width" name="username" maxlength="50" placeholder="Username" required disabled><input type="text" class="form-full-width" name="password" maxlength="50" placeholder="Password" required disabled><input type="text" class="form-full-width" name="password2" maxlength="50" placeholder="Confirm Password" required disabled>	<div><button disabled >Register</button>	</div></form><p>Already have an account?   <u>Sign in here!</u></p></div></div>`;
 	document.body.insertBefore(header, mainActive);
 	const mainInactive = document.createElement('main');
 	mainInactive.className = 'main-inactive hidden';
-	mainInactive.innerHTML = "<div class=\"main-inactive-menu\"><a href=\"./howitworks\"><h3>How it works</h3></a><a href=\"./prereqs\"><h3>Prerequisites</h3></a><a href=\"./faqs\"><h3>FAQs</h3></a><hr><h3 id=\"employer-login-mobile\">Employer Login</h3><h3 id=\"student-login-mobile\">Student Login</h3><a href=\"'./apply\"><button>Apply</button></a></div><div class=\"employer-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Employer Login</h2><form><input data-type=\"text\" class=\"form-full-width\" name=\"institutionID\" maxlength=\"50\" placeholder=\"Institution ID\" autofocus required><input type=\"text\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required><div><button>Login</button>	</div></form><p>Don't have an account?   <a href=\"./contact\"><u>Contact us!</u></a></p></div></div><div class=\"student-login-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Student Login</h2><form><input data-type=\"text\" class=\"form-full-width\" name=\"username\" maxlength=\"50\" placeholder=\"Username\" autofocus required><input type=\"text\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required> 	<div><button>Login</button>	</div></form><p>Don't have an account?   <u>Sign up here!</u></p></div></div><div class=\"student-register-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Register</h2><div class=\"warning\">Vector enrollment is not open at this time.</div><form><input data-type=\"text\" type=\"e-mail\" class=\"form-full-width\" name=\"email\" maxlength=\"50\" placeholder=\"E-mail\" autofocus required disabled><input data-type=\"text\" type=\"text\" class=\"form-full-width\" name=\"username\" maxlength=\"50\" placeholder=\"Username\" required disabled><input type=\"text\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required disabled><input type=\"text\" class=\"form-full-width\" name=\"password2\" maxlength=\"50\" placeholder=\"Confirm Password\" required disabled><div><button disabled >Register</button></div></form><p>Already have an account?   <u>Sign in here!</u></p></div></div>";
+	mainInactive.innerHTML = "<div class=\"main-inactive-menu\"><a href=\"./howitworks\"><h3>How it works</h3></a><a href=\"./prereqs\"><h3>Prerequisites</h3></a><a href=\"./faqs\"><h3>FAQs</h3></a><hr><h3 id=\"employer-login-mobile\">Employer Login</h3><h3 id=\"student-login-mobile\">Student Login</h3><a href=\"'./apply\"><button>Apply</button></a></div><div class=\"employer-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Employer Login</h2><form><input data-type=\"text\" class=\"form-full-width\" name=\"institutionID\" maxlength=\"50\" placeholder=\"Institution ID\" autofocus required><input type=\"text\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required><div><button>Login</button>	</div></form><p>Don't have an account?   <a href=\"./contact\"><u>Contact us!</u></a></p></div></div><div class=\"student-login-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Student Login</h2><form><input data-type=\"text\" class=\"form-full-width\" name=\"username\" maxlength=\"50\" placeholder=\"Username\" autofocus required><input type=\"text\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required> 	<div><button>Login</button>	</div></form><p>Don't have an account?   <u>Sign up here!</u></p></div></div><div class=\"student-register-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Register</h2><div class=\"warning\">Enrollment opens August 1<sup>st</sup>, 2020.</div><form><input data-type=\"text\" type=\"e-mail\" class=\"form-full-width\" name=\"email\" maxlength=\"50\" placeholder=\"E-mail\" autofocus required disabled><input data-type=\"text\" type=\"text\" class=\"form-full-width\" name=\"username\" maxlength=\"50\" placeholder=\"Username\" required disabled><input type=\"text\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required disabled><input type=\"text\" class=\"form-full-width\" name=\"password2\" maxlength=\"50\" placeholder=\"Confirm Password\" required disabled><div><button disabled >Register</button></div></form><p>Already have an account?   <u>Sign in here!</u></p></div></div>";
 	document.body.appendChild(mainInactive);
 	const footer = document.createElement('footer');
 	footer.innerHTML = "<div class='footer-container'><h1><a href=\"./index\">Vector</a></h1><div><h3>About</h3><ul><li><a href=\"./privacy\">Privacy Policy</a></li><li><a href=\"./contact\">Contact</a></li></ul></div><div><h3>Resources</h3><ul><li><a href=\"./faqs\">FAQ</a></li><li><a href=\"./privacy\">How it works</a></li><li><a href=\"./privacy\">Application</a></li></ul></div></div><p></p>";
@@ -31,11 +32,6 @@ export default function templatePage () {
 	signUpHereMobile.addEventListener('click', openRegisterStudentMobile);
 	loginHereMobile.addEventListener('click', openLoginStudentMobile);
 
-	// studentLoginModalMobile.addEventListener('click', handleCloseStudentLoginMobile);
-	// studentRegisterModalMobile.addEventListener('click', handleCloseStudentRegisterMobile);
-
-	// employerModalMobile.addEventListener('click', handleCloseEmployer);
-
 	function openEmployerMobile (e) {
 		mainInactiveMenu.classList.add('hidden');
 		employerModalMobile.classList.remove('hidden');
@@ -50,6 +46,56 @@ export default function templatePage () {
 	function openRegisterStudentMobile (e) {
 		studentLoginModalMobile.classList.add('hidden');
 		studentRegisterModalMobile.classList.remove('hidden');
+	}
+
+	//handle mobile login requests
+	const employerLoginBtn = document.querySelector(".employer-modal-mobile button");
+	const studentLoginBtn = document.querySelector(".student-login-modal-mobile button");
+	employerLoginBtn.addEventListener('click', handleEmployerLogin);
+	studentLoginBtn.addEventListener('click', handleStudentLogin);
+
+	function tempResponse (userType) {
+		const container = document.querySelector(`.${userType}-modal-mobile .login-form-container`);
+		removeSpinner();
+		//remove a warning if already present
+		if (document.querySelector(`.${userType}-modal-mobile .warning`)) {
+			const deleteWarning = document.querySelector(`.${userType}-modal-mobile .login-form-container .warning`);
+			container.removeChild(deleteWarning);
+		}		
+		const h2 = document.querySelector(`.${userType}-modal-mobile .login-form-container h2`);
+		let warning = document.createElement('p');
+		warning.classList=('warning');
+		warning.innerHTML = 'No such user exists';
+		container.insertBefore(warning, h2);
+	}
+
+	function handleEmployerLogin (e) {
+		e.preventDefault();
+		//form Validation
+		var institutionID = document.querySelector(".employer-modal-mobile form").elements["institutionID"].value
+		var password = document.querySelector(".employer-modal-mobile form").elements["password"].value;
+
+	  if (!institutionID || !password) {
+	    return;
+	  } else {
+	  	const element = document.querySelector('.employer-modal-mobile form div');
+	  	addSpinner(element);
+	  	setTimeout(tempResponse, 800, 'employer');
+	  }	
+	}
+
+	function handleStudentLogin(e) {
+		e.preventDefault();
+		//form Validation
+		var username = document.querySelector(".student-login-modal-mobile form").elements["username"].value
+		var password = document.querySelector(".student-login-modal-mobile form").elements["password"].value;
+		if (!username || !password) {
+			return;
+		} else {
+			const element = document.querySelector('.student-login-modal-mobile form div');
+			addSpinner(element);
+			setTimeout(tempResponse, 800, 'student-login');
+		}	
 	}
 
 	//update copyright by year

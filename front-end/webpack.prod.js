@@ -32,7 +32,7 @@ module.exports = merge(common, {
 				removeComments: true
 			},
 			favicon: "./src/public/assets/logo.png",
-			chunks: ['main', 'modal']
+			chunks: ['main', 'home']
 		}),
 		new HtmlWebpackPlugin({
 			filename: "contact.html",

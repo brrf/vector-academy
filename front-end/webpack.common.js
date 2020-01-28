@@ -6,7 +6,7 @@ module.exports = {
 		main: "./src/index.js",
 		contact: "./src/public/js/contact.js",
 		faq: "./src/public/js/faq.js",
-		modal: "./src/public/js/modal.js"
+		home: "./src/public/js/home.js"
 	},
 	module: {
 		rules: [
