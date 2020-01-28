@@ -18,12 +18,6 @@ module.exports = merge(common, {
 			chunks: ['main', 'modal']
 		}),
 		new HtmlWebpackPlugin({
-			filename: "student-login-mobile.html",
-			template: "./src/public/html/student-login-mobile.html",
-			favicon: "./src/public/assets/logo.png",
-			chunks: ['main']
-		}),
-		new HtmlWebpackPlugin({
 			filename: "contact.html",
 			template: "./src/public/html/template-contact.html",
 			favicon: "./src/public/assets/logo.png",

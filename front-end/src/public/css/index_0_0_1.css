@@ -177,33 +177,6 @@
 	margin-left: 6.25vw;
 }
 
-#login-modal {
-	background-color: rgba(0,0,0,0.6);
-	position: fixed;
-	top: 55px;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	z-index: 2;
-}
-
-#login-modal button {
-	margin-bottom: 20px;
-}
-
-.login-form-container {
-	background-color: #fbfcfd;
-	width: 425px;
-}
-
-.student-register-modal button {
-	cursor: not-allowed;
-}
-
-.student-register-modal u:hover, .student-login-modal u:hover {
-	cursor: pointer;
-}
-
 #jumpstart-section {
 	height: 30vw;
 	background-image: url("../assets/jumpstart_web.jpeg");
@@ -330,11 +303,18 @@
 	.login-form-container {
 		width: 65%;
 	}
-	
+
 	.login-form-container p {
 		margin: 20px 0 10px 0;
 		font-size: 16px;
+	}
 
+	.student-register-modal-mobile button {
+	cursor: not-allowed;
+	}
+
+	.student-register-modal-mobile u:hover, .student-login-modal-mobile u:hover {
+		cursor: pointer;
 	}
 
 	#top-content-section-large {

@@ -66,6 +66,32 @@ ul li {
 	text-shadow: 0 0 0.01px black;
 }
 
+.login-modal {
+	background-color: rgba(0,0,0,0.6);
+	position: fixed;
+	top: 55px;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 2;
+}
+
+.login-modal button {
+	margin-bottom: 20px;
+}
+
+.login-form-container {
+	width: 425px;
+}
+
+.student-register-modal button {
+	cursor: not-allowed;
+}
+
+.student-register-modal u:hover, .student-login-modal u:hover {
+	cursor: pointer;
+}
+
 /*tablet*/
 @media (max-width: 990px) {
 	.navbar-links li {
@@ -88,7 +114,7 @@ ul li {
 	.navbar-large {
 		display: none;
 	}
-	.main-inactive {
+	.main-inactive-menu {
 		background-color: #4F588F;
 		color: white;
 		display: flex;
@@ -99,21 +125,21 @@ ul li {
 		padding-top: 80px;
 	}
 
-	.main-inactive a, .main-inactive h3 {
+	.main-inactive-menu a, .main-inactive-menu h3 {
 		margin-top: 2vw;
 		height: 37px;
 	}
 
-	.main-inactive h3:hover {
+	.main-inactive-menu h3:hover {
 		cursor: pointer;
 		color: #9197BE;
 	}
 
-	.main-inactive a:hover {
+	.main-inactive-menu a:hover {
 		color: #9197BE;
 	}
 
-	.main-inactive a > button {
+	.main-inactive-menu a > button {
 		background-color: #040A2B;
 		margin-top: 3vw;
 	}

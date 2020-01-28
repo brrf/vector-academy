@@ -4,6 +4,7 @@
 	border-radius: 10px;
 	padding: 2.5vw;
 	position: relative;
+	background-color: #fbfcfd;
 }
 
 #form-container h2 {
@@ -31,8 +32,9 @@
 	align-items: center;
 }
 
-form div {
+form > div {
 	flex-basis: 100%;
+	position: relative;
 }
 
 .form-half-width {
