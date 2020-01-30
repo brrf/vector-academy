@@ -10,6 +10,7 @@ import "./public/css/faq.css";
 import "./public/css/privacy.css";
 import "./public/css/spinner.css";
 import "./public/css/contact.css";
+import "./public/css/howitworks.css";
 
 templatePage();
 loadModals();

@@ -13,8 +13,11 @@
 	box-shadow: 0 4px 4px -4px #232323;
 }
 
-#top-content-section-large {
+#top-content-section-large.page1 {
 	background-image: url("../assets/featureimage_web.jpeg");
+}
+
+#top-content-section-large {
 	background-size: cover;
 	background-position: 50% 20%;
 	background-color: #9197BE;
@@ -56,9 +59,10 @@
 }
 
 #features-section {
+	padding: 2.7vw 10vw 0 10vw;
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: space-around;
+	justify-content: space-between;
 	margin-bottom: 0.6vw;
 	background-color: white;
 	padding-bottom: 4.5vw;
@@ -67,16 +71,18 @@
 
 .feature-text {
 	padding: 0.3vw;
+	line-height: 1.4vw;
 }
 
 .features-third > div:last-child {
 	text-align: center;
-	width: 26vw;
+	width: 22vw;
 	height: 7.1vw;
 	background-color: #fff8efb5;
 }
 
 .features-image {
+	width: 22vw;
 	height: 17.4vw;
 	background-size: cover;
 }
@@ -130,7 +136,7 @@
 	display: flex;
 	flex-flow: row nowrap;
 	flex-basis: 40%;
-	margin-bottom: 2.8vw;
+	margin-bottom: 4vw;
 }
 
 .howitworks-image {
@@ -360,6 +366,10 @@
 		margin: 0 0 4vw 0;
 		text-align: center;
 		line-height: 6vw;
+	}
+
+	.feature-text {
+		line-height: 4.5vw;
 	}
 
 	.features-third {

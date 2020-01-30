@@ -1,0 +1,130 @@
+#top-content-section-large.page2 {
+	background-image: url("../assets/girlgreen.jpg");
+	background-position: 0 3%;
+}
+
+.apply {
+	background-image: url("../assets/apply-preview.jpeg");
+}
+
+.interview {
+	background-image: url("../assets/interview-preview.jpeg");
+}
+
+.rank {
+	background-image: url("../assets/rank-preview.jpeg");
+}
+
+.match {
+	background-image: url("../assets/match-preview.jpeg");
+}
+
+#living-expenses-section {
+	padding: 2.7vw 10vw 0 10vw;
+	margin-bottom: 50px;
+	background-color: white;
+}
+
+.lifestyle {
+	margin-top: 40px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.lifestyle-list h2 {
+	margin-bottom: 30px;
+}
+
+.lifestyle-list li {
+	padding: 6px;
+	text-align: initial;
+	font-size: 20px;
+	color: #383651;
+}
+
+.lifestyle-list i {
+	margin: 0 10px 0 8px;
+}
+
+.lifestyle-image {
+	background-image: url("../assets/life-preview.jpeg");
+	height: 25vw;
+	width: 37.5vw;
+	background-size: cover;
+	border-radius: 5%;
+}
+
+.salary-by-year {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+.salary-by-year div {
+	flex: 1 0 20%;
+	color: white;
+	height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.salary-by-year div:nth-child(2) {
+	background-color: #4f578f;
+}
+
+.salary-by-year div:nth-child(3) {
+	background-color: #34795b;
+}
+
+.salary-by-year div:nth-child(4) {
+	background-color: #e86642;
+}
+
+.salary-by-year div:first-child {
+	flex: 0 1 40%;
+	background-color: #202a65;
+}
+
+.salary-by-year div:first-child p {
+	margin-top: 2px;
+}
+
+.curriculum-image {
+	background-image: url("../assets/curriculum-preview.jpeg");
+	height: 25vw;
+	width: 37.5vw;
+	background-size: cover;
+	border-radius: 5%;
+}
+
+@media (max-width: 990px) {
+	#living-expenses-section {
+		padding: 2.7vw 4vw 0 4vw;
+	}
+	.lifestyle-image {
+		min-height: 225px;
+		min-width: 337.5px;
+	}
+}
+
+@media (max-width: 550px) {
+	#living-expenses-section {
+		padding: 0;
+	}
+	.lifestyle {
+		flex-direction: column-reverse;
+		align-items: center;
+	}
+	.lifestyle-list h2 {
+		margin-bottom: 5vw;
+	}
+
+	.lifestyle-image {
+		height: 60vw;
+		width: 90vw;	
+		border-radius: 0;
+	}
+}

@@ -67,6 +67,12 @@ module.exports = merge(common, {
 			favicon: "./src/public/assets/logo.png",
 			chunks: ['main']
 		}),
+		new HtmlWebpackPlugin({
+			filename: "howitworks.html",
+			template: "./src/public/html/how-it-works.html",
+			favicon: "./src/public/assets/logo.png",
+			chunks: ['main', 'howitworks']
+		}),
 		new DefinePlugin({
 			DOMAIN: JSON.stringify('https://vectoracademy.io')
 		})
