@@ -190,4 +190,7 @@ textarea {
 		width: 120px;
 		margin-left: 10px;
 	}
+	.center h4 {
+	padding: 0;
+}
 }

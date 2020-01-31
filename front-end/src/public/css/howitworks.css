@@ -25,7 +25,7 @@
 	background-color: white;
 }
 
-.lifestyle {
+.lifestyle, .curriculum {
 	margin-top: 40px;
 	display: flex;
 	flex-direction: row;
@@ -33,18 +33,29 @@
 	align-items: center;
 }
 
-.lifestyle-list h2 {
+.lifestyle-list .curriculum-list {
+	display: flex;
+	flex-direction: column;
+
+}
+
+.lifestyle-list h2, .curriculum-list h2 {
 	margin-bottom: 30px;
 }
 
-.lifestyle-list li {
+.lifestyle-list h3, .curriculum-list h3 {
+	margin-bottom: 15px;
+
+}
+
+.lifestyle-list li, .curriculum-list li {
 	padding: 6px;
 	text-align: initial;
-	font-size: 20px;
+	font-size: 1.6vw;
 	color: #383651;
 }
 
-.lifestyle-list i {
+.lifestyle-list i, .curriculum-list i {
 	margin: 0 10px 0 8px;
 }
 
@@ -92,6 +103,11 @@
 	margin-top: 2px;
 }
 
+#curriculum-section {
+	padding: 2.7vw 10vw 0 10vw;
+	margin-bottom: 50px;
+}
+
 .curriculum-image {
 	background-image: url("../assets/curriculum-preview.jpeg");
 	height: 25vw;
@@ -104,9 +120,15 @@
 	#living-expenses-section {
 		padding: 2.7vw 4vw 0 4vw;
 	}
-	.lifestyle-image {
-		min-height: 225px;
-		min-width: 337.5px;
+	.salary-by-year h3 {
+		margin-bottom: 1.5vw;
+	}
+	.lifestyle-image, .curriculum-image {
+		min-height: 200px;
+		min-width: 300px;
+	}
+	.lifestyle-list li, .curriculum-list li {
+		font-size: 2vw;
 	}
 }
 
@@ -116,15 +138,34 @@
 	}
 	.lifestyle {
 		flex-direction: column-reverse;
-		align-items: center;
 	}
-	.lifestyle-list h2 {
+	.curriculum  {
+		align-items: center;
+		flex-direction: column;
+	}
+	.lifestyle-list, .curriculum-list {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.lifestyle-list h2, .curriculum-list h2 {
 		margin-bottom: 5vw;
 	}
-
-	.lifestyle-image {
+	.lifestyle-list li, .curriculum-list li {
+		font-size: 4vw;
+	}
+	.lifestyle-image, .curriculum-image {
 		height: 60vw;
 		width: 90vw;	
 		border-radius: 0;
+	}
+	.salary-by-year {
+		flex-flow: row wrap;
+	}
+	.salary-by-year div {
+		flex: 1 0 33%;
+	}
+	.salary-by-year div:first-child {
+		flex: 1 0 100%;
 	}
 }
