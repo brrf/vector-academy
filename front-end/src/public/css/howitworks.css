@@ -188,6 +188,9 @@
 	.salary-by-year {
 		flex-flow: row wrap;
 	}
+	.salary-by-year h3 {
+		font-size: 4vw;
+	}
 	.salary-by-year div {
 		flex: 1 0 33%;
 	}
