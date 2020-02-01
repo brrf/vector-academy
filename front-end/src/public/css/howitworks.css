@@ -4,19 +4,21 @@
 }
 
 .apply {
-	background-image: url("../assets/apply-preview.jpeg");
+	background-image: url("../assets/apply.jpg");
 }
 
 .interview {
-	background-image: url("../assets/interview-preview.jpeg");
+	background-image: url("../assets/online-interview.jpg");
 }
 
 .rank {
-	background-image: url("../assets/rank-preview.jpeg");
+	background-image: url("../assets/rank.jpg");
+	background-position: 50% 0%
 }
 
 .match {
-	background-image: url("../assets/match-preview.jpeg");
+	background-image: url("../assets/match.jpg");
+	background-position: 40% 0%
 }
 
 .split-image-section {
@@ -42,13 +44,13 @@
 
 .split-content-list h3 {
 	margin-bottom: 15px;
+	text-align: start;
 
 }
 
 .split-content-list li {
 	padding: 6px;
 	text-align: initial;
-	font-size: 1.6vw;
 	color: #383651;
 }
 
@@ -64,7 +66,7 @@
 }
 
 .split-content-image.lifestyle-image {
-	background-image: url("../assets/life-preview.jpeg");
+	background-image: url("../assets/life.jpg");
 }
 
 .salary-by-year {
@@ -110,27 +112,31 @@
 }
 
 .split-content-image.curriculum-image {
-	background-image: url("../assets/curriculum-preview.jpeg");
+	background-image: url("../assets/curriculum.jpg");
 }
 
 .mentor {
-	background-image: url("../assets/mentor-preview.jpeg");
+	background-image: url("../assets/mentor.jpg");
 	background-position: 0% 30%;
 }
 
 .real-products {
-	background-image: url("../assets/products-preview.jpeg");
+	background-image: url("../assets/products.jpg");
+	background-position: 80% 0%
 }
 
 .team-member {
-	background-image: url("../assets/team-member.jpeg");
+	background-image: url("../assets/team-member.jpg");
 }
 
 .split-content-image.job-hunt-image {
-	background-image: url("../assets/job-hunt-preview.jpeg");
+	background-image: url("../assets/job-hunt.jpg");
 }
 
 @media (max-width: 990px) {
+	#curriculum-section {
+		padding: 2.7vw 5vw 2.7vw 5vw;
+	}
 	.split-image-section {
 		padding: 2.7vw 4vw 2.7vw 4vw;
 	}
@@ -142,7 +148,7 @@
 		min-width: 300px;
 	}
 	.split-content-list li {
-		font-size: 2vw;
+		
 	}
 }
 
@@ -166,8 +172,8 @@
 	.split-content-list {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
 	}
+
 	.split-content-list h2 {
 		margin-bottom: 5vw;
 	}
