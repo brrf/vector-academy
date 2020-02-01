@@ -18,10 +18,10 @@ const footerApplyButton = document.querySelector('.footer-student-register');
 employerModal.addEventListener('click', handleCloseEmployer);
 studentLoginModal.addEventListener('click', handleCloseStudentLogin);
 studentRegisterModal.addEventListener('click', handleCloseStudentRegister);
-apply1.addEventListener('click', openApplyStudent);
-apply2.addEventListener('click', openApplyStudent);
-apply1Mobile.addEventListener('click', openApplyStudentMobile);
-apply2Mobile.addEventListener('click', openApplyStudentMobile);
+if (apply1) apply1.addEventListener('click', openApplyStudent);
+if (apply2) apply2.addEventListener('click', openApplyStudent);
+if (apply1Mobile) apply1Mobile.addEventListener('click', openApplyStudentMobile);
+if (apply2Mobile) apply2Mobile.addEventListener('click', openApplyStudentMobile);
 footerApplyButton.addEventListener('click', openApplyStudentByScreenSize);
 
 function openApplyStudent (e) {

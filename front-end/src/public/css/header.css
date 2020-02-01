@@ -41,7 +41,7 @@ ul li {
 }
 
 .dropdown {
-    min-width: 100%; 
+    width: 170px; 
     background-color: white;
     padding: 1vw 0.2vw;
     display: flex;

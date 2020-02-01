@@ -41,6 +41,12 @@ module.exports = merge(common, {
 			favicon: "./src/public/assets/logo.png",
 			chunks: ['main', 'applyButtons']
 		}),
+		new HtmlWebpackPlugin({
+			filename: "timeline.html",
+			template: "./src/public/html/timeline.html",
+			favicon: "./src/public/assets/logo.png",
+			chunks: ['main', 'applyButtons']
+		}),
 		new DefinePlugin({
 			DOMAIN: JSON.stringify('http://localhost:3001')
 		})

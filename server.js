@@ -48,6 +48,10 @@ app.get('/howitworks', (req, res)=> {
   res.sendFile(path.join(__dirname, 'front-end', 'dist', 'how-it-works.html'));
 });
 
+app.get('/timeline', (req, res)=> {
+  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'timeline.html'));
+});
+
 app.post('/contact', (req, res) => {
   //validate input items
   if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.message) {
