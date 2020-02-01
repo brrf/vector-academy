@@ -37,10 +37,6 @@
 	display: flex;
 	flex-direction: column;
 }
-/*
-.split-content-list-items {
-	margin-left: 10vw;
-}*/
 
 .split-content-list h2 {
 	margin-bottom: 30px;
@@ -168,6 +164,7 @@
 	}
 	.split-content-list {
 		text-align: initial;
+		margin-left: 8vw;
 	}
 
 	.split-content-list h2 {
