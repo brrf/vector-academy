@@ -38,6 +38,10 @@
 	flex-direction: column;
 }
 
+.split-content-list-items {
+	margin: auto;
+}
+
 .split-content-list h2 {
 	margin-bottom: 30px;
 }
@@ -169,10 +173,10 @@
 		flex-direction: column-reverse;
 	}
 
-	.split-content-list {
+/*	.split-content-list {
 		display: flex;
 		flex-direction: column;
-	}
+	}*/
 
 	.split-content-list h2 {
 		margin-bottom: 5vw;
