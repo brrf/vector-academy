@@ -67,6 +67,10 @@ footer li {
 	footer li {
 		font-size: 3.4vw;
 	}
+
+	footer .student-register-mobile:hover {
+		cursor: pointer;
+	}
 }
 
 .hidden {

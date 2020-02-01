@@ -10,8 +10,9 @@ const studentRegisterModal = document.querySelector('.student-register-modal');
 const mainInactive = document.querySelector('.main-inactive');
 const mainInactiveMenu = document.querySelector('.main-inactive-menu');
 const mainActive = document.querySelector('.main-active');
-const studentLoginModalMobile = document.querySelector('.student-login-modal-mobile');
+const studentRegisterModalMobile = document.querySelector('.student-register-modal-mobile');
 const hamburger = document.querySelector('.hamburger');
+const footer = document.querySelector('footer');
 
 
 employerModal.addEventListener('click', handleCloseEmployer);
@@ -47,10 +48,11 @@ function handleCloseStudentRegister (e) {
 }
 
 function openApplyStudentMobile (e) {
+	footer.classList.add('hidden');
 	hamburger.classList.add('is-active');
 	mainActive.classList.add('hidden');
 	mainInactive.classList.remove('hidden');
 	mainInactiveMenu.classList.add('hidden');
-	studentLoginModalMobile.classList.remove('hidden');
+	studentRegisterModalMobile.classList.remove('hidden');
 	window.scrollTo(0, 0);
 }

@@ -63,7 +63,6 @@
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
-	margin-bottom: 0.6vw;
 	background-color: white;
 	padding-bottom: 4.5vw;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -238,6 +237,9 @@
 		flex-flow: column nowrap;
 		align-items: center;
 	}
+	.feature-text {
+		line-height: 2vw;
+	}
 	.first-third-width,
 	.third-third-width {
 		margin: 0;
@@ -336,13 +338,13 @@
 	}
 
 	.top-content-image {
-		background-image: url("../assets/AdobeStock_181153776.jpeg");
 		background-size: cover;
 		background-position: 75%;
 		background-color: #9197BE;
 		height: 50vh;
 		min-height: 280px;
 		padding: 0;
+		background-image: url("../assets/featureimage_web.jpeg");
 	}
 
 	.top-content-container {

@@ -6,18 +6,17 @@ module.exports = {
 		main: "./src/index.js",
 		contact: "./src/public/js/contact.js",
 		faq: "./src/public/js/faq.js",
-		home: "./src/public/js/home.js",
-		howitworks: "./src/public/js/how-it-works.js"
+		applyButtons: "./src/public/js/apply-buttons.js",
 	},
 	module: {
 		rules: [
-			{
-		        test: /\.js$/,
-		        exclude: /node_modules/,
-		        use: {
-		          loader: "babel-loader"
-		        }
-     		},
+			// {
+		 //        test: /\.js$/,
+		 //        exclude: /node_modules/,
+		 //        use: {
+		 //          loader: "babel-loader"
+		 //        }
+   //   		},
 			{
 				test: /\.html$/,
 				use: ["html-loader"]

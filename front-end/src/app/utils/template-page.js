@@ -11,15 +11,16 @@ export default function templatePage () {
 	document.body.insertBefore(header, mainActive);
 	const mainInactive = document.createElement('main');
 	mainInactive.className = 'main-inactive hidden';
-	mainInactive.innerHTML = "<div class=\"main-inactive-menu\"><a href=\"./howitworks\"><h3>How it works</h3></a><a href=\"./prereqs\"><h3>Prerequisites</h3></a><a href=\"./faqs\"><h3>FAQs</h3></a><hr><h3 id=\"employer-login-mobile\">Employer Login</h3><h3 id=\"student-login-mobile\">Student Login</h3><a href=\"'./apply\"><button>Apply</button></a></div><div class=\"employer-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Employer Login</h2><form><input data-type=\"text\" autocomplete=\"username\" class=\"form-full-width\" name=\"institutionID\" maxlength=\"50\" placeholder=\"Institution ID\" autofocus required><input type=\"password\" autocomplete=\"current-password\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required><div><button>Login</button>	</div></form><p>Don't have an account?   <a href=\"./contact\"><u>Contact us!</u></a></p></div></div><div class=\"student-login-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Student Login</h2><form><input data-type=\"text\" autocomplete=\"username\" class=\"form-full-width\" name=\"username\" maxlength=\"50\" placeholder=\"Username\" autofocus required><input type=\"password\" autocomplete=\"current-password\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required> 	<div><button>Login</button>	</div></form><p>Don't have an account?   <u>Sign up here!</u></p></div></div><div class=\"student-register-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Register</h2><div class=\"warning\">Enrollment opens August 1<sup>st</sup>, 2020.</div><form><input data-type=\"text\" type=\"e-mail\" class=\"form-full-width\" name=\"email\" maxlength=\"50\" placeholder=\"E-mail\" autofocus required disabled><input data-type=\"text\" type=\"text\" autocomplete=\"username\" class=\"form-full-width\" name=\"username\" maxlength=\"50\" placeholder=\"Username\" required disabled><input type=\"password\" autocomplete=\"current-password\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required disabled><input type=\"password\" autocomplete=\"current-password\" class=\"form-full-width\" name=\"password2\" maxlength=\"50\" placeholder=\"Confirm Password\" required disabled><div><button disabled >Register</button></div></form><p>Already have an account?   <u>Sign in here!</u></p></div></div>";
+	mainInactive.innerHTML = "<div class=\"main-inactive-menu\"><a href=\"./howitworks\"><h3>How it works</h3></a><a href=\"./prereqs\"><h3>Prerequisites</h3></a><a href=\"./faqs\"><h3>FAQs</h3></a><hr><h3 id=\"employer-login-mobile\">Employer Login</h3><h3 id=\"student-login-mobile\">Student Login</h3><h3><button class=\"student-register-mobile\">Apply</button></h3></div><div class=\"employer-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Employer Login</h2><form><input data-type=\"text\" autocomplete=\"username\" class=\"form-full-width\" name=\"institutionID\" maxlength=\"50\" placeholder=\"Institution ID\" autofocus required><input type=\"password\" autocomplete=\"current-password\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required><div><button>Login</button>	</div></form><p>Don't have an account?   <a href=\"./contact\"><u>Contact us!</u></a></p></div></div><div class=\"student-login-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Student Login</h2><form><input data-type=\"text\" autocomplete=\"username\" class=\"form-full-width\" name=\"username\" maxlength=\"50\" placeholder=\"Username\" autofocus required><input type=\"password\" autocomplete=\"current-password\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required> 	<div><button>Login</button>	</div></form><p>Don't have an account?   <u>Sign up here!</u></p></div></div><div class=\"student-register-modal-mobile hidden\"><div id='form-container' class=\"login-form-container\"><h2>Register</h2><div class=\"warning\">Enrollment opens August 1<sup>st</sup>, 2020.</div><form><input data-type=\"text\" type=\"e-mail\" class=\"form-full-width\" name=\"email\" maxlength=\"50\" placeholder=\"E-mail\" autofocus required disabled><input data-type=\"text\" type=\"text\" autocomplete=\"username\" class=\"form-full-width\" name=\"username\" maxlength=\"50\" placeholder=\"Username\" required disabled><input type=\"password\" autocomplete=\"current-password\" class=\"form-full-width\" name=\"password\" maxlength=\"50\" placeholder=\"Password\" required disabled><input type=\"password\" autocomplete=\"current-password\" class=\"form-full-width\" name=\"password2\" maxlength=\"50\" placeholder=\"Confirm Password\" required disabled><div><button disabled >Register</button></div></form><p>Already have an account?   <u>Sign in here!</u></p></div></div>";
 	document.body.appendChild(mainInactive);
 	const footer = document.createElement('footer');
-	footer.innerHTML = "<div class='footer-container'><h1><a href=\"./index\">Vector</a></h1><div><h3>About</h3><ul><li><a href=\"./privacy\">Privacy Policy</a></li><li><a href=\"./contact\">Contact</a></li></ul></div><div><h3>Resources</h3><ul><li><a href=\"./faqs\">FAQ</a></li><li><a href=\"./privacy\">How it works</a></li><li><a href=\"./privacy\">Application</a></li></ul></div></div><p></p>";
+	footer.innerHTML = "<div class='footer-container'><h1><a href=\"./index\">Vector</a></h1><div><h3>About</h3><ul><li><a href=\"./privacy\">Privacy Policy</a></li><li><a href=\"./contact\">Contact</a></li></ul></div><div><h3>Resources</h3><ul><li><a href=\"./faqs\">FAQ</a></li><li><a href=\"./privacy\">How it works</a></li><li class=\"student-register-mobile\">Application</li></ul></div></div><p></p>";
 	document.body.appendChild(footer); 
 
 	//toggle mobile login forms
 	const employerOpenBtnMobile = document.getElementById('employer-login-mobile');
 	const studentOpenBtnMobile = document.getElementById('student-login-mobile');
+	const studentRegisterBtnMobile = document.querySelectorAll('.student-register-mobile');
 	const employerModalMobile = document.querySelector('.employer-modal-mobile');
 	const studentLoginModalMobile = document.querySelector('.student-login-modal-mobile');
 	const studentRegisterModalMobile = document.querySelector('.student-register-modal-mobile');
@@ -29,6 +30,9 @@ export default function templatePage () {
 
 	employerOpenBtnMobile.addEventListener('click', openEmployerMobile);
 	studentOpenBtnMobile.addEventListener('click', openLoginStudentMobile);
+	for (let button of studentRegisterBtnMobile) {
+		button.addEventListener('click', openRegisterStudentMobile);	
+	}	
 	signUpHereMobile.addEventListener('click', openRegisterStudentMobile);
 	loginHereMobile.addEventListener('click', openLoginStudentMobile);
 
@@ -44,7 +48,9 @@ export default function templatePage () {
 	}
 
 	function openRegisterStudentMobile (e) {
+		console.log('here');
 		studentLoginModalMobile.classList.add('hidden');
+		mainInactiveMenu.classList.add('hidden');
 		studentRegisterModalMobile.classList.remove('hidden');
 	}
 

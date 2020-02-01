@@ -32,7 +32,7 @@ module.exports = merge(common, {
 				removeComments: true
 			},
 			favicon: "./src/public/assets/logo.png",
-			chunks: ['main', 'home']
+			chunks: ['main', 'applyButtons']
 		}),
 		new HtmlWebpackPlugin({
 			filename: "contact.html",
@@ -68,10 +68,10 @@ module.exports = merge(common, {
 			chunks: ['main']
 		}),
 		new HtmlWebpackPlugin({
-			filename: "howitworks.html",
+			filename: "how-it-works.html",
 			template: "./src/public/html/how-it-works.html",
 			favicon: "./src/public/assets/logo.png",
-			chunks: ['main', 'howitworks']
+			chunks: ['main', 'applyButtons']
 		}),
 		new DefinePlugin({
 			DOMAIN: JSON.stringify('https://vectoracademy.io')
