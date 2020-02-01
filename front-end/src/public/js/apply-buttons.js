@@ -13,7 +13,7 @@ const mainActive = document.querySelector('.main-active');
 const studentRegisterModalMobile = document.querySelector('.student-register-modal-mobile');
 const hamburger = document.querySelector('.hamburger');
 const footer = document.querySelector('footer');
-
+const footerApplyButton = document.querySelector('.footer-student-register');
 
 employerModal.addEventListener('click', handleCloseEmployer);
 studentLoginModal.addEventListener('click', handleCloseStudentLogin);
@@ -22,6 +22,7 @@ apply1.addEventListener('click', openApplyStudent);
 apply2.addEventListener('click', openApplyStudent);
 apply1Mobile.addEventListener('click', openApplyStudentMobile);
 apply2Mobile.addEventListener('click', openApplyStudentMobile);
+footerApplyButton.addEventListener('click', openApplyStudentByScreenSize);
 
 function openApplyStudent (e) {
 	if (!studentLoginModal.classList.contains('hidden')) studentLoginModal.classList.add('hidden');
@@ -55,4 +56,12 @@ function openApplyStudentMobile (e) {
 	mainInactiveMenu.classList.add('hidden');
 	studentRegisterModalMobile.classList.remove('hidden');
 	window.scrollTo(0, 0);
+}
+
+function openApplyStudentByScreenSize() {
+	if (window.innerWidth > 550) {
+		openApplyStudent()
+	} else {
+		openApplyStudentMobile()
+	}
 }
