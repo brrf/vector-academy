@@ -65,7 +65,7 @@ h5 {
 
 p {
 	margin: 0;
-	line-height: 1.4vw;
+	line-height: 1.6vw;
 	font-size: 1.2vw;
 }
 
@@ -190,4 +190,7 @@ textarea {
 		width: 120px;
 		margin-left: 10px;
 	}
+	.center h4 {
+	padding: 0;
+}
 }

@@ -33,6 +33,10 @@ footer li {
 	font-size: 1vw;
 }
 
+footer .footer-student-register:hover {
+	cursor: pointer;
+}
+
 /*tablet*/
 @media (max-width: 990px) {	
 	footer li {

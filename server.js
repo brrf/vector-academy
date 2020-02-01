@@ -44,9 +44,9 @@ app.get('/contact', (req, res)=> {
   res.sendFile(path.join(__dirname, 'front-end', 'dist', 'contact.html'));
 });
 
-// app.get('/student-login-mobile', (req, res)=> {
-//   res.sendFile(path.join(__dirname, 'front-end', 'dist', 'student-login-mobile.html'));
-// });
+app.get('/howitworks', (req, res)=> {
+  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'how-it-works.html'));
+});
 
 app.post('/contact', (req, res) => {
   //validate input items

@@ -44,6 +44,10 @@ app.get('/contact', (req, res)=> {
   res.sendFile(path.join(__dirname, 'front-end', 'dev', 'contact.html'));
 });
 
+app.get('/howitworks', (req, res)=> {
+  res.sendFile(path.join(__dirname, 'front-end', 'dev', 'how-it-works.html'));
+});
+
 app.post('/contact', (req, res) => {
   //validate input items
   if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.message) {
