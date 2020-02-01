@@ -77,7 +77,7 @@ module.exports = merge(common, {
 			filename: "timeline.html",
 			template: "./src/public/html/timeline.html",
 			favicon: "./src/public/assets/logo.png",
-			chunks: ['main']
+			chunks: ['main', 'applyButtons']
 		}),
 		new DefinePlugin({
 			DOMAIN: JSON.stringify('https://vectoracademy.io')
