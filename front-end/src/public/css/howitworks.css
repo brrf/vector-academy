@@ -37,10 +37,10 @@
 	display: flex;
 	flex-direction: column;
 }
-
+/*
 .split-content-list-items {
-	margin: auto;
-}
+	margin-left: 10vw;
+}*/
 
 .split-content-list h2 {
 	margin-bottom: 30px;
@@ -48,8 +48,6 @@
 
 .split-content-list h3 {
 	margin-bottom: 15px;
-	text-align: start;
-
 }
 
 .split-content-list li {
@@ -151,9 +149,6 @@
 		min-height: 200px;
 		min-width: 300px;
 	}
-	.split-content-list li {
-		
-	}
 }
 
 @media (max-width: 550px) {
@@ -165,18 +160,15 @@
 	}
 	
 	.split-content  {
-		align-items: center;
 		flex-direction: column;
 	}
 
 	.split-content.lifestyle {
 		flex-direction: column-reverse;
 	}
-
-/*	.split-content-list {
-		display: flex;
-		flex-direction: column;
-	}*/
+	.split-content-list {
+		text-align: initial;
+	}
 
 	.split-content-list h2 {
 		margin-bottom: 5vw;
