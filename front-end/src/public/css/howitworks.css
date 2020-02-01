@@ -192,4 +192,7 @@
 	.salary-by-year div:first-child {
 		flex: 1 0 100%;
 	}
+	#curriculum-section {
+		padding: 0;
+	}
 }
