@@ -160,7 +160,7 @@
 		align-items: flex-start;
 	}
 
-	.split-content.lifestyle {
+	.split-content.lifestyle, .split-content.job-hunt {
 		flex-direction: column-reverse;
 	}
 	.split-content-list {
