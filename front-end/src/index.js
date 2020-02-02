@@ -13,8 +13,6 @@ import "./public/css/contact.css";
 import "./public/css/howitworks.css";
 import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
-import '@fortawesome/fontawesome-free/js/regular';
-import '@fortawesome/fontawesome-free/js/brands';
 import "./public/css/timeline.css";
 
 templatePage();

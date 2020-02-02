@@ -8,8 +8,8 @@ button.addEventListener("click", submitForm);
 
 // repaint DOM when server responds without error
 function repaintDOM() {
-  document.querySelector('h2').innerHTML = 'Message Received!';
-  document.querySelector('form').remove();
+  document.querySelector('.contact-form-container h2').innerHTML = 'Message Received!';
+  document.querySelector('.contact-form-container form').remove();
   var text = document.createElement('p');
   text.innerHTML = 'We appreciate your reaching out. We will be in touch shortly with a reply.';
   document.querySelector('.contact-form-container').appendChild(text);
