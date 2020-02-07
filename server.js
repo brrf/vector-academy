@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const path = require('path');
 const nodemailer = require('nodemailer');
+const vhost = require('vhost');
+const db = require('./db');
 
 const app = express();
 
@@ -93,3 +95,6 @@ app.use(function(req, res, next) {
 app.listen(process.env.PORT || 3001, function () {
   console.log("Listening on port " + process.env.PORT);
 });
+
+//Connect to database
+db();

@@ -5,19 +5,19 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const path = require('path');
 const nodemailer = require('nodemailer');
+const vhost = require('vhost');
+const db = require('./db');
 
-const app = express();
-
-app.use(helmet());
+//marketing Site
+const marketingApp = express();
 
 require('dotenv').config();
 
 //Express body parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+marketingApp.use(bodyParser.json());
+marketingApp.use(bodyParser.urlencoded({ extended: false }));
 
-
-app.use ((req, res, next) => {
+marketingApp.use ((req, res, next) => {
   res.header ('Access-Control-Allow-Origin', '*')
   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
   // res.header ('Access-Control-Allow-Credentials', true)
@@ -25,34 +25,34 @@ app.use ((req, res, next) => {
   next()
 });
 
-app.use(express.static(path.join(__dirname, 'front-end', 'dev')));
+marketingApp.use(express.static(path.join(__dirname, 'front-end', 'dev')));
 
 
-app.get('/', (req, res)=> {
+marketingApp.get('/', (req, res)=> {
   res.sendFile(path.join(__dirname, 'front-end', 'dev', 'index.html'));
 });
 
-app.get('/faqs', (req, res)=> {
+marketingApp.get('/faqs', (req, res)=> {
   res.sendFile(path.join(__dirname, 'front-end', 'dev', 'faqs.html'));
 });
 
-app.get('/privacy', (req, res)=> {
+marketingApp.get('/privacy', (req, res)=> {
   res.sendFile(path.join(__dirname, 'front-end', 'dev', 'privacy.html'));
 });
 
-app.get('/contact', (req, res)=> {
+marketingApp.get('/contact', (req, res)=> {
   res.sendFile(path.join(__dirname, 'front-end', 'dev', 'contact.html'));
 });
 
-app.get('/howitworks', (req, res)=> {
+marketingApp.get('/howitworks', (req, res)=> {
   res.sendFile(path.join(__dirname, 'front-end', 'dev', 'how-it-works.html'));
 });
 
-app.get('/timeline', (req, res)=> {
+marketingApp.get('/timeline', (req, res)=> {
   res.sendFile(path.join(__dirname, 'front-end', 'dev', 'timeline.html'));
 });
 
-app.post('/contact', (req, res) => {
+marketingApp.post('/contact', (req, res) => {
   //validate input items
   if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.message) {
     return res.json({err: 'Fill out all form fields'});
@@ -81,11 +81,32 @@ app.post('/contact', (req, res) => {
   });
 })
 
+//mainApp
+
+const mainApp = express();
+
+// mainApp.use(express.static(path.join(__dirname, 'front-end', 'dev')));
+
+
+mainApp.get('/', (req, res)=> {
+  res.send('hello there');
+});
+
+//Virtual Routing Application
+
+const app = express();
+
+app.use(helmet());
+
+app.use(vhost('localhost', marketingApp));
+app.use(vhost('apply.localhost', mainApp));
+
+
 //404 Not Found Middleware
 app.use(function(req, res, next) {
   res.status(404)
     .type('text')
-    .send('Not Found');
+    .send('End of the line!');
 });
 
 
@@ -93,3 +114,6 @@ app.use(function(req, res, next) {
 app.listen(3001, function () {
   console.log("Listening on port " + 3001);
 });
+
+//Connect to database
+db();
