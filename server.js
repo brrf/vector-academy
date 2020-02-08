@@ -27,31 +27,31 @@ app.use ((req, res, next) => {
   next()
 });
 
-app.use(express.static(path.join(__dirname, 'front-end', 'dist')));
+app.use(express.static(path.join(__dirname, 'marketing-app', 'dist')));
 
 
 app.get('/', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'index.html'));
 });
 
 app.get('/faqs', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'faqs.html'));
+  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'faqs.html'));
 });
 
 app.get('/privacy', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'privacy.html'));
+  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'privacy.html'));
 });
 
 app.get('/contact', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'contact.html'));
+  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'contact.html'));
 });
 
 app.get('/howitworks', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'how-it-works.html'));
+  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'how-it-works.html'));
 });
 
 app.get('/timeline', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'front-end', 'dist', 'timeline.html'));
+  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'timeline.html'));
 });
 
 app.post('/contact', (req, res) => {
@@ -81,7 +81,7 @@ app.post('/contact', (req, res) => {
         res.json({err: false})
       }
   });
-})
+});
 
 //404 Not Found Middleware
 app.use(function(req, res, next) {

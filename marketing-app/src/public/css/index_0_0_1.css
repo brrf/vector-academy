@@ -300,7 +300,7 @@
 		height: 50vw;
 	}
 
-	#jumpstart-section div {
+	#jumpstart-section > div {
 		height: 20vw;
 		width: 60vw;
 	}
@@ -431,7 +431,7 @@
 		height: 65vw;
 	}
 
-	#jumpstart-section div {
+	#jumpstart-section > div {
 		height: 44vw;
 		width: 75vw;
 	}

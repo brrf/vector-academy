@@ -1,0 +1,172 @@
+.main-active {
+	margin-top: 0;
+}
+
+#form-container {
+	padding: 1.5vw;
+}
+
+#top-content-section-large {
+	padding: 5vw;
+}
+
+.top-content-container {
+	height: 23vw;
+}
+
+.top-content-button {
+	min-width: 200px;
+	height: 4vw;
+	min-height: 45px;
+	border-radius: 7px;
+	margin-bottom: 1.5vw;
+}
+
+.promotional-offer {
+	color: #e86542;
+	font-weight: bold;
+	background-color: white;
+	padding: 7px;
+	width: 90%;
+	font-size: 1.1vw;
+}
+
+#jumpstart-section {
+	height: 30vw;
+}
+
+#jumpstart-section > div {
+	height: 55%;
+}
+
+#jumpstart-section h2 {
+	margin-bottom: 4%;
+}
+
+#jumpstart-section .promotional-offer {
+	margin: 1vw auto 0vw auto;
+}
+
+.login-modal {
+	background-color: rgba(0,0,0,0.6);
+	position: fixed;
+	top: 0px;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 2;
+}
+
+.login-modal button {
+	margin-bottom: 20px;
+}
+
+.login-form-container {
+	width: 500px;
+}
+
+.student-register-modal button, .student-register-modal-mobile button {
+	cursor: pointer;
+}
+
+
+@media (max-width: 990px) {
+	.top-content-container {
+		height: 36vw;
+		max-height: 330px;
+		min-height: 220px;
+	}
+	.top-content-button {
+		min-width: 200px;
+		height: 5vw;
+		min-height: 40px;
+		border-radius: 7px;
+		margin-bottom: 10px;
+	}
+	.promotional-offer {
+		color: #e86542;
+		font-weight: bold;
+		background-color: white;
+		padding: 7px;
+		width: 100%;
+		font-size: 1.6vw;
+	}
+	#jumpstart-section > .center {
+		height: 23vw;
+	}
+	#jumpstart-section .promotional-offer {
+		margin: 1vw auto 0vw auto;
+		width: 75%;
+	}
+}
+
+@media (max-width: 660px) {
+	#top-content-section-large {
+		padding: 0;
+		position: relative;
+	}
+	.top-content-container {
+		padding: 1.5vw;
+		position: absolute;
+		bottom: 2vw;
+		left: 2vw;
+		height: 42vw;
+		width: 55vw;
+	}
+	.top-content-text {
+		font-size: 2.6vw;
+		line-height: 2.6vw;
+	}
+	.top-content-button {
+		min-height: 35px;
+		font-size: 14px;
+	}
+	#jumpstart-section {
+		height: 45vw;
+	}
+	#jumpstart-section > .center {
+		height: 26vw;
+	}
+	#jumpstart-section .promotional-offer {
+		margin: 1vw auto 0vw auto;
+		width: 90%;
+	}
+	.promotional-offer {
+		font-size: 2.0vw;
+	}
+}
+
+@media (max-width: 550px) {
+	.top-content-container {
+		position: inherit;
+		width: inherit;
+		height: 50vh;
+		max-height: none;
+	}
+	.top-content-text {
+		font-size: 4.5vw;
+		line-height: 6vw;
+	}
+	.top-content-button {
+		height: 7vh;
+		margin-top: 2vh;
+		margin-bottom: 4vh;
+	}
+	#jumpstart-section {
+		height: 50vh;
+	}
+	#jumpstart-section > .center {
+		height: 33vh;
+		width: 100%;
+	}
+	#jumpstart-section .promotional-offer {
+		margin: 1vw auto 0vw auto;
+		width: 95%;
+	}
+	#jumpstart-section .top-content-button {
+		margin: 0vh 0vh 1vh 0;
+	}
+	.promotional-offer {
+		font-size: 3.5vw;
+	}
+}

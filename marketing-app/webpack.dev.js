@@ -47,9 +47,15 @@ module.exports = merge(common, {
 			favicon: "./src/public/assets/logo.png",
 			chunks: ['main', 'applyButtons']
 		}),
+		new HtmlWebpackPlugin({
+			filename: "landing-page.html",
+			template: "./src/public/html/landing-page.html",
+			favicon: "./src/public/assets/logo.png",
+			chunks: ['landingPage']
+		}),
 		new DefinePlugin({
 			DOMAIN: JSON.stringify('http://localhost:3001')
-		})
+		}),	
 	],
 	module: {
 		rules: [

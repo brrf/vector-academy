@@ -7,6 +7,7 @@ module.exports = {
 		contact: "./src/public/js/contact.js",
 		faq: "./src/public/js/faq.js",
 		applyButtons: "./src/public/js/apply-buttons.js",
+		landingPage: "./src/public/js/landing-page.js"
 	},
 	module: {
 		rules: [
