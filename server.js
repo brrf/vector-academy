@@ -6,6 +6,7 @@ const vhost = require('vhost');
 const db = require('./db');
 const cors = require('cors');
 const helmet = require('helmet');
+require('dotenv').config();
 
 const server = require('./server.common.js');
 
@@ -32,8 +33,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.use(vhost('localhost', marketingApp));
-app.use(vhost('apply.localhost', mainApp));
+app.use(vhost('vectoracademy.io', marketingApp));
+app.use(vhost('apply.vectoracademy.io', mainApp));
 
 //404 Not Found Middleware
 app.use(function(req, res, next) {

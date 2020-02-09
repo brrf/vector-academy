@@ -61,7 +61,7 @@ function handleSubmit (e) {
 
 function submitForm (data) {
 
-	fetch("http://localhost:3001/register", {
+	fetch(`${DOMAIN}/register`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
