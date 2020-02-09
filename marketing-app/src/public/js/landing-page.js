@@ -79,6 +79,9 @@ function submitForm (data) {
 
 function repaintDOM () {
 	const formContainer = document.querySelectorAll('#form-container');
+	if (document.querySelector('.error-list')) {
+		document.querySelector('.error-list').remove()
+	}
 	const h2 = document.querySelectorAll('#form-container h2');
 	const form = document.querySelectorAll('#form-container form');
 

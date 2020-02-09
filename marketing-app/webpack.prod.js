@@ -83,7 +83,7 @@ module.exports = merge(common, {
 			filename: "landing-page.html",
 			template: "./src/public/html/landing-page.html",
 			favicon: "./src/public/assets/logo.png",
-			chunks: ['applyButtons']
+			chunks: ['landingPage']
 		}),
 		new DefinePlugin({
 			DOMAIN: JSON.stringify('https://vectoracademy.io')

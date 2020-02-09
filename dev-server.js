@@ -52,6 +52,10 @@ marketingApp.get('/timeline', (req, res)=> {
   res.sendFile(path.join(__dirname, 'marketing-app', 'dev', 'timeline.html'));
 });
 
+marketingApp.get('/landingpage', (req, res)=> {
+  res.sendFile(path.join(__dirname, 'marketing-app', 'dev', 'landing-page.html'));
+});
+
 marketingApp.post('/contact', (req, res) => {
   //validate input items
   if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.message) {
