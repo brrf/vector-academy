@@ -33,8 +33,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.use(vhost('vectoracademy.io', marketingApp));
-app.use(vhost('apply.vectoracademy.io', mainApp));
+app.use(vhost('localhost', marketingApp));
+app.use(vhost('apply.localhost', mainApp));
 
 //404 Not Found Middleware
 app.use(function(req, res, next) {
