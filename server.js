@@ -2,24 +2,17 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const helmet = require('helmet');
-const path = require('path');
-const nodemailer = require('nodemailer');
 const vhost = require('vhost');
 const db = require('./db');
+const cors = require('cors');
+const helmet = require('helmet');
 
-const app = express();
+const server = require('./server.common.js');
 
-app.use(helmet());
+const marketingApp = express();
+const mainApp = express();
 
-require('dotenv').config();
-
-//Express body parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-
-app.use ((req, res, next) => {
+marketingApp.use ((req, res, next) => {
   res.header ('Access-Control-Allow-Origin', 'https://www.localhost:3001')
   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
   res.header ('Access-Control-Allow-Credentials', true)
@@ -27,61 +20,20 @@ app.use ((req, res, next) => {
   next()
 });
 
-app.use(express.static(path.join(__dirname, 'marketing-app', 'dist')));
+server(marketingApp, mainApp, 'dist');
+
+//Virtual Routing Application
+const app = express();
+
+app.use(helmet());
+
+//Express body parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.get('/', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'index.html'));
-});
-
-app.get('/faqs', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'faqs.html'));
-});
-
-app.get('/privacy', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'privacy.html'));
-});
-
-app.get('/contact', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'contact.html'));
-});
-
-app.get('/howitworks', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'how-it-works.html'));
-});
-
-app.get('/timeline', (req, res)=> {
-  res.sendFile(path.join(__dirname, 'marketing-app', 'dist', 'timeline.html'));
-});
-
-app.post('/contact', (req, res) => {
-  //validate input items
-  if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.message) {
-    return res.json({err: 'Fill out all form fields'});
-  }
-  //send email to vector
-  let transport = nodemailer.createTransport({
-    host: 'smtp.zoho.com',
-    port: 465,
-    auth: {
-       user: process.env.ZOHOUSER,
-       pass: process.env.ZOHOPASS
-    }
-  });
-  const message = {
-    from: 'moshe@vectortrainingacademy.com', // Sender address
-    to: 'moshe@vectortrainingacademy.com',         // List of recipients
-    subject: `Message from: ${req.body.firstName} ${req.body.lastName}`, // Subject line
-    text: `Reply to ${req.body.email}. Message: ${req.body.message}` // Plain text body
-  };
-  transport.sendMail(message, function(err, info) {
-      if (err) {
-        res.json({err})
-      } else {
-        res.json({err: false})
-      }
-  });
-});
+app.use(vhost('localhost', marketingApp));
+app.use(vhost('apply.localhost', mainApp));
 
 //404 Not Found Middleware
 app.use(function(req, res, next) {
