@@ -5,6 +5,8 @@ export function addSpinner(element) {
   element.appendChild(spinner);
 }
 
-export function removeSpinner() {
-  document.querySelector('.spinner-box').remove();
+export function removeSpinner(spinner) {
+	document.querySelector('.spinner-box').remove();
+  // console.log(temp)
+  // temp.remove();
 }

@@ -1,7 +1,6 @@
 "use strict";
 
 import {addSpinner, removeSpinner} from './spinner';
-
 var button = document.querySelector("#contact-form button");
 var form = document.getElementById("contact-form");
 button.addEventListener("click", submitForm); 

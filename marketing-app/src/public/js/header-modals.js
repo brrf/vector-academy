@@ -1,4 +1,5 @@
 import {addSpinner, removeSpinner} from './spinner';
+import submitForm from './submit-registration-form.js';
 
 export default function loadModals() {
 	const employerOpenBtn = document.getElementById('employer-login');
@@ -63,8 +64,10 @@ export default function loadModals() {
 	//respond to login requests
 	const employerLoginBtn = document.querySelector(".employer-modal button");
 	const studentLoginBtn = document.querySelector(".student-login-modal button");
+	const studentRegisterBtn = document.querySelector(".student-register-modal button");
 	employerLoginBtn.addEventListener('click', handleEmployerLogin);
 	studentLoginBtn.addEventListener('click', handleStudentLogin);
+	studentRegisterBtn.addEventListener('click', handleStudentRegister);
 
 	function tempResponse (userType) {
 		const container = document.querySelector(`.${userType}-modal .login-form-container`);
@@ -108,6 +111,24 @@ export default function loadModals() {
 			addSpinner(element);
 			setTimeout(tempResponse, 800, 'student-login');
 		}	
+	}
+
+	function handleStudentRegister(e) {
+		e.preventDefault();
+
+		const email = document.getElementById("register-form").elements["email"].value;
+		const password = document.getElementById("register-form").elements["password"].value;
+		const password2 = document.getElementById("register-form").elements["password2"].value;
+
+		const data = {
+			email,
+			password,
+			password2
+		};
+
+		const element = document.querySelector('#register-form > div')
+  		addSpinner(element);
+		submitForm(data);
 	}
 };
 

@@ -2,6 +2,11 @@
 	width: 50%;
 }
 
+#contact-form > div {
+	display: flex;
+	align-items: center;
+}
+
 @media (max-width: 990px) {
 	.contact-form-container {
 		width: 70%;

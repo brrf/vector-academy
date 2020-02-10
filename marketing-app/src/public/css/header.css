@@ -84,8 +84,12 @@ ul li {
 	width: 425px;
 }
 
+#register-form > div {
+	display: flex;
+}
+
 .student-register-modal button {
-	cursor: not-allowed;
+	cursor: pointer;
 }
 
 .student-register-modal u:hover, .student-login-modal u:hover {
@@ -143,6 +147,9 @@ ul li {
 		background-color: #040A2B;
 		margin-top: 3vw;
 	}
+	#register-form-mobile > div {
+	display: flex;
+}
 
 }
 

@@ -322,7 +322,7 @@
 	}
 
 	.student-register-modal-mobile button {
-	cursor: not-allowed;
+	cursor: pointer;
 	}
 
 	.student-register-modal-mobile u:hover, .student-login-modal-mobile u:hover {
