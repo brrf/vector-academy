@@ -5,18 +5,18 @@ export default function loadModals() {
 	const studentOpenBtn = document.getElementById('student-login');
 	const employerModal = document.querySelector('.employer-modal');
 	const studentLoginModal = document.querySelector('.student-login-modal');
-	const studentRegisterModal = document.querySelector('.student-register-modal');
-	const studentApplyModal = document.querySelector('#navbar-container button');
-	const signUpHere = document.querySelector('.student-login-modal u');
-	const loginHere = document.querySelector('.student-register-modal u');
+	// const studentRegisterModal = document.querySelector('.student-register-modal');
+	//const studentApplyModal = document.querySelector('#navbar-container button');
+	// const signUpHere = document.querySelector('.student-login-modal u');
+	const loginHere = document.querySelector('.student-login-modal u');
 
 	employerOpenBtn.addEventListener('click', openEmployer);
 	studentOpenBtn.addEventListener('click', openLoginStudent);
 	employerModal.addEventListener('click', handleCloseEmployer);
 	studentLoginModal.addEventListener('click', handleCloseStudentLogin);
-	studentRegisterModal.addEventListener('click', handleCloseStudentRegister);
-	studentApplyModal.addEventListener('click', openApplyStudent)
-	signUpHere.addEventListener('click', openRegisterStudent);
+	// studentRegisterModal.addEventListener('click', handleCloseStudentRegister);
+	// studentApplyModal.addEventListener('click', openApplyStudent)
+	// signUpHere.addEventListener('click', openRegisterStudent);
 	loginHere.addEventListener('click', openLoginStudent);
 
 	function openEmployer (e) {
@@ -31,16 +31,16 @@ export default function loadModals() {
 		studentLoginModal.classList.remove('hidden');
 	}
 
-	function openApplyStudent (e) {
-		if (!studentLoginModal.classList.contains('hidden')) studentLoginModal.classList.add('hidden');
-		if (!employerModal.classList.contains('hidden')) employerModal.classList.add('hidden');
-		studentRegisterModal.classList.remove('hidden');
-	}
+	// function openApplyStudent (e) {
+	// 	if (!studentLoginModal.classList.contains('hidden')) studentLoginModal.classList.add('hidden');
+	// 	if (!employerModal.classList.contains('hidden')) employerModal.classList.add('hidden');
+	// 	studentRegisterModal.classList.remove('hidden');
+	// }
 
-	function openRegisterStudent (e) {
-		studentLoginModal.classList.add('hidden');
-		studentRegisterModal.classList.remove('hidden');
-	}
+	// function openRegisterStudent (e) {
+	// 	studentLoginModal.classList.add('hidden');
+	// 	studentRegisterModal.classList.remove('hidden');
+	// }
 
 	function handleCloseEmployer (e) {
 		if (e.target.nodeName === 'SPAN' || e.target.classList.contains('employer-modal')) {
@@ -54,11 +54,11 @@ export default function loadModals() {
 		}
 	}
 
-	function handleCloseStudentRegister (e) {
-		if (e.target.nodeName === 'SPAN' || e.target.classList.contains('student-register-modal')) {
-			studentRegisterModal.classList.add('hidden');
-		}
-	}
+	// function handleCloseStudentRegister (e) {
+	// 	if (e.target.nodeName === 'SPAN' || e.target.classList.contains('student-register-modal')) {
+	// 		studentRegisterModal.classList.add('hidden');
+	// 	}
+	// }
 
 	//respond to login requests
 	const employerLoginBtn = document.querySelector(".employer-modal button");
