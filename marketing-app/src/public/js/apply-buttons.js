@@ -1,34 +1,34 @@
 // load Apply modals from home screen buttons
 
-// const apply1 = document.querySelector('#top-content-section-large button');
-// const apply2 = document.querySelector('#jumpstart-section.large button');
-// const apply1Mobile = document.querySelector('#top-content-section-mobile button')
-// const apply2Mobile = document.querySelector('#jumpstart-section.mobile button')
+const apply1 = document.querySelector('#top-content-section-large button');
+const apply2 = document.querySelector('#jumpstart-section.large button');
+const apply1Mobile = document.querySelector('#top-content-section-mobile button')
+const apply2Mobile = document.querySelector('#jumpstart-section.mobile button')
 const employerModal = document.querySelector('.employer-modal');
 const studentLoginModal = document.querySelector('.student-login-modal');
-// const studentRegisterModal = document.querySelector('.student-register-modal');
+const studentRegisterModal = document.querySelector('.student-register-modal');
 const mainInactive = document.querySelector('.main-inactive');
 const mainInactiveMenu = document.querySelector('.main-inactive-menu');
 const mainActive = document.querySelector('.main-active');
-// const studentRegisterModalMobile = document.querySelector('.student-register-modal-mobile');
+const studentRegisterModalMobile = document.querySelector('.student-register-modal-mobile');
 const hamburger = document.querySelector('.hamburger');
-// const footer = document.querySelector('footer');
-// const footerApplyButton = document.querySelector('.footer-student-register');
+const footer = document.querySelector('footer');
+const footerApplyButton = document.querySelector('.footer-student-register');
 
 employerModal.addEventListener('click', handleCloseEmployer);
 studentLoginModal.addEventListener('click', handleCloseStudentLogin);
-// studentRegisterModal.addEventListener('click', handleCloseStudentRegister);
-// if (apply1) apply1.addEventListener('click', openApplyStudent);
-// if (apply2) apply2.addEventListener('click', openApplyStudent);
-// if (apply1Mobile) apply1Mobile.addEventListener('click', openApplyStudentMobile);
-// if (apply2Mobile) apply2Mobile.addEventListener('click', openApplyStudentMobile);
-// footerApplyButton.addEventListener('click', openApplyStudentByScreenSize);
+studentRegisterModal.addEventListener('click', handleCloseStudentRegister);
+if (apply1) apply1.addEventListener('click', openApplyStudent);
+if (apply2) apply2.addEventListener('click', openApplyStudent);
+if (apply1Mobile) apply1Mobile.addEventListener('click', openApplyStudentMobile);
+if (apply2Mobile) apply2Mobile.addEventListener('click', openApplyStudentMobile);
+footerApplyButton.addEventListener('click', openApplyStudentByScreenSize);
 
-// function openApplyStudent (e) {
-// 	if (!studentLoginModal.classList.contains('hidden')) studentLoginModal.classList.add('hidden');
-// 	if (!employerModal.classList.contains('hidden')) employerModal.classList.add('hidden');
-// 	studentRegisterModal.classList.remove('hidden');
-// }
+function openApplyStudent (e) {
+	if (!studentLoginModal.classList.contains('hidden')) studentLoginModal.classList.add('hidden');
+	if (!employerModal.classList.contains('hidden')) employerModal.classList.add('hidden');
+	studentRegisterModal.classList.remove('hidden');
+}
 
 function handleCloseEmployer (e) {
 	if (e.target.nodeName === 'SPAN' || e.target.classList.contains('employer-modal')) {
@@ -42,26 +42,26 @@ function handleCloseStudentLogin (e) {
 	}
 }
 
-// function handleCloseStudentRegister (e) {
-// 	if (e.target.nodeName === 'SPAN' || e.target.classList.contains('student-register-modal')) {
-// 		studentRegisterModal.classList.add('hidden');
-// 	}
-// }
+function handleCloseStudentRegister (e) {
+	if (e.target.nodeName === 'SPAN' || e.target.classList.contains('student-register-modal')) {
+		studentRegisterModal.classList.add('hidden');
+	}
+}
 
-// function openApplyStudentMobile (e) {
-// 	footer.classList.add('hidden');
-// 	hamburger.classList.add('is-active');
-// 	mainActive.classList.add('hidden');
-// 	mainInactive.classList.remove('hidden');
-// 	mainInactiveMenu.classList.add('hidden');
-// 	studentRegisterModalMobile.classList.remove('hidden');
-// 	window.scrollTo(0, 0);
-// }
+function openApplyStudentMobile (e) {
+	footer.classList.add('hidden');
+	hamburger.classList.add('is-active');
+	mainActive.classList.add('hidden');
+	mainInactive.classList.remove('hidden');
+	mainInactiveMenu.classList.add('hidden');
+	studentRegisterModalMobile.classList.remove('hidden');
+	window.scrollTo(0, 0);
+}
 
-// function openApplyStudentByScreenSize() {
-// 	if (window.innerWidth > 550) {
-// 		openApplyStudent()
-// 	} else {
-// 		openApplyStudentMobile()
-// 	}
-// }
+function openApplyStudentByScreenSize() {
+	if (window.innerWidth > 550) {
+		openApplyStudent()
+	} else {
+		openApplyStudentMobile()
+	}
+}

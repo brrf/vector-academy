@@ -2,10 +2,6 @@
 	margin-top: 0;
 }
 
-#form-container {
-	padding: 1.5vw;
-}
-
 #top-content-section-large {
 	padding: 5vw;
 }
@@ -29,6 +25,11 @@
 	padding: 7px;
 	width: 90%;
 	font-size: 1.1vw;
+}
+
+.split-content-list li {
+	list-style-type: square;
+	list-style-position: inside;
 }
 
 #jumpstart-section {
@@ -59,10 +60,6 @@
 
 .login-modal button {
 	margin-bottom: 20px;
-}
-
-.login-form-container {
-	width: 500px;
 }
 
 .student-register-modal button, .student-register-modal-mobile button {
