@@ -98,14 +98,12 @@ function repaintDOM () {
 function addErrors (errors) {
 	const formContainer = document.querySelectorAll('#form-container');
 	if (document.querySelector('.error-list')) {
-		document.querySelector('.error-list').remove()
+		document.querySelectorAll('.error-list').forEach(error => error.remove());
 	}
 	let h2s = [];
 	formContainer.forEach(container => {
 		h2s.push(container.firstElementChild);
 	})
-
-	
 
 	formContainer.forEach((container, index) => {
 		let errorList = document.createElement('div');
