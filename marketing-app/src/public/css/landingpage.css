@@ -66,6 +66,10 @@
 	cursor: pointer;
 }
 
+.login-form-container {
+	width: 425px;
+}
+
 
 @media (max-width: 990px) {
 	.top-content-container {
@@ -95,6 +99,9 @@
 		margin: 1vw auto 0vw auto;
 		width: 75%;
 	}
+	.login-form-container {
+		width: 55%;
+	}	
 }
 
 @media (max-width: 660px) {
@@ -166,4 +173,7 @@
 	.promotional-offer {
 		font-size: 3.5vw;
 	}
+	.login-form-container {
+		width: 65%;
+	}	
 }
