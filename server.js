@@ -14,7 +14,7 @@ const marketingApp = express();
 const mainApp = express();
 
 marketingApp.use ((req, res, next) => {
-  res.header ('Access-Control-Allow-Origin', 'https://www.localhost:3001')
+  res.header ('Access-Control-Allow-Origin', ['https://www.localhost:3001', 'https://www.vectoracademy.io'])
   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
   res.header ('Access-Control-Allow-Credentials', true)
   res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
@@ -27,6 +27,11 @@ server(marketingApp, mainApp, 'dist');
 const app = express();
 
 app.use(helmet());
+
+app.use(cors({
+  credentials: true, 
+  origin: ['https://localhost:3001', 'https://www.vectoracademy.io']
+}));
 
 //Express body parser
 app.use(bodyParser.json());
