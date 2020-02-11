@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		unique: true
 	},
+	promotion: {
+		default: false,
+		type: Boolean
+	}
 });
 
 module.exports = mongoose.model('User', userSchema);

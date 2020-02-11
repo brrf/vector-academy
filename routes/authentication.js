@@ -3,6 +3,11 @@ const User = require('../schemas/users');
 
 module.exports = function(mainApp) {
 	mainApp.post('/register', async (req, res) => {
+
+		//determine if coming through promoted landing page
+		const regex = /landing/
+		const promotion = regex.test(req.headers.referer);
+
 	 	let errors = [];
 		const saltRounds = 10;
 		const {password, password2, email} = req.body;
@@ -24,7 +29,8 @@ module.exports = function(mainApp) {
 				bcrypt.hash(password, salt, async function(err, hash) {
 					await User.create({
 						password: hash,
-						email
+						email,
+						promotion
 					}, (err, user) => {
 						if (err) {
 							console.error(err);
