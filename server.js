@@ -14,7 +14,7 @@ const marketingApp = express();
 const mainApp = express();
 
 marketingApp.use ((req, res, next) => {
-  res.header ('Access-Control-Allow-Origin', ['https://www.localhost:3001', 'https://www.vectoracademy.io'])
+  res.header ('Access-Control-Allow-Origin', 'https://www.vectoracademy.io')
   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
   res.header ('Access-Control-Allow-Credentials', true)
   res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
