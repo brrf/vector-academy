@@ -70,7 +70,7 @@
 	cursor: pointer;
 }
 
-.login-form-container {
+.student-register-form-container {
 	width: 425px;
 }
 
@@ -103,7 +103,7 @@
 		margin: 1vw auto 0vw auto;
 		width: 75%;
 	}
-	.login-form-container {
+	.student-register-form-container {
 		width: 55%;
 	}	
 }
@@ -181,7 +181,7 @@
 	.promotional-offer {
 		font-size: 3.5vw;
 	}
-	.login-form-container {
+	.student-register-form-container {
 		width: 65%;
 	}	
 }

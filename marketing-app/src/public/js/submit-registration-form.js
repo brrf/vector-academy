@@ -20,13 +20,13 @@ export default function submitForm (data, spinnerElement) {
 };
 
 function repaintDOM () {
-	const formContainer = document.querySelectorAll('#form-container');
+	const formContainer = document.querySelectorAll('.student-register-form-container');
 	if (document.querySelector('.error-list')) {
 		document.querySelectorAll('.error-list').forEach(error => error.remove());
 	}
-	const h2 = document.querySelectorAll('#form-container h2');
-	const form = document.querySelectorAll('#form-container form');
-	const p = document.querySelectorAll('#form-container p');
+	const h2 = document.querySelectorAll('.student-register-form-container h2');
+	const form = document.querySelectorAll('.student-register-form-container form');
+	const p = document.querySelectorAll('.student-register-form-container p');
 
 	h2.forEach(h2 => h2.innerHTML = 'Account created!');
 	form.forEach(form => form.remove());
@@ -40,7 +40,7 @@ function repaintDOM () {
 }
 
 function addErrors (errors) {
-	const formContainer = document.querySelectorAll('#form-container');
+	const formContainer = document.querySelectorAll('.student-register-form-container');
 	if (document.querySelector('.error-list')) {
 		document.querySelectorAll('.error-list').forEach(error => error.remove());
 	}
