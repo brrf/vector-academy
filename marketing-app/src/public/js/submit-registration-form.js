@@ -14,12 +14,12 @@ export default function submitForm (data, spinnerElement) {
 	  removeSpinner();
 	} else {
 	  removeSpinner();
-	  repaintDOM();	  
+	  repaintDOM(resObject.promotion);	  
 	}
 	});
 };
 
-function repaintDOM () {
+function repaintDOM (promotion) {
 	const formContainer = document.querySelectorAll('.student-register-form-container');
 	if (document.querySelector('.error-list')) {
 		document.querySelectorAll('.error-list').forEach(error => error.remove());
@@ -33,7 +33,10 @@ function repaintDOM () {
 	if (p) p.forEach(p => p.remove());
 	formContainer.forEach(container => {
 		let text = document.createElement('p');
-  		text.innerHTML = 'Your application fee will be waived. Stay tuned for more instructions.';
+		const innerHTML = promotion 
+			? 'Your application fee will be waived. Stay tuned for more instructions.'
+			: 'You\'re all set for now. Stay tuned for more instructions.'
+  		text.innerHTML = innerHTML;
   		text.classList.add('center');
 		container.appendChild(text);
 	})

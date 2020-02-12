@@ -36,7 +36,7 @@ module.exports = function(mainApp) {
 							console.error(err);
 							res.send('an error occurred');
 						} else {
-							return res.json({errors: false})
+							return res.json({errors: false, promotion})
 						}
 					});
 	    		});
