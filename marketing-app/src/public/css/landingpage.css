@@ -2,10 +2,6 @@
 	margin-top: 0;
 }
 
-#register-form > div {
-	display: flex;
-}
-
 #top-content-section-large {
 	padding: 5vw;
 }
@@ -161,9 +157,6 @@
 		margin-bottom: 4vh;
 	}
 
-	#register-form-mobile > div {
-		display: flex;
-	}
 	#jumpstart-section {
 		height: 50vh;
 	}

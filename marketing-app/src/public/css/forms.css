@@ -32,6 +32,11 @@
 	align-items: center;
 }
 
+.form-submit-button-container {
+	display: flex;
+	margin-bottom: 20px;
+}
+
 form > div {
 	flex-basis: 100%;
 	position: relative;
@@ -79,7 +84,14 @@ textarea {
 		margin: 2vw 0;
 	}
 }
+.twitter-logo {
+	height: 40px;
+	width: 40px;
+}
 
+.twitter-logo:hover {
+	cursor: pointer;
+}
 @media (max-width: 550px) {
 	#form-container {
 		box-shadow: none;
@@ -99,4 +111,13 @@ textarea {
 	padding: 6px;
 	display: flex;
 	align-items: center;
+}
+
+.success {
+	color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+	margin: 15px auto;
+	padding: 6px;
+	text-align: center;
 }

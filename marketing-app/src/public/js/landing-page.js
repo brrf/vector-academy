@@ -5,7 +5,7 @@ import "../css/index_0_0_1.css";
 import "../css/spinner.css";
 import "../css/howitworks.css";
 import "../css/landingpage.css";
-import submitForm from './submit-registration-form.js';
+import submitAuthForm from './submit-auth-form.js';
 import {addSpinner} from './spinner';
 
 const main = document.querySelector('main');
@@ -43,9 +43,8 @@ function handleSubmitMobile (e) {
 		password2
 	};
 
-	const element = document.querySelector('#register-form-mobile > div')
-  	addSpinner(element);
-	submitForm(data);
+	const spinnerElement = document.querySelector('#register-form-mobile > div')
+	submitForm(data, 'studentregister', spinnerElement);
 }
 
 function handleSubmit (e) {
@@ -60,7 +59,6 @@ function handleSubmit (e) {
 		password,
 		password2
 	};
-	const element = document.querySelector('#register-form > div')
-  	addSpinner(element);
-	submitForm(data);
+	const spinnerElement = document.querySelector('#register-form > div')
+	submitAuthForm(data, 'studentregister', spinnerElement);
 }

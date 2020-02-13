@@ -1,5 +1,5 @@
 import {addSpinner, removeSpinner} from './spinner';
-import submitForm from './submit-registration-form.js';
+import submitAuthForm from './submit-auth-form.js';
 
 export default function loadModals() {
 	const employerOpenBtn = document.getElementById('employer-login');
@@ -71,7 +71,8 @@ export default function loadModals() {
 
 	function tempResponse (userType) {
 		const container = document.querySelector(`.${userType}-modal .login-form-container`);
-		removeSpinner();
+		const element = document.querySelector('.employer-modal .form-submit-button-container');
+		removeSpinner(element);
 		//remove a warning if already present
 		if (document.querySelector(`.${userType}-modal .warning`)) {
 			const deleteWarning = document.querySelector(`.${userType}-modal .login-form-container .warning`);
@@ -87,13 +88,13 @@ export default function loadModals() {
 	function handleEmployerLogin (e) {
 		e.preventDefault();
 		//form Validation
-		var institutionID = document.querySelector(".employer-modal form").elements["institutionID"].value
-		var password = document.querySelector(".employer-modal form").elements["password"].value;
+		const institutionID = document.querySelector(".employer-modal form").elements["institutionID"].value
+		const password = document.querySelector(".employer-modal form").elements["password"].value;
 
 	  if (!institutionID || !password) {
 	    return;
 	  } else {
-	  	const element = document.querySelector('.employer-modal form div');
+	  	const element = document.querySelector('.employer-modal .form-submit-button-container');
 	  	addSpinner(element);
 	  	setTimeout(tempResponse, 800, 'employer');
 	  }	
@@ -102,16 +103,17 @@ export default function loadModals() {
 	function handleStudentLogin(e) {
 		e.preventDefault();
 		//form Validation
-		var username = document.querySelector(".student-login-modal form").elements["username"].value
-		var password = document.querySelector(".student-login-modal form").elements["password"].value;
-		if (!username || !password) {
-			return;
-		} else {
-			const element = document.querySelector('.student-login-modal form div');
-			addSpinner(element);
-			setTimeout(tempResponse, 800, 'student-login');
-		}	
-	}
+		const email = document.querySelector(".student-login-modal form").elements["email"].value
+		const password = document.querySelector(".student-login-modal form").elements["password"].value;
+		
+		const data = {
+			email,
+			password
+		}
+
+			const spinnerElement = document.querySelector('.student-login-modal form div');
+			submitAuthForm(data, 'studentlogin', spinnerElement)
+	}	
 
 	function handleStudentRegister(e) {
 		e.preventDefault();
@@ -126,9 +128,8 @@ export default function loadModals() {
 			password2
 		};
 
-		const element = document.querySelector('#register-form > div')
-  		addSpinner(element);
-		submitForm(data);
-	}
+		const spinnerElement = document.querySelector('#register-form > div')
+		submitAuthForm(data, 'studentregister', spinnerElement);
+	};
 };
 
