@@ -44,7 +44,7 @@ function handleSubmitMobile (e) {
 	};
 
 	const spinnerElement = document.querySelector('#register-form-mobile > div')
-	submitForm(data, 'studentregister', spinnerElement);
+	submitAuthForm(data, 'studentregister', spinnerElement);
 }
 
 function handleSubmit (e) {
