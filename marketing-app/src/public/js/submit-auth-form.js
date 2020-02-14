@@ -47,7 +47,7 @@ function submitStudentLoginForm (data, spinnerElement) {
 	  else {
 	  	addSuccess(resObject.success, formContainer);
 	  	removeSpinner(spinnerElement);
-	  	repaintDOMLogin();
+	  	repaintDOMLogin(spinnerElement);
 	  }
 	});
 }
@@ -75,7 +75,7 @@ function repaintDOMRegister (promotion) {
 	})
 }
 
-function repaintDOMLogin () {
+function repaintDOMLogin (element) {
 	const buttonContainer = document.querySelectorAll('.student-login-form-container .form-submit-button-container');
 	
 	buttonContainer.forEach(container => {
@@ -87,7 +87,7 @@ function repaintDOMLogin () {
 		twitter.alt = 'twitter-link';
 		link.appendChild(twitter);
 		container.appendChild(link)
-
+		element.firstElementChild.disabled = true;
 	});
 }
 
