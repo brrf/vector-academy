@@ -1,9 +1,4 @@
 import logo from "../../public/assets/Vector-01.png";
-import twitterLogo from '../../public/assets/Twitter_Logo_Blue.png';
-import facebookLogo from '../../public/assets/facebook_logo.png';
-import redditLogo from '../../public/assets/reddit_logo.png';
-import instagramLogo from '../../public/assets/instagram_logo.png';
-import linkedinLogo from '../../public/assets/linkedin_logo.png';
 import {addSpinner, removeSpinner} from "../../public/js/spinner";
 import submitAuthForm from '../../public/js/submit-auth-form.js';
 
