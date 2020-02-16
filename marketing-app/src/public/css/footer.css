@@ -20,7 +20,7 @@ footer {
 	 padding: 0 4vw;
 }
 
-.footer-container > div {
+.footer-contents-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -62,12 +62,22 @@ footer .footer-student-register:hover {
 		min-height: 350px;
 		flex-flow: column nowrap;
 		justify-content: space-around;
-		align-items: flex-start;
-		margin-left: 40%;
+	}
+
+	.footer-container h1 {
+		margin: 0;
+	/*	align-self: center;*/
 	}
 
 	.footer-container h3 {
 		font-size: 4vw;
+	}
+
+	.footer-contents-container {
+		 display: flex;
+		 justify-content: space-between;
+		 flex-basis: 100%;
+		 padding: 0;
 	}
 
 	footer p {
