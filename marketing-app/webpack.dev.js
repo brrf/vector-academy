@@ -54,7 +54,8 @@ module.exports = merge(common, {
 			chunks: ['landingPage']
 		}),
 		new DefinePlugin({
-			DOMAIN: JSON.stringify('http://localhost:3001')
+			PROTOCOL: JSON.stringify('http://'),
+			DOMAIN: JSON.stringify('localhost:3001')
 		}),	
 	],
 	module: {
