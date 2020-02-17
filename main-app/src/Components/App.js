@@ -1,9 +1,12 @@
 import React from 'react';
+import Navbar from './Navbar';
 import Register from './Register';
 
 function App() {
   return (
-    <Register />
+  	<React.Fragment>
+  		<Navbar />
+	</React.Fragment>
   );
 }
 

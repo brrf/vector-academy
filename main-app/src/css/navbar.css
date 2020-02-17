@@ -1,0 +1,23 @@
+#navbar-container {
+    z-index: 1000;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: #fff;
+    padding: .7vw;
+    border-bottom: 1px solid rgba(0,0,0,.3);
+    height: 60px;
+}
+
+.navbar-user {
+    color: grey;
+}
+
+.navbar-user:hover {
+    cursor: pointer;
+    opacity: 80%;
+}

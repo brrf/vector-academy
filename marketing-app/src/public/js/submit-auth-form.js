@@ -49,6 +49,7 @@ function submitStudentLoginForm (data, spinnerElement) {
 	  	addSuccess(resObject.success, formContainer);
 	  	removeSpinner(spinnerElement);
 	  	repaintDOMLogin(spinnerElement);
+	  	setTimeout(() => window.location.replace(`${PROTOCOL}apply.${DOMAIN}`), 2000);
 	  }
 	});
 }

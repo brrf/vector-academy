@@ -73,7 +73,9 @@ module.exports = function(marketingApp, mainApp, environment) {
 
 	//mainApp routes
 
+	mainApp.use(express.static(path.join(__dirname, 'main-app', 'build')));
+
 	mainApp.get('/', (req, res)=> {
-	  res.send('hello there');
+  		res.sendFile(path.join(__dirname, 'main-app', 'build', 'index.html'));
 	});
 }
