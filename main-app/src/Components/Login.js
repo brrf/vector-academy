@@ -62,7 +62,7 @@ export default class Login extends React.Component {
             });
           });
         } else {
-          console.log(resObject.user);
+          this.props.handleLogin(true);
         }
       });
   };

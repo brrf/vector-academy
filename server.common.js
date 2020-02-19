@@ -17,6 +17,28 @@ const authentication = require('./routes/authentication.js');
 
 module.exports = function(marketingApp, mainApp, commonApp, environment) {
 
+	//common App shared functionality
+
+	commonApp.use(helmet());
+
+	//cookie parser
+	commonApp.use(cookieParser());
+
+	//Express body parser
+	commonApp.use(bodyParser.json());
+	commonApp.use(bodyParser.urlencoded({ extended: false }));
+
+	//express session
+	commonApp.use(
+	  session({
+	    secret: "secret",
+	    resave: true,
+	    saveUninitialized: true,
+	    proxy: true,
+	    cookie: { secure: false }
+	  })
+	);
+
 	//marketing site routes
 	marketingApp.use(express.static(path.join(__dirname, 'marketing-app', environment)));
 
@@ -120,32 +142,18 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 			if (!user) {
 				return res.json({errors: [info.message]})
 			} else {
+				req.login(user, (err) => {
+					if (err) return next(err);
+					///else setInterval(() => console.log(req.user), 3000)
+				});
 				return res.json({errors: false, user})
 			}
 		})(req, res, next)
 	});
 
-	//common App shared functionality
-
-	commonApp.use(helmet());
-
-	//cookie parser
-	commonApp.use(cookieParser());
-
-	//Express body parser
-	commonApp.use(bodyParser.json());
-	commonApp.use(bodyParser.urlencoded({ extended: false }));
-
-	//express session
-	commonApp.use(
-	  session({
-	    secret: "secret",
-	    resave: true,
-	    saveUninitialized: true,
-	    proxy: true,
-	    cookie: { secure: false }
-	  })
-	);
+	mainApp.get('/authenticate', (req, res) => {
+		res.json({user: req.user});
+	})
 
 	// // Passport config
 	// require('./config/passport')(passport);
