@@ -35,6 +35,13 @@ export default class Login extends React.Component {
     this.setState({
       errors: []
     });
+
+    if (!this.state.formData.password || !this.state.formData.email) {
+      this.setState({
+        errors: ['Please fill out all the fields']
+      })
+      return;
+    }
     
     fetch("http://apply.localhost:3001/studentlogin", {
       method: "POST",
@@ -50,7 +57,6 @@ export default class Login extends React.Component {
       .then(resObject => {
         if (resObject.errors) {
           resObject.errors.forEach(error => {
-            console.log(error);
             this.setState({
               errors: [...this.state.errors, error]
             });

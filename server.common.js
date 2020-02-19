@@ -5,6 +5,7 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 const passport = require('passport');
+const flash = require('connect-flash');
 const helmet = require('helmet');
 const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser');
@@ -111,25 +112,18 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 	mainApp.use(passport.initialize());
 	mainApp.use(passport.session());
 
-	mainApp.post('/studentlogin', passport.authenticate('local'), async (req, res) => {
-		let errors = [];
-		//const success = 'We will be opening student registration soon. Follow us on twitter for the latest announcements!'
-		const {email, password} = req.body;
-		if (!email || !password) {
-			errors.push('Please fill out all items');
-			return res.json({errors})
-		}
-		// let user = await User.findOne({email});
+	mainApp.use(flash());
 
-		// if (!user) {
-		// 	errors.push('This user does not exist');
-		// 	return res.json({errors, exists: false})
-		// } else {
-			console.log({user: req.user})
-			return res.json({errors: false, user: req.user})
-		//}
-		
-	})
+	mainApp.post('/studentlogin', function (req, res, next) {
+		passport.authenticate('local', {failureFlash: true}, function (err, user, info) {
+			if (err) return next(err);
+			if (!user) {
+				return res.json({errors: [info.message]})
+			} else {
+				return res.json({errors: false, user})
+			}
+		})(req, res, next)
+	});
 
 	//common App shared functionality
 
