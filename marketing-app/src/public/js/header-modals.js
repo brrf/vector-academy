@@ -3,7 +3,7 @@ import submitAuthForm from './submit-auth-form.js';
 
 export default function loadModals() {
 	const employerOpenBtn = document.getElementById('employer-login');
-	const studentOpenBtn = document.getElementById('student-login');
+	//const studentOpenBtn = document.getElementById('student-login');
 	const employerModal = document.querySelector('.employer-modal');
 	const studentLoginModal = document.querySelector('.student-login-modal');
 	const studentRegisterModal = document.querySelector('.student-register-modal');
@@ -12,7 +12,7 @@ export default function loadModals() {
 	const registerHere = document.querySelector('.student-login-modal u');
 
 	employerOpenBtn.addEventListener('click', openEmployer);
-	studentOpenBtn.addEventListener('click', openLoginStudent);
+	//studentOpenBtn.addEventListener('click', openLoginStudent);
 	employerModal.addEventListener('click', handleCloseEmployer);
 	studentLoginModal.addEventListener('click', handleCloseStudentLogin);
 	studentRegisterModal.addEventListener('click', handleCloseStudentRegister);

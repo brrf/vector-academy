@@ -46,10 +46,10 @@ function submitStudentLoginForm (data, spinnerElement) {
 		removeSpinner(spinnerElement);	
 	  }
 	  else {
-	  	addSuccess(resObject.success, formContainer);
+	  //	console.log(resObject.user)
 	  	removeSpinner(spinnerElement);
-	  	repaintDOMLogin(spinnerElement);
-	  	setTimeout(() => window.location.replace(`${PROTOCOL}apply.${DOMAIN}`), 2000);
+	  	//repaintDOMLogin(spinnerElement);
+	  	//setTimeout(() => window.location.replace(`${PROTOCOL}apply.${DOMAIN}`), 2000);
 	  }
 	});
 }
@@ -77,21 +77,21 @@ function repaintDOMRegister (promotion) {
 	})
 }
 
-function repaintDOMLogin (element) {
-	const buttonContainer = document.querySelectorAll('.student-login-form-container .form-submit-button-container');
+// function repaintDOMLogin (element) {
+// 	const buttonContainer = document.querySelectorAll('.student-login-form-container .form-submit-button-container');
 	
-	buttonContainer.forEach(container => {
-		const link = document.createElement('a');
-		link.href = 'https://twitter.com/VectorAcad'
-		const twitter = document.createElement('img');
-		twitter.src = twitterLogo;
-		twitter.classList = 'twitter-logo';
-		twitter.alt = 'twitter-link';
-		link.appendChild(twitter);
-		container.appendChild(link)
-		element.firstElementChild.disabled = true;
-	});
-}
+// 	buttonContainer.forEach(container => {
+// 		const link = document.createElement('a');
+// 		link.href = 'https://twitter.com/VectorAcad'
+// 		const twitter = document.createElement('img');
+// 		twitter.src = twitterLogo;
+// 		twitter.classList = 'twitter-logo';
+// 		twitter.alt = 'twitter-link';
+// 		link.appendChild(twitter);
+// 		container.appendChild(link)
+// 		element.firstElementChild.disabled = true;
+// 	});
+// }
 
 function addErrors (errors, formContainer) {
 	if (document.querySelector('.error-list')) {

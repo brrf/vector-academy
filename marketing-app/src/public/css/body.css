@@ -80,7 +80,8 @@ a:hover {
 
 button {
 	 cursor: pointer; 
-	 background-color: #212A65;
+	 background-color: #212a65;
+	 border-radius: 8px;
 	 max-width: 200px;
 	 width: 10vw;
 	 min-width: 150px;

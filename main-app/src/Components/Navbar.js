@@ -12,15 +12,28 @@ export default class Navbar extends React.Component {
 			email: ''
 		}
 	}
+	// componentDidMount() {
+	//     fetch("http://apply.localhost:3001/user", {
+	//       method: "GET"
+	//     })
+	//       .then(res => res.json())
+	//       .then(resObject => {
+	//         console.log(resObject.user);
+	//       })
+ //  	}
+
 	render () {
 		return (
 			<div id='navbar-container'>
 				<img alt='logo' src={logo} />
-             	<FontAwesomeIcon
-	                icon={faUserCircle}
-	                size="2x"
-	                className='navbar-user'
-             	/>
+				<div className='navbar-right'>
+					<button>Start Application</button>
+	             	<FontAwesomeIcon
+		                icon={faUserCircle}
+		                size="2x"
+		                className='navbar-user'
+	             	/>
+	             </div>
 			</div>
 		)
 	}

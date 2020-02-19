@@ -13,6 +13,12 @@
     height: 60px;
 }
 
+.navbar-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .navbar-user {
     color: grey;
 }
@@ -20,4 +26,9 @@
 .navbar-user:hover {
     cursor: pointer;
     opacity: 80%;
+}
+
+button {
+    min-width: 155px;
+    margin-right: 2vw;
 }

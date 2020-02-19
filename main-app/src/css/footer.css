@@ -4,10 +4,14 @@ footer {
 	padding: 1.5vw 2.8vw;
 }
 
+footer h1 {
+	font-size: 3vw;
+}
+
 .footer-container {
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: space-between;	
+	justify-content: flex-start;	
 }
 
 .footer-container h1 {
@@ -16,37 +20,38 @@ footer {
 }
 
 .footer-contents-container {
-	 flex-basis: 50%;
-	 padding: 0 4vw;
-}
-
-.footer-contents-container {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: space-between;
+	flex-basis: 25%;
 }
 
 footer p {
-	color: #55575e;
+	color: white;
 }
 
-footer li {
-	margin-bottom: 0.5em;
-	font-size: 1vw;
-}
-
-footer .footer-student-register:hover {
+footer p:hover {
+	opacity: 80%;
 	cursor: pointer;
+}
+
+.copyright {
+	color: grey;
+	font-size: 13px;
 }
 
 /*tablet*/
 @media (max-width: 990px) {	
-	footer li {
-		font-size: 1.6vw;
+	.footer-contents-container {
+		justify-content: flex-start;
+	}
+	.footer-container h1 {
+		font-size: 4.5vw;
 	}
 
 	footer p {
-		font-size: 1.3vw;
+		font-size: 2vw;
+		margin-bottom: 10px;
 	}
 }
 
@@ -54,18 +59,15 @@ footer .footer-student-register:hover {
 @media (max-width: 550px) {
 
 	.footer-container {
-		min-height: 350px;
+		min-height: 0;
 		flex-flow: column nowrap;
-		justify-content: space-around;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.footer-container h1 {
-		margin: 0;
-	/*	align-self: center;*/
-	}
-
-	.footer-container h3 {
-		font-size: 4vw;
+		margin: 0 0 15px 0;
+		font-size: 6vw;
 	}
 
 	.footer-contents-container {

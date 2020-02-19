@@ -4,34 +4,31 @@ import '../css/index.css';
 import '../css/forms.css';
 import '../css/register.css';
 
-export default class Register extends React.Component {
+export default class Login extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       formData: {
         password: "",
-        password2: "",
         email: ""
       },
       errors: [],
       redirect: false
     };
     this.updatePassword = this.updatePassword.bind(this);
-    this.updatePassword2 = this.updatePassword2.bind(this);
     this.updateEmail = this.updateEmail.bind(this);
   }
 
-  componentDidMount() {
-    console.log('here');
-    fetch("http://apply.localhost:3001/user", {
-      method: "GET"
-    })
-      .then(res => res.json())
-      .then(resObject => {
-        console.log(resObject);
-      })
-  }
+  // componentDidMount() {
+  //   fetch("http://apply.localhost:3001/user", {
+  //     method: "GET"
+  //   })
+  //     .then(res => res.json())
+  //     .then(resObject => {
+  //       console.log('fetch worked');
+  //     })
+  // }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -39,11 +36,15 @@ export default class Register extends React.Component {
       errors: []
     });
     
-    fetch("http://apply.localhost:3001/register", {
+    fetch("http://apply.localhost:3001/studentlogin", {
       method: "POST",
       body: JSON.stringify(this.state.formData),
-      headers: { "Content-Type": "application/json" },
-      mode: "cors"
+      headers: { 
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "http://localhost:3000" 
+      },
+      mode: "cors",
+      credentials: "include"
     })
       .then(res => res.json())
       .then(resObject => {
@@ -55,7 +56,7 @@ export default class Register extends React.Component {
             });
           });
         } else {
-          console.log('worked');
+          console.log(resObject.user);
         }
       });
   };
@@ -65,24 +66,6 @@ export default class Register extends React.Component {
       formData: {
         ...this.state.formData,
         password: e.target.value
-      }
-    });
-  };
-
-  updatePassword2 = e => {
-    this.setState({
-      formData: {
-        ...this.state.formData,
-        password2: e.target.value
-      }
-    });
-  };
-
-  updateUsername = e => {
-    this.setState({
-      formData: {
-        ...this.state.formData,
-        username: e.target.value
       }
     });
   };
@@ -97,13 +80,12 @@ export default class Register extends React.Component {
   };
 
   render() { 
-    console.log('here');
     return (
       <React.Fragment>
         <div id="form-container" className="register-form-container">
           <Warning errors={this.state.errors}/>
           <form>
-            <h2>Register</h2>
+            <h2>Login</h2>
             <input
               className="form-full-width"
               type="email"
@@ -119,20 +101,11 @@ export default class Register extends React.Component {
               name="password"
               autoComplete="new-password"
               onChange={this.updatePassword}
-              placeholder='Password'
+              placeholder='Confirm Password'
               value={this.state.formData.password}
             />
-            <input
-              className="form-full-width"
-              type="password"
-              name="password2"
-              autoComplete="new-password"
-              onChange={this.updatePassword2}
-              placeholder='Confirm Password'
-              value={this.state.formData.password2}
-            />
             <div>
-              <button onClick={this.handleSubmit}>Register</button>
+              <button onClick={this.handleSubmit}>Login</button>
             </div>
           </form>
         </div>

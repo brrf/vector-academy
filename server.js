@@ -1,11 +1,9 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const vhost = require('vhost');
 const db = require('./db');
 const cors = require('cors');
-const helmet = require('helmet');
 require('dotenv').config();
 
 const server = require('./server.common.js');
@@ -21,28 +19,22 @@ marketingApp.use ((req, res, next) => {
   next()
 });
 
-server(marketingApp, mainApp, 'dist');
-
 //Virtual Routing Application
-const app = express();
+const commonApp = express();
 
-app.use(helmet());
-
-app.use(cors({
+commonApp.use(cors({
   credentials: true, 
   origin: ['https://localhost:3001', 'https://www.vectoracademy.io']
 }));
 
-//Express body parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+server(marketingApp, mainApp, commonApp, 'dist');
 
 
-app.use(vhost('localhost', marketingApp));
-app.use(vhost('apply.localhost', mainApp));
+commonApp.use(vhost('localhost', marketingApp));
+commonApp.use(vhost('apply.localhost', mainApp));
 
 //404 Not Found Middleware
-app.use(function(req, res, next) {
+commonApp.use(function(req, res, next) {
   res.status(404)
     .type('text')
     .send('Not Found');
@@ -50,7 +42,7 @@ app.use(function(req, res, next) {
 
 
 //Start server
-app.listen(process.env.PORT || 3001, function () {
+commonApp.listen(process.env.PORT || 3001, function () {
   console.log("Listening on port " + process.env.PORT);
 });
 

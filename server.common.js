@@ -4,11 +4,19 @@ const express = require('express');
 const path = require('path');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+const passport = require('passport');
+const helmet = require('helmet');
+const cookieParser = require("cookie-parser");
+const bodyParser = require('body-parser');
+const session = require("express-session");
+
+const User = require('./schemas/users');
 
 const authentication = require('./routes/authentication.js');
 
-module.exports = function(marketingApp, mainApp, environment) {
-	//marketing Site
+module.exports = function(marketingApp, mainApp, commonApp, environment) {
+
+	//marketing site routes
 	marketingApp.use(express.static(path.join(__dirname, 'marketing-app', environment)));
 
 	marketingApp.get('/', (req, res)=> {
@@ -53,6 +61,7 @@ module.exports = function(marketingApp, mainApp, environment) {
 	       pass: process.env.ZOHOPASS
 	    }
 	  });
+
 	  const message = {
 	    from: 'moshe@vectortrainingacademy.com', // Sender address
 	    to: 'moshe@vectortrainingacademy.com',         // List of recipients
@@ -78,4 +87,76 @@ module.exports = function(marketingApp, mainApp, environment) {
 	mainApp.get('/', (req, res)=> {
   		res.sendFile(path.join(__dirname, 'main-app', 'build', 'index.html'));
 	});
+
+	mainApp.get('/user', async (req, res) => {
+		console.log(req.user);
+		res.json({user: req.user})
+	});
+
+	//expression session
+	mainApp.use(
+	  session({
+	    secret: "secret",
+	    resave: true,
+	    saveUninitialized: true,
+	    proxy: true,
+	    cookie: { secure: false }
+	  })
+	);
+
+	// Passport config
+	require('./config/passport')(passport);
+
+	//Passport Middleware
+	mainApp.use(passport.initialize());
+	mainApp.use(passport.session());
+
+	mainApp.post('/studentlogin', passport.authenticate('local'), async (req, res) => {
+		let errors = [];
+		//const success = 'We will be opening student registration soon. Follow us on twitter for the latest announcements!'
+		const {email, password} = req.body;
+		if (!email || !password) {
+			errors.push('Please fill out all items');
+			return res.json({errors})
+		}
+		// let user = await User.findOne({email});
+
+		// if (!user) {
+		// 	errors.push('This user does not exist');
+		// 	return res.json({errors, exists: false})
+		// } else {
+			console.log({user: req.user})
+			return res.json({errors: false, user: req.user})
+		//}
+		
+	})
+
+	//common App shared functionality
+
+	commonApp.use(helmet());
+
+	//cookie parser
+	commonApp.use(cookieParser());
+
+	//Express body parser
+	commonApp.use(bodyParser.json());
+	commonApp.use(bodyParser.urlencoded({ extended: false }));
+
+	//express session
+	commonApp.use(
+	  session({
+	    secret: "secret",
+	    resave: true,
+	    saveUninitialized: true,
+	    proxy: true,
+	    cookie: { secure: false }
+	  })
+	);
+
+	// // Passport config
+	// require('./config/passport')(passport);
+
+	// //Passport Middleware
+	// commonApp.use(passport.initialize());
+	// commonApp.use(passport.session());
 }
