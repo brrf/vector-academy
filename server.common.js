@@ -10,34 +10,14 @@ const helmet = require('helmet');
 const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser');
 const session = require("express-session");
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
 
 const User = require('./schemas/users');
 
 const authentication = require('./routes/authentication.js');
 
 module.exports = function(marketingApp, mainApp, commonApp, environment) {
-
-	//common App shared functionality
-
-	commonApp.use(helmet());
-
-	//cookie parser
-	commonApp.use(cookieParser());
-
-	//Express body parser
-	commonApp.use(bodyParser.json());
-	commonApp.use(bodyParser.urlencoded({ extended: false }));
-
-	//express session
-	commonApp.use(
-	  session({
-	    secret: "secret",
-	    resave: true,
-	    saveUninitialized: true,
-	    proxy: true,
-	    cookie: { secure: false }
-	  })
-	);
 
 	//marketing site routes
 	marketingApp.use(express.static(path.join(__dirname, 'marketing-app', environment)));
@@ -111,11 +91,6 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
   		res.sendFile(path.join(__dirname, 'main-app', 'build', 'index.html'));
 	});
 
-	mainApp.get('/user', async (req, res) => {
-		console.log(req.user);
-		res.json({user: req.user})
-	});
-
 	//expression session
 	mainApp.use(
 	  session({
@@ -123,7 +98,7 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 	    resave: true,
 	    saveUninitialized: true,
 	    proxy: true,
-	    cookie: { secure: false }
+	    cookie: { secure: false },
 	  })
 	);
 
@@ -154,6 +129,50 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 	mainApp.get('/authenticate', (req, res) => {
 		res.json({user: req.user});
 	})
+
+	mainApp.get('/user', async (req, res) => {
+		res.json({user: req.user})
+	});
+
+	mainApp.get('/studentlogout', (req, res) => {
+		try {
+			req.logout();
+	  		res.json({error: false});
+		} catch {
+			res.json({error: true})
+		}
+	})
+
+	//common App shared functionality
+
+	commonApp.use(helmet());
+
+	//cookie parser
+	commonApp.use(cookieParser());
+
+	//Express body parser
+	commonApp.use(bodyParser.json());
+	commonApp.use(bodyParser.urlencoded({ extended: false }));
+
+	//access db
+	mongoose.connect(process.env.MONGO_URI, {
+		useNewUrlParser: true, 
+		useUnifiedTopology: true
+	});
+
+	//express session
+	commonApp.use(
+	  session({
+	    secret: "secret",
+	    resave: true,
+	    saveUninitialized: true,
+	    proxy: true,
+	    cookie: { secure: false },
+	    store: new MongoStore({
+	    	mongooseConnection: mongoose.connection
+	    })
+	  })
+	);
 
 	// // Passport config
 	// require('./config/passport')(passport);

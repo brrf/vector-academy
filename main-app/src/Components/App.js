@@ -5,7 +5,7 @@ import Footer from './Footer';
 import Login from './Login'
 
 function App() {
-  const [loggedIn, handleLogin] = useState(false); 
+  const [loggedIn, toggleLogin] = useState(false); 
 
   useEffect(isLoggedIn)
 
@@ -21,8 +21,9 @@ function App() {
     })
     .then(res => res.json())
     .then(resObject => {
+      console.log({user: resObject.user});
       if (resObject.user) {
-        handleLogin(true);
+        toggleLogin(true);
       }
 
     })
@@ -31,13 +32,13 @@ function App() {
   if (!loggedIn) {
   	return (
   		<React.Fragment>
-  			<Login handleLogin={handleLogin}/>
+  			<Login toggleLogin={toggleLogin}/>
 		</React.Fragment>
   	)
   }
   return (
   	<React.Fragment>
-  		<Navbar />
+  		<Navbar toggleLogin={toggleLogin}/>
   		<Homepage />
   		<Footer />
 	</React.Fragment>

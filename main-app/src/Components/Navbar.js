@@ -9,18 +9,40 @@ export default class Navbar extends React.Component {
 		super(props);
 
 		this.state = {
-			email: ''
+			userOptionsHidden: true
 		}
+
+		this.toggleUserOptions = this.toggleUserOptions.bind(this);
+		this.logout = this.logout.bind(this);
 	}
-	// componentDidMount() {
-	//     fetch("http://apply.localhost:3001/user", {
-	//       method: "GET"
-	//     })
-	//       .then(res => res.json())
-	//       .then(resObject => {
-	//         console.log(resObject.user);
-	//       })
- //  	}
+
+	toggleUserOptions () {
+		this.setState({
+			userOptionsHidden: !this.state.userOptionsHidden
+		})
+	}
+
+	logout () {
+		fetch("http://apply.localhost:3001/studentlogout", {
+			method: "GET",
+			headers: { 
+			"Content-Type": "application/json",
+			"Access-Control-Allow-Origin": "http://localhost:3000" 
+			},
+			mode: "cors",
+			credentials: "include"
+			})
+			.then(res => res.json())
+			.then(resObject => {
+			if (resObject.error) {
+				alert('An error occurred on logout');
+			} else {
+				this.props.toggleLogin(false);
+			}
+
+			})
+	}
+	
 
 	render () {
 		return (
@@ -28,11 +50,14 @@ export default class Navbar extends React.Component {
 				<img alt='logo' src={logo} />
 				<div className='navbar-right'>
 					<button>Start Application</button>
-	             	<FontAwesomeIcon
+	             	<div className='navbar-user-container' onClick={this.toggleUserOptions}>
+	             		<FontAwesomeIcon
 		                icon={faUserCircle}
 		                size="2x"
 		                className='navbar-user'
-	             	/>
+	          			/>
+	             		<div onClick={this.logout} className={`navbar-user-options ${this.state.userOptionsHidden ? 'hidden' : null}`}>Logout</div>
+	             	</div>
 	             </div>
 			</div>
 		)

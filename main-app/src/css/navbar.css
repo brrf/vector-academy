@@ -19,6 +19,10 @@
     align-items: center;
 }
 
+.navbar-user-container {
+    position: relative;
+}
+
 .navbar-user {
     color: grey;
 }
@@ -26,6 +30,29 @@
 .navbar-user:hover {
     cursor: pointer;
     opacity: 80%;
+}
+
+.navbar-user-options {
+    width: 100px;
+    background-color: #fff;
+    color: #4f588f;
+    padding: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    z-index: 3;
+    top: 48px;
+    right: 0px;
+    box-shadow: 0 0 11px 1px rgba(0,0,0,.15);
+    border: 1px solid #e2e2e2;
+    border-radius: 5%;
+    text-shadow: none;
+}
+
+.navbar-user-options:hover {
+    text-shadow: 0 0 0.01px black;
+    cursor: pointer;
 }
 
 button {

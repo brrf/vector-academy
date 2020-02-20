@@ -48,3 +48,9 @@ commonApp.listen(process.env.PORT || 3001, function () {
 
 //Connect to database
 db();
+
+//ghost server
+const ghost = express();
+ghost.listen(2367, function() {
+  console.log("Ghost listening on 2367")
+}))
