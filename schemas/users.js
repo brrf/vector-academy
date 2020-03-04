@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
 	promotion: {
 		default: false,
 		type: Boolean
+	},
+	application: {
+		type: mongoose.Schema.Types.Mixed,
+		default: {}		
 	}
-});
+}, {minimize: false});
 
 module.exports = mongoose.model('User', userSchema);

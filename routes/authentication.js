@@ -61,14 +61,4 @@ module.exports = function(mainApp) {
 	// 		return res.json({errors: false, user: req.user})
 	// 	}		
 	// })
-
-	mainApp.get('/studentlogout', (req, res) => {
-		console.log('here');
-		try {
-			req.logout();
-	  		res.json({error: false});
-		} catch {
-			res.json({error: true})
-		}
-	})
 }

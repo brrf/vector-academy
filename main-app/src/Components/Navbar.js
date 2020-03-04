@@ -1,10 +1,12 @@
 import React from 'react';
+import { connect } from "react-redux";
 import logo from '../images/Vector-01.png';
 import '../css/navbar.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle} from "@fortawesome/free-solid-svg-icons";
+import {setApplicationStep} from '../actions/application.js';
 
-export default class Navbar extends React.Component {
+class Navbar extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -32,25 +34,44 @@ export default class Navbar extends React.Component {
 			mode: "cors",
 			credentials: "include"
 			})
-			.then(res => res.json())
-			.then(resObject => {
+		.then(res => res.json())
+		.then(resObject => {
 			if (resObject.error) {
 				alert('An error occurred on logout');
 			} else {
 				this.props.toggleLogin(false);
 			}
+		})
+	}
 
-			})
+	handleHomeButton (step) {
+		this.props.dispatch(setApplicationStep(step));
 	}
 	
 
 	render () {
+		const {applicationStep, completedSteps} = this.props.applicationStatus;
+		let button = {
+			text: 'Start Application',
+			applicationStep: false
+		};
+		if (completedSteps === 0 && applicationStep === false) {
+			button.text = 'Start Application'
+			button.applicationStep = 0; 
+		} else if (completedSteps !== 0 && applicationStep === false) {
+			button.text = 'Continue Application';
+			button.applicationStep = 0;
+		} else {
+			button.text = 'Application Home';
+			button.applicationStep = false;
+		}
+
 		return (
 			<div id='navbar-container'>
-				<img alt='logo' src={logo} />
+				<img alt='logo' src={logo} className='logo' />
 				<div className='navbar-right'>
-					<button>Start Application</button>
-	             	<div className='navbar-user-container' onClick={this.toggleUserOptions}>
+					<button onClick={() => this.handleHomeButton(button.applicationStep)}>{button.text}</button>
+	             	<div className='navbar-user-container' onClick={this.toggleUserOptions} tabIndex="1" onBlur={this.toggleUserOptions}>
 	             		<FontAwesomeIcon
 		                icon={faUserCircle}
 		                size="2x"
@@ -63,3 +84,15 @@ export default class Navbar extends React.Component {
 		)
 	}
 }
+
+function mapStateToProps(state) {
+	return {
+		applicationStatus: {
+			applicationStep: state.application.applicationStatus.applicationStep,
+			completedSteps: Object.keys(state.application.applicationStatus.application).length
+		}
+	}
+}
+
+export default connect(mapStateToProps)(Navbar);
+

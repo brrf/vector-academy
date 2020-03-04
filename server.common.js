@@ -143,6 +143,127 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 		}
 	})
 
+	mainApp.post('/application', async (req, res) => {
+		let errors = []
+		let user;
+		try {
+			user = await User.findById(req.user._id);
+		} catch {
+			errors.push('Could not find user on server. Try submitting again.')
+		}
+		switch(req.body.applicationStep) {
+			case 0: {
+				const {fname, lname, highschool, birthdate, citizen, phone} = req.body.data
+				if(!fname || !lname || !highschool || !birthdate || !phone) {
+					errors.push('Please fill out all items.');
+				} else if (!citizen) {
+					errors.push('Applications are only open to US Citizens & Permanent Residents.')
+				} else {
+					try {
+						user.application.contactInformation = {
+							fname,
+							lname,
+							highschool,
+							birthdate,
+							citizen,
+							phone
+						};
+						user.markModified('application');
+						await user.save();
+					} catch (err) {
+						console.log(err);
+						errors.push('Error saving to database.')
+						return res.json({errors})
+					}
+				}
+				break;
+			}
+			case 1: {
+				//make sure 4 scores are submitted
+				let scoresSubmitted = 0;
+				for (let test in req.body.data) {
+					if (req.body.data[test]) {
+						scoresSubmitted++;
+					}
+				}
+				if (scoresSubmitted < 4) {
+						return res.json({errors: ['Please submit 4 total scores']});
+				} else {
+					const data = req.body.data
+					let scores = {};
+					for (let test in data) {
+						scores[test] = data[test]
+					}
+					try {
+						user.application.apScores = scores;
+						user.markModified('application');
+						await user.save();
+					} catch (err) {
+						console.log(err);
+						errors.push('Error saving to database.');
+						return res.json({errors});
+					}
+				}
+				break;				
+			}
+			case 2: {
+				let data;
+				if (req.body.data.testOption === 'sat') {
+					const {overallScore, math, verbal, testOption} = req.body.data;
+					if (!overallScore || !math || !verbal) {
+						errors.push('Please fill out all items.');
+					}
+					data = {testOption, overallScore, math, verbal};
+				} else if (req.body.data.testOption === 'act') {
+					const {english, math, reading, science,testOption} = req.body.data;
+					if (!english || !math || !reading || !science) {
+						errors.push('Please fill out all items.');
+					}
+					data = {testOption, english, math, reading, science}
+				} else {
+					return res.json({errors: ['No test was selected']})
+				}
+				try {
+					user.application.testScore = data;
+					user.markModified('application');
+					await user.save();
+				} catch (err) {
+					console.log(err);
+					errors.push('Error saving to database.')
+					return res.json({errors})
+				}
+				break;
+			}
+			case 3: {
+				//console.log(req.body)
+				const {essay, selection} = req.body.data;
+				if (!essay || typeof selection !== 'number') {
+					return errors.push('Please fill out all items.')
+				} 
+				if (essay.split(' ').length > 650) {
+					return errors.push('Essay is longer than 650 words');
+				}
+				try {
+				user.application.essay = {
+					selection,
+					essay
+				};
+				user.markModified('application');
+				await user.save();
+				} catch (err) {
+					console.log(err);
+					errors.push('Error saving to database.')
+					return res.json({errors})
+				}
+				break;
+			}
+		}
+		if (errors.length > 0) {
+			return res.json({errors});
+		};	
+		res.json({erorrs: false});
+	});
+
 	//common App shared functionality
 
 	commonApp.use(helmet());

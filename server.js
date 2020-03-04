@@ -47,7 +47,11 @@ commonApp.listen(process.env.PORT || 3001, function () {
 });
 
 //Connect to database
-db();
+try {
+  db();
+} catch {
+  console.log('couldn\'t connect to database')
+}
 
 //ghost server
 const ghost = express();

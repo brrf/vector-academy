@@ -68,5 +68,8 @@ commonApp.listen(3001, function () {
   console.log("Listening on port " + 3001);
 });
 
-//Connect to database
-db();
+try {
+  db();
+} catch {
+  console.log('couldn\'t connect to database')
+}

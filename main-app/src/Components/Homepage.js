@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/homepage.css';
 
-export default class Homepage extends React.Component {
+export default class HomePage extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -13,10 +13,10 @@ export default class Homepage extends React.Component {
 		return (
 			<div className='homepage-container'>
 				<div className='application-status-container'></div>
-				<div className='container-1'></div>
-				<div className='container-2'></div>
-				<div className='container-3'></div>
-				<div className='container-4'></div>
+				<div className='features-container features-container-1'></div>
+				<div className='features-container features-container-2'></div>
+				<div className='features-container features-container-3'></div>
+				<div className='features-container features-container-4'></div>
 			</div>
 		)
 	}

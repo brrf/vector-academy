@@ -1,4 +1,4 @@
-.homepage-container {
+/*.homepage-container {
 	display: grid;
 	grid-template-columns: 25vw 40vw;
 	grid-column-gap: 35vw;
@@ -9,29 +9,42 @@
 .application-status-container {
 	grid-column: 2 / 3;
 	grid-row: 1 / 5;
-	background-color: crimson;
+	background-color: #fff;
+    color: #4f588f;
+    padding: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    box-shadow: 0 0 11px 1px rgba(0,0,0,.15);
+    border: 1px solid #e2e2e2;
+    text-shadow: none;
 }
 
-.container-1 {
+.features-container {
 	grid-column: 1 / 2;
+	background-color: #fff;
+    color: #4f588f;
+    padding: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    box-shadow: 0 0 11px 1px rgba(0,0,0,.15);
+    border: 1px solid #e2e2e2;
+    text-shadow: none;
+}
+
+.features-container-1 {
 	grid-row: 1 / 2;
-	background-color: orange;
 }
 
-.container-2 {
-	grid-column: 1 / 2;
+.features-container-2 {
 	grid-row: 2 / 3;
-	background-color: yellow;
 }
 
-.container-3 {
-	grid-column: 1 / 2;
+.features-container-3 {
 	grid-row: 3 / 4;
-	background-color: green;
 }
 
-.container-4 {
-	grid-column: 1 / 2;
+.features-container-4 {
 	grid-row: 4 / 6;
-	background-color: cyan;
-}
+}*/

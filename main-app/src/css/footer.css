@@ -11,7 +11,7 @@ footer h1 {
 .footer-container {
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: flex-start;	
+	justify-content: flex-start;
 }
 
 .footer-container h1 {
@@ -85,8 +85,4 @@ footer p:hover {
 	footer li {
 		font-size: 3.4vw;
 	}
-}
-
-.hidden {
-	display: none;
 }
