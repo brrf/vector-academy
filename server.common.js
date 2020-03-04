@@ -39,6 +39,10 @@ module.exports = function(marketingApp, mainApp, environment) {
 	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'landing-page.html'));
 	});
 
+	marketingApp.get('/landingpagesuccess', (req, res)=> {
+	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'landing-page-success.html'));
+	});
+
 	marketingApp.post('/contact', (req, res) => {
 	  //validate input items
 	  if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.message) {
