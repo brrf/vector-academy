@@ -67,15 +67,15 @@ function repaintDOMRegister (promotion) {
 	formContainer.forEach(container => {
 		let text = document.createElement('p');
 		const innerHTML = promotion 
-			? 'Your application fee will be waived. Stay tuned for more instructions. Redirecting...'
+			? 'Your application fee will be waived. Stay tuned for more instructions.'
 			: 'You\'re all set for now. Stay tuned for more instructions.'
   		text.innerHTML = innerHTML;
   		text.classList.add('center');
 		container.appendChild(text);
 	})
-	if (promotion) {
-		setTimeout(() => window.location.replace("https://www.vectoracademy.io/landingpagesuccess"), 2000);
-	}
+	// if (promotion) {
+	// 	setTimeout(() => window.location.replace("https://www.vectoracademy.io/landingpagesuccess"), 2000);
+	// }
 }
 
 function repaintDOMLogin (element) {
