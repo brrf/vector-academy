@@ -61,6 +61,10 @@ function repaintDOMRegister (promotion) {
 	const form = document.querySelectorAll('.student-register-form-container form');
 	const p = document.querySelectorAll('.student-register-form-container p');
 
+	if(promotion) {
+		window.location.replace("https://www.vectoracademy.io/thankyou")
+	}
+
 	h2.forEach(h2 => h2.innerHTML = 'Account created!');
 	form.forEach(form => form.remove());
 	if (p) p.forEach(p => p.remove());
@@ -73,9 +77,6 @@ function repaintDOMRegister (promotion) {
   		text.classList.add('center');
 		container.appendChild(text);
 	})
-	// if (promotion) {
-	// 	setTimeout(() => window.location.replace("https://www.vectoracademy.io/landingpagesuccess"), 2000);
-	// }
 }
 
 function repaintDOMLogin (element) {

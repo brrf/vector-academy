@@ -39,8 +39,8 @@ module.exports = function(marketingApp, mainApp, environment) {
 	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'landing-page.html'));
 	});
 
-	marketingApp.get('/landingpagesuccess', (req, res)=> {
-	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'landing-page-success.html'));
+	marketingApp.get('/thankyou', (req, res)=> {
+	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'thank-you.html'));
 	});
 
 	marketingApp.post('/contact', (req, res) => {

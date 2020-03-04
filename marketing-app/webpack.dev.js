@@ -54,10 +54,10 @@ module.exports = merge(common, {
 			chunks: ['landingPage']
 		}),
 		new HtmlWebpackPlugin({
-			filename: "landing-page-success.html",
-			template: "./src/public/html/landing-page-success.html",
+			filename: "thank-you.html",
+			template: "./src/public/html/thank-you.html",
 			favicon: "./src/public/assets/logo.png",
-			chunks: ['landingPage']
+			chunks: []
 		}),
 		new DefinePlugin({
 			DOMAIN: JSON.stringify('http://localhost:3001')
