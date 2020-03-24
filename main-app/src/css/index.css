@@ -62,7 +62,7 @@ h5 {
 	z-index: 1;
 }
 
-p {
+p, label {
 	margin: 0;
 	line-height: 1.6vw;
 	font-size: 1.2vw;
@@ -77,9 +77,10 @@ a:hover {
 	text-shadow: 0 0 1px grey;
 }
 
-button {
+button, input[type='submit'] {
 	 cursor: pointer; 
-	 background-color: #212A65;
+	 background-color: #212a65;
+	 border-radius: 8px;
 	 max-width: 200px;
 	 width: 10vw;
 	 min-width: 150px;
@@ -87,9 +88,11 @@ button {
 	 border: none; 
 	 font-size: 18px;
 	 padding: 8px; 
+	 margin: 0 2vw 0 0;
+	 height: 37px;
 }
 
-button:hover {
+button:hover, input[type='submit']:hover {
 	opacity: 0.9;
 }
 
@@ -98,14 +101,12 @@ ul {
     list-style: none;
 }
 
-img {
-	width: 150px;
-	margin-left: 10px;
-	margin-top: 5px;
-}
-
 textarea {
 	font-family: inherit;
+}
+
+input::placeholder {
+	color: '#FFCCA5';
 }
 
 .center {
@@ -114,6 +115,11 @@ textarea {
 
 .center h4 {
 	padding: 0.6vw 12vw 1.5vw 12vw;
+}
+
+
+.hidden {
+	display: none !important;
 }
 
 /*tablet*/
@@ -146,7 +152,7 @@ textarea {
 		font-size: 2vw;
 	}
 
-	p {
+	p, label {
 		font-size: 1.8vw;
 		line-height: 2.2vw;
 	}
@@ -181,7 +187,7 @@ textarea {
 		font-size: 4.2vw;
 	}
 
-	p {
+	p, label {
 		font-size: 3.9vw;
 		line-height: 4.5vw;
 	}

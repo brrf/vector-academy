@@ -1,0 +1,50 @@
+.stripe-form {
+  font-size: 16px;
+  font-weight: 500;
+  width: 90%;
+  max-width: 650px;
+}
+
+.stripe-form button {
+  margin-top: 2vw;
+}
+
+.stripe-form button:hover {
+  cursor: not-allowed;
+}
+
+.StripeElement--complete {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.stripe-input-base {
+  margin: 1vw;
+  height: 45px;
+  padding: 10px 12px;
+  width: 100%;
+  color: #32325d;
+  font-weight: 500;
+  font-family: 'Source Code Pro, Consolas, Menlo, monospace';
+  font-size: '16px'; 
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  will-change: opacity;
+}
+
+.stripe-input-base::placeholder {
+  color: '#CFD7DF'
+}
+
+.stripe-input-invalid {
+  color: '#E25950'
+}
+
+.stripe-input-invalid::placeholder {
+  color: '#FFCCA5'
+}

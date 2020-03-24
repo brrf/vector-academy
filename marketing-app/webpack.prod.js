@@ -43,7 +43,7 @@ module.exports = merge(common, {
 				removeComments: true
 			},
 			favicon: "./src/public/assets/logo.png",
-			chunks: ['main', 'contact']
+			chunks: ['main', 'contact', 'applyButtons']
 		}),
 		new HtmlWebpackPlugin({
 			filename: "faqs.html",
@@ -54,7 +54,7 @@ module.exports = merge(common, {
 				removeComments: true
 			},
 			favicon: "./src/public/assets/logo.png",
-			chunks: ['main', 'faq']
+			chunks: ['main', 'faq', 'applyButtons']
 		}),
 		new HtmlWebpackPlugin({
 			filename: "privacy.html",
@@ -65,7 +65,7 @@ module.exports = merge(common, {
 				removeComments: true
 			},
 			favicon: "./src/public/assets/logo.png",
-			chunks: ['main']
+			chunks: ['main', 'applyButtons']
 		}),
 		new HtmlWebpackPlugin({
 			filename: "how-it-works.html",
@@ -92,7 +92,8 @@ module.exports = merge(common, {
 			chunks: []
 		}),
 		new DefinePlugin({
-			DOMAIN: JSON.stringify('https://vectoracademy.io')
+			PROTOCOL: JSON.stringify('https://'),
+			DOMAIN: JSON.stringify('vectoracademy.io')
 		})
 	],
 	module: {
