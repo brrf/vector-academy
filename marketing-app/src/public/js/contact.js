@@ -33,7 +33,7 @@ function submitForm(e) {
     email: email,
     message: message
   };
-  fetch(`${DOMAIN}/contact`, {
+  fetch(`${PROTOCOL}${DOMAIN}/contact`, {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
@@ -43,11 +43,11 @@ function submitForm(e) {
     return res.json();
   }).then(function (resObject) {
     if (!resObject.err) {
-      removeSpinner();
+      removeSpinner(element);
       repaintDOM();
     } else {
       alert('error');
-      removeSpinner();
+      removeSpinner(element);
 
     }
   });

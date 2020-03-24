@@ -1,11 +1,9 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const vhost = require('vhost');
 const db = require('./db');
 const cors = require('cors');
-const helmet = require('helmet');
 
 const server = require('./server.common.js');
 
@@ -20,19 +18,28 @@ marketingApp.use ((req, res, next) => {
   next()
 });
 
-server(marketingApp, mainApp, 'dev');
+mainApp.use(cors({
+    credentials: true, 
+    origin: ['http://localhost:3000']
+  }));
+
+mainApp.use ((req, res, next) => {
+  res.header ('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
+  res.header ('Access-Control-Allow-Credentials', true)
+  res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  next()
+});
 
 //Virtual Routing Application
-const app = express();
+const commonApp = express();
 
-app.use(helmet());
+commonApp.use(cors({
+    credentials: true, 
+    origin: ['http://localhost:8080', 'http://localhost:3000']
+  }));
 
-app.use(cors({
-  credentials: true, 
-  origin: ['http://localhost:8080', 'http://localhost:3000']
-}));
-
-app.use ((req, res, next) => {
+commonApp.use ((req, res, next) => {
   res.header ('Access-Control-Allow-Origin', '*')
   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
   res.header ('Access-Control-Allow-Credentials', true)
@@ -40,26 +47,28 @@ app.use ((req, res, next) => {
   next()
 });
 
-//Express body parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(vhost('localhost', marketingApp));
-app.use(vhost('apply.localhost', mainApp));
 
+
+server(marketingApp, mainApp, commonApp, 'dev');
+
+commonApp.use(vhost('localhost', marketingApp));
+commonApp.use(vhost('apply.localhost', mainApp));
 
 //404 Not Found Middleware
-app.use(function(req, res, next) {
+commonApp.use(function(req, res, next) {
   res.status(404)
     .type('text')
     .send('End of the line!');
 });
 
-
 //Start server
-app.listen(3001, function () {
+commonApp.listen(3001, function () {
   console.log("Listening on port " + 3001);
 });
 
-//Connect to database
-db();
+try {
+  db();
+} catch {
+  console.log('couldn\'t connect to database')
+}

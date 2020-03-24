@@ -1,0 +1,410 @@
+.application-container {
+	flex-basis: 85%;
+  flex-grow: 1;
+  background-color: #f1f1f1;
+	min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+}
+
+.application-progress-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.application-progress-container h3 {
+  margin-bottom: 15px;
+}
+
+#bar {
+  background-color: #212b65;
+  width: 25vw;
+  max-width: 500px;
+  height: 30px;
+  margin: 0 auto;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.progress-percentage {
+  color: white;
+  z-index: 3;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#bar > div {
+  position: absolute;
+  max-width: 100%;
+  height: 22px;
+  background: #52b0e3;
+  border-radius: 50px;
+  margin: 0 4px;
+  transition: width 500ms;
+  left: 0;
+}
+
+.application-steps-container {
+  margin: 2vw 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.application-step {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid black;
+  border-top: none;
+  width: 450px;
+  padding: 15px;
+  background-color: white;
+}
+
+.application-step > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.application-steps-container > div:first-child {
+  border-top: 1px solid black;
+}
+
+.application-step-status {
+  margin-right: 20px;
+}
+
+.application-step-status.incomplete {
+  color: #d82828;
+}
+
+.application-step-status.complete {
+  color: green;
+}
+
+.application-step-start {
+  margin-left: 150px;
+}
+
+.application-step:hover {
+  background-color: #eaeaea;
+  cursor: pointer;
+}
+
+.application-step:hover .application-step-start {
+  transform: scale(1.3);
+  transition: transform 150ms;
+}
+
+.application-step:hover > div {
+  text-shadow: 0 0 0.01px black;
+}
+
+.application-steps-button {
+  margin-top: 2vw;
+}
+
+.application-form-container {
+  padding: 2vw 6vw;
+  background-color: white;
+  margin: 40px auto;
+  width: 85%;
+  position: relative;
+}
+
+.application-form-container form {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.application-form-container .textarea-form {
+  display: block;
+}
+
+.application-text-input {
+  padding: 1.5vw 1.2vw;
+  border-radius: 4px;
+  flex-basis: 48%;
+  margin: 1.0vw 2% 1.0vw 0%;
+  font-size: 1.3vw;
+}
+
+.application-text-input.full-width {
+  flex-basis: 98%;
+}
+
+.application-input {
+  color: black;
+  margin-top: 25px;
+}
+
+.application-input textarea {
+  width: 50vw;
+  height: 35vh;
+  margin: 0;
+}
+
+.word-count {
+  float: right;
+}
+
+.application-input-radio-section {
+  margin-top: 15px;
+}
+
+.application-input-radio-section.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.application-input-radio {
+  display: flex;
+  flex-direction: row;
+}
+
+.application-input-radio-section label {
+  margin: 1vw;
+  display: flex;
+  align-items: center;
+}
+
+.radio-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.application-input.essay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.essay-input-prompt-container {
+  background-color: #e96443;
+  width: 70%;
+  padding: 1.6vw;
+  margin-bottom: 1vw;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.essay-input-prompt-container span {
+  position: absolute;
+  top: 0.3vw;
+  right: 0.6vw;
+}
+
+.essay-input-prompt-container span:hover {
+  opacity: 70%;
+  cursor: pointer;
+}
+
+.application-page-submit-container {
+  margin-top: 4vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100% !important;
+}
+
+.application-page-submit-container p {
+  cursor: pointer;
+  color: #212b65;
+}
+
+.application-section-complete {
+  margin: 1vw auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.application-section-complete div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.3vw;
+}
+
+.application-section-complete h5 {
+  flex-basis: 65%;
+}
+
+.application-section-complete p {
+  flex-basis: 35%;
+}
+
+.application-complete-edit {
+  position: absolute;
+  right: 1vw;
+  top: 1vw;
+  background-color: grey;
+  width: 5vw;
+  height: 2vw;
+  min-width: initial;
+  margin: 0;
+  padding: 0;
+  font-size: 1vw;
+}
+
+.edit-textarea-complete {
+  white-space: pre-wrap;
+  margin: 1.4vw 0.3vw;
+}
+
+.application-warning {
+  position: static;
+  height: auto;
+}
+
+.ap-scores-checkbox-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1vw 0;
+}
+
+.ap-scores-checkboxes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1vw;
+}
+
+.ap-scores-checkboxes > div {
+  margin-right: 0.6vw;
+}
+
+.ap-scores-checkboxes label {
+  padding: 0.5vw;
+}
+
+.ap-scores-score-container div {
+  display: flex;
+  flex-direction: row;
+}
+
+.ap-scores-score, .test-scores-score {
+  flex-basis: 46%;
+}
+
+.ap-scores-score-container label {
+  flex-basis: 32%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  line-height: 1.6vw;
+}
+
+.file-upload {
+  margin-top: 2vw;
+}
+
+.file-upload > p {
+  color: crimson;
+  font-size: 1vw;
+}
+
+input[type='checkbox'] {
+  height: initial;
+  margin: 0 0.5vw;
+}
+
+input[type='radio'] {
+  margin: 0 1vw;
+}
+
+.pdf-page {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 3vw;
+  color: #777;
+}
+
+.pdf-page-change {
+  font-size: 11px;
+  margin: 0 0.5vw;
+}
+
+.pdf-page-change:hover {
+  cursor: pointer;
+}
+
+.question-prompt {
+  margin-bottom: 0.7vw;
+}
+
+.question-word-count {
+  margin-bottom: 0.5vw;
+  flex-basis: 50vw;
+}
+
+.prompt-edit {
+  background-color: #d8d8d8;
+  padding: 8px;
+}
+
+.application-review-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-section {
+  margin: 1vw 0;
+  color: #444;
+}
+
+.review-section h3 {
+  color: #222;
+  margin-bottom: 0.8vw;
+}
+
+@media (max-width: 990px) {
+  #bar {
+    width: 30vw;
+  }
+}
+
+@media (max-width: 850px) {
+  .application-form-container {
+    width: 95%;
+  }
+  .file-upload > p {
+    font-size: 1.5vw;
+  }
+}
+
+@media (max-width: 650px) {
+  .application-complete-edit {
+    width: 8vw;
+    height: 3.2vw;
+    right: 2vw;
+    top: 2vw;
+    font-size: 2vw;
+  }
+  .file-upload > p {
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 550px) {
+  #bar {
+    width: 50vw;
+  }
+}

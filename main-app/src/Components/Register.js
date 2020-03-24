@@ -22,13 +22,24 @@ export default class Register extends React.Component {
     this.updateEmail = this.updateEmail.bind(this);
   }
 
+  componentDidMount() {
+    console.log('here');
+    fetch(`${PROTOCOL}apply.${DOMAIN}/user`, {
+      method: "GET"
+    })
+      .then(res => res.json())
+      .then(resObject => {
+        console.log(resObject);
+      })
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     this.setState({
       errors: []
     });
     
-    fetch("http://apply.localhost:3001/register", {
+    fetch(`${PROTOCOL}apply.${DOMAIN}/register`, {
       method: "POST",
       body: JSON.stringify(this.state.formData),
       headers: { "Content-Type": "application/json" },
@@ -85,7 +96,8 @@ export default class Register extends React.Component {
     });
   };
 
-  render() {  
+  render() { 
+    console.log('here');
     return (
       <React.Fragment>
         <div id="form-container" className="register-form-container">

@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 const User = require('../schemas/users');
 
 module.exports = function(mainApp) {
@@ -42,22 +43,5 @@ module.exports = function(mainApp) {
 	    		});
 			});				
 		}
-	})
-	mainApp.post('/studentlogin', async (req, res) => {
-		let errors = [];
-		const success = 'We will be opening student registration soon. Follow us on twitter for the latest announcements!'
-		const {email, password} = req.body;
-		if (!email || !password) {
-			errors.push('Please fill out all items');
-			return res.json({errors, exists: false})
-		}
-		let user = await User.findOne({email});
-		if (!user) {
-			errors.push('This user does not exist');
-			return res.json({errors, exists: false})
-		} else {
-			return res.json({errors: false, success})
-		}
-		
 	})
 }

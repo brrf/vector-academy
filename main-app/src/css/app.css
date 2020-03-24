@@ -1,0 +1,10 @@
+#main-container {
+	display: flex;
+	flex-direction: row;
+}
+
+@media (max-width: 650px) {
+    #main-container {
+    	flex-direction: column;
+    }
+}

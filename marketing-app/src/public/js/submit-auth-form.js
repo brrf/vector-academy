@@ -11,7 +11,7 @@ export default function submitAuthForm (data, url, spinnerElement, button) {
 };
 
 function submitStudentRegistrationForm (data, spinnerElement) {
-	fetch(`${DOMAIN}/studentregister`, {
+	fetch(`${PROTOCOL}${DOMAIN}/studentregister`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -19,19 +19,20 @@ function submitStudentRegistrationForm (data, spinnerElement) {
     })
 	.then(res => res.json())
 	.then(resObject => {
-	const formContainer = document.querySelectorAll('.student-register-form-container');
-	if (resObject.errors) {	  
-	  addErrors(resObject.errors, formContainer);
-	  removeSpinner(spinnerElement);
-	} else {
-	  removeSpinner(spinnerElement);
-	  repaintDOMRegister(resObject.promotion);	  
-	}
+		const formContainer = document.querySelectorAll('.student-register-form-container');
+		if (resObject.errors) {	  
+		  addErrors(resObject.errors, formContainer);
+		  removeSpinner(spinnerElement);
+		} else {
+		  removeSpinner(spinnerElement);
+		  repaintDOMRegister(resObject.promotion);
+		  setTimeout(() => window.location.replace(`${PROTOCOL}apply.${DOMAIN}`), 2000);		  
+		}
 	});
 }
 
 function submitStudentLoginForm (data, spinnerElement) {
-	fetch(`${DOMAIN}/studentlogin`, {
+	fetch(`${PROTOCOL}${DOMAIN}/studentlogin`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -45,9 +46,10 @@ function submitStudentLoginForm (data, spinnerElement) {
 		removeSpinner(spinnerElement);	
 	  }
 	  else {
-	  	addSuccess(resObject.success, formContainer);
+	  //	console.log(resObject.user)
 	  	removeSpinner(spinnerElement);
-	  	repaintDOMLogin(spinnerElement);
+	  	//repaintDOMLogin(spinnerElement);
+	  	//setTimeout(() => window.location.replace(`${PROTOCOL}apply.${DOMAIN}`), 2000);
 	  }
 	});
 }
@@ -71,29 +73,29 @@ function repaintDOMRegister (promotion) {
 	formContainer.forEach(container => {
 		let text = document.createElement('p');
 		const innerHTML = promotion 
-			? 'Your application fee will be waived. Stay tuned for more instructions.'
-			: 'You\'re all set for now. Stay tuned for more instructions.'
+			? 'Your application fee will be waived. Redirecting in 2 seconds.'
+			: 'You\'re signed up! Redirecting in 2 seconds.'
   		text.innerHTML = innerHTML;
   		text.classList.add('center');
 		container.appendChild(text);
 	})
 }
 
-function repaintDOMLogin (element) {
-	const buttonContainer = document.querySelectorAll('.student-login-form-container .form-submit-button-container');
+// function repaintDOMLogin (element) {
+// 	const buttonContainer = document.querySelectorAll('.student-login-form-container .form-submit-button-container');
 	
-	buttonContainer.forEach(container => {
-		const link = document.createElement('a');
-		link.href = 'https://twitter.com/VectorAcad'
-		const twitter = document.createElement('img');
-		twitter.src = twitterLogo;
-		twitter.classList = 'twitter-logo';
-		twitter.alt = 'twitter-link';
-		link.appendChild(twitter);
-		container.appendChild(link)
-		element.firstElementChild.disabled = true;
-	});
-}
+// 	buttonContainer.forEach(container => {
+// 		const link = document.createElement('a');
+// 		link.href = 'https://twitter.com/VectorAcad'
+// 		const twitter = document.createElement('img');
+// 		twitter.src = twitterLogo;
+// 		twitter.classList = 'twitter-logo';
+// 		twitter.alt = 'twitter-link';
+// 		link.appendChild(twitter);
+// 		container.appendChild(link)
+// 		element.firstElementChild.disabled = true;
+// 	});
+// }
 
 function addErrors (errors, formContainer) {
 	if (document.querySelector('.error-list')) {
