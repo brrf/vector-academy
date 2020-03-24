@@ -49,10 +49,15 @@ app.use(function(req, res, next) {
 });
 
 
-//Start server
-app.listen(process.env.PORT || 3001, function () {
-  console.log("Listening on port " + process.env.PORT);
-});
-
 //Connect to database
-db();
+try {
+  db();
+} catch {
+  console.log('couldn\'t connect to database')
+}
+
+//ghost server
+const ghost = express();
+ghost.listen(2367, function() {
+  console.log("Ghost listening on 2367")
+});
