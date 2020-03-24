@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {connect} from 'react-redux';
-import ApplicationSubmitButtons from './ApplicationSubmitButtons';
+import {ApplicationSubmitButtons, ApplicationEditButtons} from './ApplicationButtons';
 
 function APScores (props) {
 
@@ -35,7 +35,74 @@ function APScores (props) {
 			selected: false,
 			score: ''
 		},
-	])
+	]);
+
+	const [inputState, updateInputState] = useState([
+		{
+			focus: false,
+			empty: true
+		},
+		{
+			focus: false,
+			empty: true
+		},
+		{
+			focus: false,
+			empty: true
+		},
+		{
+			focus: false,
+			empty: true
+		},
+		{
+			focus: false,
+			empty: true
+		}
+	]);
+
+	useEffect(() => {
+		if (edit) {
+			let newInputState = [...inputState];
+			inputState.forEach(input => {
+				input.empty = false;
+			})
+			updateInputState(newInputState);
+		}
+	}, []);
+
+	function handleFocus(index) {
+		let newState = [...inputState];
+		newState[index] = {
+			...newState[index],
+			focus: true
+		}
+		updateInputState(newState);
+	};
+
+	function handleBlur(index) {
+		let newState = [...inputState];
+		newState[index] = {
+			...newState[index],
+			focus: false
+		}
+		updateInputState(newState);
+	};
+
+	function handleKeyUp(e, index) {
+		let newState = [...inputState];
+		if(e.target.value.length === 0) {
+			newState[index] = {
+				...newState[index],
+				empty: true
+			}
+		} else {
+			newState[index] = {
+				...newState[index],
+				empty: false
+			}
+		}
+		updateInputState(newState);
+	};
 
 	const [fourSelected, isFourSelected] = useState(false);
 	const [edit, updateEdit] = useState(props.complete);
@@ -43,14 +110,8 @@ function APScores (props) {
 
 	//show scores container if 4 exams are selected
 	useEffect(() => {
-		if (numberOfSelectedExams() >= 4) {
-			isFourSelected(true);
-		} else {
-			isFourSelected(false)
-		}
-	}, exams);
 
-	function numberOfSelectedExams () {
+		function numberOfSelectedExams () {
 		let number = 0;
 		exams.forEach(exam => {
 			if (exam.selected === true) {
@@ -58,7 +119,14 @@ function APScores (props) {
 			}
 		})
 		return number;
-	};
+		};
+		
+		if (numberOfSelectedExams() >= 4) {
+			isFourSelected(true);
+		} else {
+			isFourSelected(false)
+		}
+	}, [exams]);
 
 	function returnFormData() {
 		const formData = {};
@@ -122,6 +190,7 @@ function APScores (props) {
 					}			
 				</div>
 				<button onClick={(edit) => updateEdit(!edit)} className='application-complete-edit'>Edit</button>
+				<ApplicationEditButtons handleApplicationStep={props.handleApplicationStep}/>
 			</React.Fragment>
 		)
 	}
@@ -153,17 +222,21 @@ function APScores (props) {
 			{
 				fourSelected
 					?	<form 
-							className='application-input ap-scores-score-container'
+							className='application-input'
 							ref={form} 
 							onSubmit={(e) => props.handleSubmit(e, returnFormData(), true)}
 						>
 							{
-								exams.filter(exam => exam.selected).map(exam => {
+								exams.filter(exam => exam.selected).map((exam, index) => {
 									return (
-										<div key={exam.ref}>
-											<label>{exam.name}:</label>
+										<div className='styled-field ap-scores-score' 
+												onFocus={() => handleFocus(index)}
+												onBlur={() => handleBlur(index)}
+												onKeyUp={(e) => handleKeyUp(e, index)}
+												key={exam.ref}
+										>
 											<input						
-												className="application-text-input"		      
+												className={`styled-input ${inputState[index].focus ? 'styled-input-focus' : ''} ${inputState[index].empty ? 'styled-input-empty' : ''}`}      
 												type="number"
 												min="1"
 												max="5"
@@ -174,6 +247,8 @@ function APScores (props) {
 												onChange={(e) => handleUpdateExamScore(e, exam.ref)}
 												required
 											/>
+											<label className='styled-label'>{exam.name}</label>
+											<div className='baseline'></div>
 										</div>
 									)
 								})

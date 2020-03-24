@@ -44,21 +44,4 @@ module.exports = function(mainApp) {
 			});				
 		}
 	})
-	// mainApp.post('/studentlogin', passport.authenticate('local'), async (req, res) => {
-	// 	console.log(req.user);
-	// 	let errors = [];
-	// 	const success = 'We will be opening student registration soon. Follow us on twitter for the latest announcements!'
-	// 	const {email, password} = req.body;
-	// 	if (!email || !password) {
-	// 		errors.push('Please fill out all items');
-	// 		return res.json({errors, exists: false})
-	// 	}
-	// 	let user = await User.findOne({email});
-	// 	if (!user) {
-	// 		errors.push('This user does not exist');
-	// 		return res.json({errors, exists: false})
-	// 	} else {
-	// 		return res.json({errors: false, user: req.user})
-	// 	}		
-	// })
 }

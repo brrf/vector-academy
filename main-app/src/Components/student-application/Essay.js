@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {connect} from 'react-redux';
-import ApplicationSubmitButtons from './ApplicationSubmitButtons';
+import {ApplicationSubmitButtons, ApplicationEditButtons} from './ApplicationButtons';
 
 function Essay (props) {
 
@@ -69,7 +69,6 @@ function Essay (props) {
 	useEffect(getFormData, []);
 	function getFormData () {
 		if (!props.data) return;
-		console.log({data: props.data});
 		updateFormData(props.data);
 	};
 
@@ -77,10 +76,11 @@ function Essay (props) {
 		return (
 			<React.Fragment>
 				<div className='application-input application-section-complete'>
-					<h3>{prompts[formData.selection]}</h3>
-					<div className='edit-textarea-complete'>{formData.essay}</div>
+					<h3 className='prompt-edit'>{prompts[formData.selection]}</h3>
+					<div className='edit-textarea-complete'>"{formData.essay}"</div>
 				</div>
 				<button onClick={(edit) => updateEdit(!edit)} className='application-complete-edit'>Edit</button>
+				<ApplicationEditButtons handleApplicationStep={props.handleApplicationStep}/>
 			</React.Fragment>
 		)
 	}
@@ -93,9 +93,9 @@ function Essay (props) {
 				<Radio />
 				{
 					formData.selection !== null
-						? <form onSubmit={(e) => props.handleSubmit(e, formData, true)} ref={form}>
+						? <form className='textarea-form' onSubmit={(e) => props.handleSubmit(e, formData, true)} ref={form}>
 							<textarea onChange={(e) => handleUpdateFormData('essay', e.target.value)} value={formData.essay} />
-							<div><p>{`${650 - formData.essay.split(' ').length} words remaining`}</p></div>
+							<div><p className='word-count'>{`${650 - formData.essay.split(' ').length} words remaining`}</p></div>
 							<ApplicationSubmitButtons form={form} handleSubmit={props.handleSubmit} formData={formData} handleApplicationStep={props.handleApplicationStep} />
 						</form>
 						: null

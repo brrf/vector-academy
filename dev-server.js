@@ -62,7 +62,6 @@ commonApp.use(function(req, res, next) {
     .send('End of the line!');
 });
 
-
 //Start server
 commonApp.listen(3001, function () {
   console.log("Listening on port " + 3001);

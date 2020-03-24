@@ -2,16 +2,20 @@ import React, {useState} from 'react';
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimesCircle, faCheckCircle, faArrowRight} from "@fortawesome/free-solid-svg-icons";
-import {setApplicationStep, completeApplicationStep, getApplication} from '../../actions/application';
-import {getUser} from '../../actions/user';
+import {setApplicationStep, completeApplicationStep} from '../../actions/application';
+import ApplicationProgress from './ApplicationProgress';
 import Warning from '../Warning';
 import ContactInformation from './ContactInformation';
 import APScores from './APScores';
 import TestScore from './TestScore';
 import Essay from './Essay';
+import CV from './CV';
+import Questions from './Questions';
+import Review from './Review';
+import Payment from './Payment';
 
 function ApplicationSteps (props) {
-	const {applicationStep, application} = props
+	const {applicationStep, application, status} = props
 	const applicationSteps = [
 		{
 			name: 'Contact Information',
@@ -34,13 +38,9 @@ function ApplicationSteps (props) {
 			ref: 'cv'
 		},
 		{
-			name: 'Hobbies',
-			ref: 'hobbies'
-		},
-		{
-			name: 'Projects',
-			ref: 'projects'
-		} 
+			name: 'Additional Questions',
+			ref: 'questions'
+		}
 	];
 	const [errors, handleErrors] = useState([]);
 
@@ -59,12 +59,12 @@ function ApplicationSteps (props) {
 
 	function handleSubmit(e, data, nextPage) {
 		if (e) e.preventDefault();
-		fetch("http://apply.localhost:3001/application", {
+		fetch(`${PROTOCOL}apply.${DOMAIN}/application`, {
 	      method: "POST",
 	      body: JSON.stringify({data, applicationStep}),
 	      headers: { 
 	        "Content-Type": "application/json",
-	        "Access-Control-Allow-Origin": "http://localhost:3000" 
+	       // "Access-Control-Allow-Origin": "http://localhost:3000" 
 	      },
 	      mode: "cors",
 	      credentials: "include"
@@ -82,7 +82,36 @@ function ApplicationSteps (props) {
 	    		}	
 	    	}
 	    })
-	} 
+	}
+
+	function handleSubmitFile (e, data, nextPage) {
+		if (e) e.preventDefault();
+		let formData = new FormData();
+      	formData.append("cv", data);
+   		formData.append("applicationStep", applicationStep);
+		fetch(`${PROTOCOL}apply.${DOMAIN}/applicationfile`, {
+	      method: "POST",
+	      body: formData,
+	      headers: { 
+	        //"Access-Control-Allow-Origin": "http://localhost:3000" 
+	      },
+	      mode: "cors",
+	      credentials: "include"
+	    })
+	    .then(res => res.json())
+	    .then(resObject => {
+	    	if (resObject.errors) {
+	    		handleErrors(resObject.errors)
+	    	} else {
+	    		props.dispatch(completeApplicationStep(applicationSteps[applicationStep].ref, resObject.file));
+	    		if (nextPage) {
+	    			handleApplicationStep('+')
+	    		} else {
+	    			handleApplicationStep(false)
+	    		}	
+	    	}
+	    })
+	}
 
 	function returnApplicationStepJSX(applicationStep) {
 		switch(applicationStep) {
@@ -98,11 +127,25 @@ function ApplicationSteps (props) {
 			case 3: {
 				return <Essay handleSubmit={handleSubmit} handleApplicationStep={handleApplicationStep} />
 			}
+			case 4: {
+				return <CV handleSubmit={handleSubmitFile} handleApplicationStep={handleApplicationStep}/>
+			}
+			case 5: {
+				return <Questions handleSubmit={handleSubmit} handleApplicationStep={handleApplicationStep}/>
+			}
 			default: 
 				return null;
 		}
 	}
-
+	if (props.status === 1) {
+		return (
+			<div className='application-form-container'>
+				<h2 className='center'>Payment Received!</h2>	
+				<p className='center' style={{marginTop: '10px'}}>We will review your application and notify you if you are selected for interviews.</p>
+			</div>
+		)
+	}
+	//applicationStep === false is the homepage; other #s are different application steps
 	if (applicationStep === false) {
 		let JSX = applicationSteps.map((step, index) => {
 			return (
@@ -124,17 +167,36 @@ function ApplicationSteps (props) {
 			)
 		});
 		return (
-			<div className='application-steps-container'>
-				{JSX}
-			</div>
+			<React.Fragment>
+				<ApplicationProgress />
+				{
+					props.completedSteps === 6
+						? <button onClick={() => props.dispatch(setApplicationStep(6))} className='application-steps-button'>Submit Application</button>
+						: null
+				}
+				<div className='application-steps-container'>
+					{JSX}
+				</div>
+			</React.Fragment>
 		);
+	} else if (applicationStep === 6) {
+		return (
+			<Review applicationSteps={applicationSteps}/>
+		)
+	} else if (applicationStep === 7) {
+		return (
+			<Payment handleApplicationStep={handleApplicationStep} />
+		)
 	} else {
 		return (
-		 	<div className='application-form-container'>	
-				<Warning temp={true} errors={errors}/>	
-				<h2 className='center'>{applicationSteps[applicationStep].name}</h2>	
-				{returnApplicationStepJSX(applicationStep)}	
-			</div>
+			<React.Fragment>
+				<ApplicationProgress />
+			 	<div className='application-form-container'>	
+					<Warning errors={errors}/>	
+					<h2 className='center'>{applicationSteps[applicationStep].name}</h2>	
+					{returnApplicationStepJSX(applicationStep)}	
+				</div>
+			</React.Fragment>
 	 	)
 	}
 };
@@ -143,7 +205,9 @@ function mapStateToProps(state) {
 	return {
 		applicationStep: state.application.applicationStatus.applicationStep,
 		application: state.application.applicationStatus.application,
-		userId: state.user.user.id
+		userId: state.user.user.id,
+		status: state.user.user.status,
+		completedSteps: Object.keys(state.application.applicationStatus.application).length
 	}
 };
 

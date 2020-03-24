@@ -46,5 +46,35 @@
     transition: opacity 150ms ease-in;
 }
 
+@media (max-width: 750px) {
+    .sidemenu-container {
+        min-width: 175px;
+    }
+    .features-container.active:after {
+        left: 158px;
+    }
+}
+
+@media (max-width: 650px) {
+     .features-container.active:after {
+        display: none;
+    }
+    .features-container {
+        height: 40px;
+        border-bottom: 1px solid #e86542;
+    }
+    .sidemenu-toggle-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        cursor: pointer;
+        background-color: #202a65;
+    }
+    .sidemenu-toggle {    
+        color: white;
+    }
+}
+
 
 

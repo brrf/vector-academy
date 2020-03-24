@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const session = require("express-session");
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
+const multer  = require('multer');
 
 const User = require('./schemas/users');
 
@@ -85,10 +86,10 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 
 	//mainApp routes
 
-	mainApp.use(express.static(path.join(__dirname, 'main-app', 'build')));
+	mainApp.use(express.static(path.join(__dirname, 'main-app', environment)));
 
 	mainApp.get('/', (req, res)=> {
-  		res.sendFile(path.join(__dirname, 'main-app', 'build', 'index.html'));
+  		res.sendFile(path.join(__dirname, 'main-app', environment, 'index.html'));
 	});
 
 	//expression session
@@ -111,6 +112,41 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 
 	mainApp.use(flash());
 
+	//Multer config
+	const storage = multer.diskStorage({
+
+	  destination: function (req, file, cb) {
+	    cb(null, path.join(__dirname + '/assets/student-cvs/'));
+	  },
+	  filename: function (req, file, cb) {
+	    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+	  }
+	})
+
+	function checkFileType(file, cb) {
+	  // Allowed ext
+	  const filetypes = /pdf/;
+	  // Check ext
+	  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+	  // Check mime
+	  const mimetype = filetypes.test(file.mimetype);
+
+	  if(mimetype && extname){
+	    return cb(null,true);
+	  } else {
+	    cb(null, false);
+	  }
+	}
+	 
+	const upload = multer({ 
+	  storage,
+	  limits: {fileSize: 10000000},
+	  fileFilter: function(req, file, cb) {
+	    checkFileType(file, cb)
+	  } })
+
+	//mainApp routes
+
 	mainApp.post('/studentlogin', function (req, res, next) {
 		passport.authenticate('local', {failureFlash: true}, function (err, user, info) {
 			if (err) return next(err);
@@ -119,7 +155,6 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 			} else {
 				req.login(user, (err) => {
 					if (err) return next(err);
-					///else setInterval(() => console.log(req.user), 3000)
 				});
 				return res.json({errors: false, user})
 			}
@@ -141,6 +176,16 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 		} catch {
 			res.json({error: true})
 		}
+	})
+
+	mainApp.get('/stripetoken', async (req, res) => {
+		const stripe = require('stripe')('sk_test_dIFfqpgQbCkdidh0cAgaSmm300nOuWOMJE');
+
+		 const paymentIntent = await stripe.paymentIntents.create({
+		    amount: 3500,
+		    currency: 'usd'
+		  });
+		return res.json({secret: paymentIntent.client_secret});
 	})
 
 	mainApp.post('/application', async (req, res) => {
@@ -235,7 +280,6 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 				break;
 			}
 			case 3: {
-				//console.log(req.body)
 				const {essay, selection} = req.body.data;
 				if (!essay || typeof selection !== 'number') {
 					return errors.push('Please fill out all items.')
@@ -257,11 +301,98 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 				}
 				break;
 			}
+			case 5: {
+				const {why, what, where} = req.body.data;
+				if (!why || !what || !where) {
+					errors.push('Please fill out all items');
+				} else if (why.split(' ').length > 500 || what.split(' ').length > 500 || where.split(' ').length > 300) {
+					errors.push('Please keep response length within limits')
+				} else {
+					try {
+						user.application.questions = {
+							why,
+							what,
+							where
+						};
+						user.markModified('application');
+						user.save();
+					} catch (err) {
+						console.log(err);
+						errors.push('Error saving to database.')
+						return res.json({errors})
+					}
+				}
+				break;
+			}
+			case 7: {
+				const {street, city, state, zip} = req.body.data
+				if (!street || !city || !state || !zip) {
+					errors.push('Please fill out all items');
+				}
+				const {contactInformation, apScores, testScore, essay, cv, questions} = user.application;
+				if (!contactInformation || !apScores || !testScore || !essay || !cv || !questions) {
+					errors.push('Please fill out the entire application before submission.')
+				}
+				else {
+					try {
+						user.application.contactInformation = {
+							...user.application.contactInformation,
+							street,
+							city,
+							state,
+							zip
+						};
+						user.markModified('application');
+						user.status = 1;
+						user.markModified('status');
+						await user.save();
+					} catch (err) {
+						console.log(err);
+						errors.push('Error saving to database.')
+						return res.json({errors})
+					}
+				}
+				break;
+			}
 		}
 		if (errors.length > 0) {
 			return res.json({errors});
 		};	
-		res.json({erorrs: false});
+		res.json({errors: false});
+	});
+
+	mainApp.post('/applicationfile', upload.single('cv'), async (req, res) => {
+		let errors = []
+		let user;
+		try {
+			user = await User.findById(req.user._id);
+		} catch {
+			errors.push('Could not find user on server. Try submitting again.')
+		}
+		switch(Number(req.body.applicationStep)) {
+			case 4: {
+				if (!req.file) {
+					return res.json({errors: ['No file was received by the server']});
+				} else if (req.file.mimetype !== 'application/pdf') {
+					return res.json({errors: ['Please upload a pdf']})
+				}
+				try {
+					user.application.cv = req.file;
+					user.markModified('application');
+					user.save();	
+				} catch (err) {
+					console.log(err);
+					errors.push('Error saving to database.')
+					return res.json({errors})
+				}
+				
+			}
+			break;
+		}
+		if (errors.length > 0) {
+			return res.json({errors});
+		};	
+		res.json({errors: false, file: req.file});
 	});
 
 	//common App shared functionality

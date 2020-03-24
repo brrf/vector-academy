@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   padding: 20px;
 }
 
@@ -24,34 +25,35 @@
   background-color: #212b65;
   width: 25vw;
   max-width: 500px;
-  height: 24px;
+  height: 30px;
   margin: 0 auto;
   border-radius: 50px;
-  text-align: center;
-  position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .progress-percentage {
-  width: 4%;
-  color: #e96443;
-  position: absolute;
-  left: 46%;
+  color: white;
+  z-index: 3;
   font-weight: bold;
+  font-size: 15px;
 }
 
 #bar > div {
+  position: absolute;
   max-width: 100%;
-  height: 16px;
+  height: 22px;
   background: #52b0e3;
   border-radius: 50px;
   margin: 0 4px;
   transition: width 500ms;
+  left: 0;
 }
 
 .application-steps-container {
-  padding: 6vw 10vw;
+  margin: 2vw 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,18 +112,25 @@
   text-shadow: 0 0 0.01px black;
 }
 
+.application-steps-button {
+  margin-top: 2vw;
+}
+
 .application-form-container {
-  padding: 2vw 8vw;
+  padding: 2vw 6vw;
   background-color: white;
   margin: 40px auto;
   width: 85%;
-  max-height: 90%;
   position: relative;
 }
 
 .application-form-container form {
   display: flex;
   flex-flow: row wrap;
+}
+
+.application-form-container .textarea-form {
+  display: block;
 }
 
 .application-text-input {
@@ -131,7 +140,6 @@
   margin: 1.0vw 2% 1.0vw 0%;
   font-size: 1.3vw;
 }
-
 
 .application-text-input.full-width {
   flex-basis: 98%;
@@ -144,11 +152,11 @@
 
 .application-input textarea {
   width: 50vw;
-  height: 40vh;
+  height: 35vh;
   margin: 0;
 }
 
-form p {
+.word-count {
   float: right;
 }
 
@@ -171,7 +179,6 @@ form p {
   margin: 1vw;
   display: flex;
   align-items: center;
-  line-height: 1.3vw;
 }
 
 .radio-center {
@@ -198,7 +205,7 @@ form p {
 
 .essay-input-prompt-container span {
   position: absolute;
-  top: 0.6vw;
+  top: 0.3vw;
   right: 0.6vw;
 }
 
@@ -212,6 +219,7 @@ form p {
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100% !important;
 }
 
 .application-page-submit-container p {
@@ -254,7 +262,8 @@ form p {
 }
 
 .edit-textarea-complete {
-  white-space: pre-wrap
+  white-space: pre-wrap;
+  margin: 1.4vw 0.3vw;
 }
 
 .application-warning {
@@ -284,15 +293,13 @@ form p {
   padding: 0.5vw;
 }
 
-.ap-scores-score-container {
-  display: flex;
-  flex-flow: row wrap;
-}
-
 .ap-scores-score-container div {
-  flex-basis: 50%;
   display: flex;
   flex-direction: row;
+}
+
+.ap-scores-score, .test-scores-score {
+  flex-basis: 46%;
 }
 
 .ap-scores-score-container label {
@@ -303,8 +310,13 @@ form p {
   line-height: 1.6vw;
 }
 
-.ap-scores-score-container input {
-  /*background-color: crimson;*/
+.file-upload {
+  margin-top: 2vw;
+}
+
+.file-upload > p {
+  color: crimson;
+  font-size: 1vw;
 }
 
 input[type='checkbox'] {
@@ -316,14 +328,79 @@ input[type='radio'] {
   margin: 0 1vw;
 }
 
+.pdf-page {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 3vw;
+  color: #777;
+}
+
+.pdf-page-change {
+  font-size: 11px;
+  margin: 0 0.5vw;
+}
+
+.pdf-page-change:hover {
+  cursor: pointer;
+}
+
+.question-prompt {
+  margin-bottom: 0.7vw;
+}
+
+.question-word-count {
+  margin-bottom: 0.5vw;
+  flex-basis: 50vw;
+}
+
+.prompt-edit {
+  background-color: #d8d8d8;
+  padding: 8px;
+}
+
+.application-review-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-section {
+  margin: 1vw 0;
+  color: #444;
+}
+
+.review-section h3 {
+  color: #222;
+  margin-bottom: 0.8vw;
+}
+
 @media (max-width: 990px) {
   #bar {
     width: 30vw;
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 850px) {
+  .application-form-container {
+    width: 95%;
+  }
+  .file-upload > p {
+    font-size: 1.5vw;
+  }
+}
 
+@media (max-width: 650px) {
+  .application-complete-edit {
+    width: 8vw;
+    height: 3.2vw;
+    right: 2vw;
+    top: 2vw;
+    font-size: 2vw;
+  }
+  .file-upload > p {
+    font-size: 2vw;
+  }
 }
 
 @media (max-width: 550px) {
@@ -331,7 +408,3 @@ input[type='radio'] {
     width: 50vw;
   }
 }
-
-
-
-

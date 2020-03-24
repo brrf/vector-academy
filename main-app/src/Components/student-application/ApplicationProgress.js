@@ -4,13 +4,25 @@ import {connect} from "react-redux";
 function ApplicationProgress (props) {
 	const {completedSteps} = props
 	const [progressPercentage, setProgressPercentage] = useState(0);
+	const [innerBarWidth, updateInnerBarWidth] = useState(0);
 	useEffect(incrementProgressPercentage, [completedSteps]);
 
 	const barWidth = useRef(null);
-	let innerBarWidth = barWidth.current ? progressPercentage * barWidth.current.offsetWidth / 100 : 0;
+	useEffect(() => {
+		updateInnerBarWidth((progressPercentage * barWidth.current.offsetWidth / 100) - 8 );
+	}, [progressPercentage])
+	//let innerBarWidth = barWidth.current ? (progressPercentage * barWidth.current.offsetWidth / 100) - 8 : 0;
+	//set progress bar width on component mount
+	
+	//resize progress bar width as window width changes
+	window.onresize = function () {
+		if (barWidth.current) {
+			updateInnerBarWidth((progressPercentage * barWidth.current.offsetWidth / 100) - 8 );
+		};
+	};
 
 	function incrementProgressPercentage () {	
-		setProgressPercentage(Math.floor(0 + 12.5 * completedSteps));
+		setProgressPercentage(Math.floor(0 + 100/6 * completedSteps));
 	}
 
 	return (

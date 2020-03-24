@@ -24,7 +24,7 @@ export default class Register extends React.Component {
 
   componentDidMount() {
     console.log('here');
-    fetch("http://apply.localhost:3001/user", {
+    fetch(`${PROTOCOL}apply.${DOMAIN}/user`, {
       method: "GET"
     })
       .then(res => res.json())
@@ -39,7 +39,7 @@ export default class Register extends React.Component {
       errors: []
     });
     
-    fetch("http://apply.localhost:3001/register", {
+    fetch(`${PROTOCOL}apply.${DOMAIN}/register`, {
       method: "POST",
       body: JSON.stringify(this.state.formData),
       headers: { "Content-Type": "application/json" },

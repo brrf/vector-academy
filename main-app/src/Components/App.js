@@ -10,15 +10,15 @@ import '../css/app.css';
 
 function App(props) {
   const [loggedIn, toggleLogin] = useState(false); 
-
+  const [loading, toggleLoading] = useState(true);
   useEffect(isLoggedIn, [])
 
   function isLoggedIn() {
-    fetch("http://apply.localhost:3001/authenticate", {
+    fetch(`${PROTOCOL}apply.${DOMAIN}/authenticate`, {
       method: "GET",
       headers: { 
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3000" 
+     //   "Access-Control-Allow-Origin": "http://localhost:3000" 
       },
       mode: "cors",
       credentials: "include"
@@ -26,22 +26,25 @@ function App(props) {
     .then(res => res.json())
     .then(resObject => {
       if (resObject.user) {
-        //console.log({user: resObject.user})
-      props.dispatch(getUser(resObject.user));
-      props.dispatch(getApplication(resObject.user));
-      toggleLogin(true);       
+        props.dispatch(getUser(resObject.user));
+        props.dispatch(getApplication(resObject.user));
+        toggleLogin(true);       
       }
-
+      toggleLoading(false);
     })
   }
 
-  if (!loggedIn) {
+  if (loading) {
+    return (
+      <p style={{margin: '10px'}}>Loading...</p>
+    )
+  } else if (!loggedIn) {
   	return (
   		<React.Fragment>
-  			<Login toggleLogin={toggleLogin}/>
+  			<Login loginFunction={isLoggedIn} toggleLoading={toggleLoading}/>
 		</React.Fragment>
   	)
-  }
+  } else
   return (
   	<React.Fragment>
   		<Navbar toggleLogin={toggleLogin}/>
@@ -54,9 +57,6 @@ function App(props) {
 }
 
 function mapStateToProps(state) {
-//if (state.application.applicationStatus) console.log (state.application.applicationStatus.application.apScores)
-  //if (state.application.applicationStatus) console.log(state.application.applicationStatus.application.contactInformation);
-  //console.log(state.application.applicationStatus.application.apScores);
   return state;
 }
 

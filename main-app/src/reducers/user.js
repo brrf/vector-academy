@@ -4,7 +4,17 @@ export default function application(state = {}, action) {
       return {
         ...state,
         user: {
-          id: action.user._id
+          id: action.user._id,
+          status: action.user.status
+        }
+      }
+    }
+    case "UPDATE_USER_STATUS": {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          status: action.status
         }
       }
     }

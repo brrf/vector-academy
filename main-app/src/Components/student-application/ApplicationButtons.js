@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ApplicationSubmitButtons (props) {
+export function ApplicationSubmitButtons (props) {
 
 	//validate form. if no errors, handle submit form
 	function reportValidity() {
@@ -18,6 +18,15 @@ export default function ApplicationSubmitButtons (props) {
 	    		value='Save & Continue'
 	    	/>
 	    	<p onClick={reportValidity}>Save & Finish Later</p>
+	    </div>	
+	)
+}
+
+export function ApplicationEditButtons (props) {
+	return (
+		<div className='application-page-submit-container'>
+	    	<button onClick={() => props.handleApplicationStep('-')}>Previous</button>	    	
+	    	<button onClick={() => props.handleApplicationStep('+')}>Next</button>
 	    </div>	
 	)
 }

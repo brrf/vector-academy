@@ -14,7 +14,7 @@
 }
 
 .logo {
-    width: 175px;
+    width: 150px;
 }
 
 .navbar-right {
@@ -38,7 +38,6 @@
 
 .navbar-user-options {
     width: 125px;
-    height: 50px;
     background-color: #fff;
     color: #4f588f;
     padding: 1vw;
