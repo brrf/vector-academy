@@ -27,11 +27,11 @@ commonApp.use(cors({
   origin: ['https://localhost:3001', 'https://www.vectoracademy.io']
 }));
 
-server(marketingApp, mainApp, commonApp, 'dist');
-
-
 commonApp.use(vhost('localhost', marketingApp));
 commonApp.use(vhost('apply.localhost', mainApp));
+
+server(marketingApp, mainApp, commonApp, 'dist');
+
 
 //404 Not Found Middleware
 commonApp.use(function(req, res, next) {
@@ -40,13 +40,10 @@ commonApp.use(function(req, res, next) {
     .send('Not Found');
 });
 
-
-
 //Start server
 commonApp.listen(process.env.PORT || 3001, function () {
   console.log("Listening on port " + process.env.PORT);
 });
-
 
 //Connect to database
 try {

@@ -47,9 +47,6 @@ commonApp.use ((req, res, next) => {
   next()
 });
 
-
-
-
 server(marketingApp, mainApp, commonApp, 'dev');
 
 commonApp.use(vhost('localhost', marketingApp));
