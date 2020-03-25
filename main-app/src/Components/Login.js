@@ -13,7 +13,6 @@ export default function Login ({loginFunction}) {
 
   function handleSubmit (e) {
     e.preventDefault();
-    updateErrors([]);
 
     if (!formData.password || !formData.email) {
       updateErrors(['Please fill out all the fields']);
@@ -25,7 +24,7 @@ export default function Login ({loginFunction}) {
       body: JSON.stringify(formData),
       headers: { 
         "Content-Type": "application/json",
-        //"Access-Control-Allow-Origin": "http://localhost:3000" 
+        "Access-Control-Allow-Origin": "http://localhost:3000" 
       },
       mode: "cors",
       credentials: "include"
@@ -33,9 +32,11 @@ export default function Login ({loginFunction}) {
       .then(res => res.json())
       .then(resObject => {
         if (resObject.errors) {
+          let newErrors = [];
           resObject.errors.forEach(error => {
-            updateErrors([...errors, error])
+            newErrors.push(error);
           });
+          updateErrors(newErrors);
         } else {
             loginFunction();
         }

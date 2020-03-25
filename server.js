@@ -41,7 +41,7 @@ commonApp.use(function(req, res, next) {
 });
 
 //Start server
-commonApp.listen(process.env.PORT || 3001, function () {
+mainApp.listen(process.env.PORT || 3001, function () {
   console.log("Listening on port " + process.env.PORT);
 });
 

@@ -18,82 +18,23 @@ const User = require('./schemas/users');
 
 const authentication = require('./routes/authentication.js');
 
-module.exports = function(marketingApp, mainApp, commonApp, environment) {
+module.exports = function(mainApp, environment) {
 
-	//marketing site routes
-	marketingApp.use(express.static(path.join(__dirname, 'marketing-app', environment)));
+	mainApp.use(helmet());
 
-	marketingApp.get('/', (req, res)=> {
-	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'index.html'));
-	});
+	//cookie parser
+	mainApp.use(cookieParser());
 
-	marketingApp.get('/faqs', (req, res)=> {
-	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'faqs.html'));
-	});
+	//Express body parser
+	mainApp.use(bodyParser.json());
+	mainApp.use(bodyParser.urlencoded({ extended: false }));
 
-	marketingApp.get('/privacy', (req, res)=> {
-	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'privacy.html'));
-	});
-
-	marketingApp.get('/contact', (req, res)=> {
-	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'contact.html'));
-	});
-
-	marketingApp.get('/howitworks', (req, res)=> {
-	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'how-it-works.html'));
-	});
-
-	marketingApp.get('/timeline', (req, res)=> {
-	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'timeline.html'));
-	});
-
-	marketingApp.get('/landingpage', (req, res)=> {
-	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'landing-page.html'));
-	});
-
-	marketingApp.get('/thankyou', (req, res)=> {
-	  res.sendFile(path.join(__dirname, 'marketing-app', environment, 'thank-you.html'));
-	});
-
-	marketingApp.post('/contact', (req, res) => {
-	  //validate input items
-	  if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.message) {
-	    return res.json({err: 'Fill out all form fields'});
-	  }
-	  //send email to vector
-	  let transport = nodemailer.createTransport({
-	    host: 'smtp.zoho.com',
-	    port: 465,
-	    auth: {
-	       user: process.env.ZOHOUSER,
-	       pass: process.env.ZOHOPASS
-	    }
-	  });
-
-	  const message = {
-	    from: 'moshe@vectortrainingacademy.com', // Sender address
-	    to: 'moshe@vectortrainingacademy.com',         // List of recipients
-	    subject: `Message from: ${req.body.firstName} ${req.body.lastName}`, // Subject line
-	    text: `Reply to ${req.body.email}. Message: ${req.body.message}` // Plain text body
-	  };
-	  transport.sendMail(message, function(err, info) {
-	      if (err) {
-	        res.json({err})
-	      } else {
-	        res.json({err: false})
-	      }
-	  });
-	});
-
-	//marketingApp routes
-	authentication(marketingApp);
 
 	//mainApp routes
-
 	mainApp.use(express.static(path.join(__dirname, 'main-app', environment)));
 
 	mainApp.get('/', (req, res)=> {
-  		res.sendFile(path.join(__dirname, 'main-app', environment, 'index.html'));
+			res.sendFile(path.join(__dirname, 'main-app', environment, 'index.html'));
 	});
 
 	//expression session
@@ -152,6 +93,7 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 	//mainApp routes
 
 	mainApp.post('/studentlogin', function (req, res, next) {
+		console.log(req);
 		passport.authenticate('local', {failureFlash: true}, function (err, user, info) {
 			if (err) return next(err);
 			if (!user) {
@@ -399,17 +341,6 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 		res.json({errors: false, file: req.file});
 	});
 
-	//common App shared functionality
-
-	commonApp.use(helmet());
-
-	//cookie parser
-	commonApp.use(cookieParser());
-
-	//Express body parser
-	commonApp.use(bodyParser.json());
-	commonApp.use(bodyParser.urlencoded({ extended: false }));
-
 	//access db
 	mongoose.connect(process.env.MONGO_URI, {
 		useNewUrlParser: true, 
@@ -417,7 +348,7 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 	});
 
 	//express session
-	commonApp.use(
+	mainApp.use(
 	  session({
 	    secret: "secret",
 	    resave: true,
@@ -429,11 +360,4 @@ module.exports = function(marketingApp, mainApp, commonApp, environment) {
 	    })
 	  })
 	);
-
-	// // Passport config
-	// require('./config/passport')(passport);
-
-	// //Passport Middleware
-	// commonApp.use(passport.initialize());
-	// commonApp.use(passport.session());
-}
+};

@@ -2,8 +2,8 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const User = require('../schemas/users');
 
-module.exports = function(mainApp) {
-	mainApp.post('/studentregister', async (req, res) => {
+module.exports = function(marketingApp) {
+	marketingApp.post('/studentregister', async (req, res) => {
 
 		//determine if coming through promoted landing page
 		const regex = /landing/
@@ -11,6 +11,10 @@ module.exports = function(mainApp) {
 
 	 	let errors = [];
 		const saltRounds = 10;
+		if (!req.body) {
+			errors.push('Client-side error');
+			return res.json({errors});
+		}
 		const {password, password2, email} = req.body;
 		if (!password || !password2 || !email) {
 			errors.push('Please fill out all items');
