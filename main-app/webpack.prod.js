@@ -26,7 +26,7 @@ module.exports = merge(common, {
 		new DefinePlugin({
 			PROTOCOL: JSON.stringify('https://'),
 			DOMAIN: JSON.stringify('vectoracademy.io'),
-			PUBLIC: JSON.stringify('./assets')
+			PUBLIC: JSON.stringify('./assets/')
 		})
 	],
 	module: {

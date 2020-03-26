@@ -315,26 +315,22 @@ module.exports = function(mainApp, environment) {
 		} catch {
 			errors.push('Could not find user on server. Try submitting again.')
 		}
-		switch(Number(req.body.applicationStep)) {
-			case 4: {
-				if (!req.file) {
-					return res.json({errors: ['No file was received by the server']});
-				} else if (req.file.mimetype !== 'application/pdf') {
-					return res.json({errors: ['Please upload a pdf']})
-				}
-				try {
-					user.application.cv = req.file;
-					user.markModified('application');
-					user.save();	
-				} catch (err) {
-					console.log(err);
-					errors.push('Error saving to database.')
-					return res.json({errors})
-				}
-				
-			}
-			break;
+			
+		if (!req.file) {
+			return res.json({errors: ['No file was received by the server']});
+		} else if (req.file.mimetype !== 'application/pdf') {
+			return res.json({errors: ['Please upload a pdf']})
 		}
+		try {
+			user.application.cv = req.file;
+			user.markModified('application');
+			user.save();	
+		} catch (err) {
+			console.log(err);
+			errors.push('Error saving to database.')
+			return res.json({errors})
+		}
+				
 		if (errors.length > 0) {
 			return res.json({errors});
 		};	
