@@ -31,7 +31,7 @@ function CV (props) {
 			console.log({requiredFile});
 			updatePdf(requiredFile)
 		} catch {
-			console.log('could not find file');
+			console.log(window.location.pathname);
 			return;
 		}
 	};
