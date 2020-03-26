@@ -26,8 +26,9 @@ function CV (props) {
 
 		//if the file isn't found, fail silently
 		try {
-			console.log(PUBLIC);
+			console.log(`${PUBLIC}${props.data.filename}`);
 			const requiredFile = require(`${PUBLIC}${props.data.filename}`);
+			console.log({requiredFile});
 			updatePdf(requiredFile)
 		} catch {
 			return;
