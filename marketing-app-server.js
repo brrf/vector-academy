@@ -96,23 +96,23 @@ module.exports = function(marketingApp, environment) {
 
 	authentication(marketingApp);
 
-	//access db
-	mongoose.connect(process.env.MONGO_URI, {
-		useNewUrlParser: true, 
-		useUnifiedTopology: true
-	});
+	// //access db
+	// mongoose.connect(process.env.MONGO_URI, {
+	// 	useNewUrlParser: true, 
+	// 	useUnifiedTopology: true
+	// });
 
-	//express session
-	marketingApp.use(
-	  session({
-	    secret: "secret",
-	    resave: true,
-	    saveUninitialized: true,
-	    proxy: true,
-	    cookie: { secure: false },
-	    store: new MongoStore({
-	    	mongooseConnection: mongoose.connection
-	    })
-	  })
-	);
+	// //express session
+	// marketingApp.use(
+	//   session({
+	//     secret: "secret",
+	//     resave: true,
+	//     saveUninitialized: true,
+	//     proxy: true,
+	//     cookie: { secure: false },
+	//     store: new MongoStore({
+	//     	mongooseConnection: mongoose.connection
+	//     })
+	//   })
+	// );
 };

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus} from "@fortawesome/free-solid-svg-icons";
 import {ApplicationSubmitButtons, ApplicationEditButtons} from './ApplicationButtons';
 
+
 function CV (props) {
 	const [file, updateFile] = useState('');
 	const [pdfFile, updatePdf] = useState(null);
@@ -21,17 +22,14 @@ function CV (props) {
 	//get any already existing data and update local state
 	useEffect(getFormData, []);
 	function getFormData () {
-		if (!props.data) return;
+		if (!props.data || !props.userId) return;
 		updateFile(props.data)
-
 		//if the file isn't found, fail silently
 		try {
-			console.log(`${PUBLIC}${props.data.filename}`);
-			const requiredFile = require(`${PUBLIC}${props.data.filename}`);
-			console.log({requiredFile});
-			updatePdf(requiredFile)
+			const pdfName = require('../../../../public/student-cvs/' + props.userId + '/' + props.data.filename);
+			updatePdf(pdfName)
 		} catch {
-			console.log(window.location.pathname);
+			console.log('error finding pdf!!');
 			return;
 		}
 	};
@@ -134,7 +132,8 @@ function mapStateToProps(state) {
 	const complete = state.application.applicationStatus.application.cv ? true : false
 	return {
 		complete,
-		data: state.application.applicationStatus.application.cv
+		data: state.application.applicationStatus.application.cv,
+		userId: state.user.user.id,
 	}
 };
 

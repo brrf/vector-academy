@@ -18,7 +18,7 @@ module.exports = merge(common, {
 		new DefinePlugin({
 			PROTOCOL: JSON.stringify('http://'),
 			DOMAIN: JSON.stringify('localhost:3002'),
-			PUBLIC: JSON.stringify('../../../../assets/student-cvs/')
+			PUBLIC: JSON.stringify('../../../../public/student-cvs/')
 		}),	
 	],
 	module: {

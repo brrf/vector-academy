@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const User = require('../schemas/users');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = function(marketingApp) {
 	marketingApp.post('/studentregister', async (req, res) => {
@@ -41,6 +43,7 @@ module.exports = function(marketingApp) {
 							console.error(err);
 							res.send('an error occurred');
 						} else {
+						    fs.mkdirSync('./public/student-cvs/' + user.id);
 							return res.json({errors: false, promotion})
 						}
 					});

@@ -30,14 +30,13 @@ module.exports = function(mainApp, environment) {
 	mainApp.use(bodyParser.urlencoded({ extended: false }));
 
 
-	//mainApp routes
-	mainApp.use(express.static(path.join(__dirname, 'main-app', environment)));
-
-	mainApp.get('/', (req, res)=> {
-			res.sendFile(path.join(__dirname, 'main-app', environment, 'index.html'));
+	//access db
+	mongoose.connect(process.env.MONGO_URI, {
+		useNewUrlParser: true, 
+		useUnifiedTopology: true
 	});
 
-	//expression session
+	//express session
 	mainApp.use(
 	  session({
 	    secret: "secret",
@@ -45,8 +44,18 @@ module.exports = function(mainApp, environment) {
 	    saveUninitialized: true,
 	    proxy: true,
 	    cookie: { secure: false },
+	    store: new MongoStore({
+	    	mongooseConnection: mongoose.connection
+	    })
 	  })
 	);
+
+	//mainApp routes
+	mainApp.use(express.static(path.join(__dirname, 'main-app', environment)));
+
+	mainApp.get('/', (req, res)=> {
+			res.sendFile(path.join(__dirname, 'main-app', environment, 'index.html'));
+	});
 
 	// Passport config
 	require('./config/passport')(passport);
@@ -61,7 +70,7 @@ module.exports = function(mainApp, environment) {
 	const storage = multer.diskStorage({
 
 	  destination: function (req, file, cb) {
-	    cb(null, path.join(__dirname + '/assets/student-cvs/'));
+	    cb(null, path.join(__dirname + '/public/student-cvs/' + req.user.id + '/'));
 	  },
 	  filename: function (req, file, cb) {
 	    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -93,7 +102,6 @@ module.exports = function(mainApp, environment) {
 	//mainApp routes
 
 	mainApp.post('/studentlogin', function (req, res, next) {
-		console.log(req);
 		passport.authenticate('local', {failureFlash: true}, function (err, user, info) {
 			if (err) return next(err);
 			if (!user) {
@@ -140,7 +148,7 @@ module.exports = function(mainApp, environment) {
 		try {
 			user = await User.findById(req.user._id);
 		} catch {
-			errors.push('Could not find user on server. Try submitting again.')
+			return errors.push('Could not find user on server. Try submitting again.')
 		}
 		switch(req.body.applicationStep) {
 			case 0: {
@@ -336,24 +344,4 @@ module.exports = function(mainApp, environment) {
 		};	
 		res.json({errors: false, file: req.file});
 	});
-
-	//access db
-	mongoose.connect(process.env.MONGO_URI, {
-		useNewUrlParser: true, 
-		useUnifiedTopology: true
-	});
-
-	//express session
-	mainApp.use(
-	  session({
-	    secret: "secret",
-	    resave: true,
-	    saveUninitialized: true,
-	    proxy: true,
-	    cookie: { secure: false },
-	    store: new MongoStore({
-	    	mongooseConnection: mongoose.connection
-	    })
-	  })
-	);
 };
