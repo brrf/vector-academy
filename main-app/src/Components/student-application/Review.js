@@ -7,10 +7,28 @@ import {setApplicationStep} from '../../actions/application';
 function Review ({applicationSteps, data, dispatch}) {
 	const container = useRef(null);
 	const [pdfWidth, updatePdfWidth] = useState(0);
+	const [pdf, updatePdf] = useState(null);
 	useEffect(() => updatePdfWidth(container.current.offsetWidth), []);
 	useEffect(() => {
 	  window.scrollTo(0, 0)
 	}, [])
+
+	useEffect(getPdf, []);
+	function getPdf () {
+		fetch(`${PROTOCOL}apply.${DOMAIN}/cv`, {
+	      method: "GET",
+	      headers: { 
+	        "Content-Type": "application/pdf",
+	      },
+	      mode: "cors",
+	      credentials: "include"
+	    })
+	    .then(res => res.blob())
+	    .then(blob => {
+	    	const pdf = URL.createObjectURL(blob);
+	    	updatePdf(pdf);
+	    });
+	};
 
 	function returnStepJSX (step) {
 		switch (step) {
@@ -88,15 +106,9 @@ function Review ({applicationSteps, data, dispatch}) {
 				)
 			}
 			case 4: {
-				let pdfFile
-				try {
-					pdfFile = require(`../../../../assets/student-cvs/${data.cv.filename}`);
-				} catch {
-					pdfFile = null
-				}
 				return (
 					<Document
-			          file={pdfFile}
+			          file={pdf}
 			          options={{ withCredentials: true }}
 			        >
 			        	<Page pageNumber={1} width={0.8 * pdfWidth}/>
