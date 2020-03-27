@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
@@ -140,6 +141,18 @@ module.exports = function(mainApp, environment) {
 		    currency: 'usd'
 		  });
 		return res.json({secret: paymentIntent.client_secret});
+	})
+
+	mainApp.get('/cv', async (req, res) => {
+		const pdf = __dirname + '/public/student-cvs/' + req.user._id + '/' + req.user.application.cv.filename;
+		const data = fs.readFile(pdf, function (err, content) {
+			if (err) {
+				res.json(errors: ['Error retrieving PDF'])
+			} else {
+				res.writeHead(200, {"Content-type": "application/pdf"});
+				res.end(content);
+			}
+		});
 	})
 
 	mainApp.post('/application', async (req, res) => {

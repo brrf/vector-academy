@@ -23,15 +23,21 @@ function CV (props) {
 	useEffect(getFormData, []);
 	function getFormData () {
 		if (!props.data || !props.userId) return;
-		updateFile(props.data)
-		//if the file isn't found, fail silently
-		try {
-			const pdfName = require('../../../../public/student-cvs/' + props.userId + '/' + props.data.filename);
-			updatePdf(pdfName)
-		} catch {
-			console.log('error finding pdf!!');
-			return;
-		}
+		updateFile(props.data);
+
+		fetch(`${PROTOCOL}apply.${DOMAIN}/cv`, {
+	      method: "GET",
+	      headers: { 
+	        "Content-Type": "application/pdf",
+	      },
+	      mode: "cors",
+	      credentials: "include"
+	    })
+	    .then(res => res.blob())
+	    .then(blob => {
+	    	const pdf = URL.createObjectURL(blob);
+	    	updatePdf(pdf);
+	    });
 	};
 
 	useEffect(() => {
