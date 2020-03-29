@@ -145,6 +145,7 @@ module.exports = function(mainApp, environment) {
 
 	mainApp.get('/cv', async (req, res) => {
 		const pdf = __dirname + '/public/student-cvs/' + req.user._id + '/' + req.user.application.cv.filename;
+		console.log({serverPdf: pdf})
 		const data = fs.readFile(pdf, function (err, content) {
 			if (err) {
 				console.log('server error');
