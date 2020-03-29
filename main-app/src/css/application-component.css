@@ -407,4 +407,12 @@ input[type='radio'] {
   #bar {
     width: 50vw;
   }
+  .application-container {
+    padding: 20px 0px;
+  }
+  .application-form-container {
+    width: 100%;
+    padding: 2vw 0;
+    margin: 40px 0;
+  }
 }

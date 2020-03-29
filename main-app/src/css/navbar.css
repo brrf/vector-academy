@@ -71,12 +71,11 @@ button, input[type='submit'] {
         width: 100px;
     }
     .navbar-user {
-        font-size: 20px;
+        font-size: 30px;
     }
     button {
-        width: 3vw;
+        width: 150px;
         height: 30px;
-        min-width: 125px;
         font-size: 2.3vw;
     }
 
