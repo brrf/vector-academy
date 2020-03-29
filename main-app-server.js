@@ -333,6 +333,7 @@ module.exports = function(mainApp, environment) {
 		let errors = []
 		let user;
 		upload(req, res, async function(err) {
+			console.log('in the upload?')
 			if (err instanceof multer.MulterError) {
 				errors.push('An error occured on uploading. The file may be too large.');
 			} else {
