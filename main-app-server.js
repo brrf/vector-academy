@@ -30,7 +30,7 @@ module.exports = function(mainApp, environment) {
 	mainApp.use(bodyParser.json());
 	mainApp.use(bodyParser.urlencoded({ 
 		extended: false,
-		limit:'50mb'
+		limit:'100MB'
 	}));
 
 
@@ -335,8 +335,10 @@ module.exports = function(mainApp, environment) {
 		let errors = []
 		let user;
 		upload(req, res, async function(err) {
-			if (err) {
+			if (err instanceof multer.MulterError) {
 				errors.push('An error occured on uploading. The file may be too large.');
+			} else if (err) {
+				errors.push('An unknown error occurred.')	
 			} else {
 				try {
 					user = await User.findById(req.user._id);

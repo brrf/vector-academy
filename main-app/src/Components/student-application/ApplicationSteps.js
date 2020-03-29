@@ -86,7 +86,6 @@ function ApplicationSteps (props) {
 	}
 
 	function handleSubmitFile (e, data, nextPage) {
-		console.log({data})
 		if (e) e.preventDefault();
 		let formData = new FormData();
       	formData.append("cv", data);
@@ -95,7 +94,7 @@ function ApplicationSteps (props) {
 	      method: "POST",
 	      body: formData,
 	      headers: { 
-	      	"Content-Type": "multipart/form-data",
+	      //	"Content-Type": "application/json",
 	      },
 	      mode: "cors",
 	      credentials: "include"
