@@ -345,7 +345,7 @@ module.exports = function(mainApp, environment) {
 				} catch {
 					errors.push('Could not find user on server. Try submitting again.')
 				}
-					
+				console.log({file: req.file})
 				if (!req.file) {
 					return res.json({errors: ['No file was received by the server']});
 				} else if (req.file.mimetype !== 'application/pdf') {

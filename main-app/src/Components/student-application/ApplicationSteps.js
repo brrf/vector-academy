@@ -95,6 +95,7 @@ function ApplicationSteps (props) {
 	      method: "POST",
 	      body: formData,
 	      headers: { 
+	      	"Content-Type": "multipart/form-data",
 	      },
 	      mode: "cors",
 	      credentials: "include"
