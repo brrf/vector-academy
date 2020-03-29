@@ -2,7 +2,6 @@ import React, {useRef, useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {ApplicationSubmitButtons, ApplicationEditButtons} from './ApplicationButtons';
 
-
 function ContactInformation (props) {
 	const [inputState, updateInputState] = useState([
 		{
@@ -55,6 +54,9 @@ function ContactInformation (props) {
 	}, []);
 
 	function handleUpdateFormData(e, field) {
+		if (field === 'birthdate') {
+			console.log(e.target.value);
+		}
 		let value;
 		if (field === 'citizen') value = Boolean(e.target.value);
 		else value = e.target.value;
@@ -200,8 +202,8 @@ function ContactInformation (props) {
 				      className={`styled-input ${inputState[3].focus ? 'styled-input-focus' : ''} ${inputState[3].empty ? 'styled-input-empty' : ''}`}      	      
 				      type="text"
 				      ref={datePicker}		      
-				      name="birthdate"	      
-				      //placeholder='Birthdate'
+				      name="birthdate"
+				      placeholder='YYYY-MM-DD'	      
 				      onFocus={() => datePicker.current.type = 'date'}
 				      onBlur={() => datePicker.current.type = 'text'}
 				      value={formData.birthdate}

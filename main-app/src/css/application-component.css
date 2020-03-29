@@ -415,4 +415,7 @@ input[type='radio'] {
     padding: 2vw 1vw;
     margin: 40px 0;
   }
+  .application-page-submit-container p {
+    font-size: 2.3vw;
+  }
 }
