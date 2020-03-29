@@ -181,7 +181,7 @@ function ContactInformation (props) {
 				    <input		
 				      className={`styled-input ${inputState[2].focus ? 'styled-input-focus' : ''} ${inputState[2].empty ? 'styled-input-empty' : ''}`}      	      
 				      type="tel"
-				      pattern='^[2-9]\d{2}-\d{3}-\d{4}$'
+				      pattern='^[2-9]\d{2}-?\d{3}-?\d{4}$'
 				      name="phone"	      
 				      placeholder='123-456-7890'
 				      value={formData.phone}
