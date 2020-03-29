@@ -200,13 +200,10 @@ function ContactInformation (props) {
 				>
 				    <input		
 				      className={`styled-input ${inputState[3].focus ? 'styled-input-focus' : ''} ${inputState[3].empty ? 'styled-input-empty' : ''}`}      	      
-				      type="text"
-				      ref={datePicker}		      
+				      type="text"	      
 				      name="birthdate"
 				      placeholder='YYYY-MM-DD'
 				      pattern='^\d{4}-?\d{2}-?\d{2}$'      
-				      onFocus={() => datePicker.current.type = 'date'}
-				      onBlur={() => datePicker.current.type = 'text'}
 				      value={formData.birthdate}
 				      onChange={(e) => handleUpdateFormData(e, 'birthdate')}
 				      required
