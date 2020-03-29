@@ -147,8 +147,10 @@ module.exports = function(mainApp, environment) {
 		const pdf = __dirname + '/public/student-cvs/' + req.user._id + '/' + req.user.application.cv.filename;
 		const data = fs.readFile(pdf, function (err, content) {
 			if (err) {
+				console.log('server error');
 				res.json({errors: ['Error retrieving PDF']})
 			} else {
+				console.log({content});
 				res.writeHead(200, {"Content-type": "application/pdf"});
 				res.end(content);
 			}
