@@ -94,7 +94,7 @@ function Essay (props) {
 				{
 					formData.selection !== null
 						? <form className='textarea-form' onSubmit={(e) => props.handleSubmit(e, formData, true)} ref={form}>
-							<textarea onChange={(e) => handleUpdateFormData('essay', e.target.value)} value={formData.essay} />
+							<textarea onChange={(e) => handleUpdateFormData('essay', e.target.value)} value={formData.essay} required/>
 							<div><p className='word-count'>{`${650 - formData.essay.split(' ').length} words remaining`}</p></div>
 							<ApplicationSubmitButtons form={form} handleSubmit={props.handleSubmit} formData={formData} handleApplicationStep={props.handleApplicationStep} />
 						</form>

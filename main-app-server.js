@@ -98,7 +98,7 @@ module.exports = function(mainApp, environment) {
 	  limits: {fileSize: 10000000},
 	  fileFilter: function(req, file, cb) {
 	    checkFileType(file, cb)
-	  } })
+	  } }).single('cv')
 
 	//mainApp routes
 
@@ -328,33 +328,37 @@ module.exports = function(mainApp, environment) {
 		res.json({errors: false});
 	});
 
-	mainApp.post('/applicationfile', upload.single('cv'), async (req, res) => {
+	mainApp.post('/applicationfile', (req, res) => {
 		let errors = []
 		let user;
-		try {
-			user = await User.findById(req.user._id);
-		} catch {
-			errors.push('Could not find user on server. Try submitting again.')
-		}
-			
-		if (!req.file) {
-			return res.json({errors: ['No file was received by the server']});
-		} else if (req.file.mimetype !== 'application/pdf') {
-			return res.json({errors: ['Please upload a pdf']})
-		}
-		try {
-			user.application.cv = req.file;
-			user.markModified('application');
-			user.save();	
-		} catch (err) {
-			console.log(err);
-			errors.push('Error saving to database.')
-			return res.json({errors})
-		}
-				
-		if (errors.length > 0) {
-			return res.json({errors});
-		};	
-		res.json({errors: false, file: req.file});
+		upload(req, res, async function(err) {
+			if (err instanceof multer.MulterError) {
+				errors.push('An error occured on uploading. The file may be too large.');
+			} else {
+				try {
+					user = await User.findById(req.user._id);
+				} catch {
+					errors.push('Could not find user on server. Try submitting again.')
+				}
+					
+				if (!req.file) {
+					return res.json({errors: ['No file was received by the server']});
+				} else if (req.file.mimetype !== 'application/pdf') {
+					return res.json({errors: ['Please upload a pdf']})
+				}
+				try {
+					user.application.cv = req.file;
+					user.markModified('application');
+					user.save();	
+				} catch (err) {
+					console.log(err);
+					errors.push('Error saving to database.')
+					return res.json({errors})
+				}
+			}
+			if (errors.length > 0) {
+				return res.json({errors});
+			}	else res.json({errors: false, file: req.file});
+		});
 	});
 };

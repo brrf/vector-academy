@@ -203,7 +203,8 @@ function ContactInformation (props) {
 				      type="text"
 				      ref={datePicker}		      
 				      name="birthdate"
-				      placeholder='YYYY-MM-DD'	      
+				      placeholder='YYYY-MM-DD'
+				      pattern='^\d{4}-?\d{2}-?\d{2}$'      
 				      onFocus={() => datePicker.current.type = 'date'}
 				      onBlur={() => datePicker.current.type = 'text'}
 				      value={formData.birthdate}

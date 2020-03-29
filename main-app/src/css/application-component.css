@@ -418,4 +418,18 @@ input[type='radio'] {
   .application-page-submit-container p {
     font-size: 2.3vw;
   }
+  .essay-input-prompt-container {
+    width: 90%;
+    padding: 3vw;
+  }
+  .essay-input-prompt-container span {
+    top: 0.6vw;
+    right: 1.5vw;
+  }
+  .application-input textarea {
+    width: 90vw;
+  }
+  .word-count {
+    font-size: 2.3vw;
+  }
 }
