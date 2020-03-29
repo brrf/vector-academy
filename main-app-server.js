@@ -339,6 +339,7 @@ module.exports = function(mainApp, environment) {
 			console.log('in the upload?')
 			if (err) {
 				errors.push('An error occured on uploading. The file may be too large.');
+				console.log({errors});
 			} else {
 				try {
 					user = await User.findById(req.user._id);
