@@ -410,6 +410,9 @@ input[type='radio'] {
   .application-container {
     padding: 20px 0px;
   }
+  .application-step {
+    width: 90vw;
+  }
   .application-form-container {
     width: 100%;
     padding: 2vw 1vw;

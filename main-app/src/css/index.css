@@ -159,9 +159,6 @@ input::placeholder {
 
 /*mobile*/
 @media (max-width: 550px) {
-	/*html, body {
-		max-width: 1100px;
-	}*/
 	h1 {
 		font-size: 28px;
 	}

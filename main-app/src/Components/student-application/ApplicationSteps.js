@@ -93,9 +93,6 @@ function ApplicationSteps (props) {
 		fetch(`${PROTOCOL}apply.${DOMAIN}/applicationfile`, {
 	      method: "POST",
 	      body: formData,
-	      headers: { 
-	      //	"Content-Type": "application/json",
-	      },
 	      mode: "cors",
 	      credentials: "include"
 	    })
