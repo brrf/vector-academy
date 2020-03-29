@@ -299,54 +299,86 @@ function TestScore (props) {
 					    <ApplicationSubmitButtons form={form1} handleSubmit={props.handleSubmit} formData={{...formData[testOption], testOption}} handleApplicationStep={props.handleApplicationStep}/>
 					</form>
 					:	<form onSubmit={(e) => props.handleSubmit(e, {...formData[testOption], testOption}, true)} ref={form2}> 
-						    <input		
-						      className="application-text-input"		      	
-						      type="number"
-						      min="1"
-						      max="36"
-						      step="1"
-						      name="english"	      
-						      placeholder='English'
-						      value={formData.act.english}
-						      onChange={(e) => handleUpdateFormData(e, 'english')}
-						      //required
-						    />
-						    <input	
-						      className="application-text-input"			      
-						      type="number"
-						      min="1"
-						      max="36"
-						      step="1"
-						      name="math"			  
-						      placeholder='Mathematics'
-						      value={formData.act.math}
-						      onChange={(e) => handleUpdateFormData(e, 'math')}
-						      //required
-						    />
-						    <input		
-						      className="application-text-input"		      
-						      type="number"
-						      min="1"
-						      max="36"
-						      step="1"
-						      name="reading"	      
-						      placeholder='Reading'
-						      value={formData.act.reading}
-						      onChange={(e) => handleUpdateFormData(e, 'reading')}
-						      //required
-						    />
-						    <input		
-						      className="application-text-input"		      
-						      type="number"
-						      min="1"
-						      max="36"
-						      step="1"
-						      name="science"	      
-						      placeholder='Science & Reasoning'
-						      value={formData.act.science}
-						      onChange={(e) => handleUpdateFormData(e, 'science')}
-						      //required
-						    />
+							<div className='styled-field test-scores-score' 
+								onFocus={() => handleFocus(0, 'act')}
+								onBlur={() => handleBlur(0, 'act')}
+								onKeyUp={(e) => handleKeyUp(e, 0, 'act')}
+							>
+							    <input		
+							      className={`styled-input ${inputStateAct[0].focus ? 'styled-input-focus' : ''} ${inputStateAct[0].empty ? 'styled-input-empty' : ''}`}      	      		      	
+							      type="number"
+							      min="1"
+							      max="36"
+							      step="1"
+							      name="english"	      
+							      placeholder='Score'
+							      value={formData.act.english}
+							      onChange={(e) => handleUpdateFormData(e, 'english')}
+							      required
+							    />
+							    <label className='styled-label'>English</label>
+								<div className='baseline'></div>
+							</div>
+							<div className='styled-field test-scores-score' 
+								onFocus={() => handleFocus(1, 'act')}
+								onBlur={() => handleBlur(1, 'act')}
+								onKeyUp={(e) => handleKeyUp(e, 1, 'act')}
+							>
+							    <input	
+							      className={`styled-input ${inputStateAct[1].focus ? 'styled-input-focus' : ''} ${inputStateAct[1].empty ? 'styled-input-empty' : ''}`}      	      			      
+							      type="number"
+							      min="1"
+							      max="36"
+							      step="1"
+							      name="math"			  
+							      placeholder='Score'
+							      value={formData.act.math}
+							      onChange={(e) => handleUpdateFormData(e, 'math')}
+							      required
+							    />
+							    <label className='styled-label'>Mathematics</label>
+								<div className='baseline'></div>
+							</div>
+							<div className='styled-field test-scores-score' 
+								onFocus={() => handleFocus(2, 'act')}
+								onBlur={() => handleBlur(2, 'act')}
+								onKeyUp={(e) => handleKeyUp(e, 2, 'act')}
+							>
+							    <input		
+							      className={`styled-input ${inputStateAct[2].focus ? 'styled-input-focus' : ''} ${inputStateAct[2].empty ? 'styled-input-empty' : ''}`}      	      		      
+							      type="number"
+							      min="1"
+							      max="36"
+							      step="1"
+							      name="reading"	      
+							      placeholder='Score'
+							      value={formData.act.reading}
+							      onChange={(e) => handleUpdateFormData(e, 'reading')}
+							      required
+							    />
+							    <label className='styled-label'>Reading</label>
+								<div className='baseline'></div>
+							</div>
+							<div className='styled-field test-scores-score' 
+								onFocus={() => handleFocus(3, 'act')}
+								onBlur={() => handleBlur(3, 'act')}
+								onKeyUp={(e) => handleKeyUp(e, 3, 'act')}
+							>
+							    <input		
+							      className={`styled-input ${inputStateAct[3].focus ? 'styled-input-focus' : ''} ${inputStateAct[3].empty ? 'styled-input-empty' : ''}`}      	      		      
+							      type="number"
+							      min="1"
+							      max="36"
+							      step="1"
+							      name="science"	      
+							      placeholder='Score'
+							      value={formData.act.science}
+							      onChange={(e) => handleUpdateFormData(e, 'science')}
+							      required
+							    />
+							    <label className='styled-label'>Science & Reasoning</label>
+								<div className='baseline'></div>
+							</div>
 						    <ApplicationSubmitButtons handleSubmit={props.handleSubmit} formData={{...formData[testOption], testOption}} form={form2} handleApplicationStep={props.handleApplicationStep}/>
 						</form>
 				: null
