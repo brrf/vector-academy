@@ -79,6 +79,7 @@ module.exports = function(mainApp, environment) {
 	})
 
 	function checkFileType(file, cb) {
+		console.log('checking file');
 	  // Allowed ext
 	  const filetypes = /pdf/;
 	  // Check ext
@@ -97,6 +98,7 @@ module.exports = function(mainApp, environment) {
 	  storage,
 	  limits: {fileSize: 10000000},
 	  fileFilter: function(req, file, cb) {
+	  	console.log('upload area');
 	    checkFileType(file, cb)
 	  } }).single('cv')
 
