@@ -438,4 +438,7 @@ input[type='radio'] {
   .question-word-count {
     flex-basis: 90%;
   }
+  .review-section h3 {
+    font-size: 3vw;
+  }
 }
