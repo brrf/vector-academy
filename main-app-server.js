@@ -98,7 +98,7 @@ module.exports = function(mainApp, environment) {
 	 
 	const upload = multer({ 
 	  storage,
-	  limits: {fileSize: 2000000},
+	  limits: {fileSize: 5000000},
 	  fileFilter: function(req, file, cb) {
 	    checkFileType(file, cb)
 	  } }).single('cv')

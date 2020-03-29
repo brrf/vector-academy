@@ -117,7 +117,7 @@ function CV (props) {
 				<p>Please upload your CV. Ensure that it contains any extracurriculuar activities or hobbies.</p>
 				<form onSubmit={(e) => props.handleSubmit(e, file, true)} ref={form}>
 					<div className='file-upload'>
-						<p>Please upload .pdf files only. Max 2MB.</p>
+						<p>Please upload .pdf files only. Max 5MB.</p>
 						<input
 							type='file'
 							accept='application/pdf'
