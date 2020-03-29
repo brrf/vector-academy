@@ -7,7 +7,6 @@ import {faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import {setApplicationStep} from '../actions/application.js';
 
 function Navbar (props) {
-	const [userOptionsHidden, toggleUserOptions] = useState(true);
 	const [firstIncomplete, setFirstIncomplete] = useState(null);
 
 	function logout () {
@@ -15,7 +14,6 @@ function Navbar (props) {
 			method: "GET",
 			headers: { 
 			"Content-Type": "application/json",
-		//	"Access-Control-Allow-Origin": "http://localhost:3000" 
 			},
 			mode: "cors",
 			credentials: "include"
@@ -28,6 +26,11 @@ function Navbar (props) {
 				props.toggleLogin(false);
 			}
 		})
+	}
+
+	function handleToggleUserOptions(e) {
+		props.toggleUserOptions(!props.userOptionsHidden);
+		e.stopPropagation();
 	}
 
 	function handleHomeButton (step) {
@@ -72,13 +75,12 @@ function Navbar (props) {
 						? <button onClick={() => handleHomeButton(button.applicationStep)}>{button.text}</button>
 						: null
 				}
-             	<div className='navbar-user-container' onClick={() => toggleUserOptions(!userOptionsHidden)}>
+             	<div className='navbar-user-container' onClick={handleToggleUserOptions}>
              		<FontAwesomeIcon
 		                icon={faUserCircle}
-		                size="2x"
 		                className='navbar-user'
           			/>
-             		<div onClick={logout} className={`navbar-user-options ${userOptionsHidden ? 'hidden' : null}`}>Logout</div>
+             		<div onClick={logout} className={`navbar-user-options ${props.userOptionsHidden ? 'hidden' : null}`}>Logout</div>
              	</div>
              </div>
 		</div>

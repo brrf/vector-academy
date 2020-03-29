@@ -35,8 +35,7 @@ function CV (props) {
 	    })
 	    .then(res => res.blob())
 	    .then(blob => {
-	    	const pdf = URL.createObjectURL(blob);
-	    	updatePdf(pdf);
+	    	updatePdf(blob);
 	    });
 	};
 

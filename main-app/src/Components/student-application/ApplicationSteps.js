@@ -48,6 +48,8 @@ function ApplicationSteps (props) {
 		handleErrors([]);
 		if (applicationStep === 0 && counter === '-') {
 			props.dispatch(setApplicationStep(false));
+		} else if (applicationStep === 5 && counter === '+' && props.completedSteps < 6) {
+			props.dispatch(setApplicationStep(false));
 		} else if (counter === '+') {
 			props.dispatch(setApplicationStep(applicationStep + 1))
 		} else if (counter === '-') {
@@ -64,7 +66,6 @@ function ApplicationSteps (props) {
 	      body: JSON.stringify({data, applicationStep}),
 	      headers: { 
 	        "Content-Type": "application/json",
-	       // "Access-Control-Allow-Origin": "http://localhost:3000" 
 	      },
 	      mode: "cors",
 	      credentials: "include"

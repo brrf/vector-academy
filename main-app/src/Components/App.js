@@ -11,6 +11,9 @@ import '../css/app.css';
 function App(props) {
   const [loggedIn, toggleLogin] = useState(false); 
   const [loading, toggleLoading] = useState(true);
+
+  //click anywhere in app will hide userOptions menu; pass these as props to navbar.
+  const [userOptionsHidden, toggleUserOptions] = useState(true);
   useEffect(isLoggedIn, [])
 
   function isLoggedIn() {
@@ -18,7 +21,6 @@ function App(props) {
       method: "GET",
       headers: { 
         "Content-Type": "application/json",
-     //   "Access-Control-Allow-Origin": "http://localhost:3000" 
       },
       mode: "cors",
       credentials: "include"
@@ -46,13 +48,13 @@ function App(props) {
   	)
   } else
   return (
-  	<React.Fragment>
-  		<Navbar toggleLogin={toggleLogin}/>
+  	<div onClick={() => toggleUserOptions(true)}>
+  		<Navbar toggleLogin={toggleLogin} userOptionsHidden={userOptionsHidden} toggleUserOptions={toggleUserOptions}/>
       <div id='main-container'>
         <MainContent />
       </div>
   		<Footer />
-	</React.Fragment>
+	</div>
   );
 }
 
