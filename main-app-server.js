@@ -28,7 +28,10 @@ module.exports = function(mainApp, environment) {
 
 	//Express body parser
 	mainApp.use(bodyParser.json());
-	mainApp.use(bodyParser.urlencoded({ extended: false }));
+	mainApp.use(bodyParser.urlencoded({ 
+		extended: false,
+		limit:'50mb'
+	}));
 
 
 	//access db
