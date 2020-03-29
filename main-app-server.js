@@ -329,6 +329,7 @@ module.exports = function(mainApp, environment) {
 	});
 
 	mainApp.post('/applicationfile', (req, res) => {
+		console.log('hit the route');
 		let errors = []
 		let user;
 		upload(req, res, async function(err) {
