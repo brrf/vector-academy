@@ -82,7 +82,6 @@ module.exports = function(mainApp, environment) {
 	})
 
 	function checkFileType(file, cb) {
-		console.log('checking file');
 	  // Allowed ext
 	  const filetypes = /pdf/;
 	  // Check ext
@@ -101,7 +100,6 @@ module.exports = function(mainApp, environment) {
 	  storage,
 	  limits: {fileSize: 2000000},
 	  fileFilter: function(req, file, cb) {
-	  	console.log('upload area');
 	    checkFileType(file, cb)
 	  } }).single('cv')
 
@@ -150,13 +148,10 @@ module.exports = function(mainApp, environment) {
 
 	mainApp.get('/cv', async (req, res) => {
 		const pdf = __dirname + '/public/student-cvs/' + req.user._id + '/' + req.user.application.cv.filename;
-		console.log({serverPdf: pdf})
 		const data = fs.readFile(pdf, function (err, content) {
 			if (err) {
-				console.log('server error');
 				res.json({errors: ['Error retrieving PDF']})
 			} else {
-				console.log({content});
 				res.writeHead(200, {"Content-type": "application/pdf"});
 				res.end(content);
 			}
@@ -337,21 +332,17 @@ module.exports = function(mainApp, environment) {
 	});
 
 	mainApp.post('/applicationfile', (req, res) => {
-		console.log('hit the route');
 		let errors = []
 		let user;
 		upload(req, res, async function(err) {
-			console.log('in the upload?')
 			if (err) {
 				errors.push('An error occured on uploading. The file may be too large.');
-				console.log({errors});
 			} else {
 				try {
 					user = await User.findById(req.user._id);
 				} catch {
 					errors.push('Could not find user on server. Try submitting again.')
 				}
-				console.log({file: req.file})
 				if (!req.file) {
 					return res.json({errors: ['No file was received by the server']});
 				} else if (req.file.mimetype !== 'application/pdf') {

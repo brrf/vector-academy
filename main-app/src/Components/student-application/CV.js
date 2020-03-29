@@ -24,7 +24,6 @@ function CV (props) {
 	function getFormData () {
 		if (!props.data || !props.userId) return;
 		updateFile(props.data);
-		console.log({cvData: props.data})
 		fetch(`${PROTOCOL}apply.${DOMAIN}/cv`, {
 	      method: "GET",
 	      headers: { 
@@ -35,7 +34,6 @@ function CV (props) {
 	    })
 	    .then(res => res.blob())
 	    .then(blob => {
-	    	console.log({blob})
 	    	updatePdf(blob);
 	    });
 	};
