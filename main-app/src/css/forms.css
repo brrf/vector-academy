@@ -222,8 +222,7 @@ textarea {
 }
 
 .warning {
-  /*prevent font boosting*/
-  max-height: 999999px;
+  font-size: 12px;
 	flex-basis: 30px;
 	color: #721c24;
   background-color: #f8d7da;
