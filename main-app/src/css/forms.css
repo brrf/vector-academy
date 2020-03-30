@@ -222,10 +222,11 @@ textarea {
 }
 
 .warning {
+  max-height: 999999px
 	flex-basis: 30px;
 	color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
 	margin-bottom: 10px;
 	padding: 6px;
 	display: flex;

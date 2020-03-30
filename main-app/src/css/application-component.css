@@ -413,6 +413,9 @@ input[type='radio'] {
   .application-step {
     width: 90vw;
   }
+  .application-step p {
+    max-height: 999999px
+  }
   .application-form-container {
     width: 100%;
     padding: 2vw 1vw;
