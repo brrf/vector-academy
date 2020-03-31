@@ -48,3 +48,9 @@
 .stripe-input-invalid::placeholder {
   color: '#FFCCA5'
 }
+
+@media (max-width: 550px) {
+  .stripe-form {
+    width: 100%;
+  }
+}

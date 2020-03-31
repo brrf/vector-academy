@@ -4,4 +4,4 @@ dist/
 .env
 dev/
 assets/
-public
+/public
