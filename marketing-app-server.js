@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const multer  = require('multer');
 
-const User = require('./schemas/users');
+const Student = require('./schemas/students');
 
 const authentication = require('./routes/authentication.js');
 

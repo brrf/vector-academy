@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const studentSchema = new mongoose.Schema({
 	password: {
 		required: true,
 		type: String
@@ -25,4 +25,4 @@ const userSchema = new mongoose.Schema({
 	}
 }, {minimize: false});
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Student', studentSchema);

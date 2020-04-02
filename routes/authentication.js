@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const User = require('../schemas/users');
+const User = require('../schemas/students');
 const fs = require('fs');
 const path = require('path');
 

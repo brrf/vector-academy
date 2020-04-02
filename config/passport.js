@@ -1,9 +1,17 @@
-const User = require("../schemas/users");
+const Student = require("../schemas/students");
+const Manager = require("../schemas/managers");
 const mongoose = require("mongoose");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 
-module.exports = function(passport) {
+module.exports = function(passport, userType) {
+	let User;
+	if (userType === 'student') {
+		User = Student;
+	} else {
+		User = Manager;
+	};
+
 	passport.use(
 		new LocalStrategy(
 			{

@@ -1,0 +1,30 @@
+.register-form-container {
+	width: 425px;
+	margin-top: 250px;
+}
+
+.register-form-container button {
+	margin-bottom: 20px;
+}
+
+.register-form-container p {
+	font-size: 1vw;
+}
+
+@media (max-width: 990px) {
+	.register-form-container {
+		width: 55%;
+	}
+	.register-form-container p {
+	font-size: 1.5vw;
+	}
+}
+
+@media (max-width: 550px) {
+	.register-form-container {
+		width: 65%;
+	}
+	.register-form-container p {
+	font-size: 2.2vw;
+	}
+}

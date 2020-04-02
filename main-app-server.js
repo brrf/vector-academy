@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const multer  = require('multer');
 
-const User = require('./schemas/users');
+const Student = require('./schemas/students');
 
 const authentication = require('./routes/authentication.js');
 
@@ -62,7 +62,7 @@ module.exports = function(mainApp, environment) {
 	});
 
 	// Passport config
-	require('./config/passport')(passport);
+	require('./config/passport')(passport, 'student');
 
 	//Passport Middleware
 	mainApp.use(passport.initialize());
@@ -162,7 +162,7 @@ module.exports = function(mainApp, environment) {
 		let errors = []
 		let user;
 		try {
-			user = await User.findById(req.user._id);
+			user = await Student.findById(req.user._id);
 		} catch {
 			return errors.push('Could not find user on server. Try submitting again.')
 		}
@@ -341,7 +341,7 @@ module.exports = function(mainApp, environment) {
 				errors.push('An unknown error occurred.')	
 			} else {
 				try {
-					user = await User.findById(req.user._id);
+					user = await Student.findById(req.user._id);
 				} catch {
 					errors.push('Could not find user on server. Try submitting again.')
 				}
