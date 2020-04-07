@@ -8,11 +8,13 @@ module.exports = merge(common, {
 	mode: "development",
 	devServer: {
 	    compress: true,
-	    port: 3000
+	    port: 3000,
+	    historyApiFallback: true
   	},
 	output: {
 		filename: "[name].bundle.js",
-		path: path.resolve(__dirname, "dev")
+		path: path.resolve(__dirname, "dev"),
+		// publicPath: '/'
 	},
 	plugins: [
 		new DefinePlugin({

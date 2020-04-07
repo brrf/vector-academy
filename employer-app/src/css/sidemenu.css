@@ -5,6 +5,8 @@
 	background-color: #202a65;
 	box-shadow: 4px -2px 5px -1px #a9a9a9b5;
 	z-index: 2;
+    min-height: 85vh;
+    margin: 0;
 }
 
 .features-container {
@@ -23,10 +25,6 @@
 .features-container:hover {
 	background-color: #e8644259;
 	cursor: pointer;
-}
-
-.temp-features-container:hover {
-    cursor: not-allowed;
 }
 
 .features-container.active {

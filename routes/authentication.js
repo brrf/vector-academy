@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const User = require('../schemas/students');
+const Student = require('../schemas/students');
 const fs = require('fs');
 const path = require('path');
 
@@ -25,7 +25,7 @@ module.exports = function(marketingApp) {
 			errors.push('Passwords do not match')
 		};
 
-		let user = await User.findOne({email});
+		let user = await Student.findOne({email});
 		if (user) {
 			errors.push('Email is already registered. Stay tuned!')
 		} 
@@ -34,7 +34,7 @@ module.exports = function(marketingApp) {
 		} else {
 			bcrypt.genSalt(saltRounds, function(err, salt) {
 				bcrypt.hash(password, salt, async function(err, hash) {
-					await User.create({
+					await Student.create({
 						password: hash,
 						email,
 						promotion

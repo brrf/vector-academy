@@ -2,7 +2,6 @@
 
 const express = require('express');
 const path = require('path');
-const nodemailer = require('nodemailer');
 require('dotenv').config();
 const flash = require('connect-flash');
 const helmet = require('helmet');
@@ -12,6 +11,7 @@ const session = require("express-session");
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const multer  = require('multer');
+const sendEmail = require('./utils/send-email');
 
 const Student = require('./schemas/students');
 
@@ -69,29 +69,7 @@ module.exports = function(marketingApp, environment) {
 	  if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.message) {
 	    return res.json({err: 'Fill out all form fields'});
 	  }
-	  //send email to vector
-	  let transport = nodemailer.createTransport({
-	    host: 'smtp.zoho.com',
-	    port: 465,
-	    auth: {
-	       user: process.env.ZOHOUSER,
-	       pass: process.env.ZOHOPASS
-	    }
-	  });
-
-	  const message = {
-	    from: 'moshe@vectortrainingacademy.com', // Sender address
-	    to: 'moshe@vectortrainingacademy.com',         // List of recipients
-	    subject: `Message from: ${req.body.firstName} ${req.body.lastName}`, // Subject line
-	    text: `Reply to ${req.body.email}. Message: ${req.body.message}` // Plain text body
-	  };
-	  transport.sendMail(message, function(err, info) {
-	      if (err) {
-	        res.json({err})
-	      } else {
-	        res.json({err: false})
-	      }
-	  });
+	  sendEmail('moshe@vectortrainingacademy.com', 'moshe@vectortrainingacademy.com', `Message from: ${req.body.firstName} ${req.body.lastName}`, `Reply to ${req.body.email}. Message: ${req.body.message}`);
 	});
 
 	authentication(marketingApp);

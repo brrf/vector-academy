@@ -10,7 +10,7 @@ const managerSchema = new mongoose.Schema({
 		type: String,
 		unique: true
 	},
-	//0: hiring manager, 1: hiring admin
+	//0: hiring manager, 1: hiring admin, 2: vector admin
 	clearance: {
 		required: true,
 		type: Number,

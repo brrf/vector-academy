@@ -1,18 +1,10 @@
 const Student = require("../schemas/students");
-const Manager = require("../schemas/managers");
 const mongoose = require("mongoose");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 
-module.exports = function(passport, userType) {
-	let User;
-	if (userType === 'student') {
-		User = Student;
-	} else {
-		User = Manager;
-	};
-
-	passport.use(
+module.exports = function(passport) {
+	passport.use('student-strategy',
 		new LocalStrategy(
 			{
 				usernameField: "email",
@@ -20,7 +12,8 @@ module.exports = function(passport, userType) {
 				passReqToCallback : true
 			},
 			function(req, username, password, done) {
-				User.findOne({ email: username }, async function(err, user) {
+				console.log('am i here again?');
+				Student.findOne({ email: username }, async function(err, user) {
 					if (err) {
 						return done(err);
 					}
@@ -38,11 +31,12 @@ module.exports = function(passport, userType) {
 	);
 
 	passport.serializeUser(function(user, done) {
+		console.log('a student awaits!')
 		done(null, user.id);
 	});
 
 	passport.deserializeUser(function(id, done) {
-		User.findById(id, function(err, user) {
+		Student.findById(id, function(err, user) {
 			done(err, user);
 		});
 	});

@@ -12,7 +12,7 @@ export default function ApplicationComponent ({toggleSidebarHidden}) {
 	
 
 	return (
-		<div onClick={handleSidebar} className='application-container'>
+		<div onClick={handleSidebar} className='content-container'>
 			<ApplicationSteps />		
 		</div>
 	);

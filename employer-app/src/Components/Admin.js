@@ -4,7 +4,7 @@ import '../css/index.css';
 import '../css/forms.css';
 import '../css/register.css';
 
-export default function Login ({loginFunction}) {
+export default function Admin (props) {
   const [formData, updateFormData] = useState({
     password: '',
     email: ''
@@ -19,12 +19,11 @@ export default function Login ({loginFunction}) {
       return;
     }
     
-    fetch(`${PROTOCOL}${DOMAIN}/employerlogin`, {
+    fetch(`${PROTOCOL}${DOMAIN}/employerregister`, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: { 
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3000" 
       },
       mode: "cors",
       credentials: "include"
@@ -38,7 +37,7 @@ export default function Login ({loginFunction}) {
           });
           updateErrors(newErrors);
         } else {
-            loginFunction();
+           console.log('working')
         }
       });
   };
@@ -62,7 +61,7 @@ export default function Login ({loginFunction}) {
       <div id="form-container" className="register-form-container">
         <Warning errors={errors}/>
         <form>
-          <h2>Login</h2>
+          <h2>Register</h2>
           <input
             className="form-full-width"
             type="email"
@@ -78,7 +77,7 @@ export default function Login ({loginFunction}) {
             name="password"
             autoComplete="new-password"
             onChange={(e) => updatePassword(e)}
-            placeholder='Confirm Password'
+            placeholder='Password'
             value={formData.password}
           />
           <div>

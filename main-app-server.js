@@ -5,7 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
-const passport = require('passport');
+const passport = require('passport').Passport,
+	studentPassport = new passport();
 const flash = require('connect-flash');
 const helmet = require('helmet');
 const cookieParser = require("cookie-parser");
@@ -62,11 +63,11 @@ module.exports = function(mainApp, environment) {
 	});
 
 	// Passport config
-	require('./config/passport')(passport, 'student');
+	require('./config/student-passport')(studentPassport);
 
 	//Passport Middleware
-	mainApp.use(passport.initialize());
-	mainApp.use(passport.session());
+	mainApp.use(studentPassport.initialize());
+	mainApp.use(studentPassport.session());
 
 	mainApp.use(flash());
 
@@ -106,7 +107,7 @@ module.exports = function(mainApp, environment) {
 	//mainApp routes
 
 	mainApp.post('/studentlogin', function (req, res, next) {
-		passport.authenticate('local', {failureFlash: true}, function (err, user, info) {
+		studentPassport.authenticate('student-strategy', {failureFlash: true}, function (err, user, info) {
 			if (err) return next(err);
 			if (!user) {
 				return res.json({errors: [info.message]})

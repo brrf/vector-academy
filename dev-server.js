@@ -2,7 +2,8 @@
 
 const express = require('express');
 const vhost = require('vhost');
-const db = require('./db');
+const studentDb = require('./student-db');
+const employerDb = require ('./employer-db');
 const cors = require('cors');
 
 const mainAppServer = require('./main-app-server.js');
@@ -104,7 +105,8 @@ employerApp.listen(3003, function () {
 });
 
 try {
-  db();
+  studentDb();
+  employerDb();
 } catch {
   console.log('couldn\'t connect to database')
 }
