@@ -1,13 +1,12 @@
 import React, {useRef, useState, useEffect} from 'react';
-import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Link, useLocation} from "react-router-dom";
 import {connect} from 'react-redux';
 import '../css/sidemenu.css';
 
-function Sidemenu ({toggleHidden, hidden, clearance}) {
+function Sidemenu ({toggleHidden, hidden, clearance, location, match, history}) {
 	const [currentTab, updateCurrentTab] = useState(0);
 
-	function changeCurrentTab (index) {
-		updateCurrentTab(index);
+	function changeCurrentTab () {
 		if (window.innerWidth <= 650) toggleHidden(true);
 	};
 	
@@ -39,11 +38,11 @@ function Sidemenu ({toggleHidden, hidden, clearance}) {
 		},
 		{
 			title: 'Ranked Candidates',
-			link: 'rankedcandidates'
+			link: '/rankedcandidates'
 		},
 		{
 			title: 'Current Apprentices',
-			link: 'currentapprentices'
+			link: '/currentapprentices'
 		}
 	];
 	if (clearance === 1) {
@@ -52,19 +51,20 @@ function Sidemenu ({toggleHidden, hidden, clearance}) {
 			link: '/hiringmanagers'
 		})
 	};
-
+	const {pathname} = useLocation();
 	return (
 		<React.Fragment>
 			<ul className={`sidemenu-container ${hidden ? 'hidden' : ''}`}>				
 					{
-						featureContainers.map( (container, index) => {
+						featureContainers.map( container => {
 							return (
-								<li key={container.link} 
-									className={`features-container ${index === currentTab ? 'active' : null}`} 
-									onClick={() => changeCurrentTab(index)}
+								<Link key={container.link} 
+									className={`features-container ${container.link === pathname ? 'active' : null}`} 
+									onClick={changeCurrentTab}
+									to={container.link}
 								>
-									<Link to={`.${container.link}`}>{container.title}</Link>
-								</li>
+									{container.title}
+								</Link>
 							)
 						})
 					}			

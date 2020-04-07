@@ -16,12 +16,12 @@ function MainContent (props) {
 	return (
 		<React.Fragment>
 			<SideMenu hidden={sidebarHidden} toggleHidden={toggleHidden}/>
-			 <React.Fragment>
+			 <div className='content-container'>
 			    <Switch>
 			      <Route exact path="/" component={OpenPositions} />
 			      <Route path="/hiringmanagers" component={HiringManagers} />
 			    </Switch>
-			  </React.Fragment>
+			  </div>
 			{
 				//this is temporary code to upgrade a user to clearance level 2
 				props.user.id === '5e8b9c08c171769fc3c3e00e'
