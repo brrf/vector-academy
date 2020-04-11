@@ -5,7 +5,7 @@ import '../css/app.css';
 
 
 //this is temporary code which should only be used to create a vector admin once
-export default function UpgradeAdmin (props) {
+function UpgradeAdmin (props) {
 
 	function upgradeAdmin () {
 		fetch(`${PROTOCOL}${DOMAIN}/upgradeadmin`, {
@@ -25,16 +25,17 @@ export default function UpgradeAdmin (props) {
 		    }
 	    });
 	}
-
 	return (
-		<button onClick={upgradeAdmin}>Upgrade to Level 2 clearance</button>
+		props.user.clearance === 2
+			? null
+			: <button onClick={upgradeAdmin}>Upgrade to Level 2 clearance</button>
 	)
 };
 
-// function mapStateToProps(state) {
-//   return {
-//   	user: state.user
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+  	user: state.user
+  };
+}
 
-// export default connect(mapStateToProps)(UpgradeAdmin);
+export default connect(mapStateToProps)(UpgradeAdmin);

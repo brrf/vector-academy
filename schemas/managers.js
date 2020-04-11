@@ -5,6 +5,11 @@ const managerSchema = new mongoose.Schema({
 		required: true,
 		type: String
 	},
+	originalPassword: {
+		required: true,
+		type: Boolean,
+		default: true
+	},
 	email: {
 		required: true,
 		type: String,

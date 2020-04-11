@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-module.exports = function () {
-	mongoose.connect(process.env.MONGO_URI, {
-		useNewUrlParser: true, 
-		useUnifiedTopology: true
-	});
+const studentConnection = mongoose.createConnection(process.env.MONGO_URI_STUDENT, {
+	useNewUrlParser: true, 
+	useUnifiedTopology: true
+});
+studentConnection.model('Student', require('./schemas/Students'));
 
-	const db = mongoose.connection;
-	db.on('error', console.error.bind(console, 'connection error:'));
-	db.once('open', function() {
+studentConnection.on('error', console.error.bind(console, 'connection error:'));
+studentConnection.once('open', function() {
 	  console.log('Connected to Student MongoDB!')
-	});
-}
+});
 
+module.exports = studentConnection;

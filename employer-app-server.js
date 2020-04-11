@@ -36,25 +36,26 @@ module.exports = function (employerApp, environment) {
 	}));
 
 
-	//access db
-	mongoose.connect(process.env.MONGO_URI_EMPLOYER, {
-		useNewUrlParser: true, 
-		useUnifiedTopology: true
-	});
+	// //access db
+	// mongoose.createConnection(process.env.MONGO_URI_EMPLOYER, {
+	// 	useNewUrlParser: true, 
+	// 	useUnifiedTopology: true
+	// });
+	// const employerDb = require('./employer-db');
 
-	//express session
-	employerApp.use(
-	  session({
-	    secret: "another secret",
-	    resave: true,
-	    saveUninitialized: true,
-	    proxy: true,
-	    cookie: { secure: false },
-	    store: new MongoStore({
-	    	mongooseConnection: mongoose.connection
-	    })
-	  })
-	);
+	// //express session
+	// employerApp.use(
+	//   session({
+	//     secret: "another secret",
+	//     resave: true,
+	//     saveUninitialized: true,
+	//     proxy: true,
+	//     cookie: { secure: false },
+	//     store: new MongoStore({
+	//     	mongooseConnection: mongoose.connection.useDb('employer')
+	//     })
+	//   })
+	// );
 
 	// Passport config
 	require('./config/employer-passport')(employerPassport);
@@ -115,45 +116,47 @@ module.exports = function (employerApp, environment) {
 		}
 	});
 
-	employerApp.post('/spawnemployee', async function (req, res) {
+	employerApp.post('/spawnmanager', async function (req, res) {
 		let errors = [];
+		let user;
 		if (!req.body.email) {
 			errors.push('Please fill out all the fields')
 		} else if (!req.user) {
 			errors.push('We could not find your account. Try again.')
 		} else if (req.user.clearance !== 1) {
-			errors.push('You do not have the clearance for this operation')
+			errors.push('You do not have the clearance for this operation.')
+		} else {	
+			user = await Manager.findOne({email: req.body.email});
+			if (user) {
+				errors.push('Email is already registered. Stay tuned!')
+			} 
+		};
+		if (errors.length > 0) {
+			return res.json({errors})
 		} else {
 			const saltRounds = 10;
 			const {email} = req.body;
 			const password = generatePassword();
-			let user = await Manager.findOne({email});
-			if (user) {
-				errors.push('Email is already registered. Stay tuned!')
-			} 
-			if (errors.length > 0) {
-				return res.json({errors})
-			} else {
-				bcrypt.genSalt(saltRounds, function(err, salt) {
-					bcrypt.hash(password, salt, async function(err, hash) {
-						await Manager.create({
-							password: hash,
-							email,
-							clearance: 0,
-							company: 'Tesla'
-						}, (err, user) => {
-							if (err) {
-								console.error(err);
-								res.send('an error occurred');
-							} else {
-								sendEmail('moshe@vectoracademy.io', email, 'Change password', `Your temporary password is ${password}`)
-								return res.json({errors: false})
-							}
-						});
-		    		});
-				});				
-			};
-		}
+
+			bcrypt.genSalt(saltRounds, function(err, salt) {
+				bcrypt.hash(password, salt, async function(err, hash) {
+					await Manager.create({
+						password: hash,
+						email,
+						clearance: 0,
+						company: 'Tesla'
+					}, async (err, user) => {
+						if (err) {
+							console.error({err});
+							res.send('an error occurred');
+						} else {
+							sendEmail('moshe@vectortrainingacademy.com', 'moshe@vectortrainingacademy.com', 'Change password', `Your temporary password is ${password}`);
+							return res.json({errors: false})
+						}
+					});
+	    		});
+			});				
+		};
 	});
 
 	employerApp.post('/employerregister', async function (req, res) {

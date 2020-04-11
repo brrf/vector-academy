@@ -5,18 +5,24 @@ import SideMenu from './SideMenu';
 import UpgradeAdmin from './UpgradeAdmin';
 import OpenPositions from './OpenPositions';
 import HiringManagers from './HiringManagers';
+import ChangePassword from './ChangePassword';
 import '../css/app.css';	
 
 function MainContent (props) {
 
 	const [sidebarHidden, toggleHidden] = useState(false);
 	
-	
+	console.log(props.user);
 
 	return (
 		<React.Fragment>
 			<SideMenu hidden={sidebarHidden} toggleHidden={toggleHidden}/>
 			 <div className='content-container'>
+			 	{
+			 		props.user.originalPassword
+			 			? <ChangePassword />
+			 			: null
+			 	}
 			    <Switch>
 			      <Route exact path="/" component={OpenPositions} />
 			      <Route path="/hiringmanagers" component={HiringManagers} />

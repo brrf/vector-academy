@@ -6,7 +6,7 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 const passport = require('passport').Passport,
-	studentPassport = new passport();
+studentPassport = new passport();
 const flash = require('connect-flash');
 const helmet = require('helmet');
 const cookieParser = require("cookie-parser");
@@ -15,8 +15,6 @@ const session = require("express-session");
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const multer  = require('multer');
-
-const Student = require('./schemas/students');
 
 const authentication = require('./routes/authentication.js');
 
@@ -35,11 +33,13 @@ module.exports = function(mainApp, environment) {
 	}));
 
 
-	//access db
-	mongoose.connect(process.env.MONGO_URI, {
-		useNewUrlParser: true, 
-		useUnifiedTopology: true
-	});
+	// //access db
+	// mongoose.createConnection(process.env.MONGO_URI_STUDENT, {
+	// 	useNewUrlParser: true, 
+	// 	useUnifiedTopology: true
+	// });
+	const studentConnection = require('./student-db');
+	const Students = mongoose.model('Student');
 
 	//express session
 	mainApp.use(
@@ -50,7 +50,7 @@ module.exports = function(mainApp, environment) {
 	    proxy: true,
 	    cookie: { secure: false },
 	    store: new MongoStore({
-	    	mongooseConnection: mongoose.connection
+	    	mongooseConnection: studentConnection
 	    })
 	  })
 	);

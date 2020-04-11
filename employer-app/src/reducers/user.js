@@ -5,7 +5,8 @@ export default function application(state = {}, action) {
         ...state,
         user: {
           id: action.user._id,
-          clearance: action.user.clearance
+          clearance: action.user.clearance,
+          originalPassword: action.user.originalPassword
         }
       }
     }

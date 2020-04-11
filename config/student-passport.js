@@ -1,4 +1,5 @@
-const Student = require("../schemas/students");
+const studentConnection = require('../student-db');
+const Student = studentConnection.model('Student');
 const mongoose = require("mongoose");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
