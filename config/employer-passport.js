@@ -1,5 +1,4 @@
-const Manager = require("../schemas/managers");
-const mongoose = require("mongoose");
+const Manager = require('../employer-db').model('Manager');
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 

@@ -27,4 +27,4 @@ const managerSchema = new mongoose.Schema({
 	}
 }, {minimize: false});
 
-module.exports = mongoose.model('Manager', managerSchema);
+module.exports = managerSchema

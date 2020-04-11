@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-//import {connect} from 'react-redux';	
+//import {connect} from 'react-redux';
+import Warning from './Warning';	
 
 
 export default function ChangePassword (props) {
-
+	const [errors, updateErrors] = useState([]);
 	const [formData, updateFormData] = useState({
 		password: '',
 		password2: ''

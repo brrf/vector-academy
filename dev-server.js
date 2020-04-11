@@ -3,7 +3,7 @@
 const express = require('express');
 const vhost = require('vhost');
 const studentDb = require('./student-db');
-//econst employerDb = require ('./employer-db');
+const employerDb = require ('./employer-db');
 const cors = require('cors');
 
 const mainAppServer = require('./main-app-server.js');
@@ -100,9 +100,9 @@ mainApp.listen(3002, function () {
   console.log("Listening on port " + 3002);
 });
 
-// employerApp.listen(3003, function () {
-//   console.log("Listening on port " + 3003);
-// });
+employerApp.listen(3003, function () {
+  console.log("Listening on port " + 3003);
+});
 
 try {
   studentDb();

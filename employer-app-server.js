@@ -35,27 +35,22 @@ module.exports = function (employerApp, environment) {
 		limit:'100MB'
 	}));
 
+	const employerConnection = require('./employer-db');
+	const Manager = employerConnection.model('Manager');
 
-	// //access db
-	// mongoose.createConnection(process.env.MONGO_URI_EMPLOYER, {
-	// 	useNewUrlParser: true, 
-	// 	useUnifiedTopology: true
-	// });
-	// const employerDb = require('./employer-db');
-
-	// //express session
-	// employerApp.use(
-	//   session({
-	//     secret: "another secret",
-	//     resave: true,
-	//     saveUninitialized: true,
-	//     proxy: true,
-	//     cookie: { secure: false },
-	//     store: new MongoStore({
-	//     	mongooseConnection: mongoose.connection.useDb('employer')
-	//     })
-	//   })
-	// );
+	//express session
+	employerApp.use(
+	  session({
+	    secret: "another secret",
+	    resave: true,
+	    saveUninitialized: true,
+	    proxy: true,
+	    cookie: { secure: false },
+	    store: new MongoStore({
+	    	mongooseConnection: employerConnection
+	    })
+	  })
+	);
 
 	// Passport config
 	require('./config/employer-passport')(employerPassport);

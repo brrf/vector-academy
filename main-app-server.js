@@ -32,14 +32,8 @@ module.exports = function(mainApp, environment) {
 		limit:'100MB'
 	}));
 
-
-	// //access db
-	// mongoose.createConnection(process.env.MONGO_URI_STUDENT, {
-	// 	useNewUrlParser: true, 
-	// 	useUnifiedTopology: true
-	// });
 	const studentConnection = require('./student-db');
-	const Students = mongoose.model('Student');
+	const Student = studentConnection.model('Student');
 
 	//express session
 	mainApp.use(
