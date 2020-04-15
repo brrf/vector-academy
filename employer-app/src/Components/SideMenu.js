@@ -50,7 +50,13 @@ function Sidemenu ({toggleHidden, hidden, clearance, location, match, history}) 
 			title: 'Hiring Managers',
 			link: '/hiringmanagers'
 		})
-	};
+	}
+	if (clearance === 2) {
+		featureContainers.push({
+			title: 'Add Admin',
+			link: '/vectoradmin'
+		})
+	}
 	const {pathname} = useLocation();
 	return (
 		<React.Fragment>

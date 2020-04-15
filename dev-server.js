@@ -51,25 +51,12 @@ employerApp.use ((req, res, next) => {
 employerApp.use(cors({
     credentials: true, 
     origin: ['http://localhost:3000', 'http://localhost:8080']
-  }));
-
-//Virtual Routing Application
-// const commonApp = express();
-
-// commonApp.use ((req, res, next) => {
-//   res.header ('Access-Control-Allow-Origin', '*')
-//   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
-//   res.header ('Access-Control-Allow-Credentials', true)
-//   res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-//   next()
-// });
+  })
+);
 
 mainAppServer(mainApp, 'dev');
 employerAppServer(employerApp, 'dev');
 marketingAppServer(marketingApp, 'dev');
-
-// commonApp.use(vhost('localhost', marketingApp));
-// commonApp.use(vhost('apply.localhost', mainApp));
 
 //404 Not Found Middleware
 marketingApp.use(function(req, res, next) {
@@ -90,7 +77,6 @@ employerApp.use(function(req, res, next) {
     .send('End of the line!');
 });
 
-
 //Start server
 marketingApp.listen(3001, function () {
   console.log("Listening on port " + 3001);
@@ -102,6 +88,7 @@ mainApp.listen(3002, function () {
 
 employerApp.listen(3003, function () {
   console.log("Listening on port " + 3003);
+  
 });
 
 try {

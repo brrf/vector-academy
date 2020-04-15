@@ -19,7 +19,7 @@ module.exports = function sendEmail(sender, recipient, subject, text) {
 	
 	transport.sendMail(message, function(err, info) {
 	  if (err) {
-	    console.log({err});
+	    console.log(err);
 	    return ({err: true})
 	  } else {
 	    return {err: false}

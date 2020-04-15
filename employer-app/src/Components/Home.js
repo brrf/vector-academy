@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Login from './Login';
 import MainContent from './MainContent';
+import Launch from './Launch';
 import {getUser} from '../actions/user.js';
 import '../css/app.css';
 
@@ -41,10 +42,10 @@ function App(props) {
     )
   } else if (!loggedIn) {
   	return (
-  		<React.Fragment>
-  			<Login loginFunction={isLoggedIn} toggleLoading={toggleLoading}/>
-        <Footer />
-		</React.Fragment>
+  		<Router>
+        <Route path='/launch' component={Launch} />
+        <Route path='/' render={(props) => <Login loginFunction={isLoggedIn} toggleLoading={toggleLoading}/>} />
+		</Router>
   	)
   } else
   return (

@@ -195,6 +195,40 @@ textarea {
   -webkit-animation: 1ms void-animation-out;
 }
 
+#change-password-container {
+  background-color: rgba(0,0,0,.6);
+  position: fixed;
+  top: 55px;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+
+.change-password-modal {
+  margin: 10vw auto;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12), 0 1px 5px 0 rgba(0,0,0,.2);
+  border-radius: 10px;
+  padding: 2.5vw;
+  position: relative;
+  background-color: #fbfcfd;
+  width: 425px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-password-modal form {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.change-password-modal form h2 {
+  margin-bottom: 2vw;
+}
+
 @media (max-width: 990px) {
 	#form-container {
 		margin: 10vw auto;

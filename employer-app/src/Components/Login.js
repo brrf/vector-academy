@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Warning from './Warning';
+import Footer from './Footer';
 import '../css/index.css';
 import '../css/forms.css';
 import '../css/register.css';
@@ -86,6 +87,7 @@ export default function Login ({loginFunction}) {
           </div>
         </form>
       </div>
+      <Footer />
     </React.Fragment>
   );
 }

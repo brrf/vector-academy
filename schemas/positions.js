@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const positionSchema = new mongoose.Schema({
-	managerId: {
-		type: String,
-		required: true
-	},
 	discipline: {
 		type: String, 
 		required: true

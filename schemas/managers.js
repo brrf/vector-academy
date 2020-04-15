@@ -15,15 +15,27 @@ const managerSchema = new mongoose.Schema({
 		type: String,
 		unique: true
 	},
+	name: {
+		required: true,
+		type: String
+	},
 	//0: hiring manager, 1: hiring admin, 2: vector admin
 	clearance: {
 		required: true,
 		type: Number,
 		default: 0
 	},
-	company: {
+	supervisingAdminId: {
+		type: String,
+		required: false
+	},
+	companyId: {
 		type: String,
 		required: true	
+	},
+	postedPositionIds: {
+		type: Array,
+		required: false
 	}
 }, {minimize: false});
 

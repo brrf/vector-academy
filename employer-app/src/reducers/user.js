@@ -10,6 +10,16 @@ export default function application(state = {}, action) {
         }
       }
     }
+    case "UPDATE_USER": {
+      const field = action.field
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [field]: action.data
+        }
+      }
+    }
     default:
       return state;
   }

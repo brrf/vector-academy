@@ -11,9 +11,8 @@ module.exports = function(passport) {
 				passReqToCallback : true
 			},
 			function(req, username, password, done) {
-				console.log({username});
 				Manager.findOne({ email: username }, async function(err, user) {
-					console.log({user})
+					console
 					if (err) {
 						return done(err);
 					}

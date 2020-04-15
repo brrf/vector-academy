@@ -18,8 +18,11 @@ const multer  = require('multer');
 const bcrypt = require('bcrypt');
 const generatePassword = require('./utils/generate-password');
 const sendEmail = require('./utils/send-email');
+const createNewCompany = require('./utils/createNewCompany');
 
-const Manager = require('./schemas/managers');
+const employerConnection = require('./employer-db');
+const Manager = employerConnection.model('Manager');
+const Company = employerConnection.model('Company');
 
 module.exports = function (employerApp, environment) {
 
@@ -35,8 +38,6 @@ module.exports = function (employerApp, environment) {
 		limit:'100MB'
 	}));
 
-	const employerConnection = require('./employer-db');
-	const Manager = employerConnection.model('Manager');
 
 	//express session
 	employerApp.use(
@@ -96,62 +97,123 @@ module.exports = function (employerApp, environment) {
 		}
 	});
 
-	//temporary code to create a Vector admin. Delete after use!
-	employerApp.get('/upgradeadmin', async (req, res) => {
-		if (req.user.email === 'moshe@vectoracademy.io') {
-			try {
-				let user = await Manager.findOne({email: req.user.email});
-				user.clearance = 2;
-				user.markModified('clearance');
-				await user.save();
-				res.json({errors: false})
-			} catch {
-				res.json({errors: true});
-			}	
-		}
-	});
-
-	employerApp.post('/spawnmanager', async function (req, res) {
+	employerApp.put('/changepassword', async (req, res) => {
 		let errors = [];
 		let user;
-		if (!req.body.email) {
+
+		if (!req.body.password || !req.body.password2) {
 			errors.push('Please fill out all the fields')
 		} else if (!req.user) {
 			errors.push('We could not find your account. Try again.')
-		} else if (req.user.clearance !== 1) {
-			errors.push('You do not have the clearance for this operation.')
-		} else {	
-			user = await Manager.findOne({email: req.body.email});
-			if (user) {
-				errors.push('Email is already registered. Stay tuned!')
-			} 
-		};
+		} else if (req.body.password !== req.body.password2) {
+			errors.push('Password do not match')
+		} 
 		if (errors.length > 0) {
 			return res.json({errors})
 		} else {
 			const saltRounds = 10;
-			const {email} = req.body;
-			const password = generatePassword();
-
+			const {password} = req.body;
 			bcrypt.genSalt(saltRounds, function(err, salt) {
 				bcrypt.hash(password, salt, async function(err, hash) {
-					await Manager.create({
-						password: hash,
-						email,
-						clearance: 0,
-						company: 'Tesla'
-					}, async (err, user) => {
-						if (err) {
-							console.error({err});
-							res.send('an error occurred');
-						} else {
-							sendEmail('moshe@vectortrainingacademy.com', 'moshe@vectortrainingacademy.com', 'Change password', `Your temporary password is ${password}`);
-							return res.json({errors: false})
-						}
-					});
-	    		});
-			});				
+					try {
+						await Manager.findByIdAndUpdate(req.user.id, {password: hash, originalPassword: false})
+						res.json({errors: false})
+					} catch {
+						res.json({errors: ['Could not update database. Try again.']})
+					}
+				});
+			});	
 		};
+	});
+
+	//temporary code to create a Vector admin. Delete after use!
+	employerApp.get('/launchadmin', async (req, res) => {
+		try {
+			let user = await Manager.findOne({email: 'moshe@vectoracademy.io'});
+			if (!user) {
+				const password = generatePassword();
+				const saltRounds = 10;
+				bcrypt.genSalt(saltRounds, function(err, salt) {
+					bcrypt.hash(password, salt, async function(err, hash) {
+						await Manager.create({
+							password: hash,
+							email: 'moshe@vectoracademy.io',
+							clearance: 2,
+							companyId: 'Vector',
+							name: 'Vector'
+						}, async (err, user) => {
+							if (err) {
+								console.error({err});
+								return res.json({errors: true})
+							} else {
+								sendEmail('moshe@vectortrainingacademy.com', 'moshe@vectortrainingacademy.com', 'Change password', `Your temporary password is ${password}`);
+								return res.json({errors: false})
+							}
+						});
+					});
+				});
+			}
+		} catch {
+			return res.json({errors: true});
+		}	
+	});
+
+	employerApp.post('/spawnmanager', async function (req, res) {
+		let errors = [];
+		let user, company;
+		const {email, companyName, adminName, newCompany} = req.body;
+		if (!email || !companyName || !adminName) {
+			errors.push('Please fill out all the fields')
+		} else if (!req.user) {
+			errors.push('We could not find your account. Try again.')
+		} else if (req.user.clearance < 1) {
+			errors.push('You do not have the clearance for this operation.')
+		} else {	
+			user = await Manager.findOne({email});
+			if (user) {
+				errors.push('Email is already registered')
+			} 
+		};
+
+		//try to find the company; check for edge cases; if it doesn't exist, create it
+		company = await Company.findOne({name: req.body.companyName});
+		if (newCompany && company) {
+			errors.push('This company already seems to exist.');
+		} else if (!newCompany && !company) {
+			errors.push('The selected company was not found.')
+		} else if (newCompany && !company) {
+			company = await createNewCompany(companyName);
+		}
+
+		const saltRounds = 10;
+		const password = generatePassword();
+		const clearance = req.user.clearance === 1
+			? 0
+			: 1
+
+		if (errors.length > 0) {
+			return res.json({errors})
+		};
+
+		bcrypt.genSalt(saltRounds, function(err, salt) {
+			bcrypt.hash(password, salt, async function(err, hash) {
+				await Manager.create({
+					password: hash,
+					email,
+					name: adminName,
+					clearance,
+					companyId: company.id
+				}, async (err, user) => {
+					if (err) {
+						console.error({err});
+						res.send('an error occurred');
+					} else {
+						sendEmail('moshe@vectortrainingacademy.com', 'moshe@vectortrainingacademy.com', 'Change password', `Your temporary password is ${password}`);
+						return res.json({errors: false})
+					}
+				});
+    		});
+		});				
 	});
 
 	employerApp.post('/employerregister', async function (req, res) {
@@ -191,5 +253,15 @@ module.exports = function (employerApp, environment) {
 			};
 		}
 	});
+
+	employerApp.get('/companylist', async (req, res) => {
+		await Company.find({}, function(err, companies) {
+			if (err) {
+				res.json({errors: ['Error finding companies']})
+			} else {
+				res.json({companyList: companies})
+			}
+		})
+	})
 };
 

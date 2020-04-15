@@ -4,11 +4,10 @@ import logo from '../images/Vector-01.png';
 import '../css/navbar.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons";
-// import {setApplicationStep} from '../actions/application.js';
 
-export default function Navbar (props) {
+function Navbar (props) {
 	const [firstIncomplete, setFirstIncomplete] = useState(null);
-
+	const [navbarText, setNavbarText] = useState('')
 	function logout () {
 		fetch(`${PROTOCOL}${DOMAIN}/employerlogout`, {
 			method: "GET",
@@ -33,44 +32,19 @@ export default function Navbar (props) {
 		e.stopPropagation();
 	}
 
-	// function handleHomeButton (step) {
-	// 	props.dispatch(setApplicationStep(step));
-	// }
+	useEffect(() => {
+		let text;
+		props.user.clearance === 2
+			? text = 'Add admin'
+			: text = 'Hire Apprentice'
+		setNavbarText(text);
+	}, [])
 
-	// function findFirstIncomplete() {
-	// 	const applicationSteps = ['contactInformation', 'apScores', 'testScore', 'essay', 'cv', 'questions'];
-	// 	for (let i = 0; i < applicationSteps.length; i++) {
-	// 		if(!props.completedSteps.includes(applicationSteps[i])) {
-	// 			setFirstIncomplete(i);
-	// 			return;
-	// 		};
-	// 	};
-	// };
-	// useEffect(findFirstIncomplete, [props.completedSteps]);
-	
-	// const {applicationStep, completedSteps, status} = props;
-	// let button = {
-	// 	text: 'Start Application',
-	// 	applicationStep: false
-	// };
-	// if (completedSteps.length === 6 && applicationStep === false) {
-	// 	button.text = 'Submit Application';
-	// 	button.applicationStep = 6;
-	// } else if (completedSteps.length === 0 && applicationStep === false) {
-	// 	button.text = 'Start Application'
-	// 	button.applicationStep = 0; 
-	// } else if (completedSteps.length !== 0 && applicationStep === false) {
-	// 	button.text = 'Continue Application';
-	// 	button.applicationStep = firstIncomplete;
-	// } else {
-	// 	button.text = 'Application Home';
-	// 	button.applicationStep = false;
-	// }
 	return (
 		<div id='navbar-container'>
 			<img alt='logo' src={logo} className='logo' />
 			<div className='navbar-right'>
-				<button>Hire Apprentice</button>
+				<button>{navbarText}</button>
              	<div className='navbar-user-container' onClick={handleToggleUserOptions}>
              		<FontAwesomeIcon
 		                icon={faUserCircle}
@@ -83,13 +57,11 @@ export default function Navbar (props) {
 	)
 }
 
-// function mapStateToProps(state) {
-// 	return {		
-// 		applicationStep: state.application.applicationStatus.applicationStep,
-// 		completedSteps: Object.keys(state.application.applicationStatus.application),
-// 		status: state.user.user.status
-// 	}
-// }
+function mapStateToProps(state) {
+	return {		
+		user: state.user
+	}
+}
 
-// export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps)(Navbar);
 
