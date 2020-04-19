@@ -51,10 +51,10 @@ function App(props) {
   return (
   	<Router>
       <Navbar toggleLogin={toggleLogin} toggleUserOptions={toggleUserOptions} userOptionsHidden={userOptionsHidden}/>
-      <div id='main-container'>
+      <div id='main-container' onClick={() => toggleUserOptions(true)}>
         <MainContent />
       </div>
-      <Footer />
+      <Footer onClick={() => toggleUserOptions(true)}/>
     </Router>  );
 }
 

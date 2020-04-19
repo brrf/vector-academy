@@ -49,7 +49,7 @@ function Navbar (props) {
 
 
 	return (
-		<div id='navbar-container'>
+		<div id='navbar-container' onClick={() => props.toggleUserOptions(true)}>
 			<img alt='logo' src={logo} className='logo' />
 			<div className='navbar-right'>
 				<button>{navbarText}</button>
