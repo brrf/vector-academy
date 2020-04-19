@@ -160,12 +160,28 @@ module.exports = function (employerApp, environment) {
 
 	employerApp.post('/spawnmanager', async function (req, res) {
 		let errors = [];
-		let user, company;
-		const {email, companyName, adminName, newCompany} = req.body;
-		if (!email || !companyName || !adminName) {
-			errors.push('Please fill out all the fields')
-		} else if (!req.user) {
+		let user, company, email, companyName, fname, lname, newCompany;
+		({email, fname, lname} = req.body);
+
+		if (!req.user) {
 			errors.push('We could not find your account. Try again.')
+		//if Vector admin, will need to create or find a company
+		} else if (req.user.clearance === 2) {
+			({companyName, newCompany} = req.body);
+			if (!email || !fname || !lname || !companyName || !newCompany) {
+				errors.push('Please fill out all the fields')
+			}
+			//try to find the company; check for edge cases; if it doesn't exist, create it
+			company = await Company.findOne({name: companyName});
+			if (newCompany && company) {
+				errors.push('This company already seems to exist.');
+			} else if (!newCompany && !company) {
+				errors.push('The selected company was not found.')
+			} else if (newCompany && !company) {
+				company = await createNewCompany(companyName);
+			}
+		} else if (!email || !fname || !lname) {
+			errors.push('Please fill out all the fields')
 		} else if (req.user.clearance < 1) {
 			errors.push('You do not have the clearance for this operation.')
 		} else {	
@@ -175,15 +191,7 @@ module.exports = function (employerApp, environment) {
 			} 
 		};
 
-		//try to find the company; check for edge cases; if it doesn't exist, create it
-		company = await Company.findOne({name: req.body.companyName});
-		if (newCompany && company) {
-			errors.push('This company already seems to exist.');
-		} else if (!newCompany && !company) {
-			errors.push('The selected company was not found.')
-		} else if (newCompany && !company) {
-			company = await createNewCompany(companyName);
-		}
+		const companyId = company ? company.id : req.user.companyId
 
 		const saltRounds = 10;
 		const password = generatePassword();
@@ -200,9 +208,10 @@ module.exports = function (employerApp, environment) {
 				await Manager.create({
 					password: hash,
 					email,
-					name: adminName,
+					fname, 
+					lname,
 					clearance,
-					companyId: company.id
+					companyId
 				}, async (err, user) => {
 					if (err) {
 						console.error({err});
@@ -254,12 +263,60 @@ module.exports = function (employerApp, environment) {
 		}
 	});
 
+	employerApp.post('/newposition', async function (req, res) {
+		const {fname, lname, discipline, state, city, description, requestedSkills} = req.body;
+		if (!fname || !lname || !discipline || !state || !city || !description) {
+			return res.json({errors: ['Please fill out all fields']})
+		} else if (!requestedSkills || requestedSkills.length !== 3) {
+			return res.json({errors: ['Please request 3 courses']})
+		}
+
+		const submittedSkills = requestedSkills.map(skill => skill.value);
+
+		const position = {
+			supervisorFname: fname,
+			supervisorLname: lname,
+			discipline: discipline.value,
+			description,
+			city,
+			state,
+			requestedSkills: submittedSkills,
+			approved: false
+		}
+
+		if (req.body.other) position.other = req.body.other
+
+			console.log({position});
+
+		try {
+			await Company.findByIdAndUpdate(req.user._id, {
+				$push: {positions: position}
+			});
+			console.log('done');
+		} catch {
+			return res.json({errors: ['Error saving position to database']})
+		};
+	})
+
 	employerApp.get('/companylist', async (req, res) => {
 		await Company.find({}, function(err, companies) {
 			if (err) {
 				res.json({errors: ['Error finding companies']})
 			} else {
 				res.json({companyList: companies})
+			}
+		})
+	});
+
+	employerApp.get('/hydratecompany', async (req, res) => {
+		if (!req.user) {
+			return res.json({errors: ['Your credentials were not found.']})
+		}
+		await Company.findById(req.user.companyId, function(err, company) {
+			if (err) {
+				res.json({errors: ['Could not find company']});
+			} else {
+				res.json({company: company.name})
 			}
 		})
 	})

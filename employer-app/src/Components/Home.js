@@ -34,7 +34,7 @@ function App(props) {
       }
       toggleLoading(false);
     })
-  }
+  };
 
   if (loading) {
     return (

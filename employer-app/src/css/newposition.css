@@ -1,0 +1,30 @@
+.application-form-container {
+  padding: 2vw 6vw;
+  background-color: white;
+  margin: 40px auto;
+  width: 78%;
+  position: relative;
+}
+
+.application-form-container form {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.application-form-container .textarea-form {
+  display: block;
+}
+
+@media (max-width: 850px) {
+  .application-form-container {
+    width: 95%;
+  }
+}
+
+@media (max-width: 550px) {
+  .application-form-container {
+    width: 100%;
+    padding: 2vw 1vw;
+    margin: 40px 0;
+  }
+}

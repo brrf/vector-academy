@@ -15,7 +15,11 @@ const managerSchema = new mongoose.Schema({
 		type: String,
 		unique: true
 	},
-	name: {
+	fname: {
+		required: true,
+		type: String
+	},
+	lname: {
 		required: true,
 		type: String
 	},

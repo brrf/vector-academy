@@ -9,8 +9,7 @@ const companySchema = new mongoose.Schema({
 		unique: true
 	},
 	positions: {
-		type: Array,
-		default: []
+		type: [positionSchema]
 	},
 	managers: {
 		type: Array,

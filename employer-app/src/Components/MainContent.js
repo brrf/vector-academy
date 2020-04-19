@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SideMenu from './SideMenu';
 import UpgradeAdmin from './UpgradeAdmin';
 import OpenPositions from './OpenPositions';
+import NewPosition from './NewPosition';
 import HiringManagers from './HiringManagers';
 import VectorAdmin from './VectorAdmin';
 import ChangePassword from './ChangePassword';
@@ -24,6 +25,7 @@ function MainContent (props) {
 			 	}
 			    <Switch>
 			      <Route exact path="/" component={OpenPositions} />
+			      <Route path="/newposition" component={NewPosition} />
 			      <Route path="/hiringmanagers" component={HiringManagers} />
 			      <Route path="/vectoradmin" component={VectorAdmin} />
 			    </Switch>

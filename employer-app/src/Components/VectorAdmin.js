@@ -7,7 +7,8 @@ export default function VectorAdmin(props) {
 	const [formData, updateFormData] = useState({
 		email: '',
 		companyName: '',
-		adminName: '',
+		fname: '',
+		lname: '',
 		newCompany: true
 	});
 	const [errors, updateErrors] = useState([]);
@@ -71,7 +72,6 @@ export default function VectorAdmin(props) {
 	};
 
 	function handleUpdateFormData(field, value) {
-		console.log('here');
 		updateFormData({
 			...formData,
 			[field]: value
@@ -139,14 +139,23 @@ export default function VectorAdmin(props) {
 			placeholder='E-mail'
 			value={formData.email}
 			/>
-			<h3>Admin name</h3>
+			<h3>Admin First Name</h3>
 			<input
 			className="form-full-width"
 			type="text"
-			name="admin-name"
-			onChange={(e) => handleUpdateFormData('adminName', e.target.value)}
-			placeholder='Administrator Name'
-			value={formData.adminName}
+			name="first-name"
+			onChange={(e) => handleUpdateFormData('fname', e.target.value)}
+			placeholder='Administrator First Name'
+			value={formData.fname}
+			/>
+			<h3>Admin Last Name</h3>
+			<input
+			className="form-full-width"
+			type="text"
+			name="last-name"
+			onChange={(e) => handleUpdateFormData('lname', e.target.value)}
+			placeholder='Administrator Last Name'
+			value={formData.lname}
 			/>
 			<div>
 				<button onClick={handleSubmit}>Submit</button>

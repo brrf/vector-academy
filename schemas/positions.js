@@ -5,11 +5,23 @@ const positionSchema = new mongoose.Schema({
 		type: String, 
 		required: true
 	},
+	supervisorFname: {
+		type: String,
+		required: true
+	},
+	supervisorLname: {
+		type: String,
+		required: true
+	},
 	description: {
 		type: String,
 		required: true
 	},
-	location: {
+	city: {
+		type: String,
+		required: true
+	},
+	state: {
 		type: String,
 		required: true
 	},
@@ -17,9 +29,14 @@ const positionSchema = new mongoose.Schema({
 		type: String,
 		required: false
 	},
-	skillsRequested: {
+	requestedSkills: {
 		type: Array,
-		required: false
+		required: true
+	},
+	approved: {
+		type: Boolean,
+		required: true,
+		default: false
 	}
 }, {minimize: false});
 
