@@ -7,14 +7,23 @@ import {updateUser} from '../actions/user';
 
 function OpenPositions(props) {
 	return (
-		//<button onClick={() => props.dispatch(updateUser('originalPassword', true))}>toggle</button>
-		<p>More to come</p>
+		<div>
+		<h3>Positions</h3>
+		{
+			props.positions
+				? props.positions.map((position, index) => {
+					return (<p key={index}>{position.discipline}</p>)
+				})
+				: null
+		}
+		</div>
 	)
 }
 
 function mapStateToProps(state) {
+	// console.log({state});
   return {
-  	user: state.user
+  	positions: state.positions.positions
   };
 }
 

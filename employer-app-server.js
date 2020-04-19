@@ -138,6 +138,8 @@ module.exports = function (employerApp, environment) {
 						await Manager.create({
 							password: hash,
 							email: 'moshe@vectoracademy.io',
+							fname: 'Moshe',
+							lname: 'Praver',
 							clearance: 2,
 							companyId: 'Vector',
 							name: 'Vector'
@@ -168,7 +170,7 @@ module.exports = function (employerApp, environment) {
 		//if Vector admin, will need to create or find a company
 		} else if (req.user.clearance === 2) {
 			({companyName, newCompany} = req.body);
-			if (!email || !fname || !lname || !companyName || !newCompany) {
+			if (!email || !fname || !lname || !companyName) {
 				errors.push('Please fill out all the fields')
 			}
 			//try to find the company; check for edge cases; if it doesn't exist, create it
@@ -271,12 +273,12 @@ module.exports = function (employerApp, environment) {
 			return res.json({errors: ['Please request 3 courses']})
 		}
 
-		const submittedSkills = requestedSkills.map(skill => skill.value);
+		const submittedSkills = requestedSkills.map(skill => skill.label);
 
 		const position = {
 			supervisorFname: fname,
 			supervisorLname: lname,
-			discipline: discipline.value,
+			discipline: discipline.label,
 			description,
 			city,
 			state,
@@ -289,10 +291,9 @@ module.exports = function (employerApp, environment) {
 			console.log({position});
 
 		try {
-			await Company.findByIdAndUpdate(req.user._id, {
+			await Company.findByIdAndUpdate(req.user.companyId, {
 				$push: {positions: position}
-			});
-			console.log('done');
+			});		
 		} catch {
 			return res.json({errors: ['Error saving position to database']})
 		};
@@ -319,6 +320,30 @@ module.exports = function (employerApp, environment) {
 				res.json({company: company.name})
 			}
 		})
+	})
+
+	employerApp.get('/getpositions', async (req, res) => {
+		let positions = [];
+		if (req.user.clearance === 2) {
+			await Company.find({}, function(err, companyList) {
+				if (err) {
+					res.json({errors: ['Error finding companies']})
+				} else {
+					for (let i = 0; i < companyList.length; i++) {
+						companyList[i].positions.forEach(position => positions.push(position));
+					};
+				}
+			})
+		} else {
+			await Company.findById(req.user.companyId, function(err, company) {
+				if (err) {
+					res.json({errors: ['Error finding companies']})
+				} else {
+					company.poisitions.forEach(position => positions.push(position))
+				}
+			})
+		};
+		res.json({positions});
 	})
 };
 

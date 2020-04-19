@@ -43,7 +43,7 @@ export default function VectorAdmin(props) {
 	function handleSubmit(e) {
 		e.preventDefault();
 		
-		if (!formData.email || !formData.companyName || !formData.adminName) {
+		if (!formData.email || !formData.fname || !formData.lname) {
 	      updateErrors(['Please fill out all the fields']);
 	      return;
 	    };

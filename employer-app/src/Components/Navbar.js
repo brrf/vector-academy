@@ -4,6 +4,7 @@ import logo from '../images/Vector-01.png';
 import '../css/navbar.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons";
+import {setPositions} from '../actions/positions';
 
 function Navbar (props) {
 	const [firstIncomplete, setFirstIncomplete] = useState(null);
@@ -39,6 +40,26 @@ function Navbar (props) {
 			: text = 'Hire Apprentice'
 		setNavbarText(text);
 	}, [])
+
+	useEffect(getPositions, [])
+	function getPositions() {
+		fetch(`${PROTOCOL}${DOMAIN}/getpositions`, {
+			method: "GET",
+			headers: { 
+			"Content-Type": "application/json",
+			},
+			mode: "cors",
+			credentials: "include"
+			})
+		.then(res => res.json())
+		.then(resObject => {
+			if (resObject.error) {
+				alert('Error retrieving open positions');
+			} else {
+				props.dispatch(setPositions(resObject.positions));
+			}
+		})
+	}
 
 	return (
 		<div id='navbar-container'>

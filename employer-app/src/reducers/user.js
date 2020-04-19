@@ -1,4 +1,4 @@
-export default function application(state = {}, action) {
+export default function user(state = {}, action) {
   switch (action.type) {
     case "GET_USER": {
       const {_id, clearance, originalPassword, fname, lname} = action.user;
