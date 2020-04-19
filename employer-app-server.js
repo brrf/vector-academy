@@ -264,8 +264,8 @@ module.exports = function (employerApp, environment) {
 			};
 		}
 	});
-
-	employerApp.post('/newposition', async function (req, res) {
+	employerApp.route('/newposition')
+		.post(async function (req, res) {
 		const {fname, lname, discipline, state, city, description, requestedSkills} = req.body;
 		if (!fname || !lname || !discipline || !state || !city || !description) {
 			return res.json({errors: ['Please fill out all fields']})
@@ -283,12 +283,11 @@ module.exports = function (employerApp, environment) {
 			city,
 			state,
 			requestedSkills: submittedSkills,
-			approved: false
+			approved: 0,
+			company: req.user.companyId
 		}
 
-		if (req.body.other) position.other = req.body.other
-
-			console.log({position});
+		if (req.body.other) position.otherInformation = req.body.other
 
 		try {
 			await Company.findByIdAndUpdate(req.user.companyId, {
@@ -298,6 +297,39 @@ module.exports = function (employerApp, environment) {
 			return res.json({errors: ['Error saving position to database']})
 		};
 	})
+		.put(async function (req, res) {
+			let errors = [];
+			if (req.body.approved === 2 && req.user.clearance !== 2) {
+				errors.push('You do not have clearance for this operation')
+			} else if (req.body.approved === 2) {
+				const {companyId, positionId} = req.body
+				if (!companyId || !positionId) errors.push('Please provide company and position IDs.');
+				try {
+					let company = await Company.findById(companyId);
+					const newPositions = company.positions.map(position => {
+						if(position.id === positionId) {
+							position.approved = 2
+						};
+						return position;
+					});
+					company.positions = newPositions;
+					company.markModified('positions');
+					try {
+						await company.save();
+					} catch {
+						errors.push('Error updating database')
+					}
+				} catch {
+					errors.push('Error finding company in database')
+				};
+				
+				if (errors.length !== 0) {
+					res.json({errors});
+				} else {
+					res.json({errors: false})
+				}
+			};
+		})
 
 	employerApp.get('/companylist', async (req, res) => {
 		await Company.find({}, function(err, companies) {
@@ -330,7 +362,9 @@ module.exports = function (employerApp, environment) {
 
 				for (let i = 0; i < companyList.length; i++) {
 					companyList[i].positions.forEach(position => {
-						positionList.push(position);
+						let modifiedPosition = JSON.parse(JSON.stringify(position));
+						modifiedPosition.companyName = companyList[i].name	
+						positionList.push(modifiedPosition);
 					});
 				}
 			} catch {
@@ -338,14 +372,14 @@ module.exports = function (employerApp, environment) {
 					res.json({errors: ['Error finding companies']})
 				};
 			};
-		} else {
-				await Company.findById(req.user.companyId, function(err, company) {
-					if (err) {
-						res.json({errors: ['Error finding companies']})
-					} else {
-						company.poisitions.forEach(position => positionList.push(position))
-					}
-				})
+		// } else {
+		// 		await Company.findById(req.user.companyId, function(err, company) {
+		// 			if (err) {
+		// 				res.json({errors: ['Error finding companies']})
+		// 			} else {
+		// 				company.poisitions.forEach(position => positionList.push(position))
+		// 			}
+		// 		})
 		};
 		res.json({positionList});
 	})

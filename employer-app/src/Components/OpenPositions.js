@@ -1,29 +1,80 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import Home from './Home';
-import Admin from './Admin';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTimesCircle, faCheckCircle, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 import '../css/position.css';
-import {updateUser} from '../actions/user';
+import PositionReview from './PositionReview';
+import Warning from './Warning';
 
-function OpenPositions(props) {
+function OpenPositions({positions, clearance, dispatch}) {
+
+	const [errors, updateErrors] = useState(null);
+	useEffect(() => {
+		if (positions) {
+			let newErrors = positions.map((position) => {
+				return ([]);
+			})
+			updateErrors(newErrors);
+		}
+	}, [positions]);
+
 	return (
-		<div>
-		<h2>Positions To Review</h2>
+		<React.Fragment>
 		{
-			props.positions
-				? props.positions.map((position, index) => {
-					return (<p key={index} className='position-container'>{position.discipline}</p>)
+			positions
+				? positions.map((position, index) => {
+					if (position.approved === 0) {
+						return (
+							<div key={index} className='position-container'>
+								{ errors !== null 
+										? <Warning errors={errors[index]} />
+										: null
+								}
+								<div className='position-body'>
+									<div className='position-left'>
+										<div>
+											<h2>{position.companyName}</h2>
+											<h3>{position.discipline}</h3>
+											<p>{`${position.city}, ${position.state}`}</p>
+										</div>
+										<div className='position-info'>
+											<p>{position.description}</p>
+											<p>{position.otherInformation}</p>
+										</div>
+									</div>
+									<div className='position-right'>
+										<div className='position-right-section'>
+											<h4 className='supervising-engineer-label'>Supervising Engineer</h4>
+											<h4 className='supervising-engineer'>{`${position.supervisorFname} ${position.supervisorLname}`}</h4>
+										</div>
+										<div className='position-right-section'>
+											<h4 className='position-courses-label'>Onboarding Courses</h4>
+											<ul>
+												{
+													position.requestedSkills.map((skill, index) => {
+														return (
+															<h4 className='position-course' key={index}>{skill}</h4>
+														)
+													})
+												}
+											</ul>
+										</div>
+										<PositionReview companyId={position.company} positionId={position._id} updateErrors={updateErrors} index={index} errors={errors}/>
+									</div>
+								</div>
+							</div>
+						)
+					}
 				})
 				: null
 		}
-		</div>
+		</React.Fragment>
 	)
 }
 
 function mapStateToProps(state) {
-	console.log({state});
   return {
-  	positions: state.positions.positions
+  	positions: state.positions.positions,
   };
 }
 

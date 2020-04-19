@@ -11,7 +11,6 @@ import ChangePassword from './ChangePassword';
 import '../css/app.css';	
 
 function MainContent (props) {
-
 	const [sidebarHidden, toggleHidden] = useState(false);
 
 	return (
@@ -35,8 +34,9 @@ function MainContent (props) {
 };
 
 function mapStateToProps(state) {
+	
   return {
-  	user: state.user
+  	user: state.user.user
   };
 }
 

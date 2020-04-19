@@ -33,10 +33,15 @@ const positionSchema = new mongoose.Schema({
 		type: Array,
 		required: true
 	},
+	//0 = submitted; 1 = revision requested; 2 = approved; -1 = refected
 	approved: {
-		type: Boolean,
+		type: Number,
 		required: true,
-		default: false
+		default: 0
+	},
+	company: {
+		type: String,
+		required: true
 	}
 }, {minimize: false});
 

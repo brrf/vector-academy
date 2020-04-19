@@ -5,6 +5,7 @@ import '../css/navbar.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import {setPositions} from '../actions/positions';
+import getPositions from '../../utils/getPositions';
 
 function Navbar (props) {
 	const [firstIncomplete, setFirstIncomplete] = useState(null);
@@ -41,26 +42,11 @@ function Navbar (props) {
 		setNavbarText(text);
 	}, [])
 
-	useEffect(getPositions, [])
-	function getPositions() {
-		fetch(`${PROTOCOL}${DOMAIN}/getpositions`, {
-			method: "GET",
-			headers: { 
-			"Content-Type": "application/json",
-			},
-			mode: "cors",
-			credentials: "include"
-			})
-		.then(res => res.json())
-		.then(resObject => {
-			if (resObject.errors) {
-				console.log(resObject.errors);
-			} else {
-				console.log(resObject.positionList);
-				props.dispatch(setPositions(resObject.positionList));
-			}
-		})
-	}
+	useEffect(() => {
+		getPositions()
+		.then(positions => props.dispatch(setPositions(positions)));
+	}, [])
+
 
 	return (
 		<div id='navbar-container'>
@@ -81,7 +67,7 @@ function Navbar (props) {
 
 function mapStateToProps(state) {
 	return {		
-		user: state.user
+		user: state.user.user
 	}
 }
 

@@ -84,7 +84,7 @@ function Sidemenu ({toggleHidden, hidden, clearance, location, match, history}) 
 
 function mapStateToProps(state) {
   return {
-  	clearance: state.user.clearance
+  	clearance: state.user.user.clearance
   }
 }
 
