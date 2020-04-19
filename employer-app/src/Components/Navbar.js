@@ -53,10 +53,11 @@ function Navbar (props) {
 			})
 		.then(res => res.json())
 		.then(resObject => {
-			if (resObject.error) {
-				alert('Error retrieving open positions');
+			if (resObject.errors) {
+				console.log(resObject.errors);
 			} else {
-				props.dispatch(setPositions(resObject.positions));
+				console.log(resObject.positionList);
+				props.dispatch(setPositions(resObject.positionList));
 			}
 		})
 	}

@@ -323,27 +323,31 @@ module.exports = function (employerApp, environment) {
 	})
 
 	employerApp.get('/getpositions', async (req, res) => {
-		let positions = [];
+		let positionList = [];
 		if (req.user.clearance === 2) {
-			await Company.find({}, function(err, companyList) {
+			try {
+				const companyList = await Company.find({});
+
+				for (let i = 0; i < companyList.length; i++) {
+					companyList[i].positions.forEach(position => {
+						positionList.push(position);
+					});
+				}
+			} catch {
 				if (err) {
 					res.json({errors: ['Error finding companies']})
-				} else {
-					for (let i = 0; i < companyList.length; i++) {
-						companyList[i].positions.forEach(position => positions.push(position));
-					};
-				}
-			})
+				};
+			};
 		} else {
-			await Company.findById(req.user.companyId, function(err, company) {
-				if (err) {
-					res.json({errors: ['Error finding companies']})
-				} else {
-					company.poisitions.forEach(position => positions.push(position))
-				}
-			})
+				await Company.findById(req.user.companyId, function(err, company) {
+					if (err) {
+						res.json({errors: ['Error finding companies']})
+					} else {
+						company.poisitions.forEach(position => positionList.push(position))
+					}
+				})
 		};
-		res.json({positions});
+		res.json({positionList});
 	})
 };
 
