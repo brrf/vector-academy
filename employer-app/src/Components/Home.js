@@ -47,15 +47,17 @@ function App(props) {
         <Route path='/' render={(props) => <Login loginFunction={isLoggedIn} toggleLoading={toggleLoading}/>} />
 		</Router>
   	)
-  } else
-  return (
-  	<Router>
-      <Navbar toggleLogin={toggleLogin} toggleUserOptions={toggleUserOptions} userOptionsHidden={userOptionsHidden}/>
-      <div id='main-container' onClick={() => toggleUserOptions(true)}>
-        <MainContent />
-      </div>
-      <Footer onClick={() => toggleUserOptions(true)}/>
-    </Router>  );
+  } else {
+    return (
+    	<Router>
+        <Navbar toggleLogin={toggleLogin} toggleUserOptions={toggleUserOptions} userOptionsHidden={userOptionsHidden}/>
+        <div id='main-container' onClick={() => toggleUserOptions(true)}>
+          <MainContent />
+        </div>
+        <Footer onClick={() => toggleUserOptions(true)}/>
+      </Router>  
+    );
+  };
 }
 
 function mapStateToProps(state) {

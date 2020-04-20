@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import Select from 'react-select'
 import {connect} from 'react-redux';
-import Home from './Home';
-import Admin from './Admin';
-import Warning from './Warning';
-import '../css/newposition.css';
-import {updateUser} from '../actions/user';
+import {Redirect} from 'react-router-dom';
+import {setPositions} from '../../actions/positions';
+import getPositions from '../../../utils/getPositions';
+import Warning from '../Warning';
+import '../../css/newposition.css';
 
-
-function NewPosition(props) {
+function NewPosition({user, dispatch}) {
 
 	const [inputState, updateInputState] = useState([
 		{
@@ -30,8 +29,8 @@ function NewPosition(props) {
 	]);
 	
 	const [formData, updateFormData] = useState({
-		fname: props.user.fname,
-		lname: props.user.lname,
+		fname: user.fname,
+		lname: user.lname,
 		discipline: null,
 		description: '',
 		city: '',
@@ -41,6 +40,7 @@ function NewPosition(props) {
 	});
 
 	const [errors, updateErrors] = useState([]);
+	const [redirect, triggerRedirect] = useState(false);
 	const [company, updateCompany] = useState('');
 	const [disciplines, updateDisciplines] = useState([
 		{
@@ -197,7 +197,12 @@ function NewPosition(props) {
 	      if (resObject.errors) {
 	      	updateErrors(resObject.errors);
 	      } else {
-	      		console.log('success');
+	      		
+	      		getPositions()
+				.then(positions => {
+					dispatch(setPositions(positions))
+					triggerRedirect(true);
+				});
 	      };
 	    });
 
@@ -215,6 +220,10 @@ function NewPosition(props) {
 			...formData,
 			[field]: newValue
 		});
+	}
+
+	if (redirect) {
+		return <Redirect to='/pendingpositions' />
 	}
 
 	return (

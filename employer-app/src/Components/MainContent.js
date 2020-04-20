@@ -3,8 +3,10 @@ import {connect} from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SideMenu from './SideMenu';
 import UpgradeAdmin from './UpgradeAdmin';
-import OpenPositions from './OpenPositions';
-import NewPosition from './NewPosition';
+import OpenPositions from './Positions/OpenPositions';
+import NewPosition from './Positions/NewPosition';
+import PendingPositions from './Positions/PendingPositions';
+import RevisePositionContainer from './Positions/RevisePositionContainer';
 import HiringManagers from './HiringManagers';
 import VectorAdmin from './VectorAdmin';
 import ChangePassword from './ChangePassword';
@@ -23,8 +25,10 @@ function MainContent (props) {
 			 			: null
 			 	}
 			    <Switch>
-			      <Route exact path="/" component={OpenPositions} />
-			      <Route path="/newposition" component={NewPosition} />
+			      <Route exact path="/" component={NewPosition} />
+			      <Route exact path="/pendingpositions" component={PendingPositions} />
+			      <Route path="/pendingpositions/:id" component={RevisePositionContainer} />
+			      <Route path="/openpositions" component={OpenPositions} />
 			      <Route path="/hiringmanagers" component={HiringManagers} />
 			      <Route path="/vectoradmin" component={VectorAdmin} />
 			    </Switch>

@@ -292,7 +292,8 @@ module.exports = function (employerApp, environment) {
 		try {
 			await Company.findByIdAndUpdate(req.user.companyId, {
 				$push: {positions: position}
-			});		
+			});
+			return res.json({errors: false})	
 		} catch {
 			return res.json({errors: ['Error saving position to database']})
 		};
@@ -372,14 +373,15 @@ module.exports = function (employerApp, environment) {
 					res.json({errors: ['Error finding companies']})
 				};
 			};
-		// } else {
-		// 		await Company.findById(req.user.companyId, function(err, company) {
-		// 			if (err) {
-		// 				res.json({errors: ['Error finding companies']})
-		// 			} else {
-		// 				company.poisitions.forEach(position => positionList.push(position))
-		// 			}
-		// 		})
+		} else {
+			try {
+				const company = await Company.findById(req.user.companyId);
+				company.positions.forEach(position => positionList.push(position))
+			} catch {
+				if (err) {
+					res.json({errors: ['Error finding companies']})
+				};
+			};
 		};
 		res.json({positionList});
 	})

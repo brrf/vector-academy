@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {setPositions} from '../actions/positions';
-import getPositions from '../../utils/getPositions';
+import {setPositions} from '../../actions/positions';
+import getPositions from '../../../utils/getPositions';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimesCircle, faCheckCircle, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
-import '../css/position.css';
+import '../../css/position.css';
 
 
-function PositionReview({clearance, errors, updateErrors, index, companyId, positionId, dispatch}) {
+function PositionReview({clearance, errors, updateErrors, index, position, dispatch}) {
+
+	const [redirectUrl, triggerRedirect] = useState(false)
 
 	function acceptPosition () {
 		const accept = confirm('Are you sure you want to accept this position?');
@@ -15,8 +18,8 @@ function PositionReview({clearance, errors, updateErrors, index, companyId, posi
 			fetch(`${PROTOCOL}${DOMAIN}/newposition`, {
 		      method: "PUT",
 		      body: JSON.stringify({
-		      	companyId,
-		      	positionId,
+		      	companyId: position.company,
+		      	positionId: position._id,
 		      	approved: 2
 		      }),
 		      headers: { 
@@ -43,26 +46,34 @@ function PositionReview({clearance, errors, updateErrors, index, companyId, posi
 		}
 	}
 
+	if (redirectUrl) {
+		return <Redirect to={redirectUrl} />
+	}
+
 	return (
 		<React.Fragment>
-			{ clearance === 2
-				? <div className='position-right-section'>
+			<div className='position-right-section'>
+				<FontAwesomeIcon
+					icon={faTimesCircle}
+					className='position-review reject'
+				/>
+				<Link to={{
+					pathname: `/pendingpositions/${position._id}`,
+					state: {
+						position
+					}
+				}}>
 					<FontAwesomeIcon
-						icon={faTimesCircle}
-						className='position-review reject'
-						/>
-						<FontAwesomeIcon
 						icon={faQuestionCircle}
 						className='position-review revise'
-						/>
-						<FontAwesomeIcon
-						icon={faCheckCircle}
-						className='position-review accept'
-						onClick={acceptPosition}
-						/>
-				</div>
-				: null
-			}
+					/>
+				</Link>
+				<FontAwesomeIcon
+					icon={faCheckCircle}
+					className='position-review accept'
+					onClick={acceptPosition}
+				/>
+			</div>
 		</React.Fragment>
 	)
 }

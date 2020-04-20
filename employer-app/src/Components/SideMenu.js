@@ -29,8 +29,12 @@ function Sidemenu ({toggleHidden, hidden, clearance, location, match, history}) 
 	};
 	const featureContainers = [
 		{
+			title: 'Pending Positions',
+			link: '/pendingpositions'
+		},
+		{
 			title: 'Open Positions',
-			link: '/'
+			link: '/openpositions'
 		},
 		{
 			title: 'Interviews',
