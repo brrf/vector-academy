@@ -3,9 +3,10 @@ import {BrowserRouter as Router, Route, Switch, Link, useLocation, useRouteMatch
 import {connect} from 'react-redux';
 import '../css/sidemenu.css';
 
-function Sidemenu ({toggleHidden, hidden, clearance}) {
+function Sidemenu ({toggleHidden, hidden, clearance, positions}) {
 	const [currentTab, updateCurrentTab] = useState(0);
-
+	const [revisionNeeded, triggerRevision] = useState(false);
+	
 	function changeCurrentTab () {
 		if (window.innerWidth <= 650) toggleHidden(true);
 	};
@@ -16,6 +17,17 @@ function Sidemenu ({toggleHidden, hidden, clearance}) {
 			toggleHidden(true);
 		}
 	}, [])
+
+	useEffect(() => {
+		if (positions) {
+			positions.forEach(position => {
+				if (position.approved === 1) {
+					triggerRevision(true);
+					return;
+				}
+			})
+		}
+	}, [positions]);
 
 	//toggle hidden if window gets resized
 	window.addEventListener('resize', handleResize)
@@ -90,6 +102,7 @@ function Sidemenu ({toggleHidden, hidden, clearance}) {
 
 function mapStateToProps(state) {
   return {
+  	positions: state.positions.positions,
   	clearance: state.user.user.clearance
   }
 }

@@ -39,6 +39,10 @@ const positionSchema = new mongoose.Schema({
 		required: true,
 		default: 0
 	},
+	revisions: {
+		type: Array,
+		required: false
+	},
 	company: {
 		type: String,
 		required: true

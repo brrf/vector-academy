@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import Select from 'react-select';
+import {setPositions} from '../../actions/positions';
+import getPositions from '../../../utils/getPositions';
 import {connect} from 'react-redux';
 import '../../css/position.css';
 
-export default function RevisePositionVector({position}) {
+function RevisePositionVector({position, dispatch}) {
 	const [formData, updateFormData] = useState([]);
 	const [selectedFields, updateSelectedFields] = useState(null);
 	const fields = [
@@ -47,8 +49,51 @@ export default function RevisePositionVector({position}) {
 	function handleSubmit (e) {
 		e.preventDefault();
 
-		console.log('clicked');
-	}
+		if(formData.length === 0) {
+			updateErrors(['Please select a field for revision']);
+			return;
+		} else {
+			formData.forEach(section => {
+				if (!section.message) {
+					updateErrors(['Suggestion cannot be empty']);
+					return;
+				};
+			});
+		};
+
+		const accept = confirm('Are you sure you want to request revision of this position?');
+		if (accept) {
+			fetch(`${PROTOCOL}${DOMAIN}/newposition`, {
+		      method: "PUT",
+		      body: JSON.stringify({
+		      	companyId: position.company,
+		      	positionId: position._id,
+		      	approved: 1,
+		      	formData
+		      }),
+		      headers: { 
+		        "Content-Type": "application/json",
+		        "Access-Control-Allow-Origin": "http://localhost:3000" 
+		      },
+		      mode: "cors",
+		      credentials: "include"
+		    })
+			.then(res => res.json())
+			.then(resObject => {
+				if (resObject.errors) {
+					let newErrors = [...errors];
+					newErrors[index] = []
+					resObject.errors.forEach(error => {
+					newErrors[index].push(error);
+					});
+					updateErrors(newErrors);
+				} else {
+					getPositions()
+					.then(positions => dispatch(setPositions(positions)));
+				}
+			});
+		};
+	};
 	
 	return (
 		<div className='position-container'>
@@ -107,3 +152,9 @@ export default function RevisePositionVector({position}) {
 		</div>
 	)
 };
+
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps)(RevisePositionVector);

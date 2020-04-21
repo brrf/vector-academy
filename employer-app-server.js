@@ -300,36 +300,55 @@ module.exports = function (employerApp, environment) {
 	})
 		.put(async function (req, res) {
 			let errors = [];
-			if (req.body.approved === 2 && req.user.clearance !== 2) {
+			const {companyId, positionId} = req.body;
+			let company = await Company.findById(companyId);
+			let updatedCompanyPositions;
+			if (!company) {
+				errors.push('Error finding company in database');
+			} else if (req.body.approved === 2 || req.body.approved === 1 && req.user.clearance !== 2) {
 				errors.push('You do not have clearance for this operation')
-			} else if (req.body.approved === 2) {
-				const {companyId, positionId} = req.body
-				if (!companyId || !positionId) errors.push('Please provide company and position IDs.');
-				try {
-					let company = await Company.findById(companyId);
-					const newPositions = company.positions.map(position => {
+			} else if (!companyId || !positionId) {
+				 errors.push('Please provide company and position IDs.');
+			} else if (req.body.approved === 2) {		
+				updatedCompanyPositions = company.positions.map(position => {
+					if(position.id === positionId) {
+						position.approved = 2
+					};
+					return position;
+				});
+			} else if (req.body.approved === 1) {
+				const {formData} = req.body;
+				if (!formData) errors.push('Please select a field for revision')
+				else {
+					formData.forEach(section => {
+						if (!section.message) {
+							errors.push('Suggestion cannot be empty');
+							return;
+						};
+					});
+					updatedCompanyPositions = company.positions.map(position => {
 						if(position.id === positionId) {
-							position.approved = 2
+							position.revisions = formData;
+							position.approved = 1
 						};
 						return position;
 					});
-					company.positions = newPositions;
-					company.markModified('positions');
-					try {
-						await company.save();
-					} catch {
-						errors.push('Error updating database')
-					}
-				} catch {
-					errors.push('Error finding company in database')
-				};
-				
-				if (errors.length !== 0) {
-					res.json({errors});
-				} else {
-					res.json({errors: false})
 				}
 			};
+
+			try {
+				company.positions = updatedCompanyPositions;
+				company.markModified('positions');
+				await company.save();
+			} catch {
+				errors.push('Error updating database')
+			};
+				
+			if (errors.length !== 0) {
+				res.json({errors});
+			} else {
+				res.json({errors: false})
+			}
 		})
 
 	employerApp.get('/companylist', async (req, res) => {
