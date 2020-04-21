@@ -1,9 +1,9 @@
 import React, {useRef, useState, useEffect} from 'react';
-import {BrowserRouter as Router, Route, Switch, Link, useLocation} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Link, useLocation, useRouteMatch} from "react-router-dom";
 import {connect} from 'react-redux';
 import '../css/sidemenu.css';
 
-function Sidemenu ({toggleHidden, hidden, clearance, location, match, history}) {
+function Sidemenu ({toggleHidden, hidden, clearance}) {
 	const [currentTab, updateCurrentTab] = useState(0);
 
 	function changeCurrentTab () {
@@ -30,38 +30,40 @@ function Sidemenu ({toggleHidden, hidden, clearance, location, match, history}) 
 	const featureContainers = [
 		{
 			title: 'Pending Positions',
-			link: '/pendingpositions'
+			link: 'pendingpositions'
 		},
 		{
 			title: 'Open Positions',
-			link: '/openpositions'
+			link: 'openpositions'
 		},
 		{
 			title: 'Interviews',
-			link: '/interviews'
+			link: 'interviews'
 		},
 		{
 			title: 'Ranked Candidates',
-			link: '/rankedcandidates'
+			link: 'rankedcandidates'
 		},
 		{
 			title: 'Current Apprentices',
-			link: '/currentapprentices'
+			link: 'currentapprentices'
 		}
 	];
 	if (clearance === 1) {
 		featureContainers.push({
 			title: 'Hiring Managers',
-			link: '/hiringmanagers'
+			link: 'hiringmanagers'
 		})
 	}
 	if (clearance === 2) {
 		featureContainers.push({
 			title: 'Add Admin',
-			link: '/vectoradmin'
+			link: 'vectoradmin'
 		})
 	}
-	const {pathname} = useLocation();
+	
+	const pathname = (useLocation().pathname.split('/'))[1];
+
 	return (
 		<React.Fragment>
 			<ul className={`sidemenu-container ${hidden ? 'hidden' : ''}`}>				
@@ -71,7 +73,7 @@ function Sidemenu ({toggleHidden, hidden, clearance, location, match, history}) 
 								<Link key={container.link} 
 									className={`features-container ${container.link === pathname ? 'active' : null}`} 
 									onClick={changeCurrentTab}
-									to={container.link}
+									to={`/${container.link}`}
 								>
 									{container.title}
 								</Link>

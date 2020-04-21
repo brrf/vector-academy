@@ -85,3 +85,7 @@
 	color: #f79011;
 }
 
+.disabled {
+	cursor: not-allowed;
+}
+

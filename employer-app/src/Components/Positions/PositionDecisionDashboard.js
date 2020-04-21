@@ -10,8 +10,6 @@ import '../../css/position.css';
 
 function PositionReview({clearance, errors, updateErrors, index, position, dispatch}) {
 
-	const [redirectUrl, triggerRedirect] = useState(false)
-
 	function acceptPosition () {
 		const accept = confirm('Are you sure you want to accept this position?');
 		if (accept) {
@@ -46,10 +44,6 @@ function PositionReview({clearance, errors, updateErrors, index, position, dispa
 		}
 	}
 
-	if (redirectUrl) {
-		return <Redirect to={redirectUrl} />
-	}
-
 	return (
 		<React.Fragment>
 			<div className='position-right-section'>
@@ -57,12 +51,7 @@ function PositionReview({clearance, errors, updateErrors, index, position, dispa
 					icon={faTimesCircle}
 					className='position-review reject'
 				/>
-				<Link to={{
-					pathname: `/pendingpositions/${position._id}`,
-					state: {
-						position
-					}
-				}}>
+				<Link to={`/pendingpositions/${position._id}`}>
 					<FontAwesomeIcon
 						icon={faQuestionCircle}
 						className='position-review revise'
