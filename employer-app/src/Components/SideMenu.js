@@ -1,16 +1,17 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch, Link, useLocation, useRouteMatch} from "react-router-dom";
 import {connect} from 'react-redux';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
 import '../css/sidemenu.css';
 
 function Sidemenu ({toggleHidden, hidden, clearance, positions}) {
 	const [currentTab, updateCurrentTab] = useState(0);
 	const [revisionNeeded, triggerRevision] = useState(false);
-	
 	function changeCurrentTab () {
 		if (window.innerWidth <= 650) toggleHidden(true);
 	};
-	
+
 	//toggle hidden if window is <650 on load
 	useEffect(() => {
 		if (window.innerWidth <= 650) {
@@ -80,7 +81,7 @@ function Sidemenu ({toggleHidden, hidden, clearance, positions}) {
 		<React.Fragment>
 			<ul className={`sidemenu-container ${hidden ? 'hidden' : ''}`}>				
 					{
-						featureContainers.map( container => {
+						featureContainers.map( (container, index) => {
 							return (
 								<Link key={container.link} 
 									className={`features-container ${container.link === pathname ? 'active' : null}`} 
@@ -88,6 +89,13 @@ function Sidemenu ({toggleHidden, hidden, clearance, positions}) {
 									to={`/${container.link}`}
 								>
 									{container.title}
+									{ index === 0 && revisionNeeded && clearance !== 2
+										? <FontAwesomeIcon
+										icon={faExclamationCircle}
+										className='exclamation'
+										/>
+										: null
+									}
 								</Link>
 							)
 						})

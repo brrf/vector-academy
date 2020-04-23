@@ -270,6 +270,29 @@ textarea {
   align-items: center;
 }
 
+.application-complete-edit {
+  position: absolute;
+  right: 1vw;
+  top: 1vw;
+  background-color: grey;
+  width: 5vw;
+  height: 2vw;
+  min-width: initial;
+  margin: 0;
+  padding: 0;
+  font-size: 1vw;
+}
+
+@media (max-width: 650px) {
+  .application-complete-edit {
+    width: 8vw;
+    height: 3.2vw;
+    right: 2vw;
+    top: 2vw;
+    font-size: 2vw;
+  }
+}
+
 @media (max-width: 990px) {
 	#form-container {
 		margin: 10vw auto;

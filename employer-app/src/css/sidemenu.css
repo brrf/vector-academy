@@ -17,6 +17,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 2px solid #e86542;
     text-shadow: none;
     position: relative;
@@ -42,6 +43,11 @@
     opacity: 1;
     top: 13px;
     transition: opacity 150ms ease-in;
+}
+
+.exclamation {
+    margin-right: 25px;
+    font-size: 25px;
 }
 
 @media (max-width: 750px) {

@@ -174,7 +174,6 @@ function APScores (props) {
 	};
 
 	if (edit) {
-
 		return (
 			<React.Fragment>
 				<div className='application-input application-section-complete'>

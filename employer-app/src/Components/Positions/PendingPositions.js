@@ -5,31 +5,46 @@ import {connect} from 'react-redux';
 import '../../css/position.css';
 import PositionViewer from './PositionViewer';
 
-function PendingPositions({positions}) {
-	const [errors, updateErrors] = useState(null);
-	useEffect(() => {
-		if (positions) {
-			let newErrors = positions.map((position) => {
-				return ([]);
-			})
-			updateErrors(newErrors);
-		}
-	}, [positions]);
+function PendingPositions({revisionsRequested, unreviewedPositions}) {
 
 	return (
 		<React.Fragment>
-			<PositionViewer pending={true} positions={positions} />
+			{
+				revisionsRequested && revisionsRequested.length > 0
+					? <React.Fragment>
+						<h2>Requiring Revision</h2>
+						<PositionViewer positions={revisionsRequested} />
+					</React.Fragment>
+					: null
+			}
+			{
+				unreviewedPositions && unreviewedPositions.length > 0
+					? <React.Fragment>
+						<h2>Pending Revision</h2>
+						<PositionViewer positions={unreviewedPositions} />
+					</React.Fragment>
+					: null
+			}
 		</React.Fragment>
 	)
 }
 
 function mapStateToProps(state) {
-	let pendingPositions;
+	let revisionsRequested = []; 
+	let unreviewedPositions = [];
+
 	if (state.positions.positions) {
-		pendingPositions = state.positions.positions.filter(position => position.approved === 0 || position.approved === 1);
+		state.positions.positions.forEach(position => {
+			if (position.approved === 1) {
+				revisionsRequested.push(position);
+			} else if (position.approved === 0) {
+				unreviewedPositions.push(position)
+			};
+		});
 	}
 	return {
-		positions: pendingPositions,
+		revisionsRequested,
+		unreviewedPositions
 	};
 };
 

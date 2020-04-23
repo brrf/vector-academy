@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimesCircle, faCheckCircle, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 import '../../css/position.css';
 import PositionDecisionDashBoard from './PositionDecisionDashBoard';
 import Warning from '../Warning';
 
-function OpenPositions({positions, clearance, pending}) {
+function OpenPositions({positions, clearance}) {
 	const [errors, updateErrors] = useState(null);
 	useEffect(() => {
 		if (positions) {
@@ -39,6 +40,24 @@ function OpenPositions({positions, clearance, pending}) {
 										<p>{position.description}</p>
 										<p>{position.otherInformation}</p>
 									</div>
+									{
+										position.revisions
+											? <div className='requested-revision-container'>
+											<h3>Requested Revisions</h3>
+											{
+												position.revisions.map(revision => {
+													console.log(revision);
+													return (
+														<div key={revision.label}>
+															<h4>{revision.label}</h4>
+															<div>{revision.message}</div>
+														</div>
+													)
+												})
+											}
+											</div>
+											: null
+									}
 								</div>
 								<div className='position-right'>
 									<div className='position-right-section'>
@@ -58,13 +77,14 @@ function OpenPositions({positions, clearance, pending}) {
 										</ul>
 									</div>
 									{
-										clearance === 2 && pending
+										clearance === 2
 											? <PositionDecisionDashBoard position={position} updateErrors={updateErrors} index={index} errors={errors}/>
 											: null
 									}
 									
 								</div>
 							</div>
+							<button className='application-complete-edit'><Link to={`/pendingpositions/${position._id}`}>Edit</Link></button>
 						</div>
 					)
 				})

@@ -5,6 +5,7 @@
 	margin: 0.5vw;
 	padding: 2vw;
 	color: black;
+	position: relative;
 }
 
 .position-body {
@@ -88,4 +89,28 @@
 .disabled {
 	cursor: not-allowed;
 }
+
+.requested-revision-container {
+	background-color: #212b65;
+	margin: 0.6vw;
+	padding: 0.6vw;
+}
+
+.requested-revision-container h3, .requested-revision-container div {
+	color: white;
+}
+
+.requested-revision-container > div {
+	margin: 0.6vw 0.4vw;
+}
+
+.requested-revision-container h4 {
+	text-decoration: underline;
+	margin-bottom: 0.2vw;
+
+}
+
+
+
+
 
