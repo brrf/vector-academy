@@ -20,7 +20,7 @@ function PendingPositions({revisionsRequested, unreviewedPositions}) {
 			{
 				unreviewedPositions && unreviewedPositions.length > 0
 					? <React.Fragment>
-						<h2>Pending Revision</h2>
+						<h2>Pending Review</h2>
 						<PositionViewer positions={unreviewedPositions} />
 					</React.Fragment>
 					: null

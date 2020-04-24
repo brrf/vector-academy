@@ -220,12 +220,14 @@ function NewPosition({user, dispatch, position}) {
 		const {fname, lname, discipline, state, city, description, requestedSkills} = formData
 		if (!fname || !lname || !discipline || !state || !city || !description) {
 			updateErrors(['Please fill out all fields']);
-		} 
-		if (!requestedSkills || requestedSkills.length !== 3) {
+			return;
+		} else if (!requestedSkills || requestedSkills.length !== 3) {
 			updateErrors(['Please request 3 courses']);
+			return;
+		} else if (position && position.approved === 0) {
+			updateErrors(['This position has already been submitted']);
+			return;
 		}
-
-		if (errors.length !== 0) return;
 
 		fetch(`${PROTOCOL}${DOMAIN}/newposition`, {
 	      method: "POST",
@@ -275,7 +277,7 @@ function NewPosition({user, dispatch, position}) {
 			<Warning errors={errors} />
 			<h2 className='center'>New {company} Apprenticeship Position</h2>
 			{
-				position.revisions
+				position && position.revisions.length > 0
 					? <RevisionsView revisions={position.revisions}/>
 					: null
 			}	

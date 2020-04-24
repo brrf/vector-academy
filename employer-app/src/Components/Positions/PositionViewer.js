@@ -5,9 +5,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimesCircle, faCheckCircle, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 import '../../css/position.css';
 import PositionDecisionDashBoard from './PositionDecisionDashBoard';
+import RevisionsView from './RevisionsView';
 import Warning from '../Warning';
 
-function OpenPositions({positions, clearance}) {
+function PositionViewer({positions, clearance}) {
 	const [errors, updateErrors] = useState(null);
 	useEffect(() => {
 		if (positions) {
@@ -41,20 +42,8 @@ function OpenPositions({positions, clearance}) {
 										<p>{position.otherInformation}</p>
 									</div>
 									{
-										position.revisions
-											? <div className='requested-revision-container'>
-											<h3>Requested Revisions</h3>
-											{
-												position.revisions.map(revision => {
-													return (
-														<div key={revision.label}>
-															<h4>{revision.label}</h4>
-															<div>{revision.message}</div>
-														</div>
-													)
-												})
-											}
-											</div>
+										position.revisions.length > 0
+											? <RevisionsView revisions={position.revisions}/>
 											: null
 									}
 								</div>
@@ -83,7 +72,12 @@ function OpenPositions({positions, clearance}) {
 									
 								</div>
 							</div>
-							<button className='application-complete-edit'><Link to={`/pendingpositions/${position._id}`}>Edit</Link></button>
+							{
+								position.revisions.length > 0
+								? <button className='application-complete-edit'><Link to={`/pendingpositions/${position._id}`}>Edit</Link></button>
+								: null
+							}
+							
 						</div>
 					)
 				})
@@ -99,4 +93,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(OpenPositions);
+export default connect(mapStateToProps)(PositionViewer);
