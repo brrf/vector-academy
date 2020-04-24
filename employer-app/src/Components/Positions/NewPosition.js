@@ -4,11 +4,12 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {setPositions} from '../../actions/positions';
 import getPositions from '../../../utils/getPositions';
+import RevisionsView from './RevisionsView';
 import Warning from '../Warning';
 import '../../css/newposition.css';
 
-function NewPosition({user, dispatch}) {
-
+function NewPosition({user, dispatch, position}) {
+	console.log(position);
 	const [inputState, updateInputState] = useState([
 		{
 			focus: false,
@@ -135,6 +136,49 @@ function NewPosition({user, dispatch}) {
 	    });
 	}
 
+	useEffect(populateFields, [position]);
+	function populateFields() {
+		if (position) {
+			const {supervisorFname, supervisorLname, description, city, state} = position;
+			let disciplineObject
+			let requestedSkillsArray = [];
+			disciplines.forEach(discipline => {
+				if(discipline.label === position.discipline) disciplineObject = discipline;  
+			})
+			skills.forEach(skill => {
+				if (position.requestedSkills.includes(skill.label)) requestedSkillsArray.push(skill)
+			})
+			updateFormData({
+				fname: supervisorFname,
+				lname: supervisorLname,
+				description,
+				discipline: disciplineObject,
+				city,
+				state,
+				requestedSkills: requestedSkillsArray,
+				other: position.other ? position.other : ''
+			})
+			updateInputState([
+				{
+					focus: false,
+					empty: false
+				},
+				{
+					focus: false,
+					empty: false
+				},
+				{
+					focus: false,
+					empty: false
+				},
+				{
+					focus: false,
+					empty: false
+				},
+			])
+		}
+	}
+
 	function handleFocus(index) {
 		let newState = [...inputState];
 		newState[index] = {
@@ -227,10 +271,14 @@ function NewPosition({user, dispatch}) {
 	}
 
 	return (
-		<React.Fragment>
 		<div className='application-form-container'>
 			<Warning errors={errors} />
-			<h2 className='center'>New {company} Apprenticeship Position</h2>	
+			<h2 className='center'>New {company} Apprenticeship Position</h2>
+			{
+				position.revisions
+					? <RevisionsView revisions={position.revisions}/>
+					: null
+			}	
 			<form className='application-input'>
 				<h3 className='full-width'>Supervising Engineer</h3> 
 				<div className='styled-row'>
@@ -344,7 +392,6 @@ function NewPosition({user, dispatch}) {
 			</form>
 			
 		</div>
-		</React.Fragment>
 	)
 }
 

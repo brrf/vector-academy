@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import RevisePositionVector from './RevisePositionVector';
-import RevisePositionCompany from './RevisePositionCompany';
+import NewPosition from './NewPosition';
 
 function RevisePositionContainer({clearance, position}) {
 	return (
@@ -9,7 +9,7 @@ function RevisePositionContainer({clearance, position}) {
 			{
 				clearance === 2
 					? <RevisePositionVector position={position}/>
-					: <RevisePositionCompany/>
+					: <NewPosition position={position}/>
 			}
 		</React.Fragment>
 	)

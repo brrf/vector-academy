@@ -46,7 +46,6 @@ function OpenPositions({positions, clearance}) {
 											<h3>Requested Revisions</h3>
 											{
 												position.revisions.map(revision => {
-													console.log(revision);
 													return (
 														<div key={revision.label}>
 															<h4>{revision.label}</h4>
