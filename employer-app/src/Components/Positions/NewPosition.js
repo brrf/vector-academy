@@ -9,7 +9,6 @@ import Warning from '../Warning';
 import '../../css/newposition.css';
 
 function NewPosition({user, dispatch, position}) {
-	console.log(position);
 	const [inputState, updateInputState] = useState([
 		{
 			focus: false,
@@ -138,7 +137,7 @@ function NewPosition({user, dispatch, position}) {
 
 	useEffect(populateFields, [position]);
 	function populateFields() {
-		if (position) {
+		if (position && position.requestedSkills) {
 			const {supervisorFname, supervisorLname, description, city, state} = position;
 			let disciplineObject
 			let requestedSkillsArray = [];
@@ -216,6 +215,7 @@ function NewPosition({user, dispatch, position}) {
 	function handleSubmit(e) {
 		e.preventDefault();
 		updateErrors([]);
+		console.log('a button!')
 
 		const {fname, lname, discipline, state, city, description, requestedSkills} = formData
 		if (!fname || !lname || !discipline || !state || !city || !description) {
@@ -224,11 +224,13 @@ function NewPosition({user, dispatch, position}) {
 		} else if (!requestedSkills || requestedSkills.length !== 3) {
 			updateErrors(['Please request 3 courses']);
 			return;
-		} else if (position && position.approved === 0) {
-			updateErrors(['This position has already been submitted']);
-			return;
 		}
 
+		if (position && position.approved === 1) submitRevision();
+		else submitNewPosition();
+	}
+
+	function submitNewPosition() {
 		fetch(`${PROTOCOL}${DOMAIN}/newposition`, {
 	      method: "POST",
 	      headers: { 
@@ -242,17 +244,40 @@ function NewPosition({user, dispatch, position}) {
 	    .then(resObject => {
 	      if (resObject.errors) {
 	      	updateErrors(resObject.errors);
-	      } else {
-	      		
+	      } else {		
 	      		getPositions()
 				.then(positions => {
 					dispatch(setPositions(positions))
 					triggerRedirect(true);
 				});
 	      };
-	    });
+	    });	
+	}		
 
-	}
+	function submitRevision() {
+		console.log('a revision');
+		fetch(`${PROTOCOL}${DOMAIN}/newposition`, {
+	      method: "PUT",
+	      headers: { 
+	        "Content-Type": "application/json",
+	      },
+	      body: JSON.stringify({formData, approved: 0, positionId: position._id}),
+	      mode: "cors",
+	      credentials: "include"
+	    })
+	    .then(res => res.json())
+	    .then(resObject => {
+	      if (resObject.errors) {
+	      	updateErrors(resObject.errors);
+	      } else {		
+	      		getPositions()
+				.then(positions => {
+					dispatch(setPositions(positions))
+					triggerRedirect(true);
+				});
+	      };
+	    });	
+	};
 
 	function handleUpdateFormData(e, field) {
 		let newValue;
@@ -275,9 +300,9 @@ function NewPosition({user, dispatch, position}) {
 	return (
 		<div className='application-form-container'>
 			<Warning errors={errors} />
-			<h2 className='center'>New {company} Apprenticeship Position</h2>
+			<h2 className='center'>{`${position && position.approved === 1 ? 'Revised' : 'New'} ${company} Apprenticeship Position`}</h2>
 			{
-				position && position.revisions.length > 0
+				position && position.revisions && position.revisions.length > 0
 					? <RevisionsView revisions={position.revisions}/>
 					: null
 			}	
@@ -390,9 +415,8 @@ function NewPosition({user, dispatch, position}) {
 							: <p className='word-count'>No skills selected</p>		
 					}
 				</div>
-				<button onClick={handleSubmit}>Submit Position</button>
-			</form>
-			
+				<button onClick={handleSubmit}>{`${position && position.approved === 1 ? 'Revise' : 'Submit'} Position`}</button>
+			</form>	
 		</div>
 	)
 }

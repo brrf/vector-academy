@@ -25,6 +25,11 @@ function PendingPositions({revisionsRequested, unreviewedPositions}) {
 					</React.Fragment>
 					: null
 			}
+			{
+				unreviewedPositions && revisionsRequested && revisionsRequested.length === 0 && unreviewedPositions.length === 0
+				 ? <p>No pending positions</p>
+				 : null
+			}
 		</React.Fragment>
 	)
 }

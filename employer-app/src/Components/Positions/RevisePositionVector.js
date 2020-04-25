@@ -1,13 +1,17 @@
 import React, {useState, useEffect} from 'react';
+import {Redirect} from 'react-router-dom';
 import Select from 'react-select';
 import {setPositions} from '../../actions/positions';
 import getPositions from '../../../utils/getPositions';
+import Warning from '../Warning';
 import {connect} from 'react-redux';
 import '../../css/position.css';
 
 function RevisePositionVector({position, dispatch}) {
 	const [formData, updateFormData] = useState([]);
 	const [selectedFields, updateSelectedFields] = useState(null);
+	const [errors, updateErrors] = useState([]);
+	const [redirect, triggerRedirect] = useState(false);
 	const fields = [
 		{
 			label: 'Name',
@@ -81,22 +85,23 @@ function RevisePositionVector({position, dispatch}) {
 			.then(res => res.json())
 			.then(resObject => {
 				if (resObject.errors) {
-					let newErrors = [...errors];
-					newErrors[index] = []
-					resObject.errors.forEach(error => {
-					newErrors[index].push(error);
-					});
-					updateErrors(newErrors);
+					updateErrors(resObject.errors);
 				} else {
 					getPositions()
 					.then(positions => dispatch(setPositions(positions)));
+					triggerRedirect(true);
 				}
 			});
 		};
 	};
+
+	if (redirect) {
+		return <Redirect to='/pendingpositions' />
+	}
 	
 	return (
 		<div className='position-container'>
+			<Warning errors={errors} />
 			<div style={{marginBottom: '20px'}}>
 				<div className='position-body'>
 					<div className='position-left'>

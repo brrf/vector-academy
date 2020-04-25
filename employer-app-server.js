@@ -266,56 +266,68 @@ module.exports = function (employerApp, environment) {
 	});
 	employerApp.route('/newposition')
 		.post(async function (req, res) {
-		const {fname, lname, discipline, state, city, description, requestedSkills} = req.body;
-		if (!fname || !lname || !discipline || !state || !city || !description) {
-			return res.json({errors: ['Please fill out all fields']})
-		} else if (!requestedSkills || requestedSkills.length !== 3) {
-			return res.json({errors: ['Please request 3 courses']})
-		}
+			const {fname, lname, discipline, state, city, description, requestedSkills} = req.body;
+			if (!fname || !lname || !discipline || !state || !city || !description) {
+				return res.json({errors: ['Please fill out all fields']})
+			} else if (!requestedSkills || requestedSkills.length !== 3) {
+				return res.json({errors: ['Please request 3 courses']})
+			};
 
-		const submittedSkills = requestedSkills.map(skill => skill.label);
+			const submittedSkills = requestedSkills.map(skill => skill.label);
 
-		const position = {
-			supervisorFname: fname,
-			supervisorLname: lname,
-			discipline: discipline.label,
-			description,
-			city,
-			state,
-			requestedSkills: submittedSkills,
-			approved: 0,
-			company: req.user.companyId
-		}
+			const position = {
+				supervisorFname: fname,
+				supervisorLname: lname,
+				discipline: discipline.label,
+				description,
+				city,
+				state,
+				requestedSkills: submittedSkills,
+				approved: 0,
+				company: req.user.companyId
+			}
 
-		if (req.body.other) position.otherInformation = req.body.other
+			if (req.body.other) position.otherInformation = req.body.other
 
-		try {
-			await Company.findByIdAndUpdate(req.user.companyId, {
-				$push: {positions: position}
-			});
-			return res.json({errors: false})	
-		} catch {
-			return res.json({errors: ['Error saving position to database']})
-		};
-	})
+			try {
+				await Company.findByIdAndUpdate(req.user.companyId, {
+					$push: {positions: position}
+				});
+				return res.json({errors: false})	
+			} catch {
+				return res.json({errors: ['Error saving position to database']})
+			};
+		})
 		.put(async function (req, res) {
 			let errors = [];
-			const {companyId, positionId} = req.body;
-			let company = await Company.findById(companyId);
-			let updatedCompanyPositions;
-			if (!company) {
-				errors.push('Error finding company in database');
-			} else if (req.body.approved === 2 || req.body.approved === 1 && req.user.clearance !== 2) {
+			let updatedCompanyPositions, companyId, company;
+			const positionId = req.body.positionId;
+
+			if (req.user.clearance === 2) {
+				companyId = req.body.companyId;		
+			} else {
+				companyId = req.user.companyId;
+			}
+			try {
+				company = await Company.findById(companyId);
+			} catch {
+				return res.json({errors: ['Error finding company in database']});
+			}
+
+			if (req.body.approved === 2 && req.user.clearance !== 2 || req.body.approved === 1 && req.user.clearance !== 2) {
 				errors.push('You do not have clearance for this operation')
 			} else if (!companyId || !positionId) {
 				 errors.push('Please provide company and position IDs.');
+
+			//Vector admin approves a position
 			} else if (req.body.approved === 2) {		
 				updatedCompanyPositions = company.positions.map(position => {
 					if(position.id === positionId) {
 						position.approved = 2
 					};
 					return position;
-				});
+			});
+			//Vector admin requests a revision
 			} else if (req.body.approved === 1) {
 				const {formData} = req.body;
 				if (!formData) errors.push('Please select a field for revision')
@@ -334,9 +346,45 @@ module.exports = function (employerApp, environment) {
 						return position;
 					});
 				}
-			};
+			//Company submits a revision
+			} else if (req.body.approved === 0) {
+				const {fname, lname, discipline, state, city, description, requestedSkills} = req.body.formData;
+				if (!fname || !lname || !discipline || !state || !city || !description) {
+					return res.json({errors: ['Please fill out all fields']})
+				} else if (!requestedSkills || requestedSkills.length !== 3) {
+					return res.json({errors: ['Please request 3 courses']})
+				};
+
+				const submittedSkills = requestedSkills.map(skill => skill.label);
+
+				const revisedPosition = {
+					supervisorFname: fname,
+					supervisorLname: lname,
+					discipline: discipline.label,
+					description,
+					city,
+					state,
+					requestedSkills: submittedSkills,
+					approved: 0,
+					company: companyId,
+					revisions: []
+				};
+
+				if (req.body.formData.other) revisedPosition.otherInformation = req.body.formData.other
+						
+				updatedCompanyPositions = company.positions.map(position => {
+					if(position.id === positionId) {
+						position = revisedPosition;
+					};
+					return position;
+				});
+				
+			}
 
 			try {
+				if (company.positions.length !== updatedCompanyPositions.length) {
+					return res.json({errors: ['An unauthorized delete operation was attempted and aborted']});
+				}
 				company.positions = updatedCompanyPositions;
 				company.markModified('positions');
 				await company.save();
@@ -350,6 +398,36 @@ module.exports = function (employerApp, environment) {
 				res.json({errors: false})
 			}
 		})
+	.delete(async function(req, res) {
+		const {positionId, companyId} = req.body;
+		let company, updatedCompanyPositions;
+
+		if (req.user.clearance !== 2) {
+			return res.json({errors: ['You do not have clearance for this operation.']})
+		};
+
+		try {
+			company = await Company.findById(companyId);		
+		} catch (err) {
+			return res.json({errors: ['Error finding company in database']});
+		}
+
+		updatedCompanyPositions = company.positions.map(position => {
+			if(position.id === positionId) {
+				position.approved = -1;
+			};
+			return position;
+		});
+
+		try {
+			company.positions = updatedCompanyPositions;
+			company.markModified('positions');
+			await company.save();
+			res.json({errors: false})
+		} catch {
+			return res.json({errors: ['Error updating database']})
+		};
+	});
 
 	employerApp.get('/companylist', async (req, res) => {
 		await Company.find({}, function(err, companies) {

@@ -33,7 +33,7 @@ const positionSchema = new mongoose.Schema({
 		type: Array,
 		required: true
 	},
-	//0 = submitted; 1 = revision requested; 2 = approved; -1 = refected
+	//0 = submitted; 1 = revision requested; 2 = approved; -1 = rejected
 	approved: {
 		type: Number,
 		required: true,

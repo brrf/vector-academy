@@ -42,6 +42,39 @@ function PositionReview({clearance, errors, updateErrors, index, position, dispa
 				}
 			});
 		}
+	};
+
+	function rejectPosition () {
+		const reject = confirm('Are you sure you want to permanently reject this position?');
+		if (reject) {
+			fetch(`${PROTOCOL}${DOMAIN}/newposition`, {
+		      method: "DELETE",
+		      body: JSON.stringify({
+		      	companyId: position.company,
+		      	positionId: position._id,
+		      }),
+		      headers: { 
+		        "Content-Type": "application/json",
+		        "Access-Control-Allow-Origin": "http://localhost:3000" 
+		      },
+		      mode: "cors",
+		      credentials: "include"
+		    })
+			.then(res => res.json())
+			.then(resObject => {
+				if (resObject.errors) {
+					let newErrors = [...errors];
+					newErrors[index] = []
+					resObject.errors.forEach(error => {
+					newErrors[index].push(error);
+					});
+					updateErrors(newErrors);
+				} else {
+					getPositions()
+					.then(positions => dispatch(setPositions(positions)));
+				}
+			});
+		}
 	}
 
 	return (
@@ -50,6 +83,7 @@ function PositionReview({clearance, errors, updateErrors, index, position, dispa
 				<FontAwesomeIcon
 					icon={faTimesCircle}
 					className='position-review reject'
+					onClick={rejectPosition}
 				/>
 				<Link to={`/pendingpositions/${position._id}`}>
 					<FontAwesomeIcon
