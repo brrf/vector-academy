@@ -11,7 +11,6 @@ module.exports = function(passport) {
 				passReqToCallback : true
 			},
 			function(req, username, password, done) {
-				console.log('am i here again?');
 				Student.findOne({ email: username }, async function(err, user) {
 					if (err) {
 						return done(err);
@@ -30,7 +29,6 @@ module.exports = function(passport) {
 	);
 
 	passport.serializeUser(function(user, done) {
-		console.log('a student awaits!')
 		done(null, user.id);
 	});
 

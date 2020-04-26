@@ -11,6 +11,7 @@ import TestScore from './TestScore';
 import Essay from './Essay';
 import CV from './CV';
 import Questions from './Questions';
+import CompanySelection from './CompanySelection';
 import Review from './Review';
 import Payment from './Payment';
 
@@ -40,6 +41,10 @@ function ApplicationSteps (props) {
 		{
 			name: 'Additional Questions',
 			ref: 'questions'
+		},
+		{
+			name: 'Company Selection',
+			ref: 'companySelection'
 		}
 	];
 	const [errors, handleErrors] = useState([]);
@@ -48,7 +53,7 @@ function ApplicationSteps (props) {
 		handleErrors([]);
 		if (applicationStep === 0 && counter === '-') {
 			props.dispatch(setApplicationStep(false));
-		} else if (applicationStep === 5 && counter === '+' && props.completedSteps < 6) {
+		} else if (applicationStep === 6 && counter === '+' && props.completedSteps < 7) {
 			props.dispatch(setApplicationStep(false));
 		} else if (counter === '+') {
 			props.dispatch(setApplicationStep(applicationStep + 1))
@@ -131,10 +136,18 @@ function ApplicationSteps (props) {
 			case 5: {
 				return <Questions handleSubmit={handleSubmit} handleApplicationStep={handleApplicationStep}/>
 			}
+			case 5: {
+				return <Questions handleSubmit={handleSubmit} handleApplicationStep={handleApplicationStep}/>
+			}
+			case 6: {
+				return <CompanySelection handleSubmit={handleSubmit} handleApplicationStep={handleApplicationStep}/>
+			}
 			default: 
 				return null;
 		}
 	}
+
+	//student has already submitted an application
 	if (props.status === 1) {
 		return (
 			<div className='application-form-container'>
@@ -168,8 +181,8 @@ function ApplicationSteps (props) {
 			<React.Fragment>
 				<ApplicationProgress />
 				{
-					props.completedSteps === 6
-						? <button onClick={() => props.dispatch(setApplicationStep(6))} className='application-steps-button'>Submit Application</button>
+					props.completedSteps === 7
+						? <button onClick={() => props.dispatch(setApplicationStep(7))} className='application-steps-button'>Submit Application</button>
 						: null
 				}
 				<div className='application-steps-container'>
@@ -177,11 +190,11 @@ function ApplicationSteps (props) {
 				</div>
 			</React.Fragment>
 		);
-	} else if (applicationStep === 6) {
+	} else if (applicationStep === 7) {
 		return (
 			<Review applicationSteps={applicationSteps}/>
 		)
-	} else if (applicationStep === 7) {
+	} else if (applicationStep === 8) {
 		return (
 			<Payment handleApplicationStep={handleApplicationStep} />
 		)

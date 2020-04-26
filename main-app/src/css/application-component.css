@@ -363,6 +363,127 @@ input[type='radio'] {
   margin-bottom: 0.8vw;
 }
 
+.position-container {
+  background-color: #4a4a4a26;
+  height: 300px;
+  overflow: hidden;
+  margin: 15px 1% 15px 0;
+  padding: 15px;
+  color: black;
+  position: relative;
+}
+
+.position-container.expanded {
+  height: auto;
+}
+
+.position-filter-container {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.position-filter {
+  flex-basis: 33%;
+  margin-right: 1%;
+}
+
+.position-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.position-left {
+  flex-basis: 70%;
+  position: relative;
+}
+
+/*.position-left.overflow {
+  height: 285px;
+}*/
+
+.position-left.overflow.expanded {
+  height: auto;
+}
+
+.position-left.overflow:hover {
+  cursor: pointer;
+}
+
+.position-right {
+  flex-basis: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.position-container h3 {
+  color: grey;
+  margin: 0;
+}
+
+.position-info {
+  max-height: 180px;
+  overflow: hidden;
+  padding: 8px;
+}
+
+.position-info.expanded {
+  max-height: none;
+}
+
+.position-info p {
+  margin: 7.5px 0;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.position-container h6 {
+  font-size: 12px;
+  margin: 10px 0 0 10px;
+}
+
+.position-right-section {
+  margin-bottom: 7.5px;
+}
+
+.position-right-section h4 {
+  font-size: 16px;
+}
+
+.supervising-engineer-label, .position-courses-label {
+  color: #e96443;
+  font-weight: bold;
+  margin-bottom: 2.25px;
+}
+
+.supervising-engineer, .position-course {
+  color: grey;
+}
+
+.position-content {
+  display: flex;
+  justify-content: space-between
+}
+
+.position-right-section ul {
+  margin: 0;
+}
+
+.position-right-section button {
+  margin-top: 7.5px;
+  background-color: #e96443;
+  width: 90px;
+  transition: background-color 0.5s ease;
+}
+
+.position-right-section button.applied {
+  background-color: #51b0e3;
+}
+
+.position-course {
+  margin: 0 0 2px 0;
+}
+
 @media (max-width: 990px) {
   #bar {
     width: 30vw;

@@ -454,7 +454,18 @@ module.exports = function (employerApp, environment) {
 
 	employerApp.get('/getpositions', async (req, res) => {
 		let positionList = [];
-		if (req.user.clearance === 2) {
+		if (!req.user) {
+			const companyList = await Company.find({});
+			for (let i = 0; i < companyList.length; i++) {
+				companyList[i].positions.forEach(position => {
+					if (position.approved === 2) {
+						let modifiedPosition = JSON.parse(JSON.stringify(position));
+						modifiedPosition.companyName = companyList[i].name	
+						positionList.push(modifiedPosition);
+					}
+				});
+			}
+		} else	if (req.user.clearance === 2) {
 			try {
 				const companyList = await Company.find({});
 

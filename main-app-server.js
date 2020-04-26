@@ -154,6 +154,7 @@ module.exports = function(mainApp, environment) {
 	})
 
 	mainApp.post('/application', async (req, res) => {
+		console.log(req.user);
 		let errors = []
 		let user;
 		try {

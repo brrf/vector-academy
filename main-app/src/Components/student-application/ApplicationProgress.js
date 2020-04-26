@@ -11,8 +11,6 @@ function ApplicationProgress (props) {
 	useEffect(() => {
 		updateInnerBarWidth((progressPercentage * barWidth.current.offsetWidth / 100) - 8 );
 	}, [progressPercentage])
-	//let innerBarWidth = barWidth.current ? (progressPercentage * barWidth.current.offsetWidth / 100) - 8 : 0;
-	//set progress bar width on component mount
 	
 	//resize progress bar width as window width changes
 	window.onresize = function () {
@@ -22,7 +20,7 @@ function ApplicationProgress (props) {
 	};
 
 	function incrementProgressPercentage () {	
-		setProgressPercentage(Math.floor(0 + 100/6 * completedSteps));
+		setProgressPercentage(Math.floor(0 + 100/7 * completedSteps));
 	}
 
 	return (
