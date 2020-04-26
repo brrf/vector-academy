@@ -12,28 +12,14 @@ export default function PositionsViewer({positions}) {
 		discipline: null,
 		company: null
 	});
+	const [renderedPositions, updateRenderedPositions] = useState(positions)
 	const [availableFilters, updateAvailableFilters] = useState({
-		location: [
-			{
-			label: 'Mechanical Engineering',
-			value: 'mechanical-engineering'
-			}
-		],
-		discipline: [
-			{
-			label: 'Mechanical Engineering',
-			value: 'mechanical-engineering'
-			}
-		],
-		company: [
-			{
-			label: 'Mechanical Engineering',
-			value: 'mechanical-engineering'
-			}
-		]
+		location: [],
+		discipline: [],
+		company: []
 	})
 
-	//menu, placeholder
+	// style for Select component
 	const customStyles = {
 	  menu: (provided, state) => ({
 	    ...provided,
@@ -42,12 +28,90 @@ export default function PositionsViewer({positions}) {
 	  }),
 	}
 
+	useEffect(renderPositions, [positions, appliedFilters, availableFilters]);
+	function renderPositions() {
+		if (!positions || !availableFilters || !appliedFilters) return;
+		let locations = [], disciplines = [], companies = [];
 
-	useEffect(populateFilters, []);
-	function populateFilters() {
-		console.log('populated')
+		//convert filters to 1D arrays;
+		if (!appliedFilters.location) {
+			locations = availableFilters.location.map(location => location.label)
+		} else {
+			appliedFilters.location.forEach(location => locations.push(location.label))
+		}
+		if (!appliedFilters.discipline) {
+			disciplines = availableFilters.discipline.map(discipline => discipline.label)
+		} else {
+			appliedFilters.discipline.forEach(discipline => disciplines.push(discipline.label))
+		}
+		if (!appliedFilters.company) {
+			companies = availableFilters.company.map(company => company.label)
+		} else {
+			appliedFilters.company.forEach(company => companies.push(company.label))
+		}
+
+		//console.log({companies});
+		let filteredPositions = positions
+			.filter(position => disciplines.includes(position.discipline))
+			.filter(position => companies.includes(position.companyName))
+			.filter(position => locations.includes(`${position.city}, ${position.state}`))
+
+			updateRenderedPositions(filteredPositions);
 	}
 
+
+	useEffect(populateFilters, [positions]);
+	function populateFilters() {
+		let addedDisciplines = [];
+		let addedCompanies = [];
+		let addedLocations = [];
+		positions.forEach(position => {
+			// add unique disciplines
+			if (!addedDisciplines.includes(position.discipline)) {
+				addedDisciplines.push(position.discipline)
+			}
+			//add unique companies
+			if (!addedCompanies.includes(position.companyName)) {
+				addedCompanies.push(position.companyName)
+			}
+			//add unique locations
+			const location = `${position.city}, ${position.state}`;
+			if (!addedLocations.includes(location)) {
+				addedLocations.push(location);
+			}
+
+		});
+		let availableDisciplines = addedDisciplines.map(discipline => (
+			{
+				label: discipline,
+				value: discipline
+			}
+		))
+		let availableCompanies = addedCompanies.map(company => (
+			{
+				label: company,
+				value: company
+			}
+		))	
+		let availableLocations = addedLocations.map(location => (
+			{
+				label: location,
+				value: location
+			}
+		))
+		updateAvailableFilters({
+			discipline: availableDisciplines,
+			company: availableCompanies,
+			location: availableLocations
+		})
+	}
+
+	function handleUpdateAppliedFilters(e, field) {
+		updateAppliedFilters({
+			...appliedFilters,
+			[field]: e
+		})
+	}
 
 
 
@@ -57,6 +121,7 @@ export default function PositionsViewer({positions}) {
 				<h3>Filters</h3>
 				<div className='position-filter-container'>
 					<Select
+						onChange={(e) => handleUpdateAppliedFilters(e, 'location')}
 						className='position-filter'
 						value={appliedFilters.location}
 						options={availableFilters.location}
@@ -65,6 +130,7 @@ export default function PositionsViewer({positions}) {
 						placeholder='Location'
 					/>
 					<Select
+						onChange={(e) => handleUpdateAppliedFilters(e, 'discipline')}
 						className='position-filter'
 						value={appliedFilters.discipline}
 						options={availableFilters.discipline}
@@ -73,6 +139,7 @@ export default function PositionsViewer({positions}) {
 						isMulti={true}
 					/>
 					<Select
+						onChange={(e) => handleUpdateAppliedFilters(e, 'company')}
 						className='position-filter'
 						value={appliedFilters.company}
 						options={availableFilters.company}
@@ -83,8 +150,8 @@ export default function PositionsViewer({positions}) {
 				</div>
 			</div>
 			{
-				positions && positions.length > 0 
-					? positions.map((position, index) => <PositionViewer key={index} position={position} /> )
+				renderedPositions && renderedPositions.length > 0 
+					? renderedPositions.map((position, index) => <PositionViewer key={index} position={position} /> )
 					: <p>No current positions</p>
 			}
 		</React.Fragment>
