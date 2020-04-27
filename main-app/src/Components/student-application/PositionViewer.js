@@ -4,13 +4,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 
 export default function PositionViewer({position}) {
-
+	console.log(position);
 	const [positionState, updatePositionState] = useState({
 		selected: false,
 		overflow: false,
 		expanded: false
-	})
-	
+	})	
 
 	function toggleSelected (e) {
 		updatePositionState({

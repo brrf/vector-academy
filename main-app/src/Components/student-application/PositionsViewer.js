@@ -180,7 +180,7 @@ export default function PositionsViewer({positions}) {
 			</div>
 			{
 				renderedPositions && renderedPositions.length > 0 
-					? renderedPositions.map((position, index) => <PositionViewer key={index} position={position} /> )
+					? renderedPositions.map((position) => <PositionViewer key={position._id} position={position} /> )
 					: <p>No current positions</p>
 			}
 		</React.Fragment>

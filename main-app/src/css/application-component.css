@@ -365,7 +365,7 @@ input[type='radio'] {
 
 .position-container {
   background-color: #4a4a4a26;
-  height: 300px;
+  height: 310px;
   overflow: hidden;
   margin: 15px 1% 15px 0;
   padding: 15px;
@@ -396,10 +396,6 @@ input[type='radio'] {
   flex-basis: 70%;
   position: relative;
 }
-
-/*.position-left.overflow {
-  height: 285px;
-}*/
 
 .position-left.overflow.expanded {
   height: auto;
