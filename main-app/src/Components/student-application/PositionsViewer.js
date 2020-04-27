@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Select from 'react-select'
 import Warning from '../Warning';
 import PositionViewer from './PositionViewer';
@@ -8,12 +8,17 @@ import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 export default function PositionsViewer({positions}) {
 	const [selectedCompanies, updateSelectedCompanies] = useState([]);
 	const [appliedFilters, updateAppliedFilters] = useState({
-		location: null,
-		discipline: null,
-		company: null
+		location: [],
+		discipline: [],
+		company: []
 	});
 	const [renderedPositions, updateRenderedPositions] = useState(positions)
 	const [availableFilters, updateAvailableFilters] = useState({
+		location: [],
+		discipline: [],
+		company: []
+	})
+	const [allFilters, updateAllFilters] = useState({
 		location: [],
 		discipline: [],
 		company: []
@@ -26,46 +31,25 @@ export default function PositionsViewer({positions}) {
 	    width: '40vw',
 	    maxWidth: '300px'
 	  }),
-	}
+	};
 
-	useEffect(renderPositions, [positions, appliedFilters, availableFilters]);
-	function renderPositions() {
-		if (!positions || !availableFilters || !appliedFilters) return;
-		let locations = [], disciplines = [], companies = [];
+	const firstRenderRef = useRef(true)
 
-		//convert filters to 1D arrays;
-		if (!appliedFilters.location) {
-			locations = availableFilters.location.map(location => location.label)
-		} else {
-			appliedFilters.location.forEach(location => locations.push(location.label))
-		}
-		if (!appliedFilters.discipline) {
-			disciplines = availableFilters.discipline.map(discipline => discipline.label)
-		} else {
-			appliedFilters.discipline.forEach(discipline => disciplines.push(discipline.label))
-		}
-		if (!appliedFilters.company) {
-			companies = availableFilters.company.map(company => company.label)
-		} else {
-			appliedFilters.company.forEach(company => companies.push(company.label))
-		}
-
-		//console.log({companies});
-		let filteredPositions = positions
-			.filter(position => disciplines.includes(position.discipline))
-			.filter(position => companies.includes(position.companyName))
-			.filter(position => locations.includes(`${position.city}, ${position.state}`))
-
-			updateRenderedPositions(filteredPositions);
-	}
-
-
-	useEffect(populateFilters, [positions]);
+	useEffect(populateFilters, [positions, appliedFilters]);
 	function populateFilters() {
 		let addedDisciplines = [];
 		let addedCompanies = [];
 		let addedLocations = [];
-		positions.forEach(position => {
+
+		let positionsToTest;
+
+		if (availableFilters.location.length === 0 || availableFilters.discipline.length === 0 || availableFilters.company.length === 0) {
+			positionsToTest = positions
+		} else {
+			positionsToTest = returnFilteredPositions();
+		}
+
+		positionsToTest.forEach(position => {
 			// add unique disciplines
 			if (!addedDisciplines.includes(position.discipline)) {
 				addedDisciplines.push(position.discipline)
@@ -79,8 +63,10 @@ export default function PositionsViewer({positions}) {
 			if (!addedLocations.includes(location)) {
 				addedLocations.push(location);
 			}
-
 		});
+
+
+
 		let availableDisciplines = addedDisciplines.map(discipline => (
 			{
 				label: discipline,
@@ -99,11 +85,54 @@ export default function PositionsViewer({positions}) {
 				value: location
 			}
 		))
+
+		if (allFilters.location.length === 0 || allFilters.discipline.length === 0 || allFilters.company.length === 0) {
+			updateAllFilters({
+				discipline: availableDisciplines,
+				company: availableCompanies,
+				location: availableLocations
+			})
+		}
+		
 		updateAvailableFilters({
 			discipline: availableDisciplines,
 			company: availableCompanies,
 			location: availableLocations
 		})
+	}
+
+	useEffect(renderPositions, [availableFilters, appliedFilters]);
+	function renderPositions() {
+		if (!positions || !appliedFilters) return;
+		
+			let filteredPositions = returnFilteredPositions();
+			updateRenderedPositions(filteredPositions);
+	};
+
+	function returnFilteredPositions () {
+		let locations = [], disciplines = [], companies = [];
+
+		//convert filters to 1D arrays;
+		if (!appliedFilters.location || appliedFilters.location.length === 0) {
+			locations = allFilters.location.map(location => location.label)
+		} else {
+			appliedFilters.location.forEach(location => locations.push(location.label))
+		}
+		if (!appliedFilters.discipline || appliedFilters.discipline.length === 0) {
+			disciplines = allFilters.discipline.map(discipline => discipline.label)
+		} else {
+			appliedFilters.discipline.forEach(discipline => disciplines.push(discipline.label))
+		}
+		if (!appliedFilters.company || appliedFilters.company.length === 0) {
+			companies = allFilters.company.map(company => company.label)
+		} else {
+			appliedFilters.company.forEach(company => companies.push(company.label))
+		}
+
+		return positions
+			.filter(position => disciplines.includes(position.discipline))
+			.filter(position => companies.includes(position.companyName))
+			.filter(position => locations.includes(`${position.city}, ${position.state}`))
 	}
 
 	function handleUpdateAppliedFilters(e, field) {
