@@ -1,29 +1,30 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import Select from 'react-select'
 import Warning from '../Warning';
 import PositionViewer from './PositionViewer';
+import {SubmitButtonsNoForm, ApplicationEditButtons} from './ApplicationButtons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 
-export default function PositionsViewer({positions}) {
-	const [selectedCompanies, updateSelectedCompanies] = useState([]);
+export default function PositionsViewer({positions, handleSubmit, handleApplicationStep}) {
+	const [selectedPositions, updateSelectedPositions] = useState([]);
+	const [errors, updateErrors] = useState([]);
+
+	//all filters; static & derived from positions
+	const [allFilters, updateAllFilters] = useState({
+		location: [],
+		discipline: [],
+		company: []
+	});
+	//currently active filters
 	const [appliedFilters, updateAppliedFilters] = useState({
 		location: [],
 		discipline: [],
 		company: []
 	});
+	//positions that meet filter criteria
 	const [renderedPositions, updateRenderedPositions] = useState(positions)
-	const [availableFilters, updateAvailableFilters] = useState({
-		location: [],
-		discipline: [],
-		company: []
-	})
-	const [allFilters, updateAllFilters] = useState({
-		location: [],
-		discipline: [],
-		company: []
-	})
-
+	
 	// style for Select component
 	const customStyles = {
 	  menu: (provided, state) => ({
@@ -33,23 +34,13 @@ export default function PositionsViewer({positions}) {
 	  }),
 	};
 
-	const firstRenderRef = useRef(true)
-
-	useEffect(populateFilters, [positions, appliedFilters]);
+	useEffect(populateFilters, [positions]);
 	function populateFilters() {
 		let addedDisciplines = [];
 		let addedCompanies = [];
 		let addedLocations = [];
 
-		let positionsToTest;
-
-		if (availableFilters.location.length === 0 || availableFilters.discipline.length === 0 || availableFilters.company.length === 0) {
-			positionsToTest = positions
-		} else {
-			positionsToTest = returnFilteredPositions();
-		}
-
-		positionsToTest.forEach(position => {
+		positions.forEach(position => {
 			// add unique disciplines
 			if (!addedDisciplines.includes(position.discipline)) {
 				addedDisciplines.push(position.discipline)
@@ -65,43 +56,33 @@ export default function PositionsViewer({positions}) {
 			}
 		});
 
-
-
-		let availableDisciplines = addedDisciplines.map(discipline => (
+		const allDisciplines = addedDisciplines.map(discipline => (
 			{
 				label: discipline,
 				value: discipline
 			}
 		))
-		let availableCompanies = addedCompanies.map(company => (
+		const allCompanies = addedCompanies.map(company => (
 			{
 				label: company,
 				value: company
 			}
 		))	
-		let availableLocations = addedLocations.map(location => (
+		const allLocations = addedLocations.map(location => (
 			{
 				label: location,
 				value: location
 			}
 		))
-
-		if (allFilters.location.length === 0 || allFilters.discipline.length === 0 || allFilters.company.length === 0) {
-			updateAllFilters({
-				discipline: availableDisciplines,
-				company: availableCompanies,
-				location: availableLocations
-			})
-		}
 		
-		updateAvailableFilters({
-			discipline: availableDisciplines,
-			company: availableCompanies,
-			location: availableLocations
-		})
+		updateAllFilters({
+			discipline: allDisciplines,
+			company: allCompanies,
+			location: allLocations
+		});
 	}
 
-	useEffect(renderPositions, [availableFilters, appliedFilters]);
+	useEffect(renderPositions, [allFilters, appliedFilters]);
 	function renderPositions() {
 		if (!positions || !appliedFilters) return;
 		
@@ -140,12 +121,11 @@ export default function PositionsViewer({positions}) {
 			...appliedFilters,
 			[field]: e
 		})
-	}
-
-
+	};
 
 	return (
 		<React.Fragment>
+			<Warning errors={errors} />
 			<div>
 				<h3>Filters</h3>
 				<div className='position-filter-container'>
@@ -153,7 +133,7 @@ export default function PositionsViewer({positions}) {
 						onChange={(e) => handleUpdateAppliedFilters(e, 'location')}
 						className='position-filter'
 						value={appliedFilters.location}
-						options={availableFilters.location}
+						options={allFilters.location}
 						isMulti={true}
 						styles={customStyles}
 						placeholder='Location'
@@ -162,7 +142,7 @@ export default function PositionsViewer({positions}) {
 						onChange={(e) => handleUpdateAppliedFilters(e, 'discipline')}
 						className='position-filter'
 						value={appliedFilters.discipline}
-						options={availableFilters.discipline}
+						options={allFilters.discipline}
 						styles={customStyles}
 						placeholder='Discipline'
 						isMulti={true}
@@ -171,7 +151,7 @@ export default function PositionsViewer({positions}) {
 						onChange={(e) => handleUpdateAppliedFilters(e, 'company')}
 						className='position-filter'
 						value={appliedFilters.company}
-						options={availableFilters.company}
+						options={allFilters.company}
 						styles={customStyles}
 						isMulti={true}
 						placeholder='Company'
@@ -180,9 +160,11 @@ export default function PositionsViewer({positions}) {
 			</div>
 			{
 				renderedPositions && renderedPositions.length > 0 
-					? renderedPositions.map((position) => <PositionViewer key={position._id} position={position} /> )
+					? renderedPositions.map((position) => <PositionViewer key={position._id} position={position} selectedPositions={selectedPositions} updateSelectedPositions={updateSelectedPositions}/> )
 					: <p>No current positions</p>
 			}
+			<div className='selected-position-counter'>{selectedPositions.length}</div>
+			<SubmitButtonsNoForm handleSubmit={handleSubmit} handleApplicationStep={handleApplicationStep} selectedPositions={selectedPositions} updateErrors={updateErrors} />
 		</React.Fragment>
 	)
 }

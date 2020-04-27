@@ -18,7 +18,6 @@ function CV (props) {
 	const form = useRef(null);
 	const localFile = useRef(null);
 	const pdf = useRef(null);
-
 	//get any already existing data and update local state
 	useEffect(getFormData, []);
 	function getFormData () {

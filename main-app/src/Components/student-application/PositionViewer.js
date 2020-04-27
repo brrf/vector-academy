@@ -3,8 +3,7 @@ import Warning from '../Warning';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 
-export default function PositionViewer({position}) {
-	console.log(position);
+export default function PositionViewer({position, selectedPositions, updateSelectedPositions}) {
 	const [positionState, updatePositionState] = useState({
 		selected: false,
 		overflow: false,
@@ -16,6 +15,13 @@ export default function PositionViewer({position}) {
 			...positionState,
 			selected: !positionState.selected
 		})
+		const updatedSelectedPositions = [...selectedPositions];
+		if (selectedPositions.indexOf(position._id) !== -1) {	
+			updatedSelectedPositions.splice([selectedPositions.indexOf(position._id)], 1);
+		} else {
+			updatedSelectedPositions.push(position._id)
+		}
+		updateSelectedPositions(updatedSelectedPositions);
 	}
 
 	const description = useRef(null);

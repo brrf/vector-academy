@@ -379,12 +379,12 @@ input[type='radio'] {
 
 .position-filter-container {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
 }
 
 .position-filter {
-  flex-basis: 33%;
-  margin-right: 1%;
+  flex-basis: 48%;
+  margin: 0 1% 1% 0;
 }
 
 .position-body {
@@ -478,6 +478,20 @@ input[type='radio'] {
 
 .position-course {
   margin: 0 0 2px 0;
+}
+
+.selected-position-counter {
+  height: 50px;
+  width: 50px;
+  background-color: #212b65;
+  color: white;
+  position: fixed;
+  right: 90px;
+  top: 245px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 990px) {

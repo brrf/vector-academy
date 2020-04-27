@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import PositionsViewer from './PositionsViewer';
 import {ApplicationSubmitButtons, ApplicationEditButtons} from './ApplicationButtons';
 
-function CompanySelection (props) {
+function CompanySelection ({handleApplicationStep, handleSubmit, complete, data}) {
 	const [errors, handleErrors] = useState([]);
 	const [positionList, updatePositionList] = useState([]);
 	
@@ -28,15 +28,21 @@ function CompanySelection (props) {
 	    });
 	};
 
+	console.log(props.complete)
+
 	return (
 		<div className='application-input'>
-			<PositionsViewer positions={positionList}/>
+			<PositionsViewer handleApplicationStep={handleApplicationStep} handleSubmit={handleSubmit} positions={positionList}/>
 		</div>
 	)
 };
 
 function mapStateToProps(state) {
-	return state
+	const complete = state.application.applicationStatus.application.positions ? true : false
+	return {
+		complete,
+		data: state.application.applicationStatus.application.cv,
+	}
 };
 
 export default connect(mapStateToProps)(CompanySelection);

@@ -15,8 +15,7 @@ import CompanySelection from './CompanySelection';
 import Review from './Review';
 import Payment from './Payment';
 
-function ApplicationSteps (props) {
-	const {applicationStep, application, status} = props
+function ApplicationSteps ({applicationStep, application, status, dispatch, completedSteps}) {
 	const applicationSteps = [
 		{
 			name: 'Contact Information',
@@ -44,7 +43,7 @@ function ApplicationSteps (props) {
 		},
 		{
 			name: 'Company Selection',
-			ref: 'companySelection'
+			ref: 'positions'
 		}
 	];
 	const [errors, handleErrors] = useState([]);
@@ -52,15 +51,15 @@ function ApplicationSteps (props) {
 	function handleApplicationStep(counter) {
 		handleErrors([]);
 		if (applicationStep === 0 && counter === '-') {
-			props.dispatch(setApplicationStep(false));
-		} else if (applicationStep === 6 && counter === '+' && props.completedSteps < 7) {
-			props.dispatch(setApplicationStep(false));
+			dispatch(setApplicationStep(false));
+		} else if (applicationStep === 6 && counter === '+' && completedSteps < 7) {
+			dispatch(setApplicationStep(false));
 		} else if (counter === '+') {
-			props.dispatch(setApplicationStep(applicationStep + 1))
+			dispatch(setApplicationStep(applicationStep + 1))
 		} else if (counter === '-') {
-			props.dispatch(setApplicationStep(applicationStep - 1))
+			dispatch(setApplicationStep(applicationStep - 1))
 		} else {
-			props.dispatch(setApplicationStep(counter))
+			dispatch(setApplicationStep(counter))
 		}
 	}
 
@@ -80,7 +79,7 @@ function ApplicationSteps (props) {
 	    	if (resObject.errors) {
 	    		handleErrors(resObject.errors)
 	    	} else {
-	    		props.dispatch(completeApplicationStep(applicationSteps[applicationStep].ref, data));
+	    		dispatch(completeApplicationStep(applicationSteps[applicationStep].ref, data));
 	    		if (nextPage) {
 	    			handleApplicationStep('+')
 	    		} else {
@@ -106,7 +105,7 @@ function ApplicationSteps (props) {
 	    	if (resObject.errors) {
 	    		handleErrors(resObject.errors)
 	    	} else {
-	    		props.dispatch(completeApplicationStep(applicationSteps[applicationStep].ref, resObject.file));
+	    		dispatch(completeApplicationStep(applicationSteps[applicationStep].ref, resObject.file));
 	    		if (nextPage) {
 	    			handleApplicationStep('+')
 	    		} else {
@@ -148,14 +147,14 @@ function ApplicationSteps (props) {
 	}
 
 	//student has already submitted an application
-	if (props.status === 1) {
+	if (status === 1) {
 		return (
 			<div className='application-form-container'>
 				<h2 className='center'>Payment Received!</h2>	
 				<p className='center' style={{marginTop: '10px'}}>We will review your application and notify you if you are selected for interviews.</p>
 			</div>
 		)
-	}
+	};
 	//applicationStep === false is the homepage; other #s are different application steps
 	if (applicationStep === false) {
 		let JSX = applicationSteps.map((step, index) => {
@@ -181,8 +180,8 @@ function ApplicationSteps (props) {
 			<React.Fragment>
 				<ApplicationProgress />
 				{
-					props.completedSteps === 7
-						? <button onClick={() => props.dispatch(setApplicationStep(7))} className='application-steps-button'>Submit Application</button>
+					completedSteps === 7
+						? <button onClick={() => dispatch(setApplicationStep(7))} className='application-steps-button'>Submit Application</button>
 						: null
 				}
 				<div className='application-steps-container'>

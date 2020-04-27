@@ -154,7 +154,6 @@ module.exports = function(mainApp, environment) {
 	})
 
 	mainApp.post('/application', async (req, res) => {
-		console.log(req.user);
 		let errors = []
 		let user;
 		try {
@@ -290,7 +289,23 @@ module.exports = function(mainApp, environment) {
 				}
 				break;
 			}
-			case 7: {
+			case 6: {
+				if (!req.body.data || req.body.data.length === 0) {
+					errors.push('Please select at least one position')
+				} else {
+					try {
+						user.application.positions = req.body.data
+						user.markModified('application');
+						user.save();
+					} catch (err) {
+						console.log(err);
+						errors.push('Error saving to database.')
+						return res.json({errors})
+					}
+				}
+				break;
+			}
+			case 8: {
 				const {street, city, state, zip} = req.body.data
 				if (!street || !city || !state || !zip) {
 					errors.push('Please fill out all items');
