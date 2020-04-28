@@ -65,6 +65,10 @@ h5 {
 	z-index: 1;
 }
 
+h6 {
+	margin: 5px 0;
+}
+
 p, label {
 	margin: 0;
 	line-height: 1.6vw;

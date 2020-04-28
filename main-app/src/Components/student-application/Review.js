@@ -154,7 +154,7 @@ function Review ({applicationSteps, data, dispatch}) {
 					)
 				})
 			}
-			<button onClick={() => dispatch(setApplicationStep(7))}>Continue to payment</button>
+			<button onClick={() => dispatch(setApplicationStep(8))}>Continue to payment</button>
 		</div>
 	)
 };

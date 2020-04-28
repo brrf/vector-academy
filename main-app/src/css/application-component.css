@@ -486,12 +486,31 @@ input[type='radio'] {
   background-color: #212b65;
   color: white;
   position: fixed;
-  right: 90px;
-  top: 245px;
+  right: 110px;
+  top: 290px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.applied-position-container {
+  background-color: #4a4a4a26;
+  margin: 15px 1% 15px 0;
+  padding: 6px 10px;
+  color: black;
+}
+
+.applied-position-container:hover {
+  cursor: pointer;
+}
+
+.applied
+
+.applied-position-container button {
+  height: auto;
+  width: auto;
+  background-color: #51b0e3
 }
 
 @media (max-width: 990px) {

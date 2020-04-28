@@ -84,10 +84,10 @@ function ApplicationSteps ({applicationStep, application, status, dispatch, comp
 	    			handleApplicationStep('+')
 	    		} else {
 	    			handleApplicationStep(false)
-	    		}	
-	    	}
-	    })
-	}
+	    		};	
+	    	};
+	    });
+	};
 
 	function handleSubmitFile (e, data, nextPage) {
 		if (e) e.preventDefault();
@@ -110,10 +110,10 @@ function ApplicationSteps ({applicationStep, application, status, dispatch, comp
 	    			handleApplicationStep('+')
 	    		} else {
 	    			handleApplicationStep(false)
-	    		}	
-	    	}
-	    })
-	}
+	    		};
+	    	};
+	    });
+	};
 
 	function returnApplicationStepJSX(applicationStep) {
 		switch(applicationStep) {
@@ -143,8 +143,8 @@ function ApplicationSteps ({applicationStep, application, status, dispatch, comp
 			}
 			default: 
 				return null;
-		}
-	}
+		};
+	};
 
 	//student has already submitted an application
 	if (status === 1) {

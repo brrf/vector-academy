@@ -1,14 +1,21 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 import Select from 'react-select'
 import Warning from '../Warning';
 import PositionViewer from './PositionViewer';
+import CollapsedPositionViewer from './CollapsedPositionViewer';
 import {SubmitButtonsNoForm, ApplicationEditButtons} from './ApplicationButtons';
+import hydratePositions from '../../../utils/hydrate-positions';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 
-export default function PositionsViewer({positions, handleSubmit, handleApplicationStep}) {
+function PositionsViewer({positions, handleSubmit, handleApplicationStep, complete, appliedPositions}) {
 	const [selectedPositions, updateSelectedPositions] = useState([]);
+	useEffect(() => updateSelectedPositions(appliedPositions), [appliedPositions])
+
 	const [errors, updateErrors] = useState([]);
+	const [edit, updateEdit] = useState(complete);
+	const [counter, updateCounter] = useState(0);
 
 	//all filters; static & derived from positions
 	const [allFilters, updateAllFilters] = useState({
@@ -123,6 +130,21 @@ export default function PositionsViewer({positions, handleSubmit, handleApplicat
 		})
 	};
 
+	if (edit) { 
+		return (
+			<React.Fragment>
+				<h3>{`Selected Positions: ${appliedPositions.length}`}</h3>
+				{
+					hydratePositions(appliedPositions, positions).map(position => {
+						return <CollapsedPositionViewer key={position._id} position={position} />
+					})
+				}
+				<button onClick={(edit) => updateEdit(!edit)} className='application-complete-edit'>Edit</button>
+				<ApplicationEditButtons handleApplicationStep={handleApplicationStep}/>
+			</React.Fragment>
+		)
+	}
+
 	return (
 		<React.Fragment>
 			<Warning errors={errors} />
@@ -160,7 +182,7 @@ export default function PositionsViewer({positions, handleSubmit, handleApplicat
 			</div>
 			{
 				renderedPositions && renderedPositions.length > 0 
-					? renderedPositions.map((position) => <PositionViewer key={position._id} position={position} selectedPositions={selectedPositions} updateSelectedPositions={updateSelectedPositions}/> )
+					? renderedPositions.map((position) => <PositionViewer updateCounter={updateCounter} counter={counter} key={position._id} position={position} selectedPositions={selectedPositions} updateSelectedPositions={updateSelectedPositions}/> )
 					: <p>No current positions</p>
 			}
 			<div className='selected-position-counter'>{selectedPositions.length}</div>
@@ -168,3 +190,13 @@ export default function PositionsViewer({positions, handleSubmit, handleApplicat
 		</React.Fragment>
 	)
 }
+
+function mapStateToProps(state) {
+	const complete = state.application.applicationStatus.application.positions ? true : false
+	return {
+		complete,
+		appliedPositions: state.application.applicationStatus.application.positions,
+	}
+};
+
+export default connect(mapStateToProps)(PositionsViewer);

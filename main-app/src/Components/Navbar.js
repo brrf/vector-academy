@@ -53,9 +53,9 @@ function Navbar (props) {
 		text: 'Start Application',
 		applicationStep: false
 	};
-	if (completedSteps.length === 6 && applicationStep === false) {
+	if (completedSteps.length === 7 && applicationStep === false) {
 		button.text = 'Submit Application';
-		button.applicationStep = 6;
+		button.applicationStep = 7;
 	} else if (completedSteps.length === 0 && applicationStep === false) {
 		button.text = 'Start Application'
 		button.applicationStep = 0; 
