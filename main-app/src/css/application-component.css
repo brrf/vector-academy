@@ -481,12 +481,12 @@ input[type='radio'] {
 }
 
 .selected-position-counter {
-  height: 50px;
-  width: 50px;
+  height: 4vw;
+  width: 4vw;
   background-color: #212b65;
   color: white;
   position: fixed;
-  right: 110px;
+  right: calc(20px + ((100% - 250px) * 0.0735) + 1.22vw);
   top: 290px;
   border-radius: 50%;
   display: flex;
@@ -526,6 +526,15 @@ input[type='radio'] {
   .file-upload > p {
     font-size: 1.5vw;
   }
+  .selected-position-counter {
+    right: calc(20px + ((100% - 250px) * 0.025) + 1.22vw);
+  }
+}
+
+@media (max-width: 750px) {
+  .selected-position-counter {
+    right: calc(20px + ((100% - 175px) * 0.025) + 1.22vw);
+  }
 }
 
 @media (max-width: 650px) {
@@ -538,6 +547,9 @@ input[type='radio'] {
   }
   .file-upload > p {
     font-size: 2vw;
+  }
+  .selected-position-counter {
+    right: calc(20px - 2.5vw);
   }
 }
 
@@ -579,5 +591,9 @@ input[type='radio'] {
   }
   .prompt-edit {
     font-size: 3vw;
+  }
+  .selected-position-counter {
+    right: calc(1vw + 1%);
+    top: 243px;
   }
 }

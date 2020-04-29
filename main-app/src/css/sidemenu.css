@@ -40,19 +40,17 @@
     content: "";
     display: inline-block;
     position: absolute;
-    left: 233px;
+    right: 0;
     opacity: 1;
     top: 13px;
     transition: opacity 150ms ease-in;
 }
 
-@media (max-width: 750px) {
-    .sidemenu-container {
-        min-width: 175px;
-    }
-    .features-container.active:after {
-        left: 158px;
-    }
+@media (max-width: 850px) {
+  .sidemenu-container {
+        flex-basis: 15%;
+        min-width: initial;
+    }  
 }
 
 @media (max-width: 650px) {

@@ -25,8 +25,7 @@ class PositionViewer extends React.Component {
 		if (this.props.appliedPositions.includes(this.props.position._id)) {
 				this.setState({
 				selected: true
-			}, function() {this.props.updateCounter(this.props.counter + 1)});
-			//;
+			});
 		}
 		if (this.description.current.offsetHeight + this.otherInformation.current.offsetHeight > 160) {
 			this.setState({
@@ -34,17 +33,6 @@ class PositionViewer extends React.Component {
 			})
 		}
 	};
-
-	componentDidUpdate() {
-		// if (this.props.appliedPositions.includes(this.props.position._id)) {
-		// 	this.props.updateCounter(this.props.counter + 1);
-		// }
-		// if (this.state.selected)
-		// const updatedSelectedPositions = [...this.props.selectedPositions];
-		// 	updatedSelectedPositions.push(this.props.position._id);
-		// 	console.log(updatedSelectedPositions);
-		// 	this.props.updateSelectedPositions(updatedSelectedPositions);
-	}
 
 	toggleSelected() {
 		this.setState({
