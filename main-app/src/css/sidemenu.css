@@ -51,6 +51,12 @@
         flex-basis: 15%;
         min-width: initial;
     }  
+    .features-container.active:after {
+        border-right: 12px solid #ffffff;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        top: 18px;
+    }
 }
 
 @media (max-width: 650px) {
