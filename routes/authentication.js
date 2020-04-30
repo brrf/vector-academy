@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const Student = require('../schemas/students');
+const studentConnection = require('../student-db');
+const Student = studentConnection.model('Student');
 const fs = require('fs');
 const path = require('path');
 
@@ -24,7 +25,7 @@ module.exports = function(marketingApp) {
 		if (password !== password2) {
 			errors.push('Passwords do not match')
 		};
-		
+
 		let user = await Student.findOne({email});
 		if (user) {
 			errors.push('Email is already registered. Stay tuned!')
