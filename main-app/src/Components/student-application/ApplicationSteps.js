@@ -65,7 +65,7 @@ function ApplicationSteps ({applicationStep, application, status, dispatch, comp
 
 	function handleSubmit(e, data, nextPage) {
 		if (e) e.preventDefault();
-		fetch(`${PROTOCOL}apply.${DOMAIN}/application`, {
+		fetch(`${PROTOCOL}${DOMAIN}/application`, {
 	      method: "POST",
 	      body: JSON.stringify({data, applicationStep}),
 	      headers: { 
@@ -94,7 +94,7 @@ function ApplicationSteps ({applicationStep, application, status, dispatch, comp
 		let formData = new FormData();
       	formData.append("cv", data);
    		formData.append("applicationStep", applicationStep);
-		fetch(`${PROTOCOL}apply.${DOMAIN}/applicationfile`, {
+		fetch(`${PROTOCOL}${DOMAIN}/applicationfile`, {
 	      method: "POST",
 	      body: formData,
 	      mode: "cors",

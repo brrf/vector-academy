@@ -26,40 +26,30 @@ marketingApp.use(cors({
   origin: ['https://localhost:3001', 'https://www.vectoracademy.io']
 }));
 
-// mainApp.use(cors({
-//   origin: ['https://localhost:3002', 'https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
-// }));
-
-//var cors = require('cors');
-var corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200,
-  }
-mainApp.use(cors(corsOptions));
-employerApp.use(cors(corsOptions))
-mainApp.use(express.json())
-employerApp.use(express.json())
+mainApp.use(cors({
+  origin: ['https://localhost:3002', 'https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
+}));
 
 
-// mainApp.use ((req, res, next) => {
-//   res.header ('Access-Control-Allow-Origin', '*')
-//   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
-//   res.header ('Access-Control-Allow-Credentials', true)
-//   res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-//   next()
-// });
+mainApp.use ((req, res, next) => {
+  res.header ('Access-Control-Allow-Origin', '*')
+  res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
+  res.header ('Access-Control-Allow-Credentials', true)
+  res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  next()
+});
 
-// employerApp.use(cors({
-//   origin: ['https://localhost:3003', 'https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
-// }));
+employerApp.use(cors({
+  origin: ['https://localhost:3003', 'https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
+}));
 
-// employerApp.use ((req, res, next) => {
-//   res.header ('Access-Control-Allow-Origin', '*')
-//   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
-//   res.header ('Access-Control-Allow-Credentials', true)
-//   res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-//   next()
-// });
+employerApp.use ((req, res, next) => {
+  res.header ('Access-Control-Allow-Origin', '*')
+  res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
+  res.header ('Access-Control-Allow-Credentials', true)
+  res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  next()
+});
 
 
 

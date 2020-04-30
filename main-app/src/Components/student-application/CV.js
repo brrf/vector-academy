@@ -23,7 +23,7 @@ function CV (props) {
 	function getFormData () {
 		if (!props.data || !props.userId) return;
 		updateFile(props.data);
-		fetch(`${PROTOCOL}apply.${DOMAIN}/cv`, {
+		fetch(`${PROTOCOL}${DOMAIN}/cv`, {
 	      method: "GET",
 	      headers: { 
 	        "Content-Type": "application/pdf",

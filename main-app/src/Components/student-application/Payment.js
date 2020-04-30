@@ -16,7 +16,7 @@ export default function Payment ({handleApplicationStep}) {
 	}, []);
 
 	useEffect(() => {
-		fetch(`${PROTOCOL}apply.${DOMAIN}/stripetoken`, {
+		fetch(`${PROTOCOL}${DOMAIN}/stripetoken`, {
 	      method: "GET",
 	      headers: { 
 	        "Content-Type": "application/json",

@@ -22,6 +22,7 @@ class PositionViewer extends React.Component {
 
 	//determine if position already selected on servers
 	componentDidMount() {
+		if (!this.props.appliedPositions) return;
 		if (this.props.appliedPositions.includes(this.props.position._id)) {
 				this.setState({
 				selected: true
@@ -35,6 +36,7 @@ class PositionViewer extends React.Component {
 	};
 
 	toggleSelected() {
+
 		this.setState({
 			selected: !this.state.selected
 		})

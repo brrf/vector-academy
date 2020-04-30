@@ -2,8 +2,6 @@
 
 const express = require('express');
 const vhost = require('vhost');
-// const studentDb = require('./student-db');
-// const employerDb = require ('./employer-db');
 const cors = require('cors');
 
 const mainAppServer = require('./main-app-server.js');
@@ -37,7 +35,7 @@ mainApp.use ((req, res, next) => {
 
 mainApp.use(cors({
     credentials: true, 
-    origin: ['http://localhost:3001', 'http://localhost:3003', 'http://localhost:8080']
+    origin: ['http://localhost:3001', 'http://localhost:3003', 'http://localhost:3000', 'http://localhost:8080']
   }));
 
 employerApp.use ((req, res, next) => {

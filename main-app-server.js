@@ -15,6 +15,7 @@ const session = require("express-session");
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const multer  = require('multer');
+const fetch = require('node-fetch');
 
 const authentication = require('./routes/authentication.js');
 
@@ -48,18 +49,6 @@ module.exports = function(mainApp, environment) {
 	    })
 	  })
 	);
-
-	const cors = require('cors');
-	var whitelist = ['http://example1.com', 'http://example2.com']
-	var corsOptions = {
-	  origin: function (origin, callback) {
-	    if (whitelist.indexOf(origin) !== -1) {
-	      callback(null, true)
-	    } else {
-	      callback(new Error('Not allowed by CORS'))
-	    }
-	  }
-	}
 
 	//mainApp routes
 	mainApp.use(express.static(path.join(__dirname, 'main-app', environment)));
@@ -388,4 +377,17 @@ module.exports = function(mainApp, environment) {
 			}	else res.json({errors: false, file: req.file});
 		});
 	});
+
+	mainApp.get('/getpositions', async (req, res) => {
+		fetch(`${process.env.PROTOCOL}${process.env.EMPLOYER_DOMAIN}/getpositions`, {
+			method: 'GET',
+			headers: { 
+		        "Content-Type": "application/json",
+		    }
+		})
+	    .then(res => res.json())
+	    .then(resObject => {
+	    	return res.json({positionList: resObject.positionList});
+	    })
+	})
 };

@@ -15,7 +15,7 @@ function Review ({applicationSteps, data, dispatch}) {
 
 	useEffect(getPdf, []);
 	function getPdf () {
-		fetch(`${PROTOCOL}apply.${DOMAIN}/cv`, {
+		fetch(`${PROTOCOL}${DOMAIN}/cv`, {
 	      method: "GET",
 	      headers: { 
 	        "Content-Type": "application/pdf",

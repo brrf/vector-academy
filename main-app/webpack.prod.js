@@ -25,7 +25,7 @@ module.exports = merge(common, {
 		new CleanWebpackPlugin(),
 		new DefinePlugin({
 			PROTOCOL: JSON.stringify('https://'),
-			DOMAIN: JSON.stringify('vectoracademy.io'),
+			DOMAIN: JSON.stringify('apply.vectoracademy.io'),
 			PUBLIC: JSON.stringify('../../assets/student-cvs/'),
 			EMPLOYERDOMAIN: JSON.stringify('hire.vectoracademy.io')
 		})

@@ -11,7 +11,12 @@ import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 
 function PositionsViewer({positions, handleSubmit, handleApplicationStep, complete, appliedPositions}) {
 	const [selectedPositions, updateSelectedPositions] = useState([]);
-	useEffect(() => updateSelectedPositions(appliedPositions), [appliedPositions])
+	useEffect(() => {
+		if (appliedPositions && appliedPositions.length !== 0) {
+			updateSelectedPositions(appliedPositions)
+		}
+	}, [appliedPositions]);
+
 
 	const [errors, updateErrors] = useState([]);
 	const [edit, updateEdit] = useState(complete);
@@ -130,7 +135,7 @@ function PositionsViewer({positions, handleSubmit, handleApplicationStep, comple
 		})
 	};
 
-	if (edit) { 
+	if (edit && appliedPositions) { 
 		return (
 			<React.Fragment>
 				<h3>{`Selected Positions: ${appliedPositions.length}`}</h3>

@@ -10,11 +10,12 @@ export default function CompanySelection ({handleApplicationStep, handleSubmit})
 	useEffect(getAvailablePositions, [])
 	function getAvailablePositions() {
 
-		fetch(`${PROTOCOL}${EMPLOYERDOMAIN}/getpositions`, {
+		fetch(`${PROTOCOL}${DOMAIN}/getpositions`, {
 	      method: "GET",
 	    })
 	    .then(res => res.json())
 	    .then(resObject => {
+	    	console.log(resObject);
 	    	if (resObject.errors) {
 	    		handleErrors(resObject.errors)
 	    	} else {

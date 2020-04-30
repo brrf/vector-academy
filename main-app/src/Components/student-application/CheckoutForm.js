@@ -41,7 +41,7 @@ function CheckoutForm (props) {
 		} else {
 		  // The payment has been processed!
 		  	if (result.paymentIntent.status === 'succeeded') {
-				fetch(`${PROTOCOL}apply.${DOMAIN}/application`, {
+				fetch(`${PROTOCOL}${DOMAIN}/application`, {
 				  method: "POST",
 				  body: JSON.stringify({data, applicationStep: 7}),
 				  headers: { 
