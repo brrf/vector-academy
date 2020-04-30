@@ -17,7 +17,7 @@ function App(props) {
   useEffect(isLoggedIn, [])
 
   function isLoggedIn() {
-    fetch(`${PROTOCOL}apply.${DOMAIN}/authenticate`, {
+    fetch(`${PROTOCOL}${DOMAIN}/authenticate`, {
       method: "GET",
       headers: { 
         "Content-Type": "application/json",
