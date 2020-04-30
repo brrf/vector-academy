@@ -48,10 +48,10 @@ employerApp.use ((req, res, next) => {
   next()
 });
 
-employerApp.use(cors({
-  credentials: true, 
-  origin: ['https://localhost:3003', 'https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
-}));
+// employerApp.use(cors({
+//   credentials: true, 
+//   origin: ['https://localhost:3003', 'https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
+// }));
 
 mainAppServer(mainApp, 'dist');
 marketingAppServer(marketingApp, 'dist');
