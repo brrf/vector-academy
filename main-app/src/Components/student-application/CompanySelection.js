@@ -12,11 +12,6 @@ export default function CompanySelection ({handleApplicationStep, handleSubmit})
 
 		fetch(`${PROTOCOL}${EMPLOYERDOMAIN}/getpositions`, {
 	      method: "GET",
-	      headers: { 
-	        "Content-Type": "application/json",
-	      },
-	      mode: "cors",
-	      credentials: "include"
 	    })
 	    .then(res => res.json())
 	    .then(resObject => {
