@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimesCircle, faCheckCircle, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 import '../../css/position.css';
-import PositionDecisionDashBoard from './PositionDecisionDashBoard';
+import PositionDecisionDashboard from './PositionDecisionDashBoard';
 import RevisionsView from './RevisionsView';
 import Warning from '../Warning';
 
