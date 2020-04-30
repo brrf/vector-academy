@@ -491,6 +491,7 @@ module.exports = function (employerApp, environment) {
 				};
 			};
 		};
+		res.header("Access-Control-Allow-Origin", "*");
 		res.json({positionList});
 	})
 };
