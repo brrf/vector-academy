@@ -53,6 +53,8 @@ employerApp.use(cors({
   origin: ['https://localhost:3003', 'https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
 }));
 
+employerApp.options('*', cors())
+
 mainAppServer(mainApp, 'dist');
 marketingAppServer(marketingApp, 'dist');
 employerAppServer(employerApp, 'dist');
