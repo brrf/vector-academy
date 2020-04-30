@@ -28,7 +28,7 @@ marketingApp.use(cors({
 }));
 
 mainApp.use ((req, res, next) => {
-  res.header ('Access-Control-Allow-Origin', 'https://hire.vectoracademy.io')
+  res.header ('Access-Control-Allow-Origin', '*')
   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
   res.header ('Access-Control-Allow-Credentials', true)
   res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
@@ -37,11 +37,11 @@ mainApp.use ((req, res, next) => {
 
 mainApp.use(cors({
   credentials: true, 
-  origin: ['https://localhost:3002', 'https://apply.vectoracademy.io']
+  origin: ['https://localhost:3002', 'https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
 }));
 
 employerApp.use ((req, res, next) => {
-  res.header ('Access-Control-Allow-Origin', 'https://hire.vectoracademy.io')
+  res.header ('Access-Control-Allow-Origin', '*')
   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
   res.header ('Access-Control-Allow-Credentials', true)
   res.header ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
@@ -54,6 +54,7 @@ employerApp.use(cors({
 }));
 
 employerApp.options('*', cors())
+mainApp.options('*', cors());
 
 mainAppServer(mainApp, 'dist');
 marketingAppServer(marketingApp, 'dist');
