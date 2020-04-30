@@ -23,7 +23,6 @@ marketingApp.use ((req, res, next) => {
 
 
 marketingApp.use(cors({
-  credentials: true, 
   origin: ['https://localhost:3001', 'https://www.vectoracademy.io']
 }));
 
@@ -52,7 +51,6 @@ employerApp.use ((req, res, next) => {
 });
 
 employerApp.use(cors({
-  credentials: true, 
   origin: ['https://localhost:3003', 'https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
 }));
 
