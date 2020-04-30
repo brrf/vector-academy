@@ -30,7 +30,7 @@ marketingApp.use(cors({
 //   origin: ['https://localhost:3002', 'https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
 // }));
 
-var cors = require('cors');
+//var cors = require('cors');
 var corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200,
