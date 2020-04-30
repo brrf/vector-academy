@@ -8,7 +8,7 @@ import {faTimesCircle, faCheckCircle, faQuestionCircle} from "@fortawesome/free-
 import '../../css/position.css';
 
 
-function PositionReview({clearance, errors, updateErrors, index, position, dispatch}) {
+function PositionDecisionDashboard({clearance, errors, updateErrors, index, position, dispatch}) {
 
 	function acceptPosition () {
 		const accept = confirm('Are you sure you want to accept this position?');
@@ -107,4 +107,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(PositionReview);
+export default connect(mapStateToProps)(PositionDecisionDashboard);

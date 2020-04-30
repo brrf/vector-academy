@@ -24,7 +24,7 @@ module.exports = function(marketingApp) {
 		if (password !== password2) {
 			errors.push('Passwords do not match')
 		};
-
+		
 		let user = await Student.findOne({email});
 		if (user) {
 			errors.push('Email is already registered. Stay tuned!')
