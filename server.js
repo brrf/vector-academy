@@ -27,6 +27,9 @@ marketingApp.use(cors({
   origin: ['https://localhost:3001', 'https://www.vectoracademy.io']
 }));
 
+employerApp.options('*', cors())
+mainApp.options('*', cors());
+
 mainApp.use ((req, res, next) => {
   res.header ('Access-Control-Allow-Origin', '*')
   res.header ('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept')
@@ -53,8 +56,7 @@ employerApp.use(cors({
   origin: ['https://localhost:3003', 'https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
 }));
 
-employerApp.options('*', cors())
-mainApp.options('*', cors());
+
 
 mainAppServer(mainApp, 'dist');
 marketingAppServer(marketingApp, 'dist');
