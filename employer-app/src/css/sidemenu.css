@@ -50,6 +50,10 @@
     font-size: 25px;
 }
 
+.temp-features-container:hover {
+    cursor: not-allowed;
+}
+
 @media (max-width: 750px) {
     .sidemenu-container {
         min-width: 175px;

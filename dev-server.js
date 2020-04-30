@@ -2,8 +2,8 @@
 
 const express = require('express');
 const vhost = require('vhost');
-const studentDb = require('./student-db');
-const employerDb = require ('./employer-db');
+// const studentDb = require('./student-db');
+// const employerDb = require ('./employer-db');
 const cors = require('cors');
 
 const mainAppServer = require('./main-app-server.js');
@@ -24,7 +24,7 @@ marketingApp.use ((req, res, next) => {
 
 marketingApp.use(cors({
     credentials: true, 
-    origin: ['http://localhost:8080', 'http://localhost:3000']
+    origin: ['http://localhost:8080', 'http://localhost:3002', 'http://localhost:3003']
   }));
 
 mainApp.use ((req, res, next) => {
@@ -37,7 +37,7 @@ mainApp.use ((req, res, next) => {
 
 mainApp.use(cors({
     credentials: true, 
-    origin: ['http://localhost:3000', 'http://localhost:8080']
+    origin: ['http://localhost:3001', 'http://localhost:3003', 'http://localhost:8080']
   }));
 
 employerApp.use ((req, res, next) => {
@@ -50,7 +50,7 @@ employerApp.use ((req, res, next) => {
 
 employerApp.use(cors({
     credentials: true, 
-    origin: ['http://localhost:3000', 'http://localhost:8080']
+    origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:3000']
   })
 );
 
@@ -92,7 +92,7 @@ employerApp.listen(3003, function () {
 });
 
 try {
-  studentDb();
+  // studentDb();
   // employerDb();
 } catch {
   console.log('couldn\'t connect to database')

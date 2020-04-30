@@ -82,22 +82,24 @@ function Sidemenu ({toggleHidden, hidden, clearance, positions}) {
 			<ul className={`sidemenu-container ${hidden ? 'hidden' : ''}`}>				
 					{
 						featureContainers.map( (container, index) => {
-							return (
-								<Link key={container.link} 
+							if (index === 0 || index === 1) {
+								return (
+									<Link key={container.link} 
 									className={`features-container ${container.link === pathname ? 'active' : null}`} 
 									onClick={changeCurrentTab}
 									to={`/${container.link}`}
-								>
-									{container.title}
-									{ index === 0 && revisionNeeded && clearance !== 2
-										? <FontAwesomeIcon
-										icon={faExclamationCircle}
-										className='exclamation'
-										/>
-										: null
-									}
-								</Link>
-							)
+									>
+										{container.title}
+										{ index === 0 && revisionNeeded && clearance !== 2
+											? <FontAwesomeIcon
+											icon={faExclamationCircle}
+											className='exclamation'
+											/>
+											: null
+										}
+									</Link>
+								)
+							} else return (<div key={container.link} className='features-container temp-features-container'>{container.title}</div>)
 						})
 					}			
 			</ul>
