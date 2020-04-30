@@ -24,6 +24,18 @@ const employerConnection = require('./employer-db');
 const Manager = employerConnection.model('Manager');
 const Company = employerConnection.model('Company');
 
+const cors = require('cors');
+const whitelist = ['https://apply.vectoracademy.io', 'https://hire.vectoracademy.io']
+const corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 module.exports = function (employerApp, environment) {
 
 	employerApp.use(helmet());
@@ -452,7 +464,7 @@ module.exports = function (employerApp, environment) {
 		})
 	})
 
-	employerApp.get('/getpositions', async (req, res) => {
+	employerApp.get('/getpositions', cors(corsOptions), async (req, res) => {
 		let positionList = [];
 		if (!req.user) {
 			const companyList = await Company.find({});
@@ -491,7 +503,6 @@ module.exports = function (employerApp, environment) {
 				};
 			};
 		};
-		res.header("Access-Control-Allow-Origin", "*");
 		res.json({positionList});
 	})
 };
