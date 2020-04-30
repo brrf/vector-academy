@@ -5,7 +5,7 @@ const studentConnection = mongoose.createConnection(process.env.MONGO_URI_STUDEN
 	useNewUrlParser: true, 
 	useUnifiedTopology: true
 });
-studentConnection.model('Student', require('./schemas/Students'));
+studentConnection.model('Student', require('./schemas/students'));
 
 studentConnection.on('error', console.error.bind(console, 'connection error:'));
 studentConnection.once('open', function() {
