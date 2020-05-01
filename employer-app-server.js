@@ -67,7 +67,11 @@ module.exports = function (employerApp, environment) {
 	employerApp.use(express.static(path.join(__dirname, 'employer-app', environment)));
 
 	employerApp.get('/', (req, res)=> {
-			res.sendFile(path.join(__dirname, 'employer-app', environment, 'index.html'));
+			res.sendFile(path.join(__dirname, 'employer-app', environment, 'index.html'), function(err) {
+				if (err) {
+					res.status(500).send(err)
+				}
+			});
 	});
 
 	employerApp.post('/employerlogin', function (req, res, next) {
@@ -131,6 +135,7 @@ module.exports = function (employerApp, environment) {
 		try {
 			let user = await Manager.findOne({email: 'moshe@vectoracademy.io'});
 			if (!user) {
+				const company = await createNewCompany('Vector Academy')
 				const password = generatePassword();
 				const saltRounds = 10;
 				bcrypt.genSalt(saltRounds, function(err, salt) {
@@ -141,7 +146,7 @@ module.exports = function (employerApp, environment) {
 							fname: 'Moshe',
 							lname: 'Praver',
 							clearance: 2,
-							companyId: 'Vector',
+							companyId: company.id,
 							name: 'Vector'
 						}, async (err, user) => {
 							if (err) {

@@ -3,6 +3,7 @@
 const express = require('express');
 const vhost = require('vhost');
 const cors = require('cors');
+const path = require('path');
 
 const mainAppServer = require('./main-app-server.js');
 const employerAppServer = require('./employer-app-server.js');
@@ -56,6 +57,8 @@ mainAppServer(mainApp, 'dev');
 employerAppServer(employerApp, 'dev');
 marketingAppServer(marketingApp, 'dev');
 
+
+
 //404 Not Found Middleware
 marketingApp.use(function(req, res, next) {
   res.status(404)
@@ -63,10 +66,26 @@ marketingApp.use(function(req, res, next) {
     .send('End of the line!');
 });
 
+mainApp.get('/*', (req, res)=> {
+    res.sendFile(path.join(__dirname, 'main-app', 'dev', 'index.html'), function(err) {
+      if (err) {
+        res.status(500).send(err)
+      }
+    });
+});
+
 mainApp.use(function(req, res, next) {
   res.status(404)
     .type('text')
     .send('End of the line!');
+});
+
+employerApp.get('/*', (req, res)=> {
+    res.sendFile(path.join(__dirname, 'employer-app', 'dev', 'index.html'), function(err) {
+      if (err) {
+        res.status(500).send(err)
+      }
+    });
 });
 
 employerApp.use(function(req, res, next) {
