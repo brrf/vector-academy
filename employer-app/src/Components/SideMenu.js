@@ -82,7 +82,7 @@ function Sidemenu ({toggleHidden, hidden, clearance, positions}) {
 			<ul className={`sidemenu-container ${hidden ? 'hidden' : ''}`}>				
 					{
 						featureContainers.map( (container, index) => {
-							if (index === 0 || index === 1 || container.link === 'vectoradmin') {
+							if (index === 0 || index === 1 || container.link === 'vectoradmin' || container.link === 'hiringmanagers') {
 								return (
 									<Link key={container.link} 
 									className={`features-container ${container.link === pathname ? 'active' : null}`} 
