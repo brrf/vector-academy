@@ -69,10 +69,26 @@ marketingApp.use(function(req, res, next) {
     .send('Not Found');
 });
 
+mainApp.get('/*', (req, res)=> {
+    res.sendFile(path.join(__dirname, 'main-app', 'dist', 'index.html'), function(err) {
+      if (err) {
+        res.status(500).send(err)
+      }
+    });
+});
+
 mainApp.use(function(req, res, next) {
   res.status(404)
     .type('text')
     .send('Not Found');
+});
+
+employerApp.get('/*', (req, res)=> {
+    res.sendFile(path.join(__dirname, 'employer-app', 'dist', 'index.html'), function(err) {
+      if (err) {
+        res.status(500).send(err)
+      }
+    });
 });
 
 employerApp.use(function(req, res, next) {
@@ -86,25 +102,13 @@ marketingApp.listen(3001, function () {
   console.log("Listening on port " + 3001);
 });
 
-mainApp.get('/*', (req, res)=> {
-    res.sendFile(path.join(__dirname, 'main-app', 'dist', 'index.html'), function(err) {
-      if (err) {
-        res.status(500).send(err)
-      }
-    });
-});
+
 
 mainApp.listen(3002, function () {
   console.log("Listening on port " + 3002);
 });
 
-employerApp.get('/*', (req, res)=> {
-    res.sendFile(path.join(__dirname, 'employer-app', 'dist', 'index.html'), function(err) {
-      if (err) {
-        res.status(500).send(err)
-      }
-    });
-});
+
 
 employerApp.listen(3003, function () {
   console.log("Listening on port " + 3003);
