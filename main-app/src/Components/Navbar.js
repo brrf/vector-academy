@@ -10,7 +10,7 @@ function Navbar (props) {
 	const [firstIncomplete, setFirstIncomplete] = useState(null);
 
 	function logout () {
-		fetch(`${PROTOCOL}apply.${DOMAIN}/studentlogout`, {
+		fetch(`${PROTOCOL}${DOMAIN}/studentlogout`, {
 			method: "GET",
 			headers: { 
 			"Content-Type": "application/json",

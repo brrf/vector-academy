@@ -24,7 +24,7 @@ export default class Register extends React.Component {
 
   componentDidMount() {
     console.log('here');
-    fetch(`${PROTOCOL}apply.${DOMAIN}/user`, {
+    fetch(`${PROTOCOL}${DOMAIN}/user`, {
       method: "GET"
     })
       .then(res => res.json())

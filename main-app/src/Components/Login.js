@@ -19,7 +19,7 @@ export default function Login ({loginFunction}) {
       return;
     }
     
-    fetch(`${PROTOCOL}apply.${DOMAIN}/studentlogin`, {
+    fetch(`${PROTOCOL}${DOMAIN}/studentlogin`, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: { 
