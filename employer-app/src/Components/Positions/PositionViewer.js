@@ -66,7 +66,7 @@ function PositionViewer({positions, clearance}) {
 									</div>
 									{
 										clearance === 2
-											? <PositionDecisionDashBoard position={position} updateErrors={updateErrors} index={index} errors={errors}/>
+											? <PositionDecisionDashboard position={position} updateErrors={updateErrors} index={index} errors={errors}/>
 											: null
 									}
 									
