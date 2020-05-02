@@ -1,11 +1,10 @@
 import React, {useRef, useState, useEffect} from 'react';
+import {useLocation, Link} from 'react-router-dom';
+
 import '../css/sidemenu.css';
 
 export default function Sidemenu ({toggleHidden, hidden}) {
-	const [currentTab, updateCurrentTab] = useState(0);
-
 	function changeCurrentTab (index) {
-		updateCurrentTab(index);
 		if (window.innerWidth <= 650) toggleHidden(true);
 	};
 	
@@ -27,14 +26,48 @@ export default function Sidemenu ({toggleHidden, hidden}) {
 		};
 	};
 
-	const featureContainers = ['Application', 'Interviews', 'Courses', 'Evaluations', 'Benefits', 'Career Prep']
+	const featureContainers = [
+		{
+			title: 'Application',
+			link: ''
+		},
+		{
+			title: 'Interviews',
+			link: 'interviews'
+		},
+		{
+			title: 'Courses',
+			link: 'courses'
+		},
+		{
+			title: 'Evaluations',
+			link: 'evaluations'
+		},
+		{
+			title: 'Benefits',
+			link: 'benefits'
+		},
+		{
+			title: 'Career Prep',
+			link: 'career'
+		}
+	];
+
+	const pathname = (useLocation().pathname.split('/'))[1];
+
 	return (
 		<React.Fragment>
 			<div className={`sidemenu-container ${hidden ? 'hidden' : ''}`}>
 				{
 					featureContainers.map( (container, index) => {
 						return (
-							<div key={container} className={`features-container ${index === 0 ? 'active' : 'temp-features-container'}`} onClick={() => changeCurrentTab(index)}>{container}</div>
+							<Link key={container.link} 
+								className={`features-container ${container.link === pathname ? 'active' : null}`} 
+								onClick={changeCurrentTab}
+								to={`/${container.link}`}
+							>
+								{container.title}
+							</Link>
 						)
 					})
 				}

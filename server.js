@@ -102,13 +102,9 @@ marketingApp.listen(3001, function () {
   console.log("Listening on port " + 3001);
 });
 
-
-
 mainApp.listen(3002, function () {
   console.log("Listening on port " + 3002);
 });
-
-
 
 employerApp.listen(3003, function () {
   console.log("Listening on port " + 3003);

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -48,13 +49,16 @@ function App(props) {
   	)
   } else
   return (
-  	<div onClick={() => toggleUserOptions(true)}>
-  		<Navbar toggleLogin={toggleLogin} userOptionsHidden={userOptionsHidden} toggleUserOptions={toggleUserOptions}/>
-      <div id='main-container'>
-        <MainContent />
+    <Router>
+    	<div onClick={() => toggleUserOptions(true)}>
+    		<Navbar toggleLogin={toggleLogin} userOptionsHidden={userOptionsHidden} toggleUserOptions={toggleUserOptions}/>
+        <div id='main-container'>
+          <MainContent />
+        </div>
+    		<Footer />
       </div>
-  		<Footer />
-	</div>
+    </Router>
+
   );
 }
 

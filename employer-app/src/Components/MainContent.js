@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Route, Switch } from "react-router-dom";
 import SideMenu from './SideMenu';
 import UpgradeAdmin from './UpgradeAdmin';
 import OpenPositions from './Positions/OpenPositions';

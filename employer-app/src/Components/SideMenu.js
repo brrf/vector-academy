@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react';
-import {BrowserRouter as Router, Route, Switch, Link, useLocation, useRouteMatch} from "react-router-dom";
+import {BrowserRouter as Link, useLocation} from "react-router-dom";
 import {connect} from 'react-redux';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationCircle} from "@fortawesome/free-solid-svg-icons";
@@ -83,6 +83,7 @@ function Sidemenu ({toggleHidden, hidden, clearance, positions}) {
 					{
 						featureContainers.map( (container, index) => {
 							if (index === 0 || index === 1 || container.link === 'vectoradmin' || container.link === 'hiringmanagers') {
+								console.log(index);
 								return (
 									<Link key={container.link} 
 									className={`features-container ${container.link === pathname ? 'active' : null}`} 
