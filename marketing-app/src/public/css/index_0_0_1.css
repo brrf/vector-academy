@@ -47,6 +47,13 @@
 	margin-top: 0.5vw;
 }
 
+.top-content-button {
+	width: 15vw;
+	max-width: initial;
+	height: 4vw;
+	font-size: 1.5vw;
+}
+
 .top-content-text {	
 	width: 84%;
 	margin: 0 0 1.5vw 0;
@@ -234,6 +241,13 @@
 		margin: 1vw 0;
 	}
 
+	.top-content-button {
+		width: initial;
+		max-width: initial;
+		height: initial;
+		font-size: initial;
+	}
+
 	.top-content-text {	
 		font-size: 2.2vw;
 		margin: 0 0 2vw 0;
@@ -333,7 +347,7 @@
 	}
 
 	.student-register-modal-mobile button {
-	cursor: pointer;
+		cursor: pointer;
 	}
 
 	.student-register-modal-mobile u:hover, .student-login-modal-mobile u:hover {
