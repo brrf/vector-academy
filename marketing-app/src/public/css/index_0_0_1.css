@@ -314,6 +314,11 @@
 	#jumpstart-section h2 {
 		margin: 2vw 0;
 	}
+	#jumpstart-section button {
+		max-width: initial;
+		height: initial;
+		font-size: initial;
+	}
 }
 
 /*mobile*/
