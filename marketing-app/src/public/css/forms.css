@@ -97,7 +97,10 @@ textarea {
 }
 @media (max-width: 550px) {
 	input {
-		height: 8vw;
+		height: 10vw;
+	}
+	form input {
+		margin-bottom: 3vw
 	}
 	#form-container {
 		box-shadow: none;
