@@ -60,6 +60,7 @@ form > div {
 
 form input {
 	margin-bottom: 1.2vw;
+	font-size: 1.3vw;
 }
 
 input, textarea {
@@ -100,7 +101,8 @@ textarea {
 		height: 10vw;
 	}
 	form input {
-		margin-bottom: 3vw
+		margin-bottom: 3vw;
+		font-size: 3vw;
 	}
 	#form-container {
 		box-shadow: none;
