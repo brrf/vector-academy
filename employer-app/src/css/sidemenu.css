@@ -1,16 +1,16 @@
 .sidemenu-container {
-	min-width: 250px;
-	display: flex;
-	flex-direction: column;
-	background-color: #202a65;
-	box-shadow: 4px -2px 5px -1px #a9a9a9b5;
-	z-index: 2;
-    min-height: 85vh;
+    width: 250px;
+    min-width: 15vw;
+    display: flex;
+    flex-direction: column;
+    background-color: #202a65;
+    box-shadow: 4px -2px 5px -1px #a9a9a9b5;
+    z-index: 2;
     margin: 0;
 }
 
 .features-container {
-	height: 60px;
+    height: 5vw;
     color: white;
     padding: 1vw;
     text-align: left;  
@@ -21,6 +21,7 @@
     border-bottom: 2px solid #e86542;
     text-shadow: none;
     position: relative;
+    font-size: 1.4vw;
 }
 
 .features-container:hover {
@@ -33,15 +34,15 @@
 }
 
 .features-container.active:after {
-	border-right: 17px solid #ffffff;
-    border-top: 17px solid transparent;
-    border-bottom: 17px solid transparent;
+    border-right: 1.3vw solid #ffffff;
+    border-top: 1.3vw solid transparent;
+    border-bottom: 1.3vw solid transparent;
     content: "";
     display: inline-block;
     position: absolute;
-    left: 233px;
+    right: 0;
     opacity: 1;
-    top: 13px;
+    top: 1.1vw;
     transition: opacity 150ms ease-in;
 }
 

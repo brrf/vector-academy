@@ -98,6 +98,49 @@ function RevisePositionVector({position, dispatch}) {
 	if (redirect) {
 		return <Redirect to='/pendingpositions' />
 	}
+
+	// style for Select component
+	// const customStyles = {
+	// 	clearIndicator: provided => ({
+	// 		fontSize: '500px',
+	// 		color: 'crimson'
+	// 	})
+	  // control: (provided) => ({
+	  // 	fontSize: '1.6vw'
+	  // })
+	  // placeholder: (provided) => ({
+	  //   ...provided,
+	  //   fontSize: '1.6vw'
+	  // }),
+	  // indicatorsContainer: (provided) => ({
+	  // 	...provided,
+	  // 	fontSize: '17vw',
+	  // 	color: 'crimson',
+	  // 	height: '17vw'
+	  // }),
+	  // // multiValueContainer: (provided) => ({
+	  // // 	...provided,
+	  // // 	width: '10vw',
+	  // // 	height: '20vw'
+	  // // }),
+	  // // multiValueLabel: (provided) => ({
+	  // // 	...provided,
+	  // // 	color: 'crimson',
+	  // // 	fontSize: '1.6vw'
+	  // // }),
+	  // option: (provided) => ({
+	  // 	...provided,
+	  // 	fontSize: '1.6vw'
+	  // }),
+	  // container: (provided) => ({
+	  // 	...provided,
+	  // 	marginTop: '0.5vw'
+	  // }),
+	  // noOptions: (provided) => ({
+	  // 	...provided,
+	  // 	fontSize: '1.6vw'
+	  // })
+	// };
 	
 	return (
 		<div className='position-container'>
@@ -141,6 +184,8 @@ function RevisePositionVector({position, dispatch}) {
 					onChange={updateSelectedFields}
 					options={fields}
 					isMulti={true}
+					//styles={customStyles}
+					// className='test'
 				/>
 				{ formData.length > 0
 					? formData.map((section, index) => {

@@ -85,12 +85,14 @@ button, input[type='submit'] {
 	 background-color: #212a65;
 	 border-radius: 8px;
 	 width: 175px;
+	 min-width: 20vw;
 	 color: white; 
 	 border: none; 
-	 font-size: 16px;
+	 font-size: 1.2vw;
 	 padding: 8px; 
 	 margin: 0 2vw 0 0;
 	 height: 37px;
+	 min-height: 3vw;
 }
 
 button:hover, input[type='submit']:hover {

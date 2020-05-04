@@ -14,6 +14,7 @@ import Questions from './Questions';
 import CompanySelection from './CompanySelection';
 import Review from './Review';
 import Payment from './Payment';
+import '../../css/application-component.css';
 
 function ApplicationSteps ({applicationStep, application, status, dispatch, completedSteps}) {
 	const applicationSteps = [

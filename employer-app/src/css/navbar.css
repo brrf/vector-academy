@@ -6,6 +6,7 @@
     align-items: center;
     position: sticky;
     width: 100%;
+    min-height: 5vw;
     top: 0;
     background-color: #fff;
     padding: .7vw;
@@ -15,6 +16,7 @@
 
 .logo {
     width: 150px;
+    min-width: 9vw;
 }
 
 .navbar-right {
@@ -29,7 +31,7 @@
 
 .navbar-user {
     color: grey;
-    font-size: 35px;
+    font-size: 3vw;
 }
 
 .navbar-user:hover {
@@ -38,7 +40,7 @@
 }
 
 .navbar-user-options {
-    width: 125px;
+    width: 12vw;
     background-color: #fff;
     color: #4f588f;
     padding: 1vw;
@@ -47,12 +49,13 @@
     align-items: center;
     position: absolute;
     z-index: 3;
-    top: 48px;
+    top: 4.3vw;
     right: 0px;
     box-shadow: 0 0 11px 1px rgba(0,0,0,.15);
     border: 1px solid #e2e2e2;
     border-radius: 5%;
     text-shadow: none;
+    font-size: 1.3vw;
 }
 
 .navbar-user-options:hover {

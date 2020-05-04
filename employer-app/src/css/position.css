@@ -66,7 +66,7 @@
 
 .position-review {
 	margin: 1.5vw;
-	font-size: 24px;
+	font-size: 2vw;
 }
 
 .position-review:hover {
@@ -100,6 +100,10 @@
 	color: white;
 }
 
+.requested-revision-container div {
+	font-size: 1vw;
+}
+
 .requested-revision-container > div {
 	margin: 0.6vw 0.4vw;
 }
@@ -107,10 +111,4 @@
 .requested-revision-container h4 {
 	text-decoration: underline;
 	margin-bottom: 0.2vw;
-
 }
-
-
-
-
-

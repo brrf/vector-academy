@@ -54,7 +54,8 @@ form > div {
 }
 
 input.form-full-width {
-    margin-bottom: 20px;
+    margin-bottom: 1.3vw;
+    font-size: 1.2vw;
 }
 
 input, textarea {
@@ -66,7 +67,8 @@ input, textarea {
 
 
 input {
-	height: 35px;
+	min-height: 35px;
+  height: 5vh;
 }
 
 textarea {
@@ -85,7 +87,7 @@ textarea {
 .styled-field {
   position: relative;
   width: 100%;
-  height: 50px;
+  height: 4vw;
   margin-right: 2%;
 }
 
@@ -111,7 +113,7 @@ textarea {
   position: absolute;
   width: 100%;
   left: 0;
-  bottom: 8px;
+  bottom: 0.5vw;
   color: #cfd7df;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -129,13 +131,13 @@ textarea {
   width: 100%;
   left: 0;
   bottom: 0;
-  padding-bottom: 7px;
+  padding-bottom: 0.02vw;
   color: #32325d;
   background-color: transparent;
   -webkit-appearance: none;
   outline: none;
   border-style: none;
-  font-size: 16px;
+  font-size: 1.3vw;
   font-weight: 500;
 }
 
@@ -177,7 +179,7 @@ textarea {
 .styled-input.styled-input-focus + label,
 .styled-input:not(.styled-input-empty) + label {
   color: #aab7c4;
-  transform: scale(0.85) translateY(-25px);
+  transform: scale(0.85) translateY(-2.5vw);
   cursor: default;
 }
 
@@ -202,6 +204,9 @@ textarea {
 	#form-container h2 {
 		margin: 2vw 0;
 	}
+  input.form-full-width {
+    font-size: 2vw;
+  }
 }
 
 @media (max-width: 550px) {
@@ -222,13 +227,13 @@ textarea {
 }
 
 .warning {
-  font-size: 12px;
+  font-size: 1.4vw;
 	flex-basis: 30px;
 	color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
-	margin-bottom: 10px;
-	padding: 6px;
+	margin-bottom: 0.5vw;
+	padding: 0.5vw;
 	display: flex;
 	align-items: center;
 }

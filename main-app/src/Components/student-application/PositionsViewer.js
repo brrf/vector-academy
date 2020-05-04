@@ -41,8 +41,7 @@ function PositionsViewer({positions, handleSubmit, handleApplicationStep, comple
 	const customStyles = {
 	  menu: (provided, state) => ({
 	    ...provided,
-	    width: '40vw',
-	    maxWidth: '300px'
+	    width: '30vw'
 	  }),
 	};
 

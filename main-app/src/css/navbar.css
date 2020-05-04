@@ -6,6 +6,7 @@
     align-items: center;
     position: sticky;
     width: 100%;
+    min-height: 5vw;
     top: 0;
     background-color: #fff;
     padding: .7vw;
@@ -15,6 +16,7 @@
 
 .logo {
     width: 150px;
+    min-width: 9vw;
 }
 
 .navbar-right {
@@ -29,7 +31,7 @@
 
 .navbar-user {
     color: grey;
-    font-size: 35px;
+    font-size: 3vw;
 }
 
 .navbar-user:hover {

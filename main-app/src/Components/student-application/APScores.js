@@ -204,14 +204,12 @@ function APScores (props) {
 						exams.map((exam, index) => {
 							return (
 								<div key={index}>
-									<label>
-										{exam.name}
-										<input
-											type='checkbox'
-											checked={exams[index].selected}
-											onChange={() => handleUpdateExamCheckboxes(index)}
-										/>
-									</label>
+									<label>{exam.name}</label>
+									<input
+										type='checkbox'
+										checked={exams[index].selected}
+										onChange={() => handleUpdateExamCheckboxes(index)}
+									/>	
 								</div>
 							)
 						})

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Player, ControlBar, ReplayControl, ForwardControl, PlaybackRateMenuButton} from 'video-react';
-import "../../node_modules/video-react/dist/video-react.css"; // import css
+import "../../node_modules/video-react/dist/video-react.css";
 import '../css/courses.css';
 
 
