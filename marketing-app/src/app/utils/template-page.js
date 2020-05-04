@@ -45,7 +45,7 @@ export default function templatePage () {
 	// }
 
 	function openRegisterStudentMobile (e) {
-		studentLoginModalMobile.classList.add('hidden');
+		//studentLoginModalMobile.classList.add('hidden');
 		mainInactiveMenu.classList.add('hidden');
 		studentRegisterModalMobile.classList.remove('hidden');
 	}
